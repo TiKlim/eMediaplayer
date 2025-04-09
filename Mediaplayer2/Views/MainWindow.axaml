@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Mediaplayer2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Mediaplayer2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Mediaplayer2"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        SystemDecorations="None">
+    
+    <Grid RowDefinitions="Auto,*"
+          ShowGridLines="False">
+        <DockPanel Grid.Row="0">
+            <Grid Name="WindowBar"
+                  Background="#FF595E"
+                  DockPanel.Dock="Top"
+                  ColumnDefinitions="Auto,*,Auto"
+                  PointerPressed="InputElement_OnPointerPressed">
+                <TextBlock VerticalAlignment="Center"
+                           Margin="5,0,0,0"
+                           Text="Медиаплеер"
+                           Foreground="White"/>
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal">
+                    <StackPanel.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Margin" Value="2"/>
+                        </Style>
+                    </StackPanel.Styles>
+                    <Button Name="MinimizeWindow"
+                            Classes="WindowBar">
+                        <Image Source="../Assets/roll.png"
+                               Height="20"/>
+                    </Button>
+                    <Button Name="NormalWindow"
+                            Classes="WindowBar"
+                            IsVisible="False">
+                        <Image Source="../Assets/minimize.png"
+                               Height="20"/>
+                    </Button>
+                    <Button Name="MaximizeWindow"
+                            Classes="WindowBar">
+                        <Image Source="../Assets/maximise.png"
+                               Height="20"/>
+                    </Button>
+                    <Button Name="CloseWindow"
+                            Classes="CloseButton">
+                        <Image Source="../Assets/close.png"
+                               Height="20"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <!--<Menu Grid.Row="0" 
+              Background="#FF595E"
+              PointerPressed="InputElement_OnPointerPressed">
+            <Image Source="../Assets/wNew3.png"
+                   HorizontalAlignment="Left"
+                   Height="20"
+                   Classes="Icon"/>
+        </Menu>-->
+    </Grid>
+</Window>
