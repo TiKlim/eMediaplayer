@@ -69,3 +69,4 @@ K:\RiderProj\Mediaplayer2\Mediaplayer2\obj\Debug\net9.0\refint\Avalonia\Mediapla
 K:\RiderProj\Mediaplayer2\Mediaplayer2\obj\Debug\net9.0\Mediapla.979620E3.Up2Date
 K:\RiderProj\Mediaplayer2\Mediaplayer2\obj\Debug\net9.0\Mediaplayer2.genruntimeconfig.cache
 K:\RiderProj\Mediaplayer2\Mediaplayer2\obj\Debug\net9.0\ref\Mediaplayer2.dll
+K:\RiderProj\Mediaplayer2\Mediaplayer2\obj\Debug\net9.0\Mediaplayer2.sourcelink.json

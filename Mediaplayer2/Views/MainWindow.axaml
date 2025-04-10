@@ -11,57 +11,82 @@
         WindowStartupLocation="CenterScreen"
         ExtendClientAreaToDecorationsHint="True"
         SystemDecorations="None">
-    
-    <Grid RowDefinitions="Auto,*"
+    <!--Главный Grid-->
+    <Grid RowDefinitions="Auto,*,5"
+          ColumnDefinitions="5,*,5"
           ShowGridLines="False">
-        <DockPanel Grid.Row="0">
-            <Grid Name="WindowBar"
-                  Background="#FF595E"
-                  DockPanel.Dock="Top"
-                  ColumnDefinitions="Auto,*,Auto"
-                  PointerPressed="InputElement_OnPointerPressed">
-                <TextBlock VerticalAlignment="Center"
-                           Margin="5,0,0,0"
-                           Text="Медиаплеер"
-                           Foreground="White"/>
-                <StackPanel Grid.Column="2"
-                            Orientation="Horizontal">
-                    <StackPanel.Styles>
-                        <Style Selector="Button">
-                            <Setter Property="Margin" Value="2"/>
-                        </Style>
-                    </StackPanel.Styles>
-                    <Button Name="MinimizeWindow"
-                            Classes="WindowBar">
-                        <Image Source="../Assets/roll.png"
-                               Height="20"/>
-                    </Button>
-                    <Button Name="NormalWindow"
-                            Classes="WindowBar"
-                            IsVisible="False">
-                        <Image Source="../Assets/minimize.png"
-                               Height="20"/>
-                    </Button>
-                    <Button Name="MaximizeWindow"
-                            Classes="WindowBar">
-                        <Image Source="../Assets/maximise.png"
-                               Height="20"/>
-                    </Button>
-                    <Button Name="CloseWindow"
-                            Classes="CloseButton">
-                        <Image Source="../Assets/close.png"
-                               Height="20"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </DockPanel>
-        <!--<Menu Grid.Row="0" 
-              Background="#FF595E"
-              PointerPressed="InputElement_OnPointerPressed">
-            <Image Source="../Assets/wNew3.png"
-                   HorizontalAlignment="Left"
-                   Height="20"
-                   Classes="Icon"/>
-        </Menu>-->
+            <!--Изменение размеров окна. Часть первая-->
+            <Border Name="BottomLeft"
+                    Background="Transparent"
+                    Grid.Row="2"/>
+            <Border Name="BottomRight"
+                    Background="Transparent"
+                    Grid.Column="2"
+                    Grid.Row="2"/>
+            <Border Name="Right"
+                    Background="Transparent"
+                    Grid.Column="2"
+                    Grid.Row="1"/>
+            <Border Name="Bottom"
+                    Background="Transparent"
+                    Grid.Column="1"
+                    Grid.Row="2"/>
+            <Border Name="Left"
+                    Background="Transparent"
+                    Grid.Row="1"/>
+            <!--Панель управления окном-->
+            <DockPanel Grid.Row="0"
+                       Grid.ColumnSpan="3">
+                    <Grid Name="WindowBar"
+                          Background="#FF595E"
+                          DockPanel.Dock="Top"
+                          ColumnDefinitions="Auto,*,Auto"
+                          PointerPressed="InputElement_OnPointerPressed">
+                            <TextBlock VerticalAlignment="Center"
+                                       Margin="5,0,0,0"
+                                       Text="Медиаплеер"
+                                       Foreground="White"/>
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal">
+                                    <StackPanel.Styles>
+                                            <Style Selector="Button">
+                                                    <Setter Property="Margin" Value="2"/>
+                                            </Style>
+                                    </StackPanel.Styles>
+                                    <Button Name="MinimizeWindow"
+                                            Classes="WindowBar">
+                                            <Image Source="../Assets/roll.png"
+                                                   Height="20"/>
+                                    </Button>
+                                    <Button Name="NormalWindow"
+                                            Classes="WindowBar"
+                                            IsVisible="False">
+                                            <Image Source="../Assets/minimize.png"
+                                                   Height="20"/>
+                                    </Button>
+                                    <Button Name="MaximizeWindow"
+                                            Classes="WindowBar">
+                                            <Image Source="../Assets/maximise.png"
+                                                   Height="20"/>
+                                    </Button>
+                                    <Button Name="CloseWindow"
+                                            Classes="CloseButton">
+                                            <Image Source="../Assets/close.png"
+                                                   Height="20"/>
+                                    </Button>
+                            </StackPanel>
+                    </Grid>
+            </DockPanel>
+            <!--Изменение размеров окна. Часть вторая-->
+            <Border Name="TopLeft"
+                    Background="Transparent"/>
+            <Border Name="TopRight"
+                    Background="Transparent"
+                    Grid.Column="2"/>
+            <Border Name="Top"
+                    Background="Transparent"
+                    Grid.Column="1"
+                    Height="4"
+                    VerticalAlignment="Top"/>
     </Grid>
 </Window>
