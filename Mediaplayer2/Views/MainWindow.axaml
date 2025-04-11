@@ -1,9 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Mediaplayer2.ViewModels"
+        xmlns:views="clr-namespace:Mediaplayer2.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
         x:Class="Mediaplayer2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,6 +16,13 @@
     <Grid RowDefinitions="Auto,*,5"
           ColumnDefinitions="5,*,5"
           ShowGridLines="False">
+            <!--Панель с контентом-->
+            <Panel Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="3"
+                   Grid.RowSpan="3">
+                    <views:MainPage/>
+            </Panel>
             <!--Изменение размеров окна. Часть первая-->
             <Border Name="BottomLeft"
                     Background="Transparent"
