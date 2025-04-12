@@ -7,110 +7,58 @@
              x:DataType="vm:MainPageViewModel"
              x:Class="Mediaplayer2.Views.MainPage">
     <Grid ShowGridLines="False"
-          ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
-          RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+          ColumnDefinitions="8,70,*"
+          RowDefinitions="120,*,120"
           Background="#f5efef">
-        <Button Grid.Column="0" Grid.Row="4"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Classes="LeftPanel"
-                Name="HomeBtn">
-            <Image Source="../Assets/HomeRed.png"
-                   Height="60"/>
-        </Button>
         
-        <Image Grid.Column="0" Grid.Row="4"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Left"
-               Source="../Assets/NoteRed.png"
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    Orientation="Vertical"
+                    VerticalAlignment="Center">
+            
+            <Button HorizontalAlignment="Right"
+                    Classes="LeftPanel"
+                    Name="HomeBtn">
+                <Image Source="../Assets/HomeRed.png"
+                       Height="60"/>
+            </Button>
+            
+            <Button HorizontalAlignment="Right"
+                    Classes="LeftPanel"
+                    Name="MusicBtn">
+                <Image Source="../Assets/MusicCollectionRed.png"
+                       Height="60"/>
+            </Button>
+        
+            <Button HorizontalAlignment="Right"
+                    Classes="LeftPanel"
+                    Name="VideoBtn">
+                <Image Source="../Assets/VideoCollectionRed.png"
+                       Height="60"/>
+            </Button>
+        
+            <Button HorizontalAlignment="Right"
+                    Classes="LeftPanel"
+                    Name="PlaylistBtn">
+                <Image Source="../Assets/PlaylistRed.png"
+                       Height="60"/>
+            </Button>
+        
+            <Button HorizontalAlignment="Right"
+                    Classes="LeftPanel"
+                    Name="SettingsBtn">
+                <Image Source="../Assets/SettingsRed.png"
+                       Height="60"/>
+            </Button>
+        </StackPanel>
+        
+        <Image Grid.Column="0"
+               Grid.Row="1"
+               VerticalAlignment="Top"
+               Margin="0 90 0 0"
+               Source="../Assets/SecondNoteRed.png"
                Height="60"
                Name="NoteHomeImage"/>
-        
-        <Button Grid.Column="0" Grid.Row="7"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Classes="LeftPanel"
-                Name="MusicBtn"
-                PointerEntered="MusicBtn_OnPointerEntered"
-                PointerExited="MusicBtn_OnPointerExited">
-            <Image Source="../Assets/MusicCollectionRed.png"
-                   Height="60"/>
-        </Button>
-        
-        <Image Grid.Column="0" Grid.Row="7"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Left"
-               Source="../Assets/NoteRed.png"
-               Height="60"
-               Name="NoteMusicImage"
-               IsVisible="False"/>
-        
-        <Button Grid.Column="0" Grid.Row="10"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Classes="LeftPanel"
-                Name="VideoBtn"
-                PointerEntered="VideoBtn_OnPointerEntered"
-                PointerExited="VideoBtn_OnPointerExited">
-            <Image Source="../Assets/VideoCollectionRed.png"
-                   Height="60"/>
-        </Button>
-        
-        <Image Grid.Column="0" Grid.Row="10"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Left"
-               Source="../Assets/NoteRed.png"
-               Height="60"
-               Name="NoteVideoImage"
-               IsVisible="False"/>
-        
-        <Button Grid.Column="0" Grid.Row="13"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Classes="LeftPanel"
-                Name="PlaylistBtn"
-                PointerEntered="PlaylistBtn_OnPointerEntered"
-                PointerExited="PlaylistBtn_OnPointerExited">
-            <Image Source="../Assets/PlaylistRed.png"
-                   Height="60"/>
-        </Button>
-        
-        <Image Grid.Column="0" Grid.Row="13"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Left"
-               Source="../Assets/NoteRed.png"
-               Height="60"
-               Name="NotePlaylistImage"
-               IsVisible="False"/>
-        
-        <Button Grid.Column="0" Grid.Row="16"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Right"
-                Classes="LeftPanel"
-                Name="SettingsBtn"
-                PointerEntered="SettingsBtn_OnPointerEntered"
-                PointerExited="SettingsBtn_OnPointerExited">
-            <Image Source="../Assets/SettingsRed.png"
-                   Height="60"/>
-        </Button>
-        
-        <Image Grid.Column="0" Grid.Row="16"
-               Grid.ColumnSpan="2"
-               Grid.RowSpan="2"
-               HorizontalAlignment="Left"
-               Source="../Assets/NoteRed.png"
-               Height="60"
-               Name="NoteSettingsImage"
-               IsVisible="False"/>
         
         <TextBlock Grid.Column="1" Grid.Row="2"
                    Grid.ColumnSpan="10"

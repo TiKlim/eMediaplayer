@@ -15,17 +15,17 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Mediaplayer2
-build_property.ProjectDir = K:\RiderProj\Mediaplayer2\Mediaplayer2\
+build_property.ProjectDir = K:\RiderProj\Mediaplayer\Mediaplayer2\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[K:/RiderProj/Mediaplayer2/Mediaplayer2/App.axaml]
+[K:/RiderProj/Mediaplayer/Mediaplayer2/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[K:/RiderProj/Mediaplayer2/Mediaplayer2/Views/MainPage.axaml]
+[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MainPage.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[K:/RiderProj/Mediaplayer2/Mediaplayer2/Views/MainWindow.axaml]
+[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

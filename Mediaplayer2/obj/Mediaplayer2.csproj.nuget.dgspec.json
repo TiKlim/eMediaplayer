@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "K:\\RiderProj\\Mediaplayer2\\Mediaplayer2\\Mediaplayer2.csproj": {}
+    "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj": {}
   },
   "projects": {
-    "K:\\RiderProj\\Mediaplayer2\\Mediaplayer2\\Mediaplayer2.csproj": {
+    "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "K:\\RiderProj\\Mediaplayer2\\Mediaplayer2\\Mediaplayer2.csproj",
+        "projectUniqueName": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
         "projectName": "Mediaplayer2",
-        "projectPath": "K:\\RiderProj\\Mediaplayer2\\Mediaplayer2\\Mediaplayer2.csproj",
+        "projectPath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
         "packagesPath": "C:\\Users\\klimt\\.nuget\\packages\\",
-        "outputPath": "K:\\RiderProj\\Mediaplayer2\\Mediaplayer2\\obj\\",
+        "outputPath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
