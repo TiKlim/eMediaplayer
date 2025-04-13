@@ -6,59 +6,68 @@
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              x:DataType="vm:MainPageViewModel"
              x:Class="Mediaplayer2.Views.MainPage">
-    <Grid ShowGridLines="False"
-          ColumnDefinitions="8,70,*"
+    <Grid ShowGridLines="True"
+          ColumnDefinitions="90,*"
           RowDefinitions="120,*,120"
           Background="#f5efef">
         
-        <StackPanel Grid.Column="1"
+        <StackPanel Grid.Column="0"
                     Grid.Row="1"
                     Orientation="Vertical"
+                    AreVerticalSnapPointsRegular="True"
                     VerticalAlignment="Center">
             
-            <Button HorizontalAlignment="Right"
-                    Classes="LeftPanel"
-                    Name="HomeBtn">
-                <Image Source="../Assets/HomeRed.png"
-                       Height="60"/>
-            </Button>
+            <DockPanel>
+                <Image Grid.Column="0"
+                       Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Source="../Assets/SecondNoteRed.png"
+                       Height="50"
+                       Name="NoteHomeImage"/>
+                <Button HorizontalAlignment="Right"
+                        Classes="LeftPanel"
+                        Name="HomeBtn">
+                    <Image Source="../Assets/HomeRed.png"
+                           Height="50"/>
+                </Button>
+                
+            </DockPanel>
             
             <Button HorizontalAlignment="Right"
+                    Margin="0 20 0 0"
                     Classes="LeftPanel"
                     Name="MusicBtn">
                 <Image Source="../Assets/MusicCollectionRed.png"
-                       Height="60"/>
+                       Height="50"/>
             </Button>
         
             <Button HorizontalAlignment="Right"
+                    Margin="0 20 0 0"
                     Classes="LeftPanel"
                     Name="VideoBtn">
                 <Image Source="../Assets/VideoCollectionRed.png"
-                       Height="60"/>
+                       Height="50"/>
             </Button>
         
             <Button HorizontalAlignment="Right"
+                    Margin="0 20 0 0"
                     Classes="LeftPanel"
                     Name="PlaylistBtn">
                 <Image Source="../Assets/PlaylistRed.png"
-                       Height="60"/>
+                       Height="50"/>
             </Button>
         
             <Button HorizontalAlignment="Right"
+                    Margin="0 20 0 0"
                     Classes="LeftPanel"
                     Name="SettingsBtn">
                 <Image Source="../Assets/SettingsRed.png"
-                       Height="60"/>
+                       Height="50"/>
             </Button>
         </StackPanel>
         
-        <Image Grid.Column="0"
-               Grid.Row="1"
-               VerticalAlignment="Top"
-               Margin="0 90 0 0"
-               Source="../Assets/SecondNoteRed.png"
-               Height="60"
-               Name="NoteHomeImage"/>
+        
         
         <TextBlock Grid.Column="1" Grid.Row="2"
                    Grid.ColumnSpan="10"

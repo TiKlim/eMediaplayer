@@ -13,8 +13,8 @@
         <FluentTheme />
         <Style Selector="Button.LeftPanel">
             <Setter Property="Background" Value="Transparent"></Setter>
-            <Style Selector="^:pointerover /template/ContentPresenter">
-                <Setter Property="Background" Value="Transparent"></Setter>
+            <Style Selector="^:pressed /template/ContentPresenter">
+                <Setter Property="Background" Value="#f5efef"></Setter>
             </Style>
         </Style>
         <Style Selector="Button.WindowBar">
