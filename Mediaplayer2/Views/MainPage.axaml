@@ -6,68 +6,66 @@
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              x:DataType="vm:MainPageViewModel"
              x:Class="Mediaplayer2.Views.MainPage">
-    <Grid ShowGridLines="True"
-          ColumnDefinitions="90,*"
-          RowDefinitions="120,*,120"
-          Background="#f5efef">
-        
-        <StackPanel Grid.Column="0"
-                    Grid.Row="1"
-                    Orientation="Vertical"
-                    AreVerticalSnapPointsRegular="True"
-                    VerticalAlignment="Center">
-            
-            <DockPanel>
-                <Image Grid.Column="0"
-                       Grid.Row="1"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Source="../Assets/SecondNoteRed.png"
-                       Height="50"
-                       Name="NoteHomeImage"/>
-                <Button HorizontalAlignment="Right"
-                        Classes="LeftPanel"
-                        Name="HomeBtn">
-                    <Image Source="../Assets/HomeRed.png"
-                           Height="50"/>
-                </Button>
-                
-            </DockPanel>
-            
-            <Button HorizontalAlignment="Right"
-                    Margin="0 20 0 0"
-                    Classes="LeftPanel"
+    <Grid ShowGridLines="False" 
+          ColumnDefinitions="*,13*" 
+          RowDefinitions="120,*,120">
+        <!-- NavigationMenu -->
+        <StackPanel Grid.Column="0" 
+                    Grid.Row="1" 
+                    Orientation="Vertical" 
+                    AreVerticalSnapPointsRegular="True" 
+                    VerticalAlignment="Center"
+                    Spacing="20">
+            <!--ButtonHome-->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="LeftPanel"    
+                    Name="HomeBtn">
+                <Image Source="../Assets/HomeRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="80" 
+                       MinWidth="50"/></Button>
+            <!--ButtonHome-->
+            <!-- ButtonMusic -->
+            <Button HorizontalAlignment="Stretch" 
+                    Classes="LeftPanel" 
                     Name="MusicBtn">
-                <Image Source="../Assets/MusicCollectionRed.png"
-                       Height="50"/>
+                <Image Source="../Assets/MusicCollectionRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="80" 
+                       MinWidth="50"/>
             </Button>
-        
-            <Button HorizontalAlignment="Right"
-                    Margin="0 20 0 0"
-                    Classes="LeftPanel"
+            <!-- ButtonMusic -->
+            <!-- ButtonVideo -->
+            <Button HorizontalAlignment="Stretch" 
+                    Classes="LeftPanel" 
                     Name="VideoBtn">
-                <Image Source="../Assets/VideoCollectionRed.png"
-                       Height="50"/>
+                <Image Source="../Assets/VideoCollectionRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="80" 
+                       MinWidth="50"/>
             </Button>
-        
-            <Button HorizontalAlignment="Right"
-                    Margin="0 20 0 0"
-                    Classes="LeftPanel"
+            <!-- ButtonVideo -->
+            <!-- ButtonPlaylist -->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="LeftPanel" 
                     Name="PlaylistBtn">
-                <Image Source="../Assets/PlaylistRed.png"
-                       Height="50"/>
+                <Image Source="../Assets/PlaylistRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="80" 
+                       MinWidth="50"/>
             </Button>
-        
-            <Button HorizontalAlignment="Right"
-                    Margin="0 20 0 0"
-                    Classes="LeftPanel"
+            <!-- ButtonPlaylist -->
+            <!-- ButtonSettings -->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="LeftPanel" 
                     Name="SettingsBtn">
-                <Image Source="../Assets/SettingsRed.png"
-                       Height="50"/>
+                <Image Source="../Assets/SettingsRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="80" 
+                       MinWidth="50"/>
             </Button>
+            <!-- ButtonSettings -->
         </StackPanel>
-        
-        
         
         <TextBlock Grid.Column="1" Grid.Row="2"
                    Grid.ColumnSpan="10"
