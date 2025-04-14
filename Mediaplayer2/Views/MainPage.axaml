@@ -6,75 +6,69 @@
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              x:DataType="vm:MainPageViewModel"
              x:Class="Mediaplayer2.Views.MainPage">
-    <Grid ShowGridLines="False" 
+    <Grid ShowGridLines="True" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120">
-        <!-- NavigationMenu -->
+        <!--Меню навигации-->
         <StackPanel Grid.Column="0" 
                     Grid.Row="1" 
                     Orientation="Vertical" 
                     AreVerticalSnapPointsRegular="True" 
                     VerticalAlignment="Center"
                     Spacing="20">
-            <!--ButtonHome-->
+            <!--Кнопка "Домой"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="LeftPanel"    
                     Name="HomeBtn">
                 <Image Source="../Assets/HomeRed.png" 
                        Margin="30 0 0 0" 
-                       MaxWidth="80" 
-                       MinWidth="50"/></Button>
-            <!--ButtonHome-->
-            <!-- ButtonMusic -->
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <!--Кнопка "Аудио"-->
             <Button HorizontalAlignment="Stretch" 
                     Classes="LeftPanel" 
                     Name="MusicBtn">
                 <Image Source="../Assets/MusicCollectionRed.png" 
                        Margin="30 0 0 0" 
-                       MaxWidth="80" 
-                       MinWidth="50"/>
+                       MaxWidth="70" 
+                       MinWidth="40"/>
             </Button>
-            <!-- ButtonMusic -->
-            <!-- ButtonVideo -->
+            <!--Кнопка "Видео"-->
             <Button HorizontalAlignment="Stretch" 
                     Classes="LeftPanel" 
                     Name="VideoBtn">
                 <Image Source="../Assets/VideoCollectionRed.png" 
                        Margin="30 0 0 0" 
-                       MaxWidth="80" 
-                       MinWidth="50"/>
+                       MaxWidth="70" 
+                       MinWidth="40"/>
             </Button>
-            <!-- ButtonVideo -->
-            <!-- ButtonPlaylist -->
+            <!--Кнопка "Плейлисты"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="LeftPanel" 
                     Name="PlaylistBtn">
                 <Image Source="../Assets/PlaylistRed.png" 
                        Margin="30 0 0 0" 
-                       MaxWidth="80" 
-                       MinWidth="50"/>
+                       MaxWidth="70" 
+                       MinWidth="40"/>
             </Button>
-            <!-- ButtonPlaylist -->
-            <!-- ButtonSettings -->
+            <!--Кнопка "Настройки"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="LeftPanel" 
                     Name="SettingsBtn">
                 <Image Source="../Assets/SettingsRed.png" 
                        Margin="30 0 0 0" 
-                       MaxWidth="80" 
-                       MinWidth="50"/>
+                       MaxWidth="70" 
+                       MinWidth="40"/>
             </Button>
-            <!-- ButtonSettings -->
         </StackPanel>
         
-        <TextBlock Grid.Column="1" Grid.Row="2"
-                   Grid.ColumnSpan="10"
-                   Grid.RowSpan="10"
+        <TextBlock Grid.Column="1" Grid.Row="0"
                    Text="{Binding Main}"
                    FontSize="38"
                    FontWeight="Bold"
                    VerticalAlignment="Center"/>
-        
+         
         <TextBlock Grid.Column="1" Grid.Row="4"
                    Grid.ColumnSpan="8"
                    Text="{Binding PreMain}"
