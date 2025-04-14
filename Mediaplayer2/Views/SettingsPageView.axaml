@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
+             xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             x:DataType="vm:SettingsPageViewModel"
+             x:Class="Mediaplayer2.Views.SettingsPageView">
+    <!--DataContext-->
+    <UserControl.DataContext>
+        <vm:SettingsPageViewModel/>
+    </UserControl.DataContext>
+    <Grid ShowGridLines="True" 
+          ColumnDefinitions="*,13*" 
+          RowDefinitions="120,*,120"
+          Background="#f5efef">
+        <!--Меню навигации-->
+        <StackPanel Grid.Column="0" 
+                    Grid.Row="1" 
+                    Orientation="Vertical" 
+                    AreVerticalSnapPointsRegular="True" 
+                    VerticalAlignment="Center"
+                    Spacing="20">
+            <!--Кнопка "Домой"-->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="LeftPanel"    
+                    Name="HomeBtn">
+                <Image Source="../Assets/HomeRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <!--Кнопка "Аудио"-->
+            <Button HorizontalAlignment="Stretch" 
+                    Classes="LeftPanel" 
+                    Name="MusicBtn">
+                <Image Source="../Assets/MusicCollectionRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <!--Кнопка "Видео"-->
+            <Button HorizontalAlignment="Stretch" 
+                    Classes="LeftPanel" 
+                    Name="VideoBtn">
+                <Image Source="../Assets/VideoCollectionRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <!--Кнопка "Плейлисты"-->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="LeftPanel" 
+                    Name="PlaylistBtn">
+                <Image Source="../Assets/PlaylistRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <!--Кнопка "Настройки"-->
+            <Button HorizontalAlignment="Stretch"
+                    Classes="SelectedPage" 
+                    Name="SettingsBtn">
+                <Image Source="../Assets/SettingsRed.png" 
+                       Margin="30 0 0 0" 
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    Orientation="Vertical"
+                    Margin="30 50 0 0"
+                    VerticalAlignment="Center">
+            <TextBlock Text="{Binding Main}"
+                       FontSize="40"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+         
+            <TextBlock Text="{Binding PreMain}"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

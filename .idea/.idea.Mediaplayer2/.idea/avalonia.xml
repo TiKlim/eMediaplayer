@@ -8,6 +8,9 @@
         <entry key="Mediaplayer2/Views/MainPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/MainWindow.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/MusicPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
+        <entry key="Mediaplayer2/Views/PlaylistPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
+        <entry key="Mediaplayer2/Views/SettingsPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
+        <entry key="Mediaplayer2/Views/VideoPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
       </map>
     </option>
   </component>

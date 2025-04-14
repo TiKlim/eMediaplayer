@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
-             xmlns:views="clr-namespace:Mediaplayer2.Views"
              x:DataType="vm:MusicPageViewModel"
              x:Class="Mediaplayer2.Views.MusicPageView">
     <!--DataContext-->
