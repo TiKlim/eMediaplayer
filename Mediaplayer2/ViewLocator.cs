@@ -3,28 +3,26 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Mediaplayer2.ViewModels;
 
-namespace Mediaplayer2;
-
-public class ViewLocator : IDataTemplate
+namespace Mediaplayer2
 {
-    public Control? Build(object? param)
+    public class ViewLocator : IDataTemplate
     {
-        if (param is null)
-            return null;
-
-        var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
-
-        if (type != null)
+        public Control Build(object? data)
         {
-            return (Control)Activator.CreateInstance(type)!;
+            var name = data!.GetType().FullName!.Replace("ViewModel", "View");
+            var type = Type.GetType(name);
+
+            if (type != null)
+            {
+                return (Control)Activator.CreateInstance(type)!;
+            }
+
+            return new TextBlock { Text = "Not Found: " + name };
         }
 
-        return new TextBlock { Text = "Not Found: " + name };
-    }
-
-    public bool Match(object? data)
-    {
-        return data is ViewModelBase;
+        public bool Match(object? data)
+        {
+            return data is ViewModelBase;
+        }
     }
 }

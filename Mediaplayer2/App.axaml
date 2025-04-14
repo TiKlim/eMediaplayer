@@ -26,5 +26,11 @@
                 <Setter Property="Background" Value="Red"></Setter>
             </Style>
         </Style>
+        <Style Selector="Button.SelectedPage">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Style Selector="^:pointerover /template/ContentPresenter">
+                <Setter Property="Background" Value="Transparent"></Setter>
+            </Style>
+        </Style>
     </Application.Styles>
 </Application>

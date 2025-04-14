@@ -24,8 +24,11 @@ build_property.EnableCodeStyleSeverity =
 [K:/RiderProj/Mediaplayer/Mediaplayer2/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MainPage.axaml]
+[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MainPageView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/MusicPageView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

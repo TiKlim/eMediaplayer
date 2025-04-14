@@ -21,7 +21,7 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <views:MainPage/>
+                    <views:MusicPageView/>
             </Panel>
             <!--Изменение размеров окна. Часть первая-->
             <Border Name="BottomLeft"
@@ -50,10 +50,14 @@
                           DockPanel.Dock="Top"
                           ColumnDefinitions="Auto,*,Auto"
                           PointerPressed="InputElement_OnPointerPressed">
-                            <TextBlock VerticalAlignment="Center"
-                                       Margin="5,0,0,0"
-                                       Text="Медиаплеер"
-                                       Foreground="White"/>
+                            <DockPanel Margin="5 0 0 0">
+                                    <Image Source="../Assets/wNew3.png"
+                                           Height="20"/>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Margin="5 0 0 0"
+                                               Text="Медиаплеер"
+                                               Foreground="White"/>
+                            </DockPanel>
                             <StackPanel Grid.Column="2"
                                         Orientation="Horizontal">
                                     <StackPanel.Styles>
