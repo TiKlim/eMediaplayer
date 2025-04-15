@@ -121,11 +121,12 @@
             <Slider Name="PlaybackSlider"
                     Minimum="0"
                     Maximum="100"
-                    Value="0"
+                    Value="100"
                     Margin="0,0,0,10"
                     VerticalAlignment="Center"
                     Background="Black"
-                    Foreground="#FF595E"/>
+                    Foreground="#FF595E">
+            </Slider>
         </StackPanel>
     </Grid>
 </UserControl>
