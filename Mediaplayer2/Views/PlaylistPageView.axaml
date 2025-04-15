@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <vm:PlaylistPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="True" 
+    <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
           Background="#f5efef">
@@ -51,7 +51,8 @@
             <!--Кнопка "Плейлисты"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="SelectedPage" 
-                    Name="PlaylistBtn">
+                    Name="PlaylistBtn"
+                    Background="#f7d2d3">
                 <Image Source="../Assets/PlaylistRed.png" 
                        Margin="30 0 0 0" 
                        MaxWidth="70" 

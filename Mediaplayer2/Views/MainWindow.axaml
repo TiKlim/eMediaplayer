@@ -12,10 +12,10 @@
         WindowStartupLocation="CenterScreen"
         ExtendClientAreaToDecorationsHint="True"
         SystemDecorations="None">
-    <!--Главный Grid-->
-    <Grid RowDefinitions="Auto,*,5"
-          ColumnDefinitions="5,*,5"
-          ShowGridLines="False">
+        <!--Главный Grid-->
+        <Grid RowDefinitions="Auto,*,5"
+              ColumnDefinitions="5,*,5"
+              ShowGridLines="False">
             <!--Панель с контентом-->
             <Panel Grid.Column="0"
                    Grid.Row="0"

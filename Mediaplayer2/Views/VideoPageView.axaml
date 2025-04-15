@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <vm:VideoPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="True" 
+    <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
           Background="#f5efef">
@@ -42,7 +42,8 @@
             <!--Кнопка "Видео"-->
             <Button HorizontalAlignment="Stretch" 
                     Classes="SelectedPage" 
-                    Name="VideoBtn">
+                    Name="VideoBtn"
+                    Background="#f7d2d3">
                 <Image Source="../Assets/VideoCollectionRed.png" 
                        Margin="30 0 0 0" 
                        MaxWidth="70" 

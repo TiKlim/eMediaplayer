@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <vm:SettingsPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="True" 
+    <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
           Background="#f5efef">
@@ -60,7 +60,8 @@
             <!--Кнопка "Настройки"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="SelectedPage" 
-                    Name="SettingsBtn">
+                    Name="SettingsBtn"
+                    Background="#f7d2d3">
                 <Image Source="../Assets/SettingsRed.png" 
                        Margin="30 0 0 0" 
                        MaxWidth="70" 

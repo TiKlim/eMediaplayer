@@ -31,9 +31,12 @@
                        MinWidth="40"/>
             </Button>
             <!--Кнопка "Аудио"-->
+            <!--ffebec-->
+            <!--ffddde-->
             <Button HorizontalAlignment="Stretch" 
                     Classes="SelectedPage" 
-                    Name="MusicBtn">
+                    Name="MusicBtn"
+                    Background="#f7d2d3">
                 <Image Source="../Assets/MusicCollectionRed.png" 
                        Margin="30 0 0 0" 
                        MaxWidth="70" 
@@ -88,5 +91,41 @@
                Source="../Assets/MusicPagePictureRed.png"
                Opacity="0.2"
                VerticalAlignment="Center"/>
+        
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    Spacing="10">
+            <Button Name="BackwardButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/BackwardRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Button Name="PlayButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/ButtonPlayRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Button Name="ForwardButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/ForwardRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Slider Name="PlaybackSlider"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="0"
+                    Margin="0,0,0,10"
+                    VerticalAlignment="Center"
+                    Background="Black"
+                    Foreground="#FF595E"/>
+        </StackPanel>
     </Grid>
 </UserControl>

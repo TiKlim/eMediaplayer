@@ -26,7 +26,8 @@
             <!--Кнопка "Домой"-->
             <Button HorizontalAlignment="Stretch"
                     Classes="SelectedPage"    
-                    Name="HomeBtn">
+                    Name="HomeBtn"
+                    Background="#f7d2d3">
                 <Image Source="../Assets/HomeRed.png" 
                        Margin="30 0 0 0" 
                        MaxWidth="70" 
