@@ -86,6 +86,16 @@
                        FontWeight="Bold"/>
         </StackPanel>
         
+        <Button Grid.Column="1"
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                VerticalContentAlignment="Center"
+                Margin="24"
+                Content="Загрузить"
+                Background="#FF595E"
+                CornerRadius="10"
+                Command="{Binding LoadFileCommand}"/>
+        
         <Image Grid.Row="1"
                Grid.Column="1"
                Source="../Assets/MusicPagePictureRed.png"

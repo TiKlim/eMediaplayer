@@ -142,3 +142,12 @@ K:\RiderProj\Mediaplayer\Mediaplayer2\obj\Debug\net9.0\refint\Avalonia\Mediaplay
 K:\RiderProj\Mediaplayer\Mediaplayer2\obj\Debug\net9.0\Mediapla.979620E3.Up2Date
 K:\RiderProj\Mediaplayer\Mediaplayer2\obj\Debug\net9.0\Mediaplayer2.genruntimeconfig.cache
 K:\RiderProj\Mediaplayer\Mediaplayer2\obj\Debug\net9.0\ref\Mediaplayer2.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\libmp3lame.32.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\libmp3lame.64.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Asio.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Core.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Lame.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Midi.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Wasapi.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.WinMM.dll

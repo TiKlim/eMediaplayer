@@ -32,6 +32,13 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microso
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.Win32.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.Win32.Registry.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\mscorlib.dll
+C:\Users\klimt\.nuget\packages\naudio.asio\2.2.1\lib\netstandard2.0\NAudio.Asio.dll
+C:\Users\klimt\.nuget\packages\naudio.core\2.2.1\lib\netstandard2.0\NAudio.Core.dll
+C:\Users\klimt\.nuget\packages\naudio\2.2.1\lib\net6.0\NAudio.dll
+C:\Users\klimt\.nuget\packages\naudio.lame\2.1.0\lib\netstandard2.0\NAudio.Lame.dll
+C:\Users\klimt\.nuget\packages\naudio.midi\2.2.1\lib\netstandard2.0\NAudio.Midi.dll
+C:\Users\klimt\.nuget\packages\naudio.wasapi\2.2.1\lib\netstandard2.0\NAudio.Wasapi.dll
+C:\Users\klimt\.nuget\packages\naudio.winmm\2.2.1\lib\netstandard2.0\NAudio.WinMM.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\netstandard.dll
 C:\Users\klimt\.nuget\packages\reactiveui\20.1.1\lib\net8.0\ReactiveUI.dll
 C:\Users\klimt\.nuget\packages\skiasharp\2.88.8\lib\net6.0\SkiaSharp.dll
