@@ -26,5 +26,6 @@
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.1"/>
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="NAudio.Lame" Version="2.1.0" />
+        <PackageReference Include="TagLibSharp" Version="2.3.0" />
     </ItemGroup>
 </Project>

@@ -151,3 +151,4 @@ K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Lame.dll
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Midi.dll
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.Wasapi.dll
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\NAudio.WinMM.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\TagLibSharp.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kiUD0bMmuSc=",
+  "dgSpecHash": "3Y7o4TKOswQ=",
   "success": true,
   "projectFilePath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,7 @@
     "C:\\Users\\klimt\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\klimt\\.nuget\\packages\\taglibsharp\\2.3.0\\taglibsharp.2.3.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\tmds.dbus.protocol\\0.20.0\\tmds.dbus.protocol.0.20.0.nupkg.sha512"
   ],
   "logs": []

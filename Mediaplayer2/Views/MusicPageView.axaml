@@ -91,7 +91,7 @@
                 HorizontalAlignment="Right"
                 VerticalContentAlignment="Center"
                 Margin="24"
-                Content="Загрузить"
+                Content="Загрузить аудио"
                 Background="#FF595E"
                 CornerRadius="10"
                 Command="{Binding LoadFileCommand}"/>
@@ -129,8 +129,8 @@
                        MinWidth="40"/>
             </Button>
             <Slider Name="PlaybackSlider"
-                    Minimum="0"
-                    Maximum="100"
+                    Minimum="{Binding Value}"
+                    Maximum="{Binding Value}"
                     Value="100"
                     Margin="0,0,0,10"
                     VerticalAlignment="Center"
