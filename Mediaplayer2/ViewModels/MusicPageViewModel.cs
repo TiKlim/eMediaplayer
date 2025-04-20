@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
@@ -13,7 +14,7 @@ using ReactiveUI;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicPageViewModel : ViewModelBase
+public class MusicPageViewModel : ReactiveObject, IRoutableViewModel
 {
     public string Main { get; set; } = "Аудиоплеер";
     
@@ -27,7 +28,12 @@ public class MusicPageViewModel : ViewModelBase
     private TimeSpan _totalTime;
     private TimeSpan _audioDuration;
     private bool _isPlaying = false;
+    
     public ICommand LoadFileCommand { get; }
+    
+    public RoutingState Router { get; } = new RoutingState();
+    
+    public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
 
     public MusicPageViewModel()
     {
@@ -75,6 +81,10 @@ public class MusicPageViewModel : ViewModelBase
                 _waveOut.Init(_audioFileReader); 
             }
         });
+        
+        ToHome = ReactiveCommand.CreateFromObservable(
+            () => Router.Navigate.Execute(new MainPageViewModel(this))
+        );
     }
     
     private void LoadMp3Info(string filePath)

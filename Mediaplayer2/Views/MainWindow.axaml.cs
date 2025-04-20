@@ -1,16 +1,21 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Mediaplayer2.ViewModels;
+using ReactiveUI;
 
 namespace Mediaplayer2.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     // Переменная для кнопок развернуть/вернуть прежний размер.
     private bool _boobool;
     public MainWindow()
     {
         InitializeComponent();
+        this.WhenActivated(disposables => { }); //!!!
+        AvaloniaXamlLoader.Load(this);
     }
     // Метод для перемещения окна по экрану с помощью верхней панели.
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
