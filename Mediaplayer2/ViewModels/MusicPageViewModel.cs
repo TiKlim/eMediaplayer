@@ -14,7 +14,7 @@ using ReactiveUI;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicPageViewModel : ReactiveObject, IRoutableViewModel
+public class MusicPageViewModel : ReactiveObject
 {
     public string Main { get; set; } = "Аудиоплеер";
     
@@ -28,6 +28,14 @@ public class MusicPageViewModel : ReactiveObject, IRoutableViewModel
     private TimeSpan _totalTime;
     private TimeSpan _audioDuration;
     private bool _isPlaying = false;
+    
+    private double _volume;
+
+    public double Volume 
+    {
+        get => _volume;
+        set => this.RaiseAndSetIfChanged(ref _volume, value);
+    }
     
     public ICommand LoadFileCommand { get; }
     
@@ -65,7 +73,7 @@ public class MusicPageViewModel : ReactiveObject, IRoutableViewModel
             
             //var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
             //var result = await dialog.ShowAsync(desctop);
-            var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
+            /*var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Open Text File",
                 AllowMultiple = false
@@ -79,12 +87,12 @@ public class MusicPageViewModel : ReactiveObject, IRoutableViewModel
                 Value = _audioDuration.TotalSeconds;
                 _waveOut = new WaveOutEvent();
                 _waveOut.Init(_audioFileReader); 
-            }
+            }*/
         });
         
-        ToHome = ReactiveCommand.CreateFromObservable(
+        /*ToHome = ReactiveCommand.CreateFromObservable(
             () => Router.Navigate.Execute(new MainPageViewModel(this))
-        );
+        );*/
     }
     
     private void LoadMp3Info(string filePath)

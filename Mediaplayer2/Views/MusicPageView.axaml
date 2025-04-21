@@ -14,62 +14,7 @@
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
           Background="#f5efef">
-        <!--Меню навигации-->
-        <StackPanel Grid.Column="0" 
-                    Grid.Row="1" 
-                    Orientation="Vertical" 
-                    AreVerticalSnapPointsRegular="True" 
-                    VerticalAlignment="Center"
-                    Spacing="20">
-            <!--Кнопка "Домой"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel"    
-                    Name="HomeBtn">
-                <Image Source="../Assets/HomeRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Аудио"-->
-            <!--ffebec-->
-            <!--ffddde-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="SelectedPage" 
-                    Name="MusicBtn"
-                    Background="#f7d2d3">
-                <Image Source="../Assets/MusicCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Видео"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="VideoBtn">
-                <Image Source="../Assets/VideoCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Плейлисты"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="PlaylistBtn">
-                <Image Source="../Assets/PlaylistRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Настройки"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="SettingsBtn">
-                <Image Source="../Assets/SettingsRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-        </StackPanel>
+        
         
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
