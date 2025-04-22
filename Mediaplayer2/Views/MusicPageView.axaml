@@ -10,7 +10,7 @@
     <UserControl.DataContext>
         <vm:MusicPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="True" 
+    <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
           Background="#f5efef">
@@ -76,7 +76,39 @@
             <Slider Name="PlaybackSlider"
                     Minimum="{Binding Value}"
                     Maximum="{Binding Value}"
-                    Value="100"
+                    Value="0"
+                    Width="600"
+                    Margin="0,0,0,10"
+                    VerticalAlignment="Center"
+                    Background="Black"
+                    Foreground="#FF595E">
+            </Slider>
+            <Button Name="PlusInPlaylistButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/AddRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Button Name="InformButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/InformRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Button Name="VolumeButton"
+                    HorizontalAlignment="Stretch"
+                    Classes="LeftPanel">
+                <Image Source="../Assets/VolumeOnRed.png"
+                       MaxWidth="70" 
+                       MinWidth="40"/>
+            </Button>
+            <Slider Name="VolumeSlider"
+                    Minimum="{Binding Value}"
+                    Maximum="{Binding Value}"
+                    Value="0"
+                    Width="200"
                     Margin="0,0,0,10"
                     VerticalAlignment="Center"
                     Background="Black"
