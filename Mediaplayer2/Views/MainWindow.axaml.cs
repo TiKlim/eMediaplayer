@@ -14,7 +14,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = new MainPageViewModel();
+        DataContext = new MainWindowViewModel();
         /*this.WhenActivated(disposables => { }); //!!!
         AvaloniaXamlLoader.Load(this);*/
     }

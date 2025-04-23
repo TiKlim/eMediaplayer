@@ -11,9 +11,9 @@ public class MainWindowViewModel : ReactiveObject
     
     public ObservableCollection<MainPageViewModel> Main { get; } = new();
 
-    private ReactiveObject _currentView;
+    private ReactiveObject? _currentView;
 
-    private ReactiveObject CurrentView
+    private ReactiveObject? CurrentView
     {
         get => _currentView;
         set => this.RaiseAndSetIfChanged(ref _currentView, value);
@@ -22,11 +22,19 @@ public class MainWindowViewModel : ReactiveObject
     public MainWindowViewModel()
     {
         CurrentView = new MainPageViewModel();
-        ToMainPageCommand = ReactiveCommand.Create(() => CurrentView = new MainPageViewModel());
-        ToMusicPageCommand = ReactiveCommand.Create(() => CurrentView = new MusicPageViewModel());
+        ToMainPageCommand = ReactiveCommand.Create(() =>
+        {
+            CurrentView = new MainPageViewModel();
+            return Unit.Default;
+        });
+        ToMusicPageCommand = ReactiveCommand.Create(() =>
+        {
+            CurrentView = new MusicPageViewModel();
+            return Unit.Default;
+        });
     }
     
-    public ReactiveCommand<Unit, ReactiveObject> ToMainPageCommand { get; }
+    public ReactiveCommand<Unit, Unit> ToMainPageCommand { get; }
     
-    public ReactiveCommand<Unit, ReactiveObject> ToMusicPageCommand { get; }
+    public ReactiveCommand<Unit, Unit> ToMusicPageCommand { get; }
 }
