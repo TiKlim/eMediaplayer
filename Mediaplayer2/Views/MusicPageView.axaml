@@ -42,8 +42,8 @@
         
         <Image Grid.Row="1"
                Grid.Column="1"
-               Source="../Assets/MusicPagePictureRed.png"
-               Opacity="0.2"
+               Source="{Binding TrackImage}"
+               Opacity="{Binding OpacityImage}"
                VerticalAlignment="Center"/>
         
         <StackPanel Grid.Column="0"

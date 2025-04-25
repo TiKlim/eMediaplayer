@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Mediaplayer2.Views;
 using NAudio.Wave;
@@ -20,6 +21,10 @@ public class MusicPageViewModel : ReactiveObject
 
     private string _premain;
 
+    private Bitmap? trackImage;
+    
+    private double _opacityImage;
+
     public string Main
     {
         get => _main;
@@ -30,6 +35,18 @@ public class MusicPageViewModel : ReactiveObject
     {
         get => _premain;
         set => this.RaiseAndSetIfChanged(ref _premain, value);
+    }
+
+    public Bitmap? TrackImage
+    {
+        get => trackImage;
+        set => this.RaiseAndSetIfChanged(ref trackImage, value);
+    }
+
+    public double OpacityImage
+    {
+        get => _opacityImage;
+        set => this.RaiseAndSetIfChanged(ref _opacityImage, value);
     }
 
     public double Value { get; set; }
@@ -61,6 +78,8 @@ public class MusicPageViewModel : ReactiveObject
     {
         Main = "Аудиоплеер";
         PreMain = "Что послушаем сегодня?";
+        TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");
+        OpacityImage = 0.2;
         
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -106,6 +125,16 @@ public class MusicPageViewModel : ReactiveObject
         
         Main = title;
         PreMain = performer;
+        
+        if (file.Tag.Pictures.Length > 0)
+        {
+            var picture = file.Tag.Pictures[0];
+            using (var stream = new MemoryStream(picture.Data.Data))
+            {
+                TrackImage = new Bitmap(stream);
+                OpacityImage = 1;
+            }
+        }
         
         if (_audioFileReader != null)
         {
