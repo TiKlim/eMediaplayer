@@ -21,8 +21,8 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <!--<views:MainPageView/>-->
-                    <ContentControl Content="{Binding CurrentView}"/>
+                    <views:MusicPageView/>
+                    <!--<ContentControl Content="{Binding CurrentView}"/>-->
             </Panel>
             
             <Grid Grid.Column="0"

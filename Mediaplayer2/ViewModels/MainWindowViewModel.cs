@@ -21,20 +21,17 @@ public class MainWindowViewModel : ReactiveObject
 
     public MainWindowViewModel()
     {
-        CurrentView = new MainPageViewModel();
-        ToMainPageCommand = ReactiveCommand.Create(() =>
-        {
-            CurrentView = new MainPageViewModel();
-            return Unit.Default;
-        });
-        ToMusicPageCommand = ReactiveCommand.Create(() =>
-        {
-            CurrentView = new MusicPageViewModel();
-            return Unit.Default;
-        });
+        
+        //ToMainPageCommand = ReactiveCommand.Create(ShowMainPage);
+        ToMusicPageCommand = ReactiveCommand.Create(ShowMusicPage);
+        //CurrentView = new MainPageViewModel();
     }
     
     public ReactiveCommand<Unit, Unit> ToMainPageCommand { get; }
     
     public ReactiveCommand<Unit, Unit> ToMusicPageCommand { get; }
+    
+    //private void ShowMainPage() => CurrentView = new MainPageViewModel();
+    
+    private void ShowMusicPage() => CurrentView = new MusicPageViewModel();
 }

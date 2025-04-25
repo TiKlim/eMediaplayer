@@ -15,8 +15,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel();
-        /*this.WhenActivated(disposables => { }); //!!!
-        AvaloniaXamlLoader.Load(this);*/
     }
     // Метод для перемещения окна по экрану с помощью верхней панели.
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)

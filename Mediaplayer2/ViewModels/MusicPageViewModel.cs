@@ -47,20 +47,6 @@ public class MusicPageViewModel : ReactiveObject
     {
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            /*var dialog = new OpenFileDialog
-            {
-                AllowMultiple = false,
-                Filters = new List<FileDialogFilter>
-                {
-                    new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
-                }
-            };*/
-            /*var desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            desktop.MainWindow!.Close();
-            desktop.MainWindow = mainWindow;*/
-            var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
             var dialog = new OpenFileDialog
             {
                 AllowMultiple = false,
@@ -69,15 +55,8 @@ public class MusicPageViewModel : ReactiveObject
                     new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
                 }
             };
-            
-            
-            //var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
-            //var result = await dialog.ShowAsync(desctop);
-            /*var files = await provider.OpenFilePickerAsync(new FilePickerOpenOptions()
-            {
-                Title = "Open Text File",
-                AllowMultiple = false
-            });
+            var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
+            var result = await dialog.ShowAsync(desctop.MainWindow);
             if (result.Length > 0)
             {
                 _filePath = result[0];
@@ -87,12 +66,8 @@ public class MusicPageViewModel : ReactiveObject
                 Value = _audioDuration.TotalSeconds;
                 _waveOut = new WaveOutEvent();
                 _waveOut.Init(_audioFileReader); 
-            }*/
+            }
         });
-        
-        /*ToHome = ReactiveCommand.CreateFromObservable(
-            () => Router.Navigate.Execute(new MainPageViewModel(this))
-        );*/
     }
     
     private void LoadMp3Info(string filePath)

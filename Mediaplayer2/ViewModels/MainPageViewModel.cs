@@ -10,5 +10,9 @@ public class MainPageViewModel : ReactiveObject
     
     public string PreMain { get; } = "Чем займёмся сегодня?";
     
+    public IScreen HostScreen { get; }
+    
+    //public MainPageViewModel(IScreen hostScreen) => HostScreen = hostScreen;
+    
     
 }
