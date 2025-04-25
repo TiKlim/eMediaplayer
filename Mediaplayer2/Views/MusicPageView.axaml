@@ -60,7 +60,8 @@
             </Button>
             <Button Name="PlayButton"
                     HorizontalAlignment="Stretch"
-                    Classes="LeftPanel">
+                    Classes="LeftPanel"
+                    Command="{Binding PlayPauseCommand}">
                 <Image Source="../Assets/ButtonPlayRed.png"
                        MaxWidth="70" 
                        MinWidth="40"/>

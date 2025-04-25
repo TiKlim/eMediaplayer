@@ -16,9 +16,21 @@ namespace Mediaplayer2.ViewModels;
 
 public class MusicPageViewModel : ReactiveObject
 {
-    public string Main { get; set; } = "Аудиоплеер";
-    
-    public string PreMain { get; set; } = "Что послушаем сегодня?";
+    private string _main;
+
+    private string _premain;
+
+    public string Main
+    {
+        get => _main;
+        set => this.RaiseAndSetIfChanged(ref _main, value);
+    }
+
+    public string PreMain
+    {
+        get => _premain;
+        set => this.RaiseAndSetIfChanged(ref _premain, value);
+    }
 
     public double Value { get; set; }
     
@@ -42,9 +54,14 @@ public class MusicPageViewModel : ReactiveObject
     public RoutingState Router { get; } = new RoutingState();
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
+    
+    public ICommand PlayPauseCommand { get; }
 
     public MusicPageViewModel()
     {
+        Main = "Аудиоплеер";
+        PreMain = "Что послушаем сегодня?";
+        
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var dialog = new OpenFileDialog
@@ -68,6 +85,15 @@ public class MusicPageViewModel : ReactiveObject
                 _waveOut.Init(_audioFileReader); 
             }
         });
+
+        PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            _isPlaying = true;
+            await PlayAudioAsync(_filePath);
+            //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
+            _isPlaying = true;
+            await PlayAudioAsync(_filePath);
+        });
     }
     
     private void LoadMp3Info(string filePath)
@@ -77,13 +103,40 @@ public class MusicPageViewModel : ReactiveObject
         string title = file.Tag.Title ?? "Нет названия";
         
         string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-
-        Main = $"{title}";
-        PreMain = $"{performer}";
+        
+        Main = title;
+        PreMain = performer;
         
         if (_audioFileReader != null)
         {
             _totalTime = _audioFileReader.TotalTime;
         }
+    }
+
+    private async void PlayPause()
+    {
+        _isPlaying = true;
+        await PlayAudioAsync(_filePath);
+        //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
+        _isPlaying = true;
+        await PlayAudioAsync(_filePath);
+    }
+    private async Task PlayAudioAsync(string filePath) 
+    { 
+        using (var audioFileReader = new AudioFileReader(filePath)) 
+        using (var waveOut = new WaveOutEvent()) 
+        { 
+            waveOut.Init(audioFileReader); 
+            waveOut.Play();
+            var buffer = new byte[4096]; 
+            int bytesRead;
+            while (waveOut.PlaybackState == PlaybackState.Playing) 
+            {
+                bytesRead = await Task.Run(() => audioFileReader.Read(buffer, 0, buffer.Length));
+                if (bytesRead == 0) break;
+                waveOut.Play();
+                await Task.Delay(100); 
+            } 
+        } 
     }
 }
