@@ -61,7 +61,7 @@
             <Slider Grid.Row="0"
                     Name="PlaybackSlider"
                     Minimum="0"
-                    Maximum="100"
+                    Maximum="{Binding AudioDuration.TotalSeconds}"
                     Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
                     Margin="10,0,10,0"
                     VerticalAlignment="Center"

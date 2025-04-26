@@ -73,6 +73,12 @@ public class MusicPageViewModel : ReactiveObject
         get => _volume;
         set => this.RaiseAndSetIfChanged(ref _volume, value);
     }
+
+    public TimeSpan AudioDuration
+    {
+        get => _audioDuration;
+        set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
+    }
     
     public ICommand LoadFileCommand { get; }
     
@@ -106,8 +112,9 @@ public class MusicPageViewModel : ReactiveObject
                 _filePath = result[0];
                 LoadMp3Info(_filePath); 
                 _audioFileReader = new AudioFileReader(_filePath);
-                _audioDuration = _audioFileReader.TotalTime; 
-                Value = _audioDuration.TotalSeconds;
+                AudioDuration = _audioFileReader.TotalTime;
+                //_audioDuration = _audioFileReader.TotalTime; 
+                //Value = _audioDuration.TotalSeconds;
                 _waveOut = new WaveOutEvent();
                 _waveOut.Init(_audioFileReader); 
             }
@@ -148,6 +155,7 @@ public class MusicPageViewModel : ReactiveObject
         if (_audioFileReader != null)
         {
             _totalTime = _audioFileReader.TotalTime;
+            AudioDuration = _totalTime;
         }
     }
 
