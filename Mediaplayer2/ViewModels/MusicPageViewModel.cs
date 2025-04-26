@@ -26,6 +26,8 @@ public class MusicPageViewModel : ReactiveObject
     private double _opacityImage;
 
     private TimeSpan _currentTime;
+    
+    private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
 
     public string Main
     {
@@ -57,6 +59,12 @@ public class MusicPageViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _currentTime, value);
     }
 
+    public Bitmap? VolumeImage
+    {
+        get => volumeImage;
+        set => this.RaiseAndSetIfChanged(ref volumeImage, value);
+    }
+
     public double Value { get; set; }
     
     private string _filePath;
@@ -66,7 +74,7 @@ public class MusicPageViewModel : ReactiveObject
     private TimeSpan _audioDuration;
     private bool _isPlaying = false;
     
-    private float _volume = 0.5f;
+    private float _volume = 1f;
 
     public float Volume 
     {
@@ -76,6 +84,7 @@ public class MusicPageViewModel : ReactiveObject
             if (value != _volume)
             {
                 _volume = value;
+                this.RaiseAndSetIfChanged(ref _volume, value);
                 UpdateVolume();
             }
         }
@@ -94,6 +103,8 @@ public class MusicPageViewModel : ReactiveObject
     public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
     
     public ICommand PlayPauseCommand { get; }
+    
+    public ICommand VolumeCommand { get; }
 
     public MusicPageViewModel()
     {
@@ -136,6 +147,22 @@ public class MusicPageViewModel : ReactiveObject
             //_isPlaying = true;
             //await PlayAudioAsync(_filePath);
         });
+
+        VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (Volume == 0f)
+            {
+                Volume = 0.5f;
+                UpdateVolume();
+                //VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
+            }
+            else
+            {
+                Volume = 0f;
+                UpdateVolume();
+                //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            }
+        });
     }
     
     private void LoadMp3Info(string filePath)
@@ -177,14 +204,18 @@ public class MusicPageViewModel : ReactiveObject
 
     private void UpdateVolume()
     {
-        /*using (var waveOut = new WaveOutEvent())
-        {
-            waveOut.Init(_audioFileReader);
-            waveOut.Volume = Volume;
-        }*/
         if (_waveOut != null)
         {
             _waveOut.Volume = Volume;
+        }
+
+        if (Volume == 0f)
+        {
+            VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+        }
+        else
+        {
+            VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
         }
     }
     
