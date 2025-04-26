@@ -66,12 +66,19 @@ public class MusicPageViewModel : ReactiveObject
     private TimeSpan _audioDuration;
     private bool _isPlaying = false;
     
-    private double _volume;
+    private float _volume = 0.5f;
 
-    public double Volume 
+    public float Volume 
     {
         get => _volume;
-        set => this.RaiseAndSetIfChanged(ref _volume, value);
+        set
+        {
+            if (value != _volume)
+            {
+                _volume = value;
+                UpdateVolume();
+            }
+        }
     }
 
     public TimeSpan AudioDuration
@@ -167,12 +174,28 @@ public class MusicPageViewModel : ReactiveObject
         _isPlaying = true;
         await PlayAudioAsync(_filePath);
     }
+
+    private void UpdateVolume()
+    {
+        /*using (var waveOut = new WaveOutEvent())
+        {
+            waveOut.Init(_audioFileReader);
+            waveOut.Volume = Volume;
+        }*/
+        if (_waveOut != null)
+        {
+            _waveOut.Volume = Volume;
+        }
+    }
+    
     private async Task PlayAudioAsync(string filePath) 
     { 
         using (var audioFileReader = new AudioFileReader(filePath)) 
         using (var waveOut = new WaveOutEvent()) 
         { 
             waveOut.Init(audioFileReader); 
+            waveOut.Volume = Volume;
+            UpdateVolume();
             waveOut.Play();
             var buffer = new byte[2096]; //4096 
             int bytesRead;

@@ -100,7 +100,6 @@
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/AddRed.png"
-                       Width="35"
                        MaxWidth="50" 
                        MinWidth="20"/>
             </Button>
@@ -108,7 +107,6 @@
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/InformRed.png"
-                       Width="35"
                        MaxWidth="50"
                        MinWidth="20"/>
             </Button>
@@ -116,16 +114,14 @@
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/VolumeOnRed.png"
-                       Width="35"
                        MaxWidth="50" 
                        MinWidth="20"/>
             </Button>
             <Slider Name="VolumeSlider"
                     Minimum="0"
-                    Maximum="100"
-                    Value="100"
+                    Maximum="1"
+                    Value="{Binding Volume}"
                     Width="200"
-                    Margin="0,0,0,0"
                     VerticalAlignment="Center"
                     Background="Black"
                     Foreground="#FF595E">
