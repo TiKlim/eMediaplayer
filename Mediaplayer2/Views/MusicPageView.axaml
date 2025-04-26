@@ -49,9 +49,9 @@
             <Image Grid.Column="1"
                    Source="{Binding TrackImage}"
                    Opacity="{Binding OpacityImage}"
+                   Margin="40"
                    VerticalAlignment="Center"/>
         </Grid>
-        
         
         <Grid Grid.Column="0"
               Grid.Row="2"
@@ -62,7 +62,7 @@
                     Name="PlaybackSlider"
                     Minimum="0"
                     Maximum="100"
-                    Value="0"
+                    Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
                     Margin="10,0,10,0"
                     VerticalAlignment="Center"
                     Background="Black"
@@ -75,51 +75,57 @@
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/BackwardRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50" 
+                       MinWidth="20"/>
             </Button>
             <Button Name="PlayButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel"
                     Command="{Binding PlayPauseCommand}">
                 <Image Source="../Assets/ButtonPlayRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50" 
+                       MinWidth="20"/>
             </Button>
             <Button Name="ForwardButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/ForwardRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50" 
+                       MinWidth="20"/>
             </Button>
             <Button Name="PlusInPlaylistButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/AddRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50" 
+                       MinWidth="20"/>
             </Button>
             <Button Name="InformButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/InformRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50"
+                       MinWidth="20"/>
             </Button>
             <Button Name="VolumeButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
                 <Image Source="../Assets/VolumeOnRed.png"
-                       MaxWidth="70" 
-                       MinWidth="40"/>
+                       Width="35"
+                       MaxWidth="50" 
+                       MinWidth="20"/>
             </Button>
             <Slider Name="VolumeSlider"
-                    Minimum="{Binding Value}"
-                    Maximum="{Binding Value}"
-                    Value="0"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="100"
                     Width="200"
-                    Margin="0,0,0,10"
+                    Margin="0,0,0,0"
                     VerticalAlignment="Center"
                     Background="Black"
                     Foreground="#FF595E">

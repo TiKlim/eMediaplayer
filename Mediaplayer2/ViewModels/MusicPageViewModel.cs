@@ -25,6 +25,8 @@ public class MusicPageViewModel : ReactiveObject
     
     private double _opacityImage;
 
+    private TimeSpan _currentTime;
+
     public string Main
     {
         get => _main;
@@ -47,6 +49,12 @@ public class MusicPageViewModel : ReactiveObject
     {
         get => _opacityImage;
         set => this.RaiseAndSetIfChanged(ref _opacityImage, value);
+    }
+
+    public TimeSpan CurrentTime
+    {
+        get => _currentTime;
+        set => this.RaiseAndSetIfChanged(ref _currentTime, value);
     }
 
     public double Value { get; set; }
@@ -109,9 +117,10 @@ public class MusicPageViewModel : ReactiveObject
         {
             _isPlaying = true;
             await PlayAudioAsync(_filePath);
+            //await SliderAsync(_filePath);
             //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
-            _isPlaying = true;
-            await PlayAudioAsync(_filePath);
+            //_isPlaying = true;
+            //await PlayAudioAsync(_filePath);
         });
     }
     
@@ -157,7 +166,7 @@ public class MusicPageViewModel : ReactiveObject
         { 
             waveOut.Init(audioFileReader); 
             waveOut.Play();
-            var buffer = new byte[4096]; 
+            var buffer = new byte[2096]; //4096 
             int bytesRead;
             while (waveOut.PlaybackState == PlaybackState.Playing) 
             {
@@ -165,6 +174,9 @@ public class MusicPageViewModel : ReactiveObject
                 if (bytesRead == 0) break;
                 waveOut.Play();
                 await Task.Delay(100); 
+                
+                CurrentTime = audioFileReader.CurrentTime;
+                //await Task.Delay(10); 
             } 
         } 
     }
