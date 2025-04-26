@@ -10,47 +10,67 @@
     <UserControl.DataContext>
         <vm:MusicPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="False" 
-          ColumnDefinitions="*,13*" 
-          RowDefinitions="120,*,120"
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*,Auto"
           Background="#f5efef">
         
-        <StackPanel Grid.Column="1"
-                    Grid.Row="0"
-                    Orientation="Vertical"
-                    Margin="30 50 0 0"
-                    VerticalAlignment="Center">
-            <TextBlock Text="{Binding Main}"
-                       FontSize="40"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"/>
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="30 50 0 0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding Main}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
          
-            <TextBlock Text="{Binding PreMain}"
-                       FontSize="20"
-                       FontWeight="Bold"/>
-        </StackPanel>
+                <TextBlock Text="{Binding PreMain}"
+                           FontSize="20"
+                           FontWeight="Bold"/>
+            </StackPanel>
         
-        <Button Grid.Column="1"
-                Grid.Row="0"
-                HorizontalAlignment="Right"
-                VerticalContentAlignment="Center"
-                Margin="24"
-                Content="Загрузить аудио"
-                Background="#FF595E"
-                CornerRadius="10"
-                Command="{Binding LoadFileCommand}"/>
+            <Button Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Загрузить аудио"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding LoadFileCommand}"/>
+        </Grid>
         
-        <Image Grid.Row="1"
-               Grid.Column="1"
-               Source="{Binding TrackImage}"
-               Opacity="{Binding OpacityImage}"
-               VerticalAlignment="Center"/>
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <Image Grid.Column="1"
+                   Source="{Binding TrackImage}"
+                   Opacity="{Binding OpacityImage}"
+                   VerticalAlignment="Center"/>
+        </Grid>
         
-        <StackPanel Grid.Column="0"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal"
-                    Spacing="10">
+        
+        <Grid Grid.Column="0"
+              Grid.Row="2"
+              Grid.ColumnSpan="2"
+              RowDefinitions="*,*"
+              ShowGridLines="False">
+            <Slider Grid.Row="0"
+                    Name="PlaybackSlider"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="0"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    Background="Black"
+                    Foreground="#FF595E">
+            </Slider>
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        Spacing="10">
             <Button Name="BackwardButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
@@ -73,16 +93,6 @@
                        MaxWidth="70" 
                        MinWidth="40"/>
             </Button>
-            <Slider Name="PlaybackSlider"
-                    Minimum="{Binding Value}"
-                    Maximum="{Binding Value}"
-                    Value="0"
-                    Width="400"
-                    Margin="0,0,0,10"
-                    VerticalAlignment="Center"
-                    Background="Black"
-                    Foreground="#FF595E">
-            </Slider>
             <Button Name="PlusInPlaylistButton"
                     HorizontalAlignment="Stretch"
                     Classes="LeftPanel">
@@ -115,5 +125,7 @@
                     Foreground="#FF595E">
             </Slider>
         </StackPanel>
+        </Grid>
+        
     </Grid>
 </UserControl>

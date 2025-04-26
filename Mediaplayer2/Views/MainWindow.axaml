@@ -26,12 +26,13 @@
             </Panel>
             
             <Grid Grid.Column="0"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Grid.ColumnSpan="3"
-                  Grid.RowSpan="3"
-                  ColumnDefinitions="*,13*" 
-                  RowDefinitions="120,*,120">
-                    <!--Меню навигации-->
+                  RowDefinitions="Auto,*,Auto"
+                  ShowGridLines="False">
+                    <Grid Grid.Row="1"
+                          ColumnDefinitions="*,13*">
+                         <!--Меню навигации-->
         <StackPanel Grid.Column="0" 
                     Grid.Row="1" 
                     Orientation="Vertical" 
@@ -86,7 +87,9 @@
                        MaxWidth="70" 
                        MinWidth="40"/>
             </Button>
-        </StackPanel>
+        </StackPanel>   
+                    </Grid>
+                    
             </Grid>
             
             <!--Изменение размеров окна. Часть первая-->
