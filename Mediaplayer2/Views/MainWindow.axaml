@@ -24,78 +24,77 @@
                     <views:MusicPageView/>
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
             </Panel>
-            
+            <!--Grid окна действий-->
             <Grid Grid.Column="0"
                   Grid.Row="1"
                   Grid.ColumnSpan="3"
                   RowDefinitions="Auto,*,Auto"
                   ShowGridLines="False">
+                    <!--Grid меню навигации-->
                     <Grid Grid.Row="1"
                           ColumnDefinitions="*,13*">
-                         <!--Меню навигации-->
-        <StackPanel Grid.Column="0" 
-                    Grid.Row="1" 
-                    Orientation="Vertical" 
-                    AreVerticalSnapPointsRegular="True" 
-                    VerticalAlignment="Center"
-                    Spacing="20">
-            <!--Кнопка "Домой"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="SelectedPage"    
-                    Name="HomeBtn"
-                    Background="#f7d2d3"
-                    Command="{Binding ToMainPageCommand}">
-                <Image Source="../Assets/HomeRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Аудио"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="MusicBtn"
-                    Command="{Binding ToMusicPageCommand}">
-                <Image Source="../Assets/MusicCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Видео"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="VideoBtn">
-                <Image Source="../Assets/VideoCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Плейлисты"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="PlaylistBtn">
-                <Image Source="../Assets/PlaylistRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Настройки"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="SettingsBtn">
-                <Image Source="../Assets/SettingsRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-        </StackPanel>   
+                            <!--Меню навигации-->
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Vertical" 
+                                        AreVerticalSnapPointsRegular="True" 
+                                        VerticalAlignment="Center"
+                                        Spacing="20">
+                                    <!--Кнопка "Домой"-->
+                                    <Button HorizontalAlignment="Stretch"
+                                            Classes="SelectedPage"    
+                                            Name="HomeBtn"
+                                            Background="#f7d2d3"
+                                            Command="{Binding ToMainPageCommand}">
+                                            <Image Source="../Assets/HomeRed.png" 
+                                                   Margin="30 0 0 0" 
+                                                   MaxWidth="70" 
+                                                   MinWidth="40"/>
+                                    </Button>
+                                    <!--Кнопка "Аудио"-->
+                                    <Button HorizontalAlignment="Stretch" 
+                                            Classes="LeftPanel" 
+                                            Name="MusicBtn"
+                                            Command="{Binding ToMusicPageCommand}">
+                                            <Image Source="../Assets/MusicCollectionRed.png" 
+                                                   Margin="30 0 0 0" 
+                                                   MaxWidth="70" 
+                                                   MinWidth="40"/>
+                                    </Button>
+                                    <!--Кнопка "Видео"-->
+                                    <Button HorizontalAlignment="Stretch" 
+                                            Classes="LeftPanel" 
+                                            Name="VideoBtn">
+                                            <Image Source="../Assets/VideoCollectionRed.png" 
+                                                   Margin="30 0 0 0" 
+                                                   MaxWidth="70" 
+                                                   MinWidth="40"/>
+                                    </Button>
+                                    <!--Кнопка "Плейлисты"-->
+                                    <Button HorizontalAlignment="Stretch"
+                                            Classes="LeftPanel" 
+                                            Name="PlaylistBtn">
+                                            <Image Source="../Assets/PlaylistRed.png" 
+                                                   Margin="30 0 0 0" 
+                                                   MaxWidth="70" 
+                                                   MinWidth="40"/>
+                                    </Button>
+                                    <!--Кнопка "Настройки"-->
+                                    <Button HorizontalAlignment="Stretch"
+                                            Classes="LeftPanel" 
+                                            Name="SettingsBtn">
+                                            <Image Source="../Assets/SettingsRed.png" 
+                                                   Margin="30 0 0 0" 
+                                                   MaxWidth="70" 
+                                                   MinWidth="40"/>
+                                    </Button>
+                            </StackPanel>   
                     </Grid>
-                    
             </Grid>
-            
             <!--Изменение размеров окна. Часть первая-->
             <Border Name="BottomLeft"
                     Background="Transparent"
-                    Grid.Row="2"/>
+                    Grid.Row="2"
+                    Grid.Column="0"/>
             <Border Name="BottomRight"
                     Background="Transparent"
                     Grid.Column="2"
@@ -110,15 +109,18 @@
                     Grid.Row="2"/>
             <Border Name="Left"
                     Background="Transparent"
-                    Grid.Row="1"/>
+                    Grid.Row="1"
+                    Grid.Column="0"/>
             <!--Панель управления окном-->
-            <DockPanel Grid.Row="0"
+            <DockPanel Grid.Column="0"
+                       Grid.Row="0"
                        Grid.ColumnSpan="3">
                     <Grid Name="WindowBar"
                           Background="#FF595E"
                           DockPanel.Dock="Top"
                           ColumnDefinitions="Auto,*,Auto"
                           PointerPressed="InputElement_OnPointerPressed">
+                            <!--Иконка и заголовок-->
                             <DockPanel Margin="5 0 0 0">
                                     <Image Source="../Assets/wNew3.png"
                                            Height="20"/>
@@ -127,6 +129,7 @@
                                                Text="Медиаплеер"
                                                Foreground="White"/>
                             </DockPanel>
+                            <!--Управление окном-->
                             <StackPanel Grid.Column="2"
                                         Orientation="Horizontal">
                                     <StackPanel.Styles>
@@ -134,22 +137,26 @@
                                                     <Setter Property="Margin" Value="2"/>
                                             </Style>
                                     </StackPanel.Styles>
+                                    <!--Свернуть окно-->
                                     <Button Name="MinimizeWindow"
                                             Classes="WindowBar">
                                             <Image Source="../Assets/roll.png"
                                                    Height="20"/>
                                     </Button>
+                                    <!--Вернуть окно в прежние размеры-->
                                     <Button Name="NormalWindow"
                                             Classes="WindowBar"
                                             IsVisible="False">
                                             <Image Source="../Assets/minimize.png"
                                                    Height="20"/>
                                     </Button>
+                                    <!--Увеличить окно на весь экран-->
                                     <Button Name="MaximizeWindow"
                                             Classes="WindowBar">
                                             <Image Source="../Assets/maximise.png"
                                                    Height="20"/>
                                     </Button>
+                                    <!--Закрыть окно-->
                                     <Button Name="CloseWindow"
                                             Classes="CloseButton">
                                             <Image Source="../Assets/close.png"
@@ -159,15 +166,19 @@
                     </Grid>
             </DockPanel>
             <!--Изменение размеров окна. Часть вторая-->
-            <Border Name="TopLeft"
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    Name="TopLeft"
                     Background="Transparent"/>
             <Border Name="TopRight"
                     Background="Transparent"
-                    Grid.Column="2"/>
+                    Grid.Column="2"
+                    Grid.Row="0"/>
             <Border Name="Top"
                     Background="Transparent"
                     Grid.Column="1"
+                    Grid.Row="0"
                     Height="4"
                     VerticalAlignment="Top"/>
-    </Grid>
+        </Grid>
 </Window>
