@@ -28,6 +28,8 @@ public class MusicPageViewModel : ReactiveObject
     private TimeSpan _currentTime;
     
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
+    
+    private Bitmap? playImage = new Bitmap("Assets/ButtonPlayRed.png");
 
     public string Main
     {
@@ -63,6 +65,12 @@ public class MusicPageViewModel : ReactiveObject
     {
         get => volumeImage;
         set => this.RaiseAndSetIfChanged(ref volumeImage, value);
+    }
+
+    public Bitmap? PlayImage
+    {
+        get => playImage;
+        set => this.RaiseAndSetIfChanged(ref playImage, value);
     }
 
     public double Value { get; set; }
@@ -140,12 +148,18 @@ public class MusicPageViewModel : ReactiveObject
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            _isPlaying = true;
-            await PlayAudioAsync(_filePath);
-            //await SliderAsync(_filePath);
-            //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
-            //_isPlaying = true;
-            //await PlayAudioAsync(_filePath);
+            if (_isPlaying)
+            {
+                _isPlaying = false;
+                _waveOut?.Stop();
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            }
+            else
+            {
+                _isPlaying = true;
+                PlayImage = new Bitmap("Assets/StopRed.png");
+                await PlayAudioAsync(_filePath);
+            }
         });
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>

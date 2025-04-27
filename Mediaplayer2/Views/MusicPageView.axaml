@@ -91,7 +91,7 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding PlayPauseCommand}">
-                    <Image Source="../Assets/ButtonPlayRed.png"
+                    <Image Source="{Binding PlayImage}"
                            Width="35"
                            MaxWidth="50" 
                            MinWidth="20"/>
