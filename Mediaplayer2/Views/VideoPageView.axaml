@@ -10,84 +10,143 @@
     <UserControl.DataContext>
         <vm:VideoPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="False" 
-          ColumnDefinitions="*,13*" 
-          RowDefinitions="120,*,120"
+    <!--Главный Grid-->
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*,Auto"
           Background="#f5efef">
-        <!--Меню навигации-->
-        <StackPanel Grid.Column="0" 
-                    Grid.Row="1" 
-                    Orientation="Vertical" 
-                    AreVerticalSnapPointsRegular="True" 
-                    VerticalAlignment="Center"
-                    Spacing="20">
-            <!--Кнопка "Домой"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel"    
-                    Name="HomeBtn">
-                <Image Source="../Assets/HomeRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Аудио"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="MusicBtn">
-                <Image Source="../Assets/MusicCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Видео"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="SelectedPage" 
-                    Name="VideoBtn"
-                    Background="#f7d2d3">
-                <Image Source="../Assets/VideoCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Плейлисты"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="PlaylistBtn">
-                <Image Source="../Assets/PlaylistRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Настройки"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="SettingsBtn">
-                <Image Source="../Assets/SettingsRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1"
+        <!--Grid для заголовка-->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Заголовок-->
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="30 50 0 0"
+                        VerticalAlignment="Center">
+                <!--Главный титл (для названия)-->
+                <TextBlock Text="{Binding Main}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                <!--Второй титл (для исполнителя)-->
+                <TextBlock Text="{Binding PreMain}"
+                           FontSize="20"
+                           FontWeight="Bold"/>
+            </StackPanel>
+            <!--Кнопка для загрузки видео-файла-->
+            <Button Grid.Column="1"
                     Grid.Row="0"
-                    Orientation="Vertical"
-                    Margin="30 50 0 0"
-                    VerticalAlignment="Center">
-            <TextBlock Text="{Binding Main}"
-                       FontSize="40"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"/>
-         
-            <TextBlock Text="{Binding PreMain}"
-                       FontSize="20"
-                       FontWeight="Bold"/>
-        </StackPanel>
-        
-        <Image Grid.Row="1"
-               Grid.Column="1"
-               Source="../Assets/VideoPagePictureRed.png"
-               Opacity="0.2"
-               VerticalAlignment="Center"/>
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Загрузить видео"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding LoadFileCommand}"/>
+        </Grid>
+        <!--Grid для изображения (обложка трека)-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Изображение (обложка трека)-->
+            <Image Grid.Column="1"
+                   Source="{Binding TrackImage}"
+                   Opacity="{Binding OpacityImage}"
+                   VerticalAlignment="Center"/>
+        </Grid>
+        <!--Grid для нижней панели-->
+        <Grid Grid.Column="0"
+              Grid.Row="2"
+              RowDefinitions="*,*"
+              ShowGridLines="False">
+            <!--Полоса прокрутки-->
+            <Slider Grid.Row="0"
+                    Name="PlaybackSlider"
+                    Minimum="0"
+                    Maximum="{Binding AudioDuration.TotalSeconds}"
+                    Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    Background="Black"
+                    Foreground="#FF595E">
+            </Slider>
+            <!--Управление треком (предыдущий, проиграть/остановить, следующий)-->
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Spacing="10">
+                <!--Кнопка "Предыдущий трек"-->
+                <Button Name="BackwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel">
+                    <Image Source="../Assets/BackwardRed.png"
+                           Width="35"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Играть/остановить"-->
+                <Button Name="PlayButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding PlayPauseCommand}">
+                    <Image Source="{Binding PlayImage}"
+                           Width="35"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Следующий трек"-->
+                <Button Name="ForwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel">
+                    <Image Source="../Assets/ForwardRed.png"
+                           Width="35"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+            </StackPanel>
+            <!--Управление треком (добавить в плейлист/убрать из плейлиста, информация о треке, уровень громкости)-->
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Spacing="10">
+                <!--Кнопка "Добавить в плейлист/убрать из плейлиста"-->
+                <Button Name="PlusInPlaylistButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel">
+                    <Image Source="../Assets/AddRed.png"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Информация о треке"-->
+                <Button Name="InformButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel">
+                    <Image Source="../Assets/InformRed.png"
+                           MaxWidth="50"
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Звук выключить/включить"-->
+                <Button Name="VolumeButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding VolumeCommand}">
+                    <Image Source="{Binding VolumeImage}"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Полоса регулирования громкости-->
+                <Slider Name="VolumeSlider"
+                        Minimum="0"
+                        Maximum="1"
+                        Value="{Binding Volume, Mode=TwoWay}"
+                        Width="200"
+                        VerticalAlignment="Center"
+                        Background="Black"
+                        Foreground="#FF595E">
+                </Slider>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
