@@ -259,6 +259,6 @@ public class MusicPageViewModel : ReactiveObject
                 _isPlaying = false;
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
-        } 
+        }
     }
 }
