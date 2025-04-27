@@ -160,7 +160,7 @@ public class MusicPageViewModel : ReactiveObject
                 PlayImage = new Bitmap("Assets/StopRed.png");
                 await PlayAudioAsync(_filePath);
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -248,12 +248,17 @@ public class MusicPageViewModel : ReactiveObject
             {
                 bytesRead = await Task.Run(() => audioFileReader.Read(buffer, 0, buffer.Length));
                 if (bytesRead == 0) break;
-                waveOut.Play();
+                //waveOut.Write(buffer, 0, bytesRead);
                 await Task.Delay(100); 
-                
                 CurrentTime = audioFileReader.CurrentTime;
                 //await Task.Delay(10); 
-            } 
+            }
+
+            if (waveOut.PlaybackState == PlaybackState.Stopped || waveOut.PlaybackState == PlaybackState.Paused)
+            {
+                _isPlaying = false;
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            }
         } 
     }
 }
