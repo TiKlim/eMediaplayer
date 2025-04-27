@@ -74,6 +74,14 @@
               "target": "Package",
               "version": "[11.2.1, )"
             },
+            "LibVLCSharp": {
+              "target": "Package",
+              "version": "[3.9.3, )"
+            },
+            "LibVLCSharp.Avalonia": {
+              "target": "Package",
+              "version": "[3.9.3, )"
+            },
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"
@@ -85,6 +93,10 @@
             "TagLibSharp": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "VideoLAN.LibVLC.Windows": {
+              "target": "Package",
+              "version": "[3.0.21, )"
             }
           },
           "imports": [

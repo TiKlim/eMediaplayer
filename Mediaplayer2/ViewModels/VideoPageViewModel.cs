@@ -8,6 +8,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
+using LibVLCSharp.Avalonia;
+using LibVLCSharp.Shared;
 using NAudio.Wave;
 using ReactiveUI;
 
@@ -42,6 +44,12 @@ public class VideoPageViewModel : ReactiveObject
     private bool _isPlaying = false;
     
     private float _volume = 1f;
+    
+    private LibVLC _libVLC;
+    
+    private MediaPlayer _mediaPlayer;
+    
+    private VideoView _videoView;
 
     public string Main
     {
@@ -117,8 +125,13 @@ public class VideoPageViewModel : ReactiveObject
     
     public ICommand VolumeCommand { get; }
 
-    public VideoPageViewModel()
+    public VideoPageViewModel(VideoView videoView)
     {
+        Core.Initialize();
+        _libVLC = new LibVLC();
+        _mediaPlayer = new MediaPlayer(_libVLC);
+        //var videoView = new VideoPageViewModel(VideoPlayer); //???
+        _videoView = videoView;
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
         TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
@@ -131,7 +144,7 @@ public class VideoPageViewModel : ReactiveObject
                 AllowMultiple = false,
                 Filters = new List<FileDialogFilter>
                 {
-                    new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
+                    new FileDialogFilter { Name = "Video Files", Extensions = { "mp4", "mkv", "avi" } }
                 }
             };
             var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
@@ -139,13 +152,14 @@ public class VideoPageViewModel : ReactiveObject
             if (result.Length > 0)
             {
                 _filePath = result[0];
-                LoadMp3Info(_filePath); 
-                _audioFileReader = new AudioFileReader(_filePath);
-                AudioDuration = _audioFileReader.TotalTime;
+                LoadVideoInfo(_filePath);
+                PlayVideoAsync(_filePath);
+                //_audioFileReader = new AudioFileReader(_filePath);
+                //AudioDuration = _audioFileReader.TotalTime;
                 //_audioDuration = _audioFileReader.TotalTime; 
                 //Value = _audioDuration.TotalSeconds;
-                _waveOut = new WaveOutEvent();
-                _waveOut.Init(_audioFileReader); 
+                //_waveOut = new WaveOutEvent();
+                //_waveOut.Init(_audioFileReader); 
             }
         });
 
@@ -153,15 +167,16 @@ public class VideoPageViewModel : ReactiveObject
         {
             if (_isPlaying)
             {
+                _mediaPlayer.Pause();
                 _isPlaying = false;
-                _waveOut?.Stop();
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
             else
             {
+                _mediaPlayer.Play();
                 _isPlaying = true;
                 PlayImage = new Bitmap("Assets/StopRed.png");
-                await PlayAudioAsync(_filePath);
+                await PlayVideoAsync(_filePath);
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
@@ -182,17 +197,20 @@ public class VideoPageViewModel : ReactiveObject
         });
     }
     
-    private void LoadMp3Info(string filePath)
+    private void LoadVideoInfo(string filePath)
     {
-        var file = TagLib.File.Create(filePath);
-        
+        Main = Path.GetFileNameWithoutExtension(filePath);
+        PreMain = Path.GetFileNameWithoutExtension(filePath);
+        OpacityImage = 1;
+        /*var file = TagLib.File.Create(filePath);
+
         string title = file.Tag.Title ?? "Нет названия";
-        
+
         string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-        
+
         Main = title;
         PreMain = performer;
-        
+
         if (file.Tag.Pictures.Length > 0)
         {
             var picture = file.Tag.Pictures[0];
@@ -202,28 +220,28 @@ public class VideoPageViewModel : ReactiveObject
                 OpacityImage = 1;
             }
         }
-        
+
         if (_audioFileReader != null)
         {
             _totalTime = _audioFileReader.TotalTime;
             AudioDuration = _totalTime;
-        }
+        }*/
     }
 
-    private async void PlayPause()
+    /*private async void PlayPause()
     {
         _isPlaying = true;
-        await PlayAudioAsync(_filePath);
+        await PlayVideoAsync(_filePath);
         //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
         _isPlaying = true;
-        await PlayAudioAsync(_filePath);
-    }
+        await PlayVideoAsync(_filePath);
+    }*/
 
     private void UpdateVolume()
     {
         if (_waveOut != null)
         {
-            _waveOut.Volume = Volume;
+            _mediaPlayer.Volume = (int)(Volume * 100);
         }
 
         if (Volume == 0f)
@@ -236,9 +254,14 @@ public class VideoPageViewModel : ReactiveObject
         }
     }
     
-    private async Task PlayAudioAsync(string filePath) 
-    { 
-        using (var audioFileReader = new AudioFileReader(filePath)) 
+    private async Task PlayVideoAsync(string filePath)
+    {
+        var media = new Media(_libVLC, filePath, FromType.FromPath);
+        _mediaPlayer.Play(media);
+        _videoView.MediaPlayer = _mediaPlayer;
+        UpdateVolume();
+        
+        /*using (var audioFileReader = new AudioFileReader(filePath)) 
         using (var waveOut = new WaveOutEvent()) 
         { 
             waveOut.Init(audioFileReader); 
@@ -262,6 +285,6 @@ public class VideoPageViewModel : ReactiveObject
                 _isPlaying = false;
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
-        }
+        }*/
     }
 }

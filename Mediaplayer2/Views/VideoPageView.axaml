@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:avalonia="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
              x:DataType="vm:VideoPageViewModel"
              x:Class="Mediaplayer2.Views.VideoPageView">
     <!--DataContext-->
@@ -54,6 +55,7 @@
                    Source="{Binding TrackImage}"
                    Opacity="{Binding OpacityImage}"
                    VerticalAlignment="Center"/>
+            <avalonia:VideoView x:Name="VideoPlayer"/>
         </Grid>
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
