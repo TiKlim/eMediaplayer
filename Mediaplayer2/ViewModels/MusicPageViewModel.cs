@@ -30,6 +30,20 @@ public class MusicPageViewModel : ReactiveObject
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
     
     private Bitmap? playImage = new Bitmap("Assets/ButtonPlayRed.png");
+    
+    private string _filePath;
+    
+    private IWavePlayer _waveOut;
+    
+    private AudioFileReader _audioFileReader;
+    
+    private TimeSpan _totalTime;
+    
+    private TimeSpan _audioDuration;
+    
+    private bool _isPlaying = false;
+    
+    private float _volume = 1f;
 
     public string Main
     {
@@ -74,15 +88,6 @@ public class MusicPageViewModel : ReactiveObject
     }
 
     public double Value { get; set; }
-    
-    private string _filePath;
-    private IWavePlayer _waveOut;
-    private AudioFileReader _audioFileReader;
-    private TimeSpan _totalTime;
-    private TimeSpan _audioDuration;
-    private bool _isPlaying = false;
-    
-    private float _volume = 1f;
 
     public float Volume 
     {
