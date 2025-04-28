@@ -114,6 +114,18 @@ public class VideoPageViewModel : ReactiveObject
         get => _audioDuration;
         set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
     }
+
+    public string FilePath
+    {
+        get => _filePath;
+        set => this.RaiseAndSetIfChanged(ref _filePath, value);
+    }
+
+    public MediaPlayer? MediaPlayer
+    {
+        get => _mediaPlayer;
+        set => this.RaiseAndSetIfChanged(ref _mediaPlayer, value);
+    }
     
     public ICommand LoadFileCommand { get; }
     
@@ -124,14 +136,18 @@ public class VideoPageViewModel : ReactiveObject
     public ICommand PlayPauseCommand { get; }
     
     public ICommand VolumeCommand { get; }
+    
+    public event Action<MediaPlayer> OnPlay;
 
-    public VideoPageViewModel(VideoView videoView)
+    public VideoPageViewModel()
     {
         Core.Initialize();
         _libVLC = new LibVLC();
         _mediaPlayer = new MediaPlayer(_libVLC);
+        //OnPlay?.Invoke(_mediaPlayer);
+        
         //var videoView = new VideoPageViewModel(VideoPlayer); //???
-        _videoView = videoView;
+        //_videoView = videoView;
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
         TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
@@ -258,7 +274,8 @@ public class VideoPageViewModel : ReactiveObject
     {
         var media = new Media(_libVLC, filePath, FromType.FromPath);
         _mediaPlayer.Play(media);
-        _videoView.MediaPlayer = _mediaPlayer;
+        //_videoView.MediaPlayer = _mediaPlayer;
+        _videoView.MediaPlayer = MediaPlayer;
         UpdateVolume();
         
         /*using (var audioFileReader = new AudioFileReader(filePath)) 

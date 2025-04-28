@@ -55,7 +55,9 @@
                    Source="{Binding TrackImage}"
                    Opacity="{Binding OpacityImage}"
                    VerticalAlignment="Center"/>
-            <avalonia:VideoView x:Name="VideoPlayer"/>
+            <avalonia:VideoView x:Name="VideoPlayer"
+                                Grid.Column="1"
+                                MediaPlayer="{Binding MediaPlayer}"/>
         </Grid>
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
