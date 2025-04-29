@@ -14,7 +14,8 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="#f5efef">
+          Background="#f5efef"
+          ClipToBounds="True">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"
@@ -55,15 +56,13 @@
                    Source="{Binding TrackImage}"
                    Opacity="{Binding OpacityImage}"
                    VerticalAlignment="Center"/>
-            <avalonia:VideoView x:Name="VideoPlayer"
-                                Grid.Column="1"
-                                MediaPlayer="{Binding MediaPlayer}"/>
         </Grid>
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
               Grid.Row="2"
               RowDefinitions="*,*"
-              ShowGridLines="False">
+              ShowGridLines="False"
+              ZIndex="11">
             <!--Полоса прокрутки-->
             <Slider Grid.Row="0"
                     Name="PlaybackSlider"
@@ -152,5 +151,13 @@
                 </Slider>
             </StackPanel>
         </Grid>
+        <avalonia:VideoView x:Name="VideoPlayer"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            MediaPlayer="{Binding MediaPlayer}"
+                            IsVisible="{Binding Visible}"
+                            ZIndex="-1">
+           
+        </avalonia:VideoView>
     </Grid>
 </UserControl>

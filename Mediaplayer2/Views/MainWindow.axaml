@@ -22,9 +22,9 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <!--<views:VideoPageView/>-->
+                    <views:VideoPageView/>
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
-                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
+                    <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
             </Panel>
             <!--Grid окна действий-->
             <Grid Grid.Column="0"

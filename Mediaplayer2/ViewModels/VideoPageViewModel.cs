@@ -51,6 +51,8 @@ public class VideoPageViewModel : ReactiveObject
     
     private VideoView _videoView;
 
+    private bool _visible;
+
     public string Main
     {
         get => _main;
@@ -126,6 +128,12 @@ public class VideoPageViewModel : ReactiveObject
         get => _mediaPlayer;
         set => this.RaiseAndSetIfChanged(ref _mediaPlayer, value);
     }
+
+    public bool Visible
+    {
+        get => _visible;
+        set => this.RaiseAndSetIfChanged(ref _visible, value);
+    }
     
     public ICommand LoadFileCommand { get; }
     
@@ -152,6 +160,7 @@ public class VideoPageViewModel : ReactiveObject
         PreMain = "Что посмотрим сегодня?";
         TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
         OpacityImage = 0.2;
+        Visible = false;
         
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -217,7 +226,8 @@ public class VideoPageViewModel : ReactiveObject
     {
         Main = Path.GetFileNameWithoutExtension(filePath);
         PreMain = Path.GetFileNameWithoutExtension(filePath);
-        OpacityImage = 1;
+        //OpacityImage = 1;
+        Visible = true;
         /*var file = TagLib.File.Create(filePath);
 
         string title = file.Tag.Title ?? "Нет названия";
