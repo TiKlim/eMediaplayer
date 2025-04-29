@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
@@ -12,10 +14,11 @@ using Avalonia.Platform.Storage;
 using Mediaplayer2.Views;
 using NAudio.Wave;
 using ReactiveUI;
+using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicPageViewModel : ReactiveObject
+public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 {
     private string _main;
 
@@ -44,6 +47,7 @@ public class MusicPageViewModel : ReactiveObject
     private bool _isPlaying = false;
     
     private float _volume = 1f;
+    private IRoutableViewModel _routableViewModelImplementation;
 
     public string Main
     {
@@ -119,6 +123,10 @@ public class MusicPageViewModel : ReactiveObject
     
     public ICommand VolumeCommand { get; }
 
+    public string? UrlPathSegment => "/music";
+    public IScreen HostScreen { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
+
     public MusicPageViewModel()
     {
         Main = "Аудиоплеер";
@@ -183,6 +191,18 @@ public class MusicPageViewModel : ReactiveObject
             }
         });
     }
+
+    public MusicPageViewModel(IScreen screen = null)
+    {
+        HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+
+        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(Music);
+    }
+    
+    private IObservable<IRoutableViewModel> Music() => Observable.FromAsync(async CancellationToken =>
+    {
+        return HostScreen.Router.Navigate.Execute(new MainPageViewModel(HostScreen));
+    }).ObserveOn(RxApp.MainThreadScheduler).SelectMany(x => x!);
     
     private void LoadMp3Info(string filePath)
     {

@@ -4,6 +4,7 @@
         xmlns:views="clr-namespace:Mediaplayer2.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:reactiveUi="http://reactiveui.net"
         mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
         x:Class="Mediaplayer2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -21,8 +22,9 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <views:VideoPageView/>
+                    <!--<views:VideoPageView/>-->
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
+                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
             </Panel>
             <!--Grid окна действий-->
             <Grid Grid.Column="0"
@@ -44,7 +46,7 @@
                                             Classes="SelectedPage"    
                                             Name="HomeBtn"
                                             Background="#f7d2d3"
-                                            Command="{Binding ToMainPageCommand}">
+                                            Command="{Binding }">
                                             <Image Source="../Assets/HomeRed.png" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 

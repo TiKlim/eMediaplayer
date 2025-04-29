@@ -1,18 +1,28 @@
 using System.Collections.ObjectModel;
 using System.Reactive;
 using ReactiveUI;
+using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MainPageViewModel : ReactiveObject
+public class MainPageViewModel : ViewModelBase, IRoutableViewModel
 {
     public string Main { get; } = "Главная";
     
     public string PreMain { get; } = "Чем займёмся сегодня?";
-    
+
+    public string? UrlPathSegment => "/home";
     public IScreen HostScreen { get; }
+
+    public MainPageViewModel()
+    {
+        
+    }
     
-    //public MainPageViewModel(IScreen hostScreen) => HostScreen = hostScreen;
+    public MainPageViewModel(IScreen hostScreen)
+    {
+        HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
+    }
     
     
 }
