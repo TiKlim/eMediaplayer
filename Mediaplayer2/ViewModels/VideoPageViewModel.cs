@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reactive;
 using System.Threading.Tasks;
@@ -179,7 +180,7 @@ public class VideoPageViewModel : ReactiveObject
                 LoadVideoInfo(_filePath);
                 PlayVideoAsync(_filePath);
                 //_audioFileReader = new AudioFileReader(_filePath);
-                AudioDuration = new TimeSpan(_mediaPlayer.Time);
+                //AudioDuration = new TimeSpan(_mediaPlayer.Time);
                 //_audioDuration = _audioFileReader.TotalTime; 
                 //Value = _audioDuration.TotalSeconds;
                 //_waveOut = new WaveOutEvent();
@@ -246,11 +247,12 @@ public class VideoPageViewModel : ReactiveObject
             }
         }*/
 
-        if (_mediaPlayer != null)
+        /*if (_mediaPlayer != null)
         {
             _totalTime = new TimeSpan(_mediaPlayer.Time);
             AudioDuration = _totalTime;
-        }
+            Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
+        }*/
     }
 
     /*private async void PlayPause()
@@ -283,10 +285,19 @@ public class VideoPageViewModel : ReactiveObject
     {
         var media = new Media(_libVLC, filePath, FromType.FromPath);
         _mediaPlayer.Media = media;
-        _mediaPlayer.Play(media);
-        _isPlaying = true;
         
-        AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
+        _mediaPlayer.Playing += (sender, e) =>
+        {
+            AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
+            Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
+        };
+        
+        _mediaPlayer.Play(media);
+        
+        //AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
+        //Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
+        
+        _isPlaying = true;
 
         while (_isPlaying)
         {
@@ -294,6 +305,7 @@ public class VideoPageViewModel : ReactiveObject
             if (_mediaPlayer.State == VLCState.Playing)
             {
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time); 
+                //Debug.WriteLine($"Current Time: {CurrentTime.TotalSeconds} seconds");
             }
             else
             {

@@ -232,14 +232,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         }
     }
 
-    private async void PlayPause()
+    /*private async void PlayPause()
     {
         _isPlaying = true;
         await PlayAudioAsync(_filePath);
         //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
         _isPlaying = true;
         await PlayAudioAsync(_filePath);
-    }
+    }*/
 
     private void UpdateVolume()
     {
