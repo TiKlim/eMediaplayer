@@ -147,7 +147,7 @@ public class VideoPageViewModel : ReactiveObject
     
     public event Action<MediaPlayer> OnPlay;
     
-    public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
+    //public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
 
     public VideoPageViewModel()
     {
@@ -264,7 +264,7 @@ public class VideoPageViewModel : ReactiveObject
 
     private void UpdateVolume()
     {
-        if (_waveOut != null)
+        if (_mediaPlayer != null)
         {
             _mediaPlayer.Volume = (int)(Volume * 100);
         }
@@ -285,14 +285,23 @@ public class VideoPageViewModel : ReactiveObject
         _mediaPlayer.Media = media;
         _mediaPlayer.Play(media);
         _isPlaying = true;
+        
+        AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
 
         while (_isPlaying)
         {
             await Task.Delay(100);
-            CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time); 
+            if (_mediaPlayer.State == VLCState.Playing)
+            {
+                CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time); 
+            }
+            else
+            {
+                _isPlaying = false;
+            }
         }
         
-        _videoView.MediaPlayer = MediaPlayer;
+        //_videoView.MediaPlayer = MediaPlayer;
         UpdateVolume();
         
         /*using (var audioFileReader = new AudioFileReader(filePath)) 
