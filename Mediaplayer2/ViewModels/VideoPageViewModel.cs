@@ -146,16 +146,15 @@ public class VideoPageViewModel : ReactiveObject
     public ICommand VolumeCommand { get; }
     
     public event Action<MediaPlayer> OnPlay;
+    
+    public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
 
     public VideoPageViewModel()
     {
         Core.Initialize();
         _libVLC = new LibVLC();
         _mediaPlayer = new MediaPlayer(_libVLC);
-        //OnPlay?.Invoke(_mediaPlayer);
-        
-        //var videoView = new VideoPageViewModel(VideoPlayer); //???
-        //_videoView = videoView;
+
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
         TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
@@ -180,7 +179,7 @@ public class VideoPageViewModel : ReactiveObject
                 LoadVideoInfo(_filePath);
                 PlayVideoAsync(_filePath);
                 //_audioFileReader = new AudioFileReader(_filePath);
-                //AudioDuration = _audioFileReader.TotalTime;
+                AudioDuration = new TimeSpan(_mediaPlayer.Time);
                 //_audioDuration = _audioFileReader.TotalTime; 
                 //Value = _audioDuration.TotalSeconds;
                 //_waveOut = new WaveOutEvent();
@@ -245,13 +244,13 @@ public class VideoPageViewModel : ReactiveObject
                 TrackImage = new Bitmap(stream);
                 OpacityImage = 1;
             }
-        }
-
-        if (_audioFileReader != null)
-        {
-            _totalTime = _audioFileReader.TotalTime;
-            AudioDuration = _totalTime;
         }*/
+
+        if (_mediaPlayer != null)
+        {
+            _totalTime = new TimeSpan(_mediaPlayer.Time);
+            AudioDuration = _totalTime;
+        }
     }
 
     /*private async void PlayPause()
@@ -283,8 +282,16 @@ public class VideoPageViewModel : ReactiveObject
     private async Task PlayVideoAsync(string filePath)
     {
         var media = new Media(_libVLC, filePath, FromType.FromPath);
+        _mediaPlayer.Media = media;
         _mediaPlayer.Play(media);
-        //_videoView.MediaPlayer = _mediaPlayer;
+        _isPlaying = true;
+
+        while (_isPlaying)
+        {
+            await Task.Delay(100);
+            CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time); 
+        }
+        
         _videoView.MediaPlayer = MediaPlayer;
         UpdateVolume();
         
@@ -313,5 +320,7 @@ public class VideoPageViewModel : ReactiveObject
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
         }*/
+        
+        
     }
 }
