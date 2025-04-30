@@ -28,8 +28,8 @@
                     <!--<views:VideoPageView/>-->
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
                     <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
-                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
-                    <!--<ContentControl Content="{Binding Router.CurrentViewModel}" />-->
+                    <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
+                    <ContentControl Content="{Binding Router.CurrentViewModel}" />
 
             </Panel>
             <!--Grid окна действий-->

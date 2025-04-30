@@ -19,20 +19,24 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     
     public IScreen HostScreen { get; }
     
-    public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
+    public ReactiveCommand<Unit, Unit> ToMusicPageCommand { get; }
 
     public MainWindowViewModel()
     {
         HostScreen = Locator.Current.GetService<IScreen>()!;
         Debug.WriteLine("Навигация прошла");
         Router.Navigate.Execute(new MainPageViewModel(this));
-        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(Music);
+        //ToMusicPageCommand = ReactiveCommand.CreateFromObservable(Music);
+        ToMusicPageCommand = ReactiveCommand.Create(() =>
+        {
+            Router.Navigate.Execute(new MusicPageViewModel(this));
+        });
     }
     
-    private IObservable<IRoutableViewModel> Music() => Observable.FromAsync(async cancellationToken =>
+    /*private IObservable<IRoutableViewModel> Music() => Observable.FromAsync(async cancellationToken =>
     {
         var musicPageViewModel = new MusicPageViewModel(this);
         await Router.Navigate.Execute(musicPageViewModel);
         return musicPageViewModel;
-    });
+    });*/
 }
