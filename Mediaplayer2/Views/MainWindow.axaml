@@ -13,6 +13,9 @@
         WindowStartupLocation="CenterScreen"
         ExtendClientAreaToDecorationsHint="True"
         SystemDecorations="None">
+        <Window.DataContext>
+                <vm:MainWindowViewModel/>
+        </Window.DataContext>
         <!--Главный Grid-->
         <Grid RowDefinitions="Auto,*,5"
               ColumnDefinitions="5,*,5"
@@ -22,9 +25,12 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <views:VideoPageView/>
+                    <!--<views:VideoPageView/>-->
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
                     <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
+                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
+                    <!--<ContentControl Content="{Binding Router.CurrentViewModel}" />-->
+
             </Panel>
             <!--Grid окна действий-->
             <Grid Grid.Column="0"

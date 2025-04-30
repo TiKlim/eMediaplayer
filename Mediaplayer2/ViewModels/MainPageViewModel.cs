@@ -16,10 +16,10 @@ public class MainPageViewModel : ViewModelBase, IRoutableViewModel
 
     public MainPageViewModel()
     {
-        
+        HostScreen = Locator.Current.GetService<IScreen>()!;
     }
     
-    public MainPageViewModel(IScreen hostScreen)
+    public MainPageViewModel(IScreen? hostScreen)
     {
         HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
     }
