@@ -10,84 +10,50 @@
     <UserControl.DataContext>
         <vm:PlaylistPageViewModel/>
     </UserControl.DataContext>
-    <Grid ShowGridLines="False" 
-          ColumnDefinitions="*,13*" 
-          RowDefinitions="120,*,120"
+    <!--Главный Grid-->
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*,Auto"
           Background="#f5efef">
-        <!--Меню навигации-->
-        <StackPanel Grid.Column="0" 
-                    Grid.Row="1" 
-                    Orientation="Vertical" 
-                    AreVerticalSnapPointsRegular="True" 
-                    VerticalAlignment="Center"
-                    Spacing="20">
-            <!--Кнопка "Домой"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel"    
-                    Name="HomeBtn">
-                <Image Source="../Assets/HomeRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Аудио"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="MusicBtn">
-                <Image Source="../Assets/MusicCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Видео"-->
-            <Button HorizontalAlignment="Stretch" 
-                    Classes="LeftPanel" 
-                    Name="VideoBtn">
-                <Image Source="../Assets/VideoCollectionRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Плейлисты"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="SelectedPage" 
-                    Name="PlaylistBtn"
-                    Background="#f7d2d3">
-                <Image Source="../Assets/PlaylistRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-            <!--Кнопка "Настройки"-->
-            <Button HorizontalAlignment="Stretch"
-                    Classes="LeftPanel" 
-                    Name="SettingsBtn">
-                <Image Source="../Assets/SettingsRed.png" 
-                       Margin="30 0 0 0" 
-                       MaxWidth="70" 
-                       MinWidth="40"/>
-            </Button>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1"
+        <!--Grid для заголовка-->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Заголовок-->
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="30 50 0 0"
+                        VerticalAlignment="Center">
+                <!--Главный титл (для названия)-->
+                <TextBlock Text="{Binding Main}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                <!--Второй титл (для исполнителя)-->
+                <TextBlock Text="{Binding PreMain}"
+                           FontSize="20"
+                           FontWeight="Bold"/>
+            </StackPanel>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Column="1"
                     Grid.Row="0"
-                    Orientation="Vertical"
-                    Margin="30 50 0 0"
-                    VerticalAlignment="Center">
-            <TextBlock Text="{Binding Main}"
-                       FontSize="40"
-                       FontWeight="Bold"
-                       VerticalAlignment="Center"/>
-         
-            <TextBlock Text="{Binding PreMain}"
-                       FontSize="20"
-                       FontWeight="Bold"/>
-        </StackPanel>
-        
-        <Image Grid.Row="1"
-               Grid.Column="1"
-               Source="../Assets/PlaylistPagePictureRed.png"
-               Opacity="0.2"
-               VerticalAlignment="Center"/>
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Создать плейлист"
+                    Background="#FF595E"
+                    CornerRadius="10"/>
+        </Grid>
+        <!--Grid для изображения (обложка трека)-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Изображение (обложка трека)-->
+            <Image Grid.Column="1"
+                   Source="../Assets/PlaylistPagePictureRed.png"
+                   Opacity="0.2"
+                   Margin="40"
+                   VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </UserControl>

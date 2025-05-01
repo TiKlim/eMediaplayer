@@ -12,9 +12,11 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MainWindowViewModel : ReactiveObject //ViewModelBase, IScreen
+public class MainWindowViewModel : ReactiveObject
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
+
+    private bool _isSelected;
 
     private string _selectedClasses;
 
@@ -43,6 +45,12 @@ public class MainWindowViewModel : ReactiveObject //ViewModelBase, IScreen
     public ReactiveCommand<Unit, Unit> ToHomePageCommand { get; }
     
     public ReactiveCommand<Unit, Unit> ToMusicPageCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> ToVideoPageCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> ToPlaylistPageCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> ToSettingsPageCommand { get; }
 
     public MainWindowViewModel()
     {
@@ -50,26 +58,45 @@ public class MainWindowViewModel : ReactiveObject //ViewModelBase, IScreen
         CurrentView = new MainPageView();
         ToHomePageCommand = ReactiveCommand.Create(HomePage);
         ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
+        ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
+        ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
+        ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
 
-        if ((CurrentView = new MainPageView()) != null)
+        if (_isSelected) 
         {
             Background = "#f7d2d3";
             SelectedClasses = "SelectedPage";
         }
-        else if ((CurrentView = new MusicPageView()) != null)
+        else
         {
-            Background = "#f7d2d3";
-            SelectedClasses = "SelectedPage";
+            Background = "Transparent";
+            SelectedClasses = "LeftPanel";
         }
     }
     
     private void HomePage()
     {
         CurrentView = new MainPageView();
+        _isSelected = true; //???
     }
 
     private void MusicPage()
     {
         CurrentView = new MusicPageView();
+    }
+    
+    private void VideoPage()
+    {
+        CurrentView = new VideoPageView();
+    }
+    
+    private void PlaylistPage()
+    {
+        CurrentView = new PlaylistPageView();
+    }
+    
+    private void SettingsPage()
+    {
+        CurrentView = new SettingsPageView();
     }
 }

@@ -191,19 +191,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             }
         });
     }
-
-    public MusicPageViewModel(IScreen? hostScreen = null, RoutingState? router = null)
-    {
-        HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
-        Router = router ?? throw new ArgumentNullException(nameof(router));
-
-        //ToMusicPageCommand = ReactiveCommand.CreateFromObservable(Music);
-    }
-    
-    /*private IObservable<IRoutableViewModel> Music() => Observable.FromAsync(async CancellationToken =>
-    {
-        return HostScreen.Router.Navigate.Execute(new MainPageViewModel(HostScreen));
-    }).ObserveOn(RxApp.MainThreadScheduler).SelectMany(x => x!);*/
     
     private void LoadMp3Info(string filePath)
     {

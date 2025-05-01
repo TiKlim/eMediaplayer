@@ -68,7 +68,8 @@
                                     <!--Кнопка "Видео"-->
                                     <Button HorizontalAlignment="Stretch" 
                                             Classes="LeftPanel" 
-                                            Name="VideoBtn">
+                                            Name="VideoBtn"
+                                            Command="{Binding ToVideoPageCommand}">
                                             <Image Source="../Assets/VideoCollectionRed.png" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
@@ -77,7 +78,8 @@
                                     <!--Кнопка "Плейлисты"-->
                                     <Button HorizontalAlignment="Stretch"
                                             Classes="LeftPanel" 
-                                            Name="PlaylistBtn">
+                                            Name="PlaylistBtn"
+                                            Command="{Binding ToPlaylistPageCommand}">
                                             <Image Source="../Assets/PlaylistRed.png" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
@@ -86,7 +88,8 @@
                                     <!--Кнопка "Настройки"-->
                                     <Button HorizontalAlignment="Stretch"
                                             Classes="LeftPanel" 
-                                            Name="SettingsBtn">
+                                            Name="SettingsBtn"
+                                            Command="{Binding ToSettingsPageCommand}">
                                             <Image Source="../Assets/SettingsRed.png" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
