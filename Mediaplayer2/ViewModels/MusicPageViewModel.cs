@@ -47,7 +47,10 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private bool _isPlaying = false;
     
     private float _volume = 1f;
+    
     private IRoutableViewModel _routableViewModelImplementation;
+    
+    //private object _currentView;
 
     public string Main
     {
@@ -113,6 +116,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
     }
     
+    /*public object CurrentView
+    {
+        get => _currentView;
+        set => this.RaiseAndSetIfChanged(ref _currentView, value);
+    }*/
+    
     public ICommand LoadFileCommand { get; }
     
     public RoutingState Router { get; }
@@ -122,6 +131,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     public ICommand PlayPauseCommand { get; }
     
     public ICommand VolumeCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public string? UrlPathSegment => "/music";
     public IScreen HostScreen { get; }
@@ -133,6 +144,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         PreMain = "Что послушаем сегодня?";
         TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");
         OpacityImage = 0.2;
+        //CurrentView = new MusicPageView();
         
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -190,7 +202,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
             }
         });
+        
+        //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
     }
+    
+    /*private void AudioEditPage()
+    {
+        CurrentView = new EditAudioView();
+    }*/
     
     private void LoadMp3Info(string filePath)
     {

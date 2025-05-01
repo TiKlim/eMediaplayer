@@ -51,6 +51,8 @@ public class MainWindowViewModel : ReactiveObject
     public ReactiveCommand<Unit, Unit> ToPlaylistPageCommand { get; }
     
     public ReactiveCommand<Unit, Unit> ToSettingsPageCommand { get; }
+    
+    //public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public MainWindowViewModel()
     {
@@ -61,6 +63,7 @@ public class MainWindowViewModel : ReactiveObject
         ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
         ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
         ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
+        //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
 
         if (_isSelected) 
         {
@@ -99,4 +102,9 @@ public class MainWindowViewModel : ReactiveObject
     {
         CurrentView = new SettingsPageView();
     }
+
+    /*private void AudioEditPage()
+    {
+        CurrentView = new EditAudioView();
+    }*/
 }
