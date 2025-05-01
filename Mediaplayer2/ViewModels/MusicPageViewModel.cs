@@ -115,7 +115,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand LoadFileCommand { get; }
     
-    public RoutingState Router { get; } = new RoutingState();
+    public RoutingState Router { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
     
@@ -192,9 +192,10 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         });
     }
 
-    public MusicPageViewModel(IScreen? screen = null)
+    public MusicPageViewModel(IScreen? hostScreen = null, RoutingState? router = null)
     {
-        HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
+        Router = router ?? throw new ArgumentNullException(nameof(router));
 
         //ToMusicPageCommand = ReactiveCommand.CreateFromObservable(Music);
     }

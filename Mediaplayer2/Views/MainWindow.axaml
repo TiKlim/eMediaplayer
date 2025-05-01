@@ -25,11 +25,7 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <!--<views:VideoPageView/>-->
-                    <!--<ContentControl Content="{Binding CurrentView}"/>-->
-                    <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
-                    <!--<reactiveUi:RoutedViewHost Router="{Binding Router}" />-->
-                    <ContentControl Content="{Binding Router.CurrentViewModel}" />
+                    <ContentControl Content="{Binding CurrentView}"/>
 
             </Panel>
             <!--Grid окна действий-->
@@ -49,10 +45,10 @@
                                         Spacing="20">
                                     <!--Кнопка "Домой"-->
                                     <Button HorizontalAlignment="Stretch"
-                                            Classes="SelectedPage"    
+                                            Classes="LeftPanel"    
                                             Name="HomeBtn"
-                                            Background="#f7d2d3"
-                                            Command="{Binding }">
+                                            Background="{Binding Background}"
+                                            Command="{Binding ToHomePageCommand}">
                                             <Image Source="../Assets/HomeRed.png" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
@@ -62,6 +58,7 @@
                                     <Button HorizontalAlignment="Stretch" 
                                             Classes="LeftPanel" 
                                             Name="MusicBtn"
+                                            Background="{Binding Background}"
                                             Command="{Binding ToMusicPageCommand}">
                                             <Image Source="../Assets/MusicCollectionRed.png" 
                                                    Margin="30 0 0 0" 
