@@ -132,7 +132,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand VolumeCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
+    //public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public string? UrlPathSegment => "/music";
     public IScreen HostScreen { get; }
