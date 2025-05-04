@@ -124,8 +124,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand LoadFileCommand { get; }
     
-    public RoutingState Router { get; }
-    
     public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
     
     public ICommand PlayPauseCommand { get; }
@@ -136,7 +134,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 
     public string? UrlPathSegment => "/music";
     public IScreen HostScreen { get; }
-    public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
+    //public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
+
+    public MusicPageViewModel(IScreen? hostScreen)
+    {
+        HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
+    }
 
     public MusicPageViewModel()
     {

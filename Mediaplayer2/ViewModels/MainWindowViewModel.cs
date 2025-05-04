@@ -12,9 +12,11 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MainWindowViewModel : ReactiveObject
+public class MainWindowViewModel : ViewModelBase, IScreen
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
+    
+    public RoutingState Router { get; } = new RoutingState();
 
     private bool _isSelected;
 
@@ -44,7 +46,7 @@ public class MainWindowViewModel : ReactiveObject
     
     public ReactiveCommand<Unit, Unit> ToHomePageCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToMusicPageCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
     
     public ReactiveCommand<Unit, Unit> ToVideoPageCommand { get; }
     
@@ -59,7 +61,9 @@ public class MainWindowViewModel : ReactiveObject
         Background = "Transparent";
         CurrentView = new MainPageView();
         ToHomePageCommand = ReactiveCommand.Create(HomePage);
-        ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
+        //ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
+        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)));
+        ToMusicPageCommand.Execute().Subscribe(); 
         ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
         ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
         ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
@@ -83,9 +87,14 @@ public class MainWindowViewModel : ReactiveObject
         _isSelected = true; //???
     }
 
-    private void MusicPage()
+    /*private void MusicPage()
     {
         CurrentView = new MusicPageView();
+    }*/
+
+    private IObservable<IRoutableViewModel> ToMusic()
+    {
+        return Router.Navigate.Execute(new MusicPageViewModel(this));
     }
     
     private void VideoPage()

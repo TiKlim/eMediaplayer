@@ -25,7 +25,8 @@
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <ContentControl Content="{Binding CurrentView}"/>
+                    <!--<ContentControl Content="{Binding CurrentView}"/>-->
+                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
 
             </Panel>
             <!--Grid окна действий-->
