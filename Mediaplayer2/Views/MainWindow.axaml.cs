@@ -16,7 +16,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         //var viewModel = new VideoPageViewModel(VideoPlayer);
         //DataContext = viewModel;
-        DataContext = new MainWindowViewModel();
+        //DataContext = new MainWindowViewModel();
     }
     // Метод для перемещения окна по экрану с помощью верхней панели.
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)

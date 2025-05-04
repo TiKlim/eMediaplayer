@@ -58,10 +58,12 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 
     public MainWindowViewModel()
     {
-        Background = "Transparent";
-        CurrentView = new MainPageView();
+        //Background = "Transparent";
+        //CurrentView = new MainPageView();
         ToHomePageCommand = ReactiveCommand.Create(HomePage);
         //ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
+        //Router.CurrentViewModel = new MainPageViewModel(this);
+        Router.Navigate.Execute(new MainPageViewModel(this));
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)));
         ToMusicPageCommand.Execute().Subscribe(); 
         ToVideoPageCommand = ReactiveCommand.Create(VideoPage);

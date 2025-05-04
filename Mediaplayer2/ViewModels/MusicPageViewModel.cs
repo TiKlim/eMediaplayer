@@ -136,13 +136,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     //public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
 
-    public MusicPageViewModel(IScreen? hostScreen)
+    public MusicPageViewModel(IScreen? hostScreen = null)
     {
         HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
     }
 
     public MusicPageViewModel()
     {
+        HostScreen = Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
         PreMain = "Что послушаем сегодня?";
         TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");

@@ -13,7 +13,7 @@ public partial class MainPageView : ReactiveUserControl<MainPageViewModel>
     public MainPageView()
     {
         InitializeComponent();
-        this.WhenActivated(disposables => { });
-        AvaloniaXamlLoader.Load(this);
+        /*this.WhenActivated(disposables => { });
+        AvaloniaXamlLoader.Load(this);*/
     }
 }

@@ -4,7 +4,7 @@
         xmlns:views="clr-namespace:Mediaplayer2.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:reactiveUi="http://reactiveui.net"
+        xmlns:react="http://reactiveui.net"
         mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
         x:Class="Mediaplayer2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -26,7 +26,7 @@
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
-                    <reactiveUi:RoutedViewHost Router="{Binding Router}" />
+                    <react:RoutedViewHost Router="{Binding Router}" />
 
             </Panel>
             <!--Grid окна действий-->

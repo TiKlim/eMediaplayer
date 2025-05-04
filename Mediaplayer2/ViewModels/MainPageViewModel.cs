@@ -19,7 +19,7 @@ public class MainPageViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = Locator.Current.GetService<IScreen>()!;
     }
     
-    public MainPageViewModel(IScreen? hostScreen)
+    public MainPageViewModel(IScreen? hostScreen = null)
     {
         HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
     }
