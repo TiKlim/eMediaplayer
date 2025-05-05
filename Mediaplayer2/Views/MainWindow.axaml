@@ -26,7 +26,8 @@
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
                     <!--<ContentControl Content="{Binding CurrentView}"/>-->
-                    <react:RoutedViewHost Router="{Binding Router}" />
+                    <!--<react:RoutedViewHost Router="{Binding Router}" />-->
+                    <views:MusicPageView/>
 
             </Panel>
             <!--Grid окна действий-->
