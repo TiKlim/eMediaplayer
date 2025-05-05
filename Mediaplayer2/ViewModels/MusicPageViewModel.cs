@@ -132,6 +132,10 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand VolumeCommand { get; }
     
+    public ICommand BackTime { get; }
+    
+    public ICommand ForeTime { get; }
+    
     //public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public string? UrlPathSegment => "/music";
@@ -247,6 +251,26 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 Volume = 0f;
                 UpdateVolume();
                 //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            }
+        });
+        
+        BackTime = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_audioFileReader != null)
+            {
+                var newTime = _audioFileReader.CurrentTime - TimeSpan.FromSeconds(10);
+                _audioFileReader.CurrentTime = newTime < TimeSpan.Zero ? TimeSpan.Zero : newTime;
+                CurrentTime = _audioFileReader.CurrentTime;
+            }
+        });
+
+        ForeTime = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_audioFileReader != null)
+            {
+                var newTime = _audioFileReader.CurrentTime + TimeSpan.FromSeconds(10);
+                _audioFileReader.CurrentTime = newTime > _audioFileReader.TotalTime ? _audioFileReader.TotalTime : newTime;
+                CurrentTime = _audioFileReader.CurrentTime;
             }
         });
         
