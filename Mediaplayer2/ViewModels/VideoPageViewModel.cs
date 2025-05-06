@@ -13,10 +13,11 @@ using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using NAudio.Wave;
 using ReactiveUI;
+using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class VideoPageViewModel : ReactiveObject
+public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 {
     private string _main;
 
@@ -149,9 +150,20 @@ public class VideoPageViewModel : ReactiveObject
     public event Action<MediaPlayer> OnPlay;
     
     //public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
+    
+    public string? UrlPathSegment => "/music";
+    
+    public IScreen HostScreen { get; }
 
     public VideoPageViewModel()
     {
+        
+    }
+
+    public VideoPageViewModel(IScreen? screen = null)
+    {
+        HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        
         Core.Initialize();
         _libVLC = new LibVLC();
         _mediaPlayer = new MediaPlayer(_libVLC);

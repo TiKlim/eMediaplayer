@@ -1,13 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using Mediaplayer2.ViewModels;
 
 namespace Mediaplayer2.Views;
 
-public partial class VideoPageView : UserControl
+public partial class VideoPageView : ReactiveUserControl<VideoPageViewModel>
 {
     //private VideoPageViewModel _viewModel;
     

@@ -44,38 +44,29 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         set => this.RaiseAndSetIfChanged(ref _currentView, value);
     }*/
     
-    public ReactiveCommand<Unit, Unit> ToHomePageCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToHomePageCommand { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToVideoPageCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToVideoPageCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToPlaylistPageCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToPlaylistPageCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToSettingsPageCommand { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> ToSettingsPageCommand { get; }
     
-    public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
+    //public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public MainWindowViewModel()
     {
         Router = new RoutingState();
         
-        //Locator.CurrentMutable.Register(() => new MusicPageView(), typeof(IViewFor<MusicPageViewModel>));
-        //Background = "Transparent";
-        //CurrentView = new MainPageView();
-        //ToHomePageCommand = ReactiveCommand.Create(HomePage);
-        //ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
-        //Router.CurrentViewModel = new MainPageViewModel(this);
-        //Router.Navigate.Execute(new MainPageViewModel(this));
         Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
+        ToHomePageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
-        //ToMusicPageCommand.Execute().Subscribe(); 
-        
-        //ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
-        //ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
-        //ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
-        //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
+        ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
 
         if (_isSelected) 
         {

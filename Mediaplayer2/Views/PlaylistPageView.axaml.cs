@@ -1,10 +1,12 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Mediaplayer2.ViewModels;
 
 namespace Mediaplayer2.Views;
 
-public partial class PlaylistPageView : UserControl
+public partial class PlaylistPageView : ReactiveUserControl<PlaylistPageViewModel>
 {
     public PlaylistPageView()
     {
