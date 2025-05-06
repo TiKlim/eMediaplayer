@@ -72,7 +72,7 @@
                     Background="Black"
                     Foreground="#FF595E">
             </Slider>
-            <!--Управление треком (назад на 10 секунд, проиграть/остановить, вперёд на 10 секунд)-->
+            <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left"
@@ -86,7 +86,7 @@
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка ""-->
+                <!--Кнопка "играть/стоп"-->
                 <Button Name="PlayButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
@@ -106,26 +106,19 @@
                            MinWidth="20"/>
                 </Button>
             </StackPanel>
-            <!--Управление треком (добавить в плейлист/убрать из плейлиста, информация о треке, уровень громкости)-->
+            <!--Управление треком (Редактирование трека, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0"
                         Spacing="10">
-                <!--Кнопка "Добавить в плейлист/убрать из плейлиста"-->
-                <Button Name="PlusInPlaylistButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/AddRed.png"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
-                </Button>
-                <!--Кнопка "Информация о треке"-->
+                <!--Кнопка "Редактирование трека"-->
                 <Button Name="InformButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
-                        Command="{Binding }">
-                    <Image Source="../Assets/InformRed.png"
+                        Command="{Binding ToEditAudioPageCommand}">
+                    <Image Source="../Assets/EditAudioRed.png"
+                           Width="35"
                            MaxWidth="50"
                            MinWidth="20"/>
                 </Button>

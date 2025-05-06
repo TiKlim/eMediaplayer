@@ -141,7 +141,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 
     public string? UrlPathSegment => "/music";
     public IScreen HostScreen { get; }
-    //public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
+    
+    public ReactiveCommand<Unit, IRoutableViewModel> ToEditAudioPageCommand { get; }
 
     public MusicPageViewModel()
     {
@@ -278,6 +279,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 CurrentTime = _audioFileReader.CurrentTime;
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
+        
+        ToEditAudioPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditAudioViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
         
         /*_waveOut.PlaybackStopped += (sender, e) =>
         {
