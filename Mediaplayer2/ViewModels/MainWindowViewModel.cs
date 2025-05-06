@@ -60,7 +60,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     {
         Router = new RoutingState();
         
-        Locator.CurrentMutable.Register(() => new MusicPageView(), typeof(IViewFor<MusicPageViewModel>));
+        //Locator.CurrentMutable.Register(() => new MusicPageView(), typeof(IViewFor<MusicPageViewModel>));
         //Background = "Transparent";
         //CurrentView = new MainPageView();
         //ToHomePageCommand = ReactiveCommand.Create(HomePage);

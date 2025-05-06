@@ -15,12 +15,16 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Helper.Services();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
             };
+            //var vm = new MainWindowViewModel(desktop.MainWindow);
+            //desktop.MainWindow.DataContext = vm;
         }
 
         base.OnFrameworkInitializationCompleted();

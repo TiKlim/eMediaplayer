@@ -86,7 +86,7 @@
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка "Вперёд на 10 секунд"-->
+                <!--Кнопка ""-->
                 <Button Name="PlayButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
@@ -96,7 +96,7 @@
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка "Следующий трек"-->
+                <!--Кнопка "Вперёд на 10 секунд"-->
                 <Button Name="ForwardButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"

@@ -11,6 +11,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using Mediaplayer2.Views;
 using NAudio.Wave;
 using ReactiveUI;
@@ -161,7 +162,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         {
             if (_audioFileReader != null && _isPlaying)
             {
-                CurrentTime = _audioFileReader.CurrentTime;
+                Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = _audioFileReader.CurrentTime; });
             }
         };
         
@@ -194,7 +195,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 _waveOut.Init(_audioFileReader); 
                 AudioDuration = _audioFileReader.TotalTime;
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -230,12 +231,15 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 //await PlayAudioAsync(_filePath);
             }
             
-            _waveOut.PlaybackStopped += (sender, e) =>
+            /*_waveOut.PlaybackStopped += (sender, e) =>
             {
-                _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
-                CurrentTime = TimeSpan.Zero;
-            };
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    _isPlaying = false;
+                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    CurrentTime = TimeSpan.Zero;
+                });
+            };*/
         }, outputScheduler: RxApp.MainThreadScheduler);
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -252,7 +256,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 UpdateVolume();
                 //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
         
         BackTime = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -262,7 +266,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 _audioFileReader.CurrentTime = newTime < TimeSpan.Zero ? TimeSpan.Zero : newTime;
                 CurrentTime = _audioFileReader.CurrentTime;
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
 
         ForeTime = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -272,7 +276,17 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 _audioFileReader.CurrentTime = newTime > _audioFileReader.TotalTime ? _audioFileReader.TotalTime : newTime;
                 CurrentTime = _audioFileReader.CurrentTime;
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
+        
+        _waveOut.PlaybackStopped += (sender, e) =>
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                _isPlaying = false;
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                CurrentTime = TimeSpan.Zero;
+            });
+        };
         
         //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
     }
@@ -353,14 +367,17 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 if (bytesRead == 0) break;
                 //waveOut.Write(buffer, 0, bytesRead);
                 await Task.Delay(100); 
-                CurrentTime = audioFileReader.CurrentTime;
+                Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = audioFileReader.CurrentTime; });
                 //await Task.Delay(10); 
             }
 
             if (waveOut.PlaybackState == PlaybackState.Stopped || waveOut.PlaybackState == PlaybackState.Paused)
             {
-                _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    _isPlaying = false;
+                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                });
             }
         }
     }
