@@ -11,5 +11,10 @@ public partial class MusicPageView : ReactiveUserControl<MusicPageViewModel>
     public MusicPageView()
     {
         InitializeComponent();
+        /*this.WhenActivated(disposables =>
+        {
+            this.OneWayBind(ViewModel, x => x.UrlPathSegment, x => x.PathTextBlock.Text)
+                .DisposeWith(disposables);
+        });*/
     }
 }

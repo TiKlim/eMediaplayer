@@ -16,7 +16,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
     
-    public RoutingState Router { get; } = new RoutingState();
+    public RoutingState Router { get; }
 
     private bool _isSelected;
 
@@ -24,7 +24,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 
     private string _background;
 
-    private object _currentView;
+    //private object _currentView;
 
     public string SelectedClasses
     {
@@ -38,11 +38,11 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         set => this.RaiseAndSetIfChanged(ref _background, value);
     }
 
-    public object CurrentView
+    /*public object CurrentView
     {
         get => _currentView;
         set => this.RaiseAndSetIfChanged(ref _currentView, value);
-    }
+    }*/
     
     public ReactiveCommand<Unit, Unit> ToHomePageCommand { get; }
     
@@ -58,18 +58,23 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 
     public MainWindowViewModel()
     {
+        Router = new RoutingState();
+        
+        Locator.CurrentMutable.Register(() => new MusicPageView(), typeof(IViewFor<MusicPageViewModel>));
         //Background = "Transparent";
         //CurrentView = new MainPageView();
-        ToHomePageCommand = ReactiveCommand.Create(HomePage);
+        //ToHomePageCommand = ReactiveCommand.Create(HomePage);
         //ToMusicPageCommand = ReactiveCommand.Create(MusicPage);
         //Router.CurrentViewModel = new MainPageViewModel(this);
-        Router.Navigate.Execute(new MainPageViewModel(this));
+        //Router.Navigate.Execute(new MainPageViewModel(this));
+        
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)));
-        ToMusicPageCommand.Execute().Subscribe(); 
-        ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
-        ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
-        ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
-        ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
+        //ToMusicPageCommand.Execute().Subscribe(); 
+        
+        //ToVideoPageCommand = ReactiveCommand.Create(VideoPage);
+        //ToPlaylistPageCommand = ReactiveCommand.Create(PlaylistPage);
+        //ToSettingsPageCommand = ReactiveCommand.Create(SettingsPage);
+        //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
 
         if (_isSelected) 
         {
@@ -85,7 +90,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     
     private void HomePage()
     {
-        CurrentView = new MainPageView();
+        //CurrentView = new MainPageView();
         _isSelected = true; //???
     }
 
@@ -101,21 +106,21 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     
     private void VideoPage()
     {
-        CurrentView = new VideoPageView();
+        //CurrentView = new VideoPageView();
     }
     
     private void PlaylistPage()
     {
-        CurrentView = new PlaylistPageView();
+        //CurrentView = new PlaylistPageView();
     }
     
     private void SettingsPage()
     {
-        CurrentView = new SettingsPageView();
+        //CurrentView = new SettingsPageView();
     }
 
     private void AudioEditPage()
     {
-        CurrentView = new EditAudioView();
+        //CurrentView = new EditAudioView();
     }
 }

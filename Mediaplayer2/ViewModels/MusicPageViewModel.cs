@@ -142,9 +142,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     //public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
 
-    public MusicPageViewModel(IScreen? hostScreen = null)
+    public MusicPageViewModel(IScreen? screen = null)
     {
-        HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>()!;
+        HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
     }
 
     public MusicPageViewModel()
