@@ -143,14 +143,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     //public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
 
+    public MusicPageViewModel()
+    {
+
+    }
+
     public MusicPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
-    }
-
-    public MusicPageViewModel()
-    {
-        HostScreen = Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
         PreMain = "Что послушаем сегодня?";
         TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");
@@ -162,7 +162,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         {
             if (_audioFileReader != null && _isPlaying)
             {
-                Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = _audioFileReader.CurrentTime; });
+                //Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = _audioFileReader.CurrentTime; });
+                CurrentTime = _audioFileReader.CurrentTime;
             }
         };
         
@@ -231,16 +232,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 //await PlayAudioAsync(_filePath);
             }
             
-            /*_waveOut.PlaybackStopped += (sender, e) =>
+            _waveOut.PlaybackStopped += (sender, e) =>
             {
-                Dispatcher.UIThread.InvokeAsync(() =>
-                {
+                //Dispatcher.UIThread.InvokeAsync(() =>
+                //{
                     _isPlaying = false;
                     PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                     CurrentTime = TimeSpan.Zero;
-                });
-            };*/
-        }, outputScheduler: RxApp.MainThreadScheduler);
+                //});
+            };
+        }, outputScheduler: RxApp.MainThreadScheduler); //*
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -278,15 +279,15 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
         
-        _waveOut.PlaybackStopped += (sender, e) =>
+        /*_waveOut.PlaybackStopped += (sender, e) =>
         {
-            Dispatcher.UIThread.InvokeAsync(() =>
-            {
+            //Dispatcher.UIThread.InvokeAsync(() =>
+            //{
                 _isPlaying = false;
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                 CurrentTime = TimeSpan.Zero;
-            });
-        };
+           // });
+        };*/
         
         //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
     }
@@ -367,17 +368,18 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 if (bytesRead == 0) break;
                 //waveOut.Write(buffer, 0, bytesRead);
                 await Task.Delay(100); 
-                Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = audioFileReader.CurrentTime; });
+                //Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = audioFileReader.CurrentTime; });
+                CurrentTime = audioFileReader.CurrentTime;
                 //await Task.Delay(10); 
             }
 
             if (waveOut.PlaybackState == PlaybackState.Stopped || waveOut.PlaybackState == PlaybackState.Paused)
             {
-                Dispatcher.UIThread.InvokeAsync(() =>
-                {
+                //Dispatcher.UIThread.InvokeAsync(() =>
+                //{
                     _isPlaying = false;
                     PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
-                });
+                //});
             }
         }
     }

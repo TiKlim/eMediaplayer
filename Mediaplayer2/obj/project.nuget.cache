@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gLhc7DaHYlM=",
+  "dgSpecHash": "4/KCjzU6YWg=",
   "success": true,
   "projectFilePath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,8 @@
     "C:\\Users\\klimt\\.nuget\\packages\\libvlcsharp\\3.9.3\\libvlcsharp.3.9.3.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\libvlcsharp.avalonia\\3.9.3\\libvlcsharp.avalonia.3.9.3.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\microcom.runtime\\0.11.0\\microcom.runtime.0.11.0.nupkg.sha512",
+    "C:\\Users\\klimt\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.4\\microsoft.extensions.dependencyinjection.9.0.4.nupkg.sha512",
+    "C:\\Users\\klimt\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.4\\microsoft.extensions.dependencyinjection.abstractions.9.0.4.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
@@ -61,7 +63,8 @@
     "C:\\Users\\klimt\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.8\\skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\skiasharp.nativeassets.webassembly\\2.88.8\\skiasharp.nativeassets.webassembly.2.88.8.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.8\\skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
-    "C:\\Users\\klimt\\.nuget\\packages\\splat\\15.1.1\\splat.15.1.1.nupkg.sha512",
+    "C:\\Users\\klimt\\.nuget\\packages\\splat\\15.3.1\\splat.15.3.1.nupkg.sha512",
+    "C:\\Users\\klimt\\.nuget\\packages\\splat.microsoft.extensions.dependencyinjection\\15.3.1\\splat.microsoft.extensions.dependencyinjection.15.3.1.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",

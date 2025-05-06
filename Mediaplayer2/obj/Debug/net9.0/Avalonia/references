@@ -29,6 +29,8 @@ C:\Users\klimt\.nuget\packages\libvlcsharp.avalonia\3.9.3\lib\netstandard2.0\Lib
 C:\Users\klimt\.nuget\packages\libvlcsharp\3.9.3\lib\net8.0\LibVLCSharp.dll
 C:\Users\klimt\.nuget\packages\microcom.runtime\0.11.0\lib\net5.0\MicroCom.Runtime.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.CSharp.dll
+C:\Users\klimt\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\9.0.4\lib\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\klimt\.nuget\packages\microsoft.extensions.dependencyinjection\9.0.4\lib\net9.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.VisualBasic.Core.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.VisualBasic.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\Microsoft.Win32.Primitives.dll
@@ -44,7 +46,8 @@ C:\Users\klimt\.nuget\packages\naudio.winmm\2.2.1\lib\netstandard2.0\NAudio.WinM
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\netstandard.dll
 C:\Users\klimt\.nuget\packages\reactiveui\20.1.1\lib\net8.0\ReactiveUI.dll
 C:\Users\klimt\.nuget\packages\skiasharp\2.88.8\lib\net6.0\SkiaSharp.dll
-C:\Users\klimt\.nuget\packages\splat\15.1.1\lib\net8.0\Splat.dll
+C:\Users\klimt\.nuget\packages\splat\15.3.1\lib\net9.0\Splat.dll
+C:\Users\klimt\.nuget\packages\splat.microsoft.extensions.dependencyinjection\15.3.1\lib\net9.0\Splat.Microsoft.Extensions.DependencyInjection.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\System.AppContext.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\System.Buffers.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\9.0.2\ref\net9.0\System.Collections.Concurrent.dll

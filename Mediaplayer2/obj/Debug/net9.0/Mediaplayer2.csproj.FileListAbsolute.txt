@@ -1926,3 +1926,6 @@ K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\libvlc\win-x86\plugins\vi
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\libvlc\win-x86\plugins\visualization\libvisual_plugin.dll
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\LibVLCSharp.dll
 K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\LibVLCSharp.Avalonia.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+K:\RiderProj\Mediaplayer\Mediaplayer2\bin\Debug\net9.0\Splat.Microsoft.Extensions.DependencyInjection.dll

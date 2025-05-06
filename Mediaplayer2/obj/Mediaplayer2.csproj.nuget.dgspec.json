@@ -82,6 +82,10 @@
               "target": "Package",
               "version": "[3.9.3, )"
             },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "NAudio": {
               "target": "Package",
               "version": "[2.2.1, )"
@@ -89,6 +93,10 @@
             "NAudio.Lame": {
               "target": "Package",
               "version": "[2.1.0, )"
+            },
+            "Splat.Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[15.3.1, )"
             },
             "TagLibSharp": {
               "target": "Package",

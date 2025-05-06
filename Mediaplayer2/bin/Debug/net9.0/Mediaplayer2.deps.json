@@ -16,8 +16,10 @@
           "Avalonia.Themes.Fluent": "11.2.1",
           "LibVLCSharp": "3.9.3",
           "LibVLCSharp.Avalonia": "3.9.3",
+          "Microsoft.Extensions.DependencyInjection": "9.0.4",
           "NAudio": "2.2.1",
           "NAudio.Lame": "2.1.0",
+          "Splat.Microsoft.Extensions.DependencyInjection": "15.3.1",
           "TagLibSharp": "2.3.0",
           "VideoLAN.LibVLC.Windows": "3.0.21"
         },
@@ -390,6 +392,25 @@
           }
         }
       },
+      "Microsoft.Extensions.DependencyInjection/9.0.4": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.4"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.425.16305"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.4": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.425.16305"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/3.1.0": {},
       "Microsoft.NETCore.Targets/1.1.3": {},
       "Microsoft.Win32.Registry/4.7.0": {
@@ -481,7 +502,7 @@
       "ReactiveUI/20.1.1": {
         "dependencies": {
           "DynamicData": "8.4.1",
-          "Splat": "15.1.1",
+          "Splat": "15.3.1",
           "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
@@ -601,11 +622,23 @@
           }
         }
       },
-      "Splat/15.1.1": {
+      "Splat/15.3.1": {
         "runtime": {
-          "lib/net8.0/Splat.dll": {
-            "assemblyVersion": "15.1.0.0",
-            "fileVersion": "15.1.1.17670"
+          "lib/net9.0/Splat.dll": {
+            "assemblyVersion": "15.3.0.0",
+            "fileVersion": "15.3.1.27942"
+          }
+        }
+      },
+      "Splat.Microsoft.Extensions.DependencyInjection/15.3.1": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "9.0.4",
+          "Splat": "15.3.1"
+        },
+        "runtime": {
+          "lib/net9.0/Splat.Microsoft.Extensions.DependencyInjection.dll": {
+            "assemblyVersion": "15.3.0.0",
+            "fileVersion": "15.3.1.27942"
           }
         }
       },
@@ -1214,6 +1247,20 @@
       "path": "microcom.runtime/0.11.0",
       "hashPath": "microcom.runtime.0.11.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.DependencyInjection/9.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f2MTUaS2EQ3lX4325ytPAISZqgBfXmY0WvgD80ji6Z20AoDNiCESxsqo6mFRwHJD/jfVKRw9FsW6+86gNre3ug==",
+      "path": "microsoft.extensions.dependencyinjection/9.0.4",
+      "hashPath": "microsoft.extensions.dependencyinjection.9.0.4.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/9.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UI0TQPVkS78bFdjkTodmkH0Fe8lXv9LnhGFKgKrsgUJ5a5FVdFRcgjIkBVLbGgdRhxWirxH/8IXUtEyYJx6GQg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/9.0.4",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.9.0.4.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "type": "package",
       "serviceable": true,
@@ -1431,12 +1478,19 @@
       "path": "skiasharp.nativeassets.win32/2.88.8",
       "hashPath": "skiasharp.nativeassets.win32.2.88.8.nupkg.sha512"
     },
-    "Splat/15.1.1": {
+    "Splat/15.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RHDTdF90FwVbRia2cmuIzkiVoETqnXSB2dDBBi/I35HWXqv4OKGqoMcfcd6obMvO2OmmY5PjU1M62K8LkJafAA==",
-      "path": "splat/15.1.1",
-      "hashPath": "splat.15.1.1.nupkg.sha512"
+      "sha512": "sha512-zyu98Mwp8gTi3MlS6EGtvcacmw5W/qA4/h/DVeZ28A1dR6mcM628ujHck6LK5SM6LwroR5LzBonWgeFtwo2Afg==",
+      "path": "splat/15.3.1",
+      "hashPath": "splat.15.3.1.nupkg.sha512"
+    },
+    "Splat.Microsoft.Extensions.DependencyInjection/15.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9iKQ2T2Mit/yzVew/FEi+A3wWgHEDv8EQtoUX7ArK/bughD17DYVlalM2X/uxW3Jf5BO0xqRByXXTMmV0z2BfA==",
+      "path": "splat.microsoft.extensions.dependencyinjection/15.3.1",
+      "hashPath": "splat.microsoft.extensions.dependencyinjection.15.3.1.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",
