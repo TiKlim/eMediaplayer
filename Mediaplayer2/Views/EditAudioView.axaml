@@ -34,16 +34,6 @@
                            FontSize="20"
                            FontWeight="Bold"/>
             </StackPanel>
-            <!--Кнопка для загрузки аудио-файла-->
-            <Button Grid.Column="1"
-                    Grid.Row="0"
-                    HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center"
-                    Margin="24"
-                    Content="Загрузить аудио"
-                    Background="#FF595E"
-                    CornerRadius="10"
-                    Command="{Binding }"/>
         </Grid>
         <!--Grid для изображения (обложка трека)-->
         <Grid Grid.Row="1"
@@ -56,8 +46,9 @@
                 <Slider Grid.Row="0"
                         Name="PlaybackSlider"
                         Minimum="0"
-                        Maximum="{Binding }"
-                        Value="{Binding }"
+                        Maximum="{Binding AudioDuration.TotalSeconds}"
+                        Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
+                        Width="1000"
                         Margin="10,0,10,0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -73,7 +64,7 @@
                     <Button Name="BackwardButton"
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
-                            Command="{Binding }">
+                            Command="{Binding BackTime}">
                         <Image Source="../Assets/BackTimeRed.png"
                                MaxWidth="50" 
                                MinWidth="20"/>
@@ -82,8 +73,8 @@
                     <Button Name="PlayButton"
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
-                            Command="{Binding }">
-                        <Image Source="{Binding }"
+                            Command="{Binding PlayPauseCommand}">
+                        <Image Source="{Binding PlayImage}"
                                Width="35"
                                MaxWidth="50" 
                                MinWidth="20"/>
@@ -92,7 +83,7 @@
                     <Button Name="ForwardButton"
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
-                            Command="{Binding }">
+                            Command="{Binding ForeTime}">
                         <Image Source="../Assets/ForeTimeRed.png"
                                MaxWidth="50" 
                                MinWidth="20"/>
@@ -107,16 +98,17 @@
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                     <!--Полоса прокрутки-->
-                    <Slider Minimum="0"
-                            Maximum="{Binding }"
-                            Value="{Binding }"
+                    <Slider Minimum="{Binding StartSliderValue}"
+                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Value="0"
+                            Width="1000"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Background="Black"
                             Foreground="#FF595E">
                     </Slider>
-                    <TextBlock Text="{Binding StartTime}"
+                    <TextBlock Text="{Binding StartTimeText}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
@@ -125,20 +117,21 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Spacing="10">
-                    <TextBlock Text="{Binding Start}"
+                    <TextBlock Text="{Binding End}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                     <!--Полоса прокрутки-->
                     <Slider Minimum="0"
-                            Maximum="{Binding }"
-                            Value="{Binding }"
+                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Value="{Binding EndSliderValue, Mode=TwoWay}"
+                            Width="1000"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Background="Black"
                             Foreground="#FF595E">
                     </Slider>
-                    <TextBlock Text="{Binding StartTime}"
+                    <TextBlock Text="{Binding EndTimeText}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
@@ -149,50 +142,24 @@
               Grid.Row="2"
               RowDefinitions="*,*"
               ShowGridLines="False">
-            
-            
-            <!--Управление треком (добавить в плейлист/убрать из плейлиста, информация о треке, уровень громкости)-->
-            <StackPanel Grid.Row="1"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        Margin="0 0 10 0"
-                        Spacing="10">
-                <!--Кнопка "Добавить в плейлист/убрать из плейлиста"-->
-                <Button Name="PlusInPlaylistButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/AddRed.png"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
-                </Button>
-                <!--Кнопка "Информация о треке"-->
-                <Button Name="InformButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/InformRed.png"
-                           MaxWidth="50"
-                           MinWidth="20"/>
-                </Button>
-                <!--Кнопка "Звук выключить/включить"-->
-                <Button Name="VolumeButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel"
-                        Command="{Binding}">
-                    <Image Source=""
-                           MaxWidth="50" 
-                           MinWidth="20"/>
-                </Button>
-                <!--Полоса регулирования громкости-->
-                <Slider Name="VolumeSlider"
-                        Minimum="0"
-                        Maximum="1"
-                        Value=""
-                        Width="200"
-                        VerticalAlignment="Center"
-                        Background="Black"
-                        Foreground="#FF595E">
-                </Slider>
-            </StackPanel>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Сохранить изменения"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding SaveCommand}"/>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Отменить изменения"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
