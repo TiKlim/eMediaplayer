@@ -86,7 +86,7 @@
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка "играть/стоп"-->
+                <!--Кнопка "Играть/стоп"-->
                 <Button Name="PlayButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"

@@ -127,7 +127,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand LoadFileCommand { get; }
     
-    public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
+    //public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
     
     public ICommand PlayPauseCommand { get; }
     
