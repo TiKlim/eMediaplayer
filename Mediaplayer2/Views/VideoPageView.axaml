@@ -74,21 +74,21 @@
                     Background="Black"
                     Foreground="#FF595E">
             </Slider>
-            <!--Управление треком (предыдущий, проиграть/остановить, следующий)-->
+            <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         Spacing="10">
-                <!--Кнопка "Предыдущий трек"-->
+                <!--Кнопка "Назад на 10 секунд"-->
                 <Button Name="BackwardButton"
                         HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/BackwardRed.png"
-                           Width="35"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}">
+                    <Image Source="../Assets/BackTimeRed.png"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка "Играть/остановить"-->
+                <!--Кнопка "Играть/стоп"-->
                 <Button Name="PlayButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
@@ -98,35 +98,28 @@
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
-                <!--Кнопка "Следующий трек"-->
+                <!--Кнопка "Вперёд на 10 секунд"-->
                 <Button Name="ForwardButton"
                         HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/ForwardRed.png"
-                           Width="35"
+                        Classes="LeftPanel"
+                        Command="{Binding ForeTime}">
+                    <Image Source="../Assets/ForeTimeRed.png"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
             </StackPanel>
-            <!--Управление треком (добавить в плейлист/убрать из плейлиста, информация о треке, уровень громкости)-->
+            <!--Управление треком (информация о треке, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0"
                         Spacing="10">
-                <!--Кнопка "Добавить в плейлист/убрать из плейлиста"-->
-                <Button Name="PlusInPlaylistButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
-                    <Image Source="../Assets/AddRed.png"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
-                </Button>
                 <!--Кнопка "Информация о треке"-->
                 <Button Name="InformButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel">
-                    <Image Source="../Assets/InformRed.png"
+                    <Image Source="../Assets/EditVideoRed.png"
+                           Width="35"
                            MaxWidth="50"
                            MinWidth="20"/>
                 </Button>

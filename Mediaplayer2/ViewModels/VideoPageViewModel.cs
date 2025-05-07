@@ -54,6 +54,8 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     private VideoView _videoView;
 
     private bool _visible;
+    
+    private System.Timers.Timer _timer;
 
     public string Main
     {
@@ -147,6 +149,10 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand VolumeCommand { get; }
     
+    public ICommand BackTime { get; }
+    
+    public ICommand ForeTime { get; }
+    
     public event Action<MediaPlayer> OnPlay;
     
     //public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
@@ -174,6 +180,15 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         Visible = false;
         
+        /*_timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
+        _timer.Elapsed += (sender, e) =>
+        {
+            if (_audioFileReader != null && _isPlaying)
+            {
+                CurrentTime = _audioFileReader.CurrentTime;
+            }
+        };*/
+        
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var dialog = new OpenFileDialog
@@ -190,6 +205,14 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             {
                 _filePath = result[0];
                 LoadVideoInfo(_filePath);
+                
+                //_audioFileReader?.Dispose();
+                //_mediaPlayer?.Dispose();
+                
+                /*_libVLC = new LibVLC();
+                _mediaPlayer = new MediaPlayer(_libVLC);
+                AudioDuration = _audioFileReader.TotalTime;*/
+                
                 PlayVideoAsync(_filePath);
                 //_audioFileReader = new AudioFileReader(_filePath);
                 //AudioDuration = new TimeSpan(_mediaPlayer.Time);
@@ -215,6 +238,45 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 PlayImage = new Bitmap("Assets/StopRed.png");
                 await PlayVideoAsync(_filePath);
             }
+            
+            /*if (_isPlaying)
+            {
+                //_waveOut?.Init(_audioFileReader);
+                //_waveOut.Volume = Volume;
+                _mediaPlayer.Pause();
+                _timer.Stop();
+                _isPlaying = false;
+                UpdateVolume();
+                //CurrentTime = _audioFileReader.CurrentTime; // Обновляем текущее время
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            }
+            else
+            {
+                // Запустить воспроизведение
+                if (_audioFileReader != null)
+                {
+                    // Убедитесь, что WaveOut инициализирован
+                    if (_mediaPlayer == null)
+                    {
+                        _libVLC = new LibVLC();
+                        _mediaPlayer = new MediaPlayer(_libVLC);
+                    }
+
+                    //_mediaPlayer.Volume = Volume; // Установка громкости
+                    _mediaPlayer.Play(); // Запуск воспроизведения
+                    _timer.Start();
+                    _isPlaying = true;
+                    PlayImage = new Bitmap("Assets/StopRed.png");
+                }
+                //await PlayAudioAsync(_filePath);
+            }*/
+            
+            /*_mediaPlayer.PlaybackStopped += (sender, e) =>
+            {
+                _isPlaying = false;
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                CurrentTime = TimeSpan.Zero;
+            };*/
         }, outputScheduler: RxApp.MainThreadScheduler);
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -232,6 +294,26 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
             }
         });
+        
+        BackTime = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_audioFileReader != null)
+            {
+                var newTime = _audioFileReader.CurrentTime - TimeSpan.FromSeconds(10);
+                _audioFileReader.CurrentTime = newTime < TimeSpan.Zero ? TimeSpan.Zero : newTime;
+                CurrentTime = _audioFileReader.CurrentTime;
+            }
+        }, outputScheduler: RxApp.MainThreadScheduler);
+
+        ForeTime = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_audioFileReader != null)
+            {
+                var newTime = _audioFileReader.CurrentTime + TimeSpan.FromSeconds(10);
+                _audioFileReader.CurrentTime = newTime > _audioFileReader.TotalTime ? _audioFileReader.TotalTime : newTime;
+                CurrentTime = _audioFileReader.CurrentTime;
+            }
+        }, outputScheduler: RxApp.MainThreadScheduler);
     }
     
     private void LoadVideoInfo(string filePath)

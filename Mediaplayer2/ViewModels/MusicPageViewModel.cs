@@ -163,7 +163,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         {
             if (_audioFileReader != null && _isPlaying)
             {
-                //Dispatcher.UIThread.InvokeAsync(() => { CurrentTime = _audioFileReader.CurrentTime; });
                 CurrentTime = _audioFileReader.CurrentTime;
             }
         };
