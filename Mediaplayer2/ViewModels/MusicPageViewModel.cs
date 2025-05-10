@@ -327,15 +327,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         }
     }
 
-    /*private async void PlayPause()
-    {
-        _isPlaying = true;
-        await PlayAudioAsync(_filePath);
-        //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
-        _isPlaying = true;
-        await PlayAudioAsync(_filePath);
-    }*/
-
     private void UpdateVolume()
     {
         if (_waveOut != null)
@@ -353,7 +344,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         }
     }
     
-    private async Task PlayAudioAsync(string filePath) 
+    /*private async Task PlayAudioAsync(string filePath) 
     { 
         using (var audioFileReader = new AudioFileReader(filePath)) 
         using (var waveOut = new WaveOutEvent()) 
@@ -384,5 +375,5 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 //});
             }
         }
-    }
+    }*/
 }

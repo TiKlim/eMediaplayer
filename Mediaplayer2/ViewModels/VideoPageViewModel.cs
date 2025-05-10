@@ -296,36 +296,21 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     
     private void LoadVideoInfo(string filePath)
     {
-        Main = Path.GetFileNameWithoutExtension(filePath);
-        PreMain = Path.GetFileNameWithoutExtension(filePath);
-        //OpacityImage = 1;
-        Visible = true;
+        //var file = TagLib.File.Create(filePath);
         
-        /*var file = TagLib.File.Create(filePath);
+        //string title = file.Tag.Title ?? "Нет названия";
+        
+        //string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
+        
+        //Main = title;
+        //PreMain = performer;
 
-        string title = file.Tag.Title ?? "Нет названия";
-
-        string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-
-        Main = title;
-        PreMain = performer;
-
-        if (file.Tag.Pictures.Length > 0)
-        {
-            var picture = file.Tag.Pictures[0];
-            using (var stream = new MemoryStream(picture.Data.Data))
-            {
-                TrackImage = new Bitmap(stream);
-                OpacityImage = 1;
-            }
-        }*/
-
-        /*if (_mediaPlayer != null)
-        {
-            _totalTime = new TimeSpan(_mediaPlayer.Time);
-            AudioDuration = _totalTime;
-            Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
-        }*/
+        //if (file.Tag.Title == null)
+        //{
+            Main = Path.GetFileNameWithoutExtension(filePath);
+        //}
+        
+        Visible = true;
     }
 
     private void UpdateVolume()
