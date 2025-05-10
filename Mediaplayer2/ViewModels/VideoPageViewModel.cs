@@ -209,19 +209,11 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 //_audioFileReader?.Dispose();
                 //_mediaPlayer?.Dispose();
                 
-                /*_libVLC = new LibVLC();
-                _mediaPlayer = new MediaPlayer(_libVLC);
-                AudioDuration = _audioFileReader.TotalTime;*/
-                
-                PlayVideoAsync(_filePath);
                 //_audioFileReader = new AudioFileReader(_filePath);
-                //AudioDuration = new TimeSpan(_mediaPlayer.Time);
-                //_audioDuration = _audioFileReader.TotalTime; 
-                //Value = _audioDuration.TotalSeconds;
-                //_waveOut = new WaveOutEvent();
-                //_waveOut.Init(_audioFileReader); 
+                AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
+                //AudioDuration = _audioFileReader.TotalTime;
             }
-        });
+        }, outputScheduler: RxApp.MainThreadScheduler);
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -229,54 +221,23 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             {
                 _mediaPlayer.Pause();
                 _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
-            }
-            else
-            {
-                _mediaPlayer.Play();
-                _isPlaying = true;
-                PlayImage = new Bitmap("Assets/StopRed.png");
-                await PlayVideoAsync(_filePath);
-            }
-            
-            /*if (_isPlaying)
-            {
-                //_waveOut?.Init(_audioFileReader);
-                //_waveOut.Volume = Volume;
-                _mediaPlayer.Pause();
-                _timer.Stop();
-                _isPlaying = false;
                 UpdateVolume();
-                //CurrentTime = _audioFileReader.CurrentTime; // Обновляем текущее время
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
             else
             {
-                // Запустить воспроизведение
-                if (_audioFileReader != null)
+                if (_filePath != null)
                 {
-                    // Убедитесь, что WaveOut инициализирован
-                    if (_mediaPlayer == null)
-                    {
-                        _libVLC = new LibVLC();
-                        _mediaPlayer = new MediaPlayer(_libVLC);
-                    }
-
-                    //_mediaPlayer.Volume = Volume; // Установка громкости
-                    _mediaPlayer.Play(); // Запуск воспроизведения
-                    _timer.Start();
+                    var media = new Media(_libVLC, _filePath, FromType.FromPath);
+                    _mediaPlayer.Media = media;
+                    _mediaPlayer.Play(media);
+                    //_timer.Start();
+                    //_mediaPlayer.Volume = (int)Volume; // Установка громкости
                     _isPlaying = true;
+                    UpdateVolume();
                     PlayImage = new Bitmap("Assets/StopRed.png");
                 }
-                //await PlayAudioAsync(_filePath);
-            }*/
-            
-            /*_mediaPlayer.PlaybackStopped += (sender, e) =>
-            {
-                _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
-                CurrentTime = TimeSpan.Zero;
-            };*/
+            }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -348,15 +309,6 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
         }*/
     }
-
-    /*private async void PlayPause()
-    {
-        _isPlaying = true;
-        await PlayVideoAsync(_filePath);
-        //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSlider.Value);
-        _isPlaying = true;
-        await PlayVideoAsync(_filePath);
-    }*/
 
     private void UpdateVolume()
     {
