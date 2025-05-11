@@ -158,7 +158,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     
     //public double VideoDuration => _mediaPlayer.Length > 0 ? _mediaPlayer.Length / 1000.0 : 0;
     
-    public string? UrlPathSegment => "/music";
+    public string? UrlPathSegment => "/video";
     
     public IScreen HostScreen { get; }
     

@@ -46,17 +46,16 @@
                 <avalonia:VideoView x:Name="VideoPlayer"
                                     Grid.Row="0"
                                     MediaPlayer="{Binding MediaPlayer}"
-                                    ZIndex="-1"
-                                    Height="400"
-                                    Width="900">
+                                    Height="200"
+                                    Width="700">
            
                 </avalonia:VideoView>
                 <!--Полоса прокрутки-->
                 <Slider Grid.Row="1"
                         Name="PlaybackSlider"
                         Minimum="0"
-                        Maximum="{Binding AudioDuration.TotalSeconds}"
-                        Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
+                        Maximum="{Binding AudioDuration.TotalMilliseconds}"
+                        Value="{Binding CurrentTime.TotalMilliseconds, Mode=TwoWay}"
                         Width="1000"
                         Margin="10,0,10,0"
                         VerticalAlignment="Center"
@@ -108,7 +107,7 @@
                                Margin="0,0,10,0"/>
                     <!--Полоса прокрутки-->
                     <Slider Minimum="{Binding StartSliderValue}"
-                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Maximum="{Binding AudioDuration.TotalMilliseconds}"
                             Value="0"
                             Width="1000"
                             Margin="10,0,10,0"
@@ -131,7 +130,7 @@
                                Margin="0,0,10,0"/>
                     <!--Полоса прокрутки-->
                     <Slider Minimum="0"
-                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Maximum="{Binding AudioDuration.TotalMilliseconds}"
                             Value="{Binding EndSliderValue, Mode=TwoWay}"
                             Width="1000"
                             Margin="10,0,10,0"

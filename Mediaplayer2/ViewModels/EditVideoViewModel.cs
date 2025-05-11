@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
+using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using NAudio.Lame;
 using NAudio.Wave;
@@ -61,6 +62,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     private LibVLC _libVLC;
     
     private MediaPlayer _mediaPlayer;
+    
+    private VideoView _videoView;
     
     public string Main
     {
@@ -192,6 +195,12 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         }
     }
     
+    public string FilePath
+    {
+        get => _filePath;
+        set => this.RaiseAndSetIfChanged(ref _filePath, value);
+    }
+    
     public MediaPlayer? MediaPlayer
     {
         get => _mediaPlayer;
@@ -210,7 +219,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     public ReactiveCommand<Unit, IRoutableViewModel> CancelCommand { get; }
     
-    public string? UrlPathSegment => "/editAudio";
+    public string? UrlPathSegment => "/editVideo";
     
     public IScreen HostScreen { get; }
     
@@ -235,7 +244,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         _timer = new System.Timers.Timer(100);
         _timer.Elapsed += (sender, e) =>
         {
-            if (_filePath != null && _isPlaying)
+            if (filePath != null && _isPlaying)
             {
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time);
                 //Debug.WriteLine($"Current Time: {CurrentTime.TotalMilliseconds} seconds");
@@ -250,23 +259,35 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
+            Debug.WriteLine("PlayPauseCommand executed.");
             if (_isPlaying)
             {
+                Debug.WriteLine("1");
                 _mediaPlayer.Pause();
+                Debug.WriteLine("2");
                 _timer.Stop();
+                Debug.WriteLine("3");
                 _isPlaying = false;
+                Debug.WriteLine("4");
                 UpdateVolume();
+                Debug.WriteLine("5");
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
             else
             {
-                if (_filePath != null)
+                Debug.WriteLine("6");
+                Debug.WriteLine($"MediaPlayer State: {_mediaPlayer.State}");
+                Debug.WriteLine($"File path: {filePath}");
+                if (filePath != null)
                 {
+                    Debug.WriteLine("7");
                     if (_mediaPlayer.Media == null)
                     {
-                        var media = new Media(_libVLC, _filePath, FromType.FromPath);
+                        Debug.WriteLine("8");
+                        var media = new Media(_libVLC, filePath, FromType.FromPath);
                         _mediaPlayer.Media = media;
                         await Task.Delay(100);
+                        Debug.WriteLine("Media assigned to MediaPlayer.");
                         _mediaPlayer.Playing += (sender, e) =>
                         {
                             AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
@@ -274,6 +295,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                             EndSliderValue = AudioDuration.TotalMilliseconds;
                         };
                     }
+                    Debug.WriteLine($"MediaPlayer State: {_mediaPlayer.State}");
                     _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
                     _timer.Start();
                     _isPlaying = true;
