@@ -253,7 +253,10 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         PreMain = Path.GetFileNameWithoutExtension(filePath);
         
-        //EndSliderValue = AudioDuration.TotalSeconds;
+        EndSliderValue = AudioDuration.TotalMilliseconds;
+        
+        var newTime = TimeSpan.FromMilliseconds(StartSliderValue);
+        _mediaPlayer.Time = (int)newTime.TotalMilliseconds;
         
         //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSliderValue);
         
@@ -262,28 +265,20 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             Debug.WriteLine("PlayPauseCommand executed.");
             if (_isPlaying)
             {
-                Debug.WriteLine("1");
                 _mediaPlayer.Pause();
-                Debug.WriteLine("2");
                 _timer.Stop();
-                Debug.WriteLine("3");
                 _isPlaying = false;
-                Debug.WriteLine("4");
                 UpdateVolume();
-                Debug.WriteLine("5");
                 PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
             else
             {
-                Debug.WriteLine("6");
                 Debug.WriteLine($"MediaPlayer State: {_mediaPlayer.State}");
                 Debug.WriteLine($"File path: {filePath}");
                 if (filePath != null)
                 {
-                    Debug.WriteLine("7");
                     if (_mediaPlayer.Media == null)
                     {
-                        Debug.WriteLine("8");
                         var media = new Media(_libVLC, filePath, FromType.FromPath);
                         _mediaPlayer.Media = media;
                         await Task.Delay(100);
@@ -293,9 +288,9 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                             AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
                             Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
                             EndSliderValue = AudioDuration.TotalMilliseconds;
+                            Debug.WriteLine($"Audio Duration: {EndSliderValue} seconds");
                         };
                     }
-                    Debug.WriteLine($"MediaPlayer State: {_mediaPlayer.State}");
                     _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
                     _timer.Start();
                     _isPlaying = true;
@@ -381,6 +376,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
         return string.Format("{0:D2}:{1:D2}", (int)timeSpan.TotalMinutes, timeSpan.Seconds);
     }
+
     
     private void UpdateVolume()
     {
