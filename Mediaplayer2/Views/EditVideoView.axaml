@@ -1,0 +1,174 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:avalonia="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
+             x:DataType="vm:EditVideoViewModel"
+             x:Class="Mediaplayer2.Views.EditVideoView">
+    <!--DataContext-->
+    <UserControl.DataContext>
+        <vm:EditVideoViewModel/>
+    </UserControl.DataContext>
+    <!--Главный Grid-->
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*,Auto"
+          Background="#f5efef">
+        <!--Grid для заголовка-->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Заголовок-->
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="30 50 0 0"
+                        VerticalAlignment="Center">
+                <!--Главный титл (для названия)-->
+                <TextBlock Text="{Binding Main}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                <!--Второй титл (для исполнителя)-->
+                <TextBlock Text="{Binding PreMain}"
+                           FontSize="20"
+                           FontWeight="Bold"/>
+            </StackPanel>
+        </Grid>
+        <!--Grid для изображения (обложка трека)-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Изображение (обложка трека)-->
+            <Grid Grid.Column="1"
+                  RowDefinitions="*,*,*,*,*">
+                <avalonia:VideoView x:Name="VideoPlayer"
+                                    Grid.Row="0"
+                                    MediaPlayer="{Binding MediaPlayer}"
+                                    ZIndex="-1"
+                                    Height="400"
+                                    Width="900">
+           
+                </avalonia:VideoView>
+                <!--Полоса прокрутки-->
+                <Slider Grid.Row="1"
+                        Name="PlaybackSlider"
+                        Minimum="0"
+                        Maximum="{Binding AudioDuration.TotalSeconds}"
+                        Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
+                        Width="1000"
+                        Margin="10,0,10,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="Black"
+                        Foreground="#FF595E">
+                </Slider>
+                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
+                <StackPanel Grid.Row="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Spacing="10">
+                    <!--Кнопка "Назад на 10 секунд"-->
+                    <Button Name="BackwardButton"
+                            HorizontalAlignment="Stretch"
+                            Classes="LeftPanel"
+                            Command="{Binding BackTime}">
+                        <Image Source="../Assets/BackTimeRed.png"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </Button>
+                    <!--Кнопка "Играть/стоп"-->
+                    <Button Name="PlayButton"
+                            HorizontalAlignment="Stretch"
+                            Classes="LeftPanel"
+                            Command="{Binding PlayPauseCommand}">
+                        <Image Source="{Binding PlayImage}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </Button>
+                    <!--Кнопка "Вперёд на 10 секунд"-->
+                    <Button Name="ForwardButton"
+                            HorizontalAlignment="Stretch"
+                            Classes="LeftPanel"
+                            Command="{Binding ForeTime}">
+                        <Image Source="../Assets/ForeTimeRed.png"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </Button>
+                </StackPanel>
+                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Text="{Binding Start}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                    <!--Полоса прокрутки-->
+                    <Slider Minimum="{Binding StartSliderValue}"
+                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Value="0"
+                            Width="1000"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="Black"
+                            Foreground="#FF595E">
+                    </Slider>
+                    <TextBlock Text="{Binding StartTimeText}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                </StackPanel>
+                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
+                <StackPanel Grid.Row="4"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Text="{Binding End}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                    <!--Полоса прокрутки-->
+                    <Slider Minimum="0"
+                            Maximum="{Binding AudioDuration.TotalSeconds}"
+                            Value="{Binding EndSliderValue, Mode=TwoWay}"
+                            Width="1000"
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="Black"
+                            Foreground="#FF595E">
+                    </Slider>
+                    <TextBlock Text="{Binding EndTimeText}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,10,0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!--Grid для нижней панели-->
+        <Grid Grid.Column="0"
+              Grid.Row="2"
+              RowDefinitions="*,*"
+              ShowGridLines="False">
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Сохранить изменения"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding SaveCommand}"/>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Отменить изменения"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding CancelCommand}"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -117,7 +117,8 @@
                 <!--Кнопка "Информация о треке"-->
                 <Button Name="InformButton"
                         HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
+                        Classes="LeftPanel"
+                        Command="{Binding ToEditVideoPageCommand}">
                     <Image Source="../Assets/EditVideoRed.png"
                            Width="35"
                            MaxWidth="50"

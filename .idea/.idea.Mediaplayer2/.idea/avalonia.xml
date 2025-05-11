@@ -5,6 +5,7 @@
       <map>
         <entry key="Mediaplayer2/App.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/EditAudioView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
+        <entry key="Mediaplayer2/Views/EditVideoView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/MainPage.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/MainPageView.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />
         <entry key="Mediaplayer2/Views/MainWindow.axaml" value="Mediaplayer2/Mediaplayer2.csproj" />

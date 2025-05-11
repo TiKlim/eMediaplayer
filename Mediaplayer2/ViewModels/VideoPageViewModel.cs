@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
@@ -160,6 +161,8 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     public string? UrlPathSegment => "/music";
     
     public IScreen HostScreen { get; }
+    
+    public ReactiveCommand<Unit, IRoutableViewModel> ToEditVideoPageCommand { get; }
 
     public VideoPageViewModel()
     {
@@ -291,6 +294,8 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time);
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
+        
+        ToEditVideoPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditVideoViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
 
     }
     
