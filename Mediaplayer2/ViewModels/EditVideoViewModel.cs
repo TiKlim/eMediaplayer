@@ -8,6 +8,9 @@ using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
+using MediaToolkit;
+using MediaToolkit.Model;
+using MediaToolkit.Options;
 using NAudio.Lame;
 using NAudio.Wave;
 using ReactiveUI;
@@ -253,10 +256,15 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         PreMain = Path.GetFileNameWithoutExtension(filePath);
         
-        EndSliderValue = AudioDuration.TotalMilliseconds;
+        //AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length); //*
+        
+        //EndSliderValue = AudioDuration.TotalMilliseconds;
         
         var newTime = TimeSpan.FromMilliseconds(StartSliderValue);
         _mediaPlayer.Time = (int)newTime.TotalMilliseconds;
+        
+        //UpdateStartTimeText();
+        //UpdateEndTimeText();
         
         //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSliderValue);
         
@@ -289,6 +297,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                             Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
                             EndSliderValue = AudioDuration.TotalMilliseconds;
                             Debug.WriteLine($"Audio Duration: {EndSliderValue} seconds");
+                            UpdateEndTimeText();
                         };
                     }
                     _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
@@ -369,13 +378,23 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     private void UpdateEndTimeText()
     {
         EndTimeText = $"{FormatTime(EndSliderValue)}";
+        Debug.WriteLine($"EndTimeText updated: {EndTimeText}");
     }
     
-    private string FormatTime(double seconds)
+    /*private string FormatTime(double seconds)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
         return string.Format("{0:D2}:{1:D2}", (int)timeSpan.TotalMinutes, timeSpan.Seconds);
+    }*/
+    private string FormatTime(double milliseconds)
+    {
+        TimeSpan timeSpan = TimeSpan.FromMilliseconds(milliseconds);
+        int hours = (int)timeSpan.TotalHours;
+        int minutes = (int)timeSpan.TotalMinutes % 60;
+        return string.Format("{0:D2}:{1:D2}", hours, minutes);
     }
+
+
 
     
     private void UpdateVolume()
@@ -399,31 +418,23 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     {
         string tempFilePath = Path.Combine(Path.GetDirectoryName(inputFilePath)!, $"{Path.GetFileNameWithoutExtension(inputFilePath)}_temp{Path.GetExtension(inputFilePath)}");
 
-        string ffmpegPath = "ffmpeg"; // Убедитесь, что ffmpeg доступен в PATH
-        string arguments = $"-i \"{inputFilePath}\" -ss {startSeconds} -to {endSeconds} -c copy \"{tempFilePath}\"";
+        var inputFile = new MediaFile { Filename = inputFilePath };
+        var outputFile = new MediaFile { Filename = tempFilePath };
 
-        var process = new Process
+        using (var engine = new Engine())
         {
-            StartInfo = new ProcessStartInfo
+            // Устанавливаем параметры обрезки
+            var options = new ConversionOptions
             {
-                FileName = ffmpegPath,
-                Arguments = arguments,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            }
-        };
+                Seek = TimeSpan.FromSeconds(startSeconds),
+                //MaxDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
+            };
 
-        process.Start();
-        process.WaitForExit();
-        
-        if (process.ExitCode != 0)
-        {
-            string errorOutput = process.StandardError.ReadToEnd();
-            throw new Exception($"FFmpeg error: {errorOutput}");
+            // Выполняем обрезку
+            engine.Convert(inputFile, outputFile, options);
         }
-        
+
+        // Заменяем оригинальный файл на обработанный
         File.Delete(inputFilePath);
         File.Move(tempFilePath, inputFilePath);
     }

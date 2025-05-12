@@ -52,27 +52,27 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Fonts.Inter": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.ReactiveUI": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "Avalonia.Themes.Fluent": {
               "target": "Package",
-              "version": "[11.2.1, )"
+              "version": "[11.3.0, )"
             },
             "LibVLCSharp": {
               "target": "Package",
@@ -81,6 +81,10 @@
             "LibVLCSharp.Avalonia": {
               "target": "Package",
               "version": "[3.9.3, )"
+            },
+            "MediaToolkit": {
+              "target": "Package",
+              "version": "[1.1.0.1, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -97,6 +101,10 @@
             "Splat.Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[15.3.1, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             },
             "TagLibSharp": {
               "target": "Package",
