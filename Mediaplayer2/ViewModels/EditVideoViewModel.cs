@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
@@ -356,6 +357,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
 
         SaveCommand = ReactiveCommand.CreateFromObservable(() =>
         {
+            _mediaPlayer.Stop();
+            _mediaPlayer.Dispose();
             TrimVideoFile(filePath, (double)StartSliderValue, (double)EndSliderValue);
             return HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
@@ -420,23 +423,37 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
 
         var inputFile = new MediaFile { Filename = inputFilePath };
         var outputFile = new MediaFile { Filename = tempFilePath };
+        
+        
 
         using (var engine = new Engine())
         {
-            // Устанавливаем параметры обрезки
             var options = new ConversionOptions
             {
                 Seek = TimeSpan.FromSeconds(startSeconds),
                 //MaxDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
             };
-
-            // Выполняем обрезку
+            
             engine.Convert(inputFile, outputFile, options);
         }
+        
+        //File.Delete(inputFilePath);
+        //File.Move(tempFilePath, inputFilePath);
+        try
+        {
+            if (File.Exists(inputFilePath))
+            {
+                File.Delete(inputFilePath);
+            }
 
-        // Заменяем оригинальный файл на обработанный
-        File.Delete(inputFilePath);
-        File.Move(tempFilePath, inputFilePath);
+            File.Move(tempFilePath, inputFilePath);
+        }
+        catch (IOException ex) // Повторная попытка
+        {
+            Debug.WriteLine($"Error deleting file: {ex.Message}");
+            
+            Thread.Sleep(1000);
+            TrimVideoFile(inputFilePath, startSeconds, endSeconds);
+        }
     }
-
 }
