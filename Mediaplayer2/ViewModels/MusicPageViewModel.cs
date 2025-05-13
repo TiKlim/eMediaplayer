@@ -52,6 +52,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private System.Timers.Timer _timer;
     
     private IRoutableViewModel _routableViewModelImplementation;
+
+    private string _visibleAttention;
+    
+    private string _visibleImage;
+
+    private string _attention;
     
     //private object _currentView;
 
@@ -144,6 +150,20 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToEditAudioPageCommand { get; }
 
+    public string VisibleAttention
+    {
+        get => _visibleAttention;
+        set => this.RaiseAndSetIfChanged(ref _visibleAttention, value);
+    }
+
+    public string VisibleImage
+    {
+        get => _visibleImage;
+        set => this.RaiseAndSetIfChanged(ref _visibleImage, value);
+    }
+
+    public string Attention { get; } = "Выберите трек";
+
     public MusicPageViewModel()
     {
 
@@ -156,6 +176,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         PreMain = "Что послушаем сегодня?";
         TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");
         OpacityImage = 0.2;
+        VisibleImage = "true";
+        VisibleAttention = "false";
         //CurrentView = new MusicPageView();
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
@@ -200,47 +222,69 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            if (_isPlaying)
+            if (_filePath == null)
             {
-                //_waveOut?.Init(_audioFileReader);
-                //_waveOut.Volume = Volume;
-                _waveOut?.Pause();
-                _timer.Stop();
-                _isPlaying = false;
-                UpdateVolume();
-                //CurrentTime = _audioFileReader.CurrentTime; // Обновляем текущее время
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                VisibleImage = "false";
+                VisibleAttention = "true";
+                await Task.Delay(2000);
+                VisibleImage = "true";
+                VisibleAttention = "false";
             }
-            else
+            else //*
             {
-                // Запустить воспроизведение
-                if (_audioFileReader != null)
-                {
-                    // Убедитесь, что WaveOut инициализирован
-                    if (_waveOut == null)
-                    {
-                        _waveOut = new WaveOutEvent();
-                        _waveOut.Init(_audioFileReader);
-                    }
 
-                    _waveOut.Volume = Volume; // Установка громкости
-                    _waveOut.Play(); // Запуск воспроизведения
-                    _timer.Start();
-                    _isPlaying = true;
-                    PlayImage = new Bitmap("Assets/StopRed.png");
+
+
+                if (_isPlaying)
+                {
+                    //_waveOut?.Init(_audioFileReader);
+                    //_waveOut.Volume = Volume;
+                    _waveOut?.Pause();
+                    _timer.Stop();
+                    _isPlaying = false;
+                    UpdateVolume();
+                    //CurrentTime = _audioFileReader.CurrentTime; // Обновляем текущее время
+                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                 }
-                //await PlayAudioAsync(_filePath);
-            }
-            
-            _waveOut.PlaybackStopped += (sender, e) =>
-            {
-                //Dispatcher.UIThread.InvokeAsync(() =>
-                //{
+                else
+                {
+                    // Запустить воспроизведение
+                    if (_audioFileReader != null)
+                    {
+                        // Убедитесь, что WaveOut инициализирован
+                        if (_waveOut == null)
+                        {
+                            _waveOut = new WaveOutEvent();
+                            _waveOut.Init(_audioFileReader);
+                        }
+
+                        _waveOut.Volume = Volume; // Установка громкости
+                        _waveOut.Play(); // Запуск воспроизведения
+                        _timer.Start();
+                        _isPlaying = true;
+                        PlayImage = new Bitmap("Assets/StopRed.png");
+                    }
+                    /*else if (_audioFileReader == null)
+                    {
+                        VisibleImage = "false";
+                        VisibleAttention = "true";
+                        await Task.Delay(100);
+                        VisibleImage = "true";
+                        VisibleAttention = "false";
+                    }*/
+                    //await PlayAudioAsync(_filePath);
+                }
+
+                _waveOut.PlaybackStopped += (sender, e) =>
+                {
+                    //Dispatcher.UIThread.InvokeAsync(() =>
+                    //{
                     _isPlaying = false;
                     PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                     CurrentTime = TimeSpan.Zero;
-                //});
-            };
+                    //});
+                };
+            }
         }, outputScheduler: RxApp.MainThreadScheduler); //*
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>

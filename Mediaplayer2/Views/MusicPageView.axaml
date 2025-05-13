@@ -50,11 +50,21 @@
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <!--Изображение (обложка трека)-->
-            <Image Grid.Column="1"
-                   Source="{Binding TrackImage}"
-                   Opacity="{Binding OpacityImage}"
-                   Margin="40"
-                   VerticalAlignment="Center"/>
+            <Border Grid.Column="1"
+                    CornerRadius="10">
+                <Image Source="{Binding TrackImage}"
+                       Opacity="{Binding OpacityImage}"
+                       Margin="40"
+                       VerticalAlignment="Center"
+                       IsVisible="{Binding VisibleImage}"/>
+            </Border>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding Attention}"
+                       IsVisible="{Binding VisibleAttention}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="#F7D3D4"
+                       FontSize="20"/>
         </Grid>
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
