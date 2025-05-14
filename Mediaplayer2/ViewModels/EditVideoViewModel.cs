@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
@@ -6,6 +7,9 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
@@ -227,6 +231,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     public IScreen HostScreen { get; }
     
+    public ReactiveCommand<Unit, Unit> ExtractAudio { get; }
+    
     public EditVideoViewModel()
     {
 
@@ -364,6 +370,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         });
         
         CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+
+        ExtractAudio = ReactiveCommand.CreateFromTask(() => AudioFromVideo(filePath));
     }
     
     
@@ -454,6 +462,55 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             
             Thread.Sleep(1000);
             TrimVideoFile(inputFilePath, startSeconds, endSeconds);
+        }
+    }
+
+    private async Task AudioFromVideo(string videoFilePath)
+    {
+        if (!File.Exists(videoFilePath))
+        {
+            throw new FileNotFoundException("Video file not found.", videoFilePath);
+        }
+
+        // Открытие диалогового окна для выбора места сохранения
+        var dialog = new SaveFileDialog
+        {
+            Title = "Сохранить аудио",
+            Filters = new List<FileDialogFilter>
+            {
+                new FileDialogFilter
+                {
+                    Name = "MP3 files",
+                    Extensions = { "mp3" }
+                }
+            }
+        };
+
+        var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
+        var result = await dialog.ShowAsync(desctop.MainWindow);
+
+        if (string.IsNullOrEmpty(result))
+        {
+            // Пользователь отменил выбор
+            return;
+        }
+
+        var inputFile = new MediaFile { Filename = videoFilePath };
+        var outputFile = new MediaFile { Filename = result };
+
+        try
+        {
+            using (var engine = new Engine())
+            {
+                engine.GetMetadata(inputFile);
+                engine.Convert(inputFile, outputFile);
+            }
+
+            // 
+        }
+        catch (Exception ex)
+        {
+            // 
         }
     }
 }

@@ -146,12 +146,12 @@
             </Grid>
         </Grid>
         <!--Grid для нижней панели-->
-        <Grid Grid.Column="0"
-              Grid.Row="2"
-              RowDefinitions="*,*"
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <!--Кнопка для загрузки аудио-файла-->
-            <Button Grid.Row="0"
+            <Button Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center"
                     Margin="24"
@@ -160,7 +160,16 @@
                     CornerRadius="10"
                     Command="{Binding SaveCommand}"/>
             <!--Кнопка для загрузки аудио-файла-->
-            <Button Grid.Row="0"
+            <Button Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Margin="24"
+                    Content="Извлечь аудиодорожку"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding ExtractAudio}"/>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Column="1"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     Margin="24"
