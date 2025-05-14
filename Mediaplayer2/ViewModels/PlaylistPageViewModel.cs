@@ -9,7 +9,7 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
     
     public string PreMain { get; }
     
-    public string? UrlPathSegment => "/playlist";
+    public string? UrlPathSegment => "/playlists";
     
     public IScreen HostScreen { get; }
 
@@ -23,6 +23,6 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
 
         Main = "Плейлисты";
-        PreMain = "Похоже, что у Вас нет плейлистов :(";
+        PreMain = "Похоже, что у Вас нет плейлистов :("; 
     }
 }
