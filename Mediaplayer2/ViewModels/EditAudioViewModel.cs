@@ -55,6 +55,8 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     
     private string _startTimeText;
     
+    private readonly SettingsPageViewModel _equalizer;
+    
     public string Main
     {
         get => _main;
@@ -323,10 +325,10 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         SaveCommand = ReactiveCommand.CreateFromObservable(() =>
         {
             TrimMp3File(filePath, (double)StartSliderValue, (double)EndSliderValue);
-            return HostScreen.Router.Navigate.Execute(new MusicPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
+            return HostScreen.Router.Navigate.Execute(new MusicPageViewModel(_equalizer, HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
         
-        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new MusicPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new MusicPageViewModel(_equalizer, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
     }
     
     

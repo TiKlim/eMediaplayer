@@ -12,6 +12,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using Mediaplayer2.Models;
 using Mediaplayer2.Views;
 using NAudio.Wave;
 using ReactiveUI;
@@ -58,6 +59,10 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private string _visibleImage;
 
     private string _attention;
+
+    private readonly SettingsPageViewModel _equalizer;
+    
+    private Equalizer _equalizers;
     
     //private object _currentView;
 
@@ -168,8 +173,13 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     {
 
     }
+    
+    /*public MusicPageViewModel(SettingsPageViewModel equalizer)
+    {
+        equalizer = _equalizer;
+    }*/
 
-    public MusicPageViewModel(IScreen? screen = null)
+    public MusicPageViewModel(SettingsPageViewModel equalizer, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
@@ -178,6 +188,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
+        _equalizer = equalizer;
         //CurrentView = new MusicPageView();
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
@@ -336,6 +347,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         };*/
         
         //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
+    }
+    
+    public void ApplyEqualizer()
+    {
+        // Примените значения эквалайзера к аудиоплееру
+        var bass = _equalizer.EqualizerValue.Bass;
+        var mid = _equalizer.EqualizerValue.Mid;
+        var treble = _equalizer.EqualizerValue.Treble;
+
+        
     }
     
     /*private void AudioEditPage()

@@ -1,3 +1,4 @@
+using Mediaplayer2.Models;
 using ReactiveUI;
 using Splat;
 
@@ -12,6 +13,8 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
     public string? UrlPathSegment => "/settings";
     
     public IScreen HostScreen { get; }
+    
+    public Equalizer EqualizerValue { get; }
 
     public SettingsPageViewModel()
     {
@@ -23,6 +26,8 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
         Main = "Настройки";
-        PreMain = "Настрой под настроение!";
+        PreMain = "Настрой под настроение";
+
+        EqualizerValue = new Equalizer();
     }
 }

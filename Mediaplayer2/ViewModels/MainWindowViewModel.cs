@@ -23,6 +23,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     private string _selectedClasses;
 
     private string _background;
+    
+    private readonly SettingsPageViewModel _equalizer;
 
     //private object _currentView;
 
@@ -63,7 +65,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
         ToHomePageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
         ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
@@ -93,7 +95,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 
     private IObservable<IRoutableViewModel> ToMusic()
     {
-        return Router.Navigate.Execute(new MusicPageViewModel(this));
+        return Router.Navigate.Execute(new MusicPageViewModel(_equalizer, this));
     }
     
     private void VideoPage()
