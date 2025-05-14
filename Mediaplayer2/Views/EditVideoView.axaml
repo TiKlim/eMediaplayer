@@ -150,7 +150,7 @@
               Grid.Column="0"
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
-            <!--Кнопка для загрузки аудио-файла-->
+            <!--Кнопка для завершения редактирования-->
             <Button Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center"
@@ -159,7 +159,7 @@
                     Background="#FF595E"
                     CornerRadius="10"
                     Command="{Binding SaveCommand}"/>
-            <!--Кнопка для загрузки аудио-файла-->
+            <!--Кнопка для извлечения и сохранения аудиодорожки из видеофайла-->
             <Button Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalContentAlignment="Center"
@@ -168,7 +168,7 @@
                     Background="#FF595E"
                     CornerRadius="10"
                     Command="{Binding ExtractAudio}"/>
-            <!--Кнопка для загрузки аудио-файла-->
+            <!--Кнопка для сохранения изменений-->
             <Button Grid.Column="1"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
