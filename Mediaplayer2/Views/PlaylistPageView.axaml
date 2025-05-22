@@ -50,7 +50,7 @@
               ShowGridLines="False">
             <!--Изображение (обложка трека)-->
             <Image Grid.Column="1"
-                   Source="../Assets/PlaylistPagePictureRed.png"
+                   Source="../Assets/PlaylistPagePictureRed2.png"
                    Opacity="0.2"
                    Margin="40"
                    VerticalAlignment="Center"/>

@@ -70,9 +70,11 @@
         <Grid Grid.Column="0"
               Grid.Row="2"
               RowDefinitions="*,*"
+              ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <!--Полоса прокрутки-->
             <Slider Grid.Row="0"
+                    Grid.Column="1"
                     Name="PlaybackSlider"
                     Minimum="0"
                     Maximum="{Binding AudioDuration.TotalSeconds}"
@@ -84,6 +86,7 @@
             </Slider>
             <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
             <StackPanel Grid.Row="1"
+                        Grid.Column="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         Spacing="10">
@@ -118,6 +121,7 @@
             </StackPanel>
             <!--Управление треком (Редактирование трека, уровень громкости)-->
             <StackPanel Grid.Row="1"
+                        Grid.Column="1"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0"

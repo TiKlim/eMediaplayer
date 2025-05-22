@@ -196,7 +196,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
-        TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
+        TrackImage = new Bitmap("Assets/VideoPagePictureRed2.png");
         OpacityImage = 0.2;
         Visible = false;
         

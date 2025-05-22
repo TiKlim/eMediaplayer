@@ -194,7 +194,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
         PreMain = "Что послушаем сегодня?";
-        TrackImage = new Bitmap("Assets/MusicPagePictureRed.png");
+        TrackImage = new Bitmap("Assets/MusicPagePictureRed2.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";

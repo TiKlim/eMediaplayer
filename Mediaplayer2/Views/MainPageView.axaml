@@ -34,7 +34,7 @@
         
         <Image Grid.Row="1"
                Grid.Column="1"
-               Source="../Assets/MainPagePictureRed.png"
+               Source="../Assets/MainPagePictureRed2.png"
                Opacity="0.2"
                VerticalAlignment="Center"/>
     </Grid>
