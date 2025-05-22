@@ -25,6 +25,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     private string _background;
     
     private readonly SettingsPageViewModel _equalizer;
+    
+    private Mediaplayer2.Models.Equalizer _equalizers;
 
     //private object _currentView;
 
@@ -62,11 +64,15 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     {
         Router = new RoutingState();
         
+        //var settingsViewModel = new SettingsPageViewModel();
+        //_equalizers = settingsViewModel.Equalizer; // Инициализация эквалайзера
+        _equalizer = new SettingsPageViewModel(this);
+        
         Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
         ToHomePageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
 

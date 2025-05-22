@@ -57,6 +57,11 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     private bool _visible;
     
     private System.Timers.Timer _timer;
+    
+    //private Equalizer _equalizer;
+    private Mediaplayer2.Models.Equalizer _equalizer;
+    
+    private readonly SettingsPageViewModel _equalizers;
 
     public string Main
     {
@@ -140,6 +145,18 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _visible, value);
     }
     
+    /*public Equalizer Equalizer
+    {
+        get => _equalizer;
+        set => this.RaiseAndSetIfChanged(ref _equalizer, value);
+    }*/
+    
+    public Mediaplayer2.Models.Equalizer Equalizer
+    {
+        get => _equalizer;
+        set => this.RaiseAndSetIfChanged(ref _equalizer, value);
+    }
+    
     public ICommand LoadFileCommand { get; }
     
     public RoutingState Router { get; } = new RoutingState();
@@ -169,7 +186,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         
     }
 
-    public VideoPageViewModel(IScreen? screen = null)
+    public VideoPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -182,6 +199,10 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         TrackImage = new Bitmap("Assets/VideoPagePictureRed.png");
         OpacityImage = 0.2;
         Visible = false;
+        
+        _equalizer = settingsViewModel.Equalizer;
+        
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>
@@ -295,8 +316,14 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
         
-        ToEditVideoPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditVideoViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        ToEditVideoPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditVideoViewModel(_equalizers, _filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
 
+    }
+    
+    // Метод для применения эквалайзера
+    public void ApplyEqualizer()
+    {
+        var currentSettings = _equalizer.CurrentSettings;
     }
     
     private void LoadVideoInfo(string filePath)

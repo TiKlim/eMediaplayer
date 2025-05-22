@@ -41,16 +41,12 @@
               ShowGridLines="False">
             <StackPanel Grid.Column="1">
                 <TextBlock Text="Bass" />
-                <Slider Minimum="-10" Maximum="10" 
-                        Value="{Binding EqualizerValue.Bass, Mode=TwoWay}" />
-        
-                <TextBlock Text="Mid" />
-                <Slider Minimum="-10" Maximum="10" 
-                        Value="{Binding EqualizerValue.Mid, Mode=TwoWay}" />
-        
-                <TextBlock Text="Treble" />
-                <Slider Minimum="-10" Maximum="10" 
-                        Value="{Binding EqualizerValue.Treble, Mode=TwoWay}" />
+                <ComboBox ItemsSource="{Binding PresetNames}" 
+                          SelectedItem="{Binding SelectedPreset, Mode=TwoWay}" 
+                          Width="200" 
+                          Margin="10">
+                </ComboBox>
+
             </StackPanel>
         </Grid>
     </Grid>

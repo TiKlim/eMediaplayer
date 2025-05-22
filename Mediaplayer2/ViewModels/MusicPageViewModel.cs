@@ -60,9 +60,13 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 
     private string _attention;
 
-    private readonly SettingsPageViewModel _equalizer;
+    //private readonly SettingsPageViewModel _equalizer;
     
-    private Equalizer _equalizers;
+    private Equalizer _equalizer;
+    
+    private readonly SettingsPageViewModel _equalizers;
+    
+    private EqualizerSampleProvider _equalizerProvider;
     
     //private object _currentView;
 
@@ -130,6 +134,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
     }
     
+    public Equalizer Equalizer
+    {
+        get => _equalizer;
+        set => this.RaiseAndSetIfChanged(ref _equalizer, value);
+    }
+    
     /*public object CurrentView
     {
         get => _currentView;
@@ -179,7 +189,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         equalizer = _equalizer;
     }*/
 
-    public MusicPageViewModel(SettingsPageViewModel equalizer, IScreen? screen = null)
+    public MusicPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
@@ -188,7 +198,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
-        _equalizer = equalizer;
+        _equalizer = settingsViewModel.Equalizer;
+        
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         //CurrentView = new MusicPageView();
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
@@ -222,6 +234,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 _waveOut?.Dispose();
                 
                 _audioFileReader = new AudioFileReader(_filePath);
+                
+                //var eqProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+                _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
                 
                 //_audioDuration = _audioFileReader.TotalTime; 
                 //Value = _audioDuration.TotalSeconds;
@@ -349,7 +364,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         //ToAudioEditPageCommand = ReactiveCommand.Create(AudioEditPage);
     }
     
-    public void ApplyEqualizer()
+    /*public void ApplyEqualizer()
     {
         // Примените значения эквалайзера к аудиоплееру
         var bass = _equalizer.EqualizerValue.Bass;
@@ -357,12 +372,24 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         var treble = _equalizer.EqualizerValue.Treble;
 
         
-    }
+    }*/
     
     /*private void AudioEditPage()
     {
         CurrentView = new EditAudioView();
     }*/
+    
+    // Метод для применения эквалайзера
+    public void ApplyEqualizer()
+    {
+
+        var currentSettings = _equalizer.CurrentSettings;
+
+        for (int i = 0; i < _equalizer.CurrentSettings.Length; i++)
+        {
+            _equalizerProvider.Gains[i] = _equalizer.CurrentSettings[i];
+        }
+    }
     
     private void LoadMp3Info(string filePath)
     {

@@ -73,6 +73,10 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     private VideoView _videoView;
     
+    private Mediaplayer2.Models.Equalizer _equalizer;
+    
+    private readonly SettingsPageViewModel _equalizers;
+    
     public string Main
     {
         get => _main;
@@ -215,6 +219,12 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _mediaPlayer, value);
     }
     
+    public Mediaplayer2.Models.Equalizer Equalizer
+    {
+        get => _equalizer;
+        set => this.RaiseAndSetIfChanged(ref _equalizer, value);
+    }
+    
     public ICommand PlayPauseCommand { get; }
     
     public ICommand VolumeCommand { get; }
@@ -238,7 +248,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
 
     }
 
-    public EditVideoViewModel(string filePath, IScreen? screen = null)
+    public EditVideoViewModel(SettingsPageViewModel settingsViewModel, string filePath, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -250,6 +260,10 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         Start = "Начало:";
         End = "Конец:";
+        
+        _equalizer = settingsViewModel.Equalizer;
+        
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer; 
         
         _timer = new System.Timers.Timer(100);
         _timer.Elapsed += (sender, e) =>
@@ -366,12 +380,17 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             _mediaPlayer.Stop();
             _mediaPlayer.Dispose();
             TrimVideoFile(filePath, (double)StartSliderValue, (double)EndSliderValue);
-            return HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
+            return HostScreen.Router.Navigate.Execute(new VideoPageViewModel(_equalizers, HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
         
-        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(_equalizers, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
 
         ExtractAudio = ReactiveCommand.CreateFromTask(() => AudioFromVideo(filePath));
+    }
+    
+    public void ApplyEqualizer()
+    {
+        var currentSettings = _equalizer.CurrentSettings;
     }
     
     
