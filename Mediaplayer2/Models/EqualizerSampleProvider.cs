@@ -5,7 +5,8 @@ namespace Mediaplayer2.Models;
 public class EqualizerSampleProvider : ISampleProvider
 {
     private readonly ISampleProvider source;
-    private readonly float[] gains;
+    public float[] Gains { get; private set; }
+    
 
     private readonly int sampleRate;
     private readonly int channels;
@@ -14,7 +15,7 @@ public class EqualizerSampleProvider : ISampleProvider
     public EqualizerSampleProvider(ISampleProvider source, float[] gains)
     {
         this.source = source;
-        this.gains = gains;
+        this.Gains = gains;
         this.sampleRate = source.WaveFormat.SampleRate;
         this.channels = source.WaveFormat.Channels;
         WaveFormat = source.WaveFormat;
@@ -33,8 +34,8 @@ public class EqualizerSampleProvider : ISampleProvider
                 int i = offset + n + ch;
 
                 float gain = 1f;
-                if (gains.Length > 0)
-                    gain = gains[0]; 
+                if (Gains.Length > 0)
+                    gain = Gains[0]; 
 
                 buffer[i] *= gain;
             }

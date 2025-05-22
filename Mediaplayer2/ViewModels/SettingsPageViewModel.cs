@@ -13,6 +13,10 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
     
     private string _selectedPreset;
     
+    private readonly SettingsPageViewModel _equalizers;
+    
+    private EqualizerSampleProvider _equalizerProvider;
+    
     public ObservableCollection<string> PresetNames { get; private set; }
     
     public string Main { get; }
@@ -38,7 +42,7 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         
     }
 
-    public SettingsPageViewModel(IScreen? screen = null)
+    public SettingsPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -47,12 +51,27 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
 
         //EqualizerValue = new Equalizer();
         
-        _equalizer = new Equalizer();
+        _equalizer = settingsViewModel.Equalizer;
+        
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
+        
+        //_equalizer = new Equalizer();
         PresetNames = new ObservableCollection<string>(_equalizer.Presets.Keys);
         
         if (PresetNames.Count > 0)
         {
             SelectedPreset = PresetNames[0];
+        }
+    }
+    
+    public void ApplyEqualizer()
+    {
+
+        var currentSettings = _equalizer.CurrentSettings;
+
+        for (int i = 0; i < _equalizer.CurrentSettings.Length; i++)
+        {
+            _equalizerProvider.Gains[i] = _equalizer.CurrentSettings[i];
         }
     }
 
@@ -73,7 +92,7 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
 
     private void ApplyPreset()
     {
-        _equalizer.SetPreset(SelectedPreset);
+        //_equalizer.SetPreset(SelectedPreset);
         
         _equalizer.SetPreset(SelectedPreset);
         EqualizerUpdated?.Invoke();

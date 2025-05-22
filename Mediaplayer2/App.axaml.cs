@@ -8,9 +8,13 @@ namespace Mediaplayer2;
 
 public partial class App : Application
 {
+    public static SettingsPageViewModel SettingsViewModel { get; private set; }
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        
+        SettingsViewModel = new SettingsPageViewModel();
     }
 
     public override void OnFrameworkInitializationCompleted()
