@@ -186,7 +186,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         
     }
 
-    public VideoPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
+    public VideoPageViewModel(Mediaplayer2.Models.Equalizer equalizer, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -200,9 +200,12 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         Visible = false;
         
-        _equalizer = settingsViewModel.Equalizer;
+        //_equalizer = settingsViewModel.Equalizer;
         
-        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
+        //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
+        
+        _equalizer = equalizer;
+        
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>

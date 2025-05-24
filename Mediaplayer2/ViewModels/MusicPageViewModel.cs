@@ -189,7 +189,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         equalizer = _equalizer;
     }*/
 
-    public MusicPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
+    public MusicPageViewModel(Equalizer equalizer, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
@@ -198,10 +198,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
-        _equalizer = settingsViewModel.Equalizer;
+        //_equalizer = settingsViewModel.Equalizer;
         
-        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
+        //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         //CurrentView = new MusicPageView();
+        
+        _equalizer = equalizer;
+        
+        // Подписка на обновления эквалайзера
+        var settingsViewModel = new SettingsPageViewModel(_equalizer, HostScreen);
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer;
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>
@@ -382,12 +388,13 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     // Метод для применения эквалайзера
     public void ApplyEqualizer()
     {
-
-        var currentSettings = _equalizer.CurrentSettings;
-
-        for (int i = 0; i < _equalizer.CurrentSettings.Length; i++)
+        if (_equalizerProvider != null)
         {
-            _equalizerProvider.Gains[i] = _equalizer.CurrentSettings[i];
+            var settings = _equalizer.CurrentSettings;
+            for (int i = 0; i < settings.Length; i++)
+            {
+                _equalizerProvider.Gains[i] = settings[i];
+            }
         }
     }
     

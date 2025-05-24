@@ -322,13 +322,13 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
-        SaveCommand = ReactiveCommand.CreateFromObservable(() =>
+        /*SaveCommand = ReactiveCommand.CreateFromObservable(() =>
         {
             TrimMp3File(filePath, (double)StartSliderValue, (double)EndSliderValue);
             return HostScreen.Router.Navigate.Execute(new MusicPageViewModel(_equalizer, HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
         
-        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new MusicPageViewModel(_equalizer, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new MusicPageViewModel(_equalizer, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));*/
     }
     
     

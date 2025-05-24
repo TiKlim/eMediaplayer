@@ -1,13 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using Mediaplayer2.Models;
 using ReactiveUI;
 using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
+public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
 {
     private Equalizer _equalizer;
     
@@ -33,6 +34,17 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _equalizer, value);
     }
     
+    public string SelectedPreset
+    {
+        get => _selectedPreset;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedPreset, value);
+            _equalizer.SetPreset(value);
+            EqualizerUpdated?.Invoke();
+        }
+    }
+    
     public event Action EqualizerUpdated;
     
     //public Equalizer EqualizerValue { get; }
@@ -42,7 +54,7 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         
     }
 
-    public SettingsPageViewModel(SettingsPageViewModel settingsViewModel, IScreen? screen = null)
+    public SettingsPageViewModel(Equalizer equalizer, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -50,14 +62,15 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         PreMain = "Настрой под настроение";
 
         //EqualizerValue = new Equalizer();
+        _equalizer = equalizer;
         
-        _equalizer = settingsViewModel.Equalizer;
-        
-        settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
-        
-        //_equalizer = new Equalizer();
         PresetNames = new ObservableCollection<string>(_equalizer.Presets.Keys);
         
+        SelectedPreset = PresetNames.FirstOrDefault() ?? "";
+        
+        _equalizer.WhenAnyValue(eq => eq.CurrentSettings)
+            .Subscribe(_ => EqualizerUpdated?.Invoke());
+    
         if (PresetNames.Count > 0)
         {
             SelectedPreset = PresetNames[0];
@@ -75,7 +88,7 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
         }
     }
 
-    public string SelectedPreset
+    /*public string SelectedPreset
     {
         get => _selectedPreset;
         set
@@ -87,7 +100,7 @@ public class SettingsPageViewModel : ViewModelBase, IRoutableViewModel
                 ApplyPreset();
             }
         }
-    }
+    }*/
     
 
     private void ApplyPreset()

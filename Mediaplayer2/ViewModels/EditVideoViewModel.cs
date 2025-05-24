@@ -375,7 +375,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
-        SaveCommand = ReactiveCommand.CreateFromObservable(() =>
+        /*SaveCommand = ReactiveCommand.CreateFromObservable(() =>
         {
             _mediaPlayer.Stop();
             _mediaPlayer.Dispose();
@@ -383,7 +383,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             return HostScreen.Router.Navigate.Execute(new VideoPageViewModel(_equalizers, HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
         
-        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(_equalizers, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(_equalizers, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));*/
 
         ExtractAudio = ReactiveCommand.CreateFromTask(() => AudioFromVideo(filePath));
     }

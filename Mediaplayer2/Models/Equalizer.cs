@@ -5,30 +5,15 @@ namespace Mediaplayer2.Models;
 
 public class Equalizer : ReactiveObject
 {
-    /*private double _bass;
-    private double _mid;
-    private double _treble;
+    private float[] _currentSettings;
 
-    public double Bass
+    public Dictionary<string, float[]> Presets { get; }
+
+    public float[] CurrentSettings
     {
-        get => _bass;
-        set => this.RaiseAndSetIfChanged(ref _bass, value);
+        get => _currentSettings;
+        private set => this.RaiseAndSetIfChanged(ref _currentSettings, value);
     }
-
-    public double Mid
-    {
-        get => _mid;
-        set => this.RaiseAndSetIfChanged(ref _mid, value);
-    }
-
-    public double Treble
-    {
-        get => _treble;
-        set => this.RaiseAndSetIfChanged(ref _treble, value);
-    }*/
-    
-    public Dictionary<string, float[]> Presets { get; private set; }
-    public float[] CurrentSettings { get; private set; }
 
     public Equalizer()
     {
@@ -39,15 +24,14 @@ public class Equalizer : ReactiveObject
             { "Jazz", new float[] { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f } },
             { "Classical", new float[] { 0.6f, 0.7f, 0.8f, 0.9f, 0.7f } }
         };
-        //CurrentSettings = new float[5];
         CurrentSettings = Presets["Pop"];
     }
 
     public void SetPreset(string presetName)
     {
-        if (Presets.ContainsKey(presetName))
+        if (Presets.TryGetValue(presetName, out var settings))
         {
-            CurrentSettings = Presets[presetName];
+            CurrentSettings = settings;
         }
     }
 }

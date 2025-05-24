@@ -6,6 +6,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading;
 using Avalonia.Controls;
+using Mediaplayer2.Models;
 using Mediaplayer2.Views;
 using ReactiveUI;
 using Splat;
@@ -24,10 +25,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
 
     private string _background;
     
-    private readonly SettingsPageViewModel _equalizer;
-    
-    private Mediaplayer2.Models.Equalizer _equalizers;
-
+    private readonly Equalizer _equalizer;
+ 
     //private object _currentView;
 
     public string SelectedClasses
@@ -66,7 +65,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         
         //var settingsViewModel = new SettingsPageViewModel();
         //_equalizers = settingsViewModel.Equalizer; // Инициализация эквалайзера
-        _equalizer = new SettingsPageViewModel(_equalizer, this);
+        _equalizer = new Equalizer(); // Создаем единственный экземпляр эквалайзера
+        //_equalizer = new SettingsPageViewModel(equalizer, this);
         
         Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
@@ -99,10 +99,10 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         CurrentView = new MusicPageView();
     }*/
 
-    private IObservable<IRoutableViewModel> ToMusic()
+    /*private IObservable<IRoutableViewModel> ToMusic()
     {
-        return Router.Navigate.Execute(new MusicPageViewModel(_equalizer, this));
-    }
+        return Router.Navigate.Execute(new MusicPageViewModel(equalizer, this));
+    }*/
     
     private void VideoPage()
     {
