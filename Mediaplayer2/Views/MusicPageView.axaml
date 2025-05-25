@@ -136,10 +136,12 @@
                            MinWidth="20"/>
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Normal" Command="{Binding SelectPresetCommand}" CommandParameter="Normal" />
-                            <MenuItem Header="Bass Boost" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
-                            <MenuItem Header="Treble Boost" Command="{Binding SelectPresetCommand}" CommandParameter="Treble Boost" />
-                            <MenuItem Header="Vocal" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
+                            <MenuItem Header="{Binding Pop}" Command="{Binding SelectPresetCommand}" CommandParameter="Pop" />
+                            <MenuItem Header="{Binding Vocal}" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
+                            <MenuItem Header="{Binding Rock}" Command="{Binding SelectPresetCommand}" CommandParameter="Rock" />
+                            <MenuItem Header="{Binding Jazz}" Command="{Binding SelectPresetCommand}" CommandParameter="Jazz" />
+                            <MenuItem Header="{Binding Classical}" Command="{Binding SelectPresetCommand}" CommandParameter="Classical" />
+                            <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
