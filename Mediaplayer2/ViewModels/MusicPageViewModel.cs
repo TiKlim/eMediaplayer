@@ -68,6 +68,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     private EqualizerSampleProvider _equalizerProvider;
     
+    private AudioSettings _audioSettings;
+    
     //private object _currentView;
 
     public string Main
@@ -134,11 +136,11 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
     }
     
-    public Equalizer Equalizer
+    /*public Equalizer Equalizer
     {
         get => _equalizer;
         set => this.RaiseAndSetIfChanged(ref _equalizer, value);
-    }
+    }*/
     
     /*public object CurrentView
     {
@@ -189,7 +191,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         equalizer = _equalizer;
     }*/
 
-    public MusicPageViewModel(Equalizer equalizer, IScreen? screen = null)
+    public MusicPageViewModel(AudioSettings audioSettings, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
@@ -203,11 +205,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         //CurrentView = new MusicPageView();
         
-        _equalizer = equalizer;
+        //_equalizer = equalizer;
+        _audioSettings = audioSettings;
         
         // Подписка на обновления эквалайзера
-        var settingsViewModel = new SettingsPageViewModel(_equalizer, HostScreen);
-        settingsViewModel.EqualizerUpdated += ApplyEqualizer;
+        /*var settingsViewModel = new SettingsPageViewModel(_equalizer, HostScreen);
+        settingsViewModel.EqualizerUpdated += ApplyEqualizer;*/
+        
+        /*_equalizer.WhenAnyValue(eq => eq.CurrentSettings)
+            .Subscribe(_ => ApplyEqualizer());*/
+        ApplyEqualizer();
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>
@@ -264,9 +271,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             }
             else //*
             {
-
-
-
                 if (_isPlaying)
                 {
                     //_waveOut?.Init(_audioFileReader);

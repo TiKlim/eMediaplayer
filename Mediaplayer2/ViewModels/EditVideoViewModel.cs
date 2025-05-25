@@ -261,7 +261,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         Start = "Начало:";
         End = "Конец:";
         
-        _equalizer = settingsViewModel.Equalizer;
+        //_equalizer = settingsViewModel.Equalizer;
         
         settingsViewModel.EqualizerUpdated += ApplyEqualizer; 
         

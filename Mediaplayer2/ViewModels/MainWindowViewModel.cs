@@ -26,6 +26,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     private string _background;
     
     private readonly Equalizer _equalizer;
+    
+    public AudioSettings AudioSettings { get; }
  
     //private object _currentView;
 
@@ -68,13 +70,15 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         _equalizer = new Equalizer(); // Создаем единственный экземпляр эквалайзера
         //_equalizer = new SettingsPageViewModel(equalizer, this);
         
+        AudioSettings = new AudioSettings();
+        
         Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
         ToHomePageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(AudioSettings, this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(AudioSettings, this)).ObserveOn(RxApp.MainThreadScheduler));
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(_equalizer, this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(AudioSettings, this)).ObserveOn(RxApp.MainThreadScheduler));
 
         if (_isSelected) 
         {

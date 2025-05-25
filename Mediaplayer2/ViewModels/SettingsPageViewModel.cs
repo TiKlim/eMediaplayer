@@ -14,9 +14,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
     
     private string _selectedPreset;
     
-    private readonly SettingsPageViewModel _equalizers;
+    private AudioSettings _audioSettings;
     
-    private EqualizerSampleProvider _equalizerProvider;
+    //private readonly SettingsPageViewModel _equalizers;
+    
+    //private EqualizerSampleProvider _equalizerProvider;
     
     public ObservableCollection<string> PresetNames { get; private set; }
     
@@ -28,13 +30,13 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
     
     public IScreen HostScreen { get; }
     
-    public Equalizer Equalizer
+    /*public Equalizer Equalizer
     {
         get => _equalizer;
         set => this.RaiseAndSetIfChanged(ref _equalizer, value);
-    }
+    }*/
     
-    public string SelectedPreset
+    /*public string SelectedPreset
     {
         get => _selectedPreset;
         set
@@ -43,6 +45,12 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             _equalizer.SetPreset(value);
             EqualizerUpdated?.Invoke();
         }
+    }*/
+    
+    public string SelectedPreset
+    {
+        get => _audioSettings.SelectedPreset;
+        set => _audioSettings.SelectedPreset = value;
     }
     
     public event Action EqualizerUpdated;
@@ -54,7 +62,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         
     }
 
-    public SettingsPageViewModel(Equalizer equalizer, IScreen? screen = null)
+    public SettingsPageViewModel(AudioSettings audioSettings, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -62,9 +70,10 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         PreMain = "Настрой под настроение";
 
         //EqualizerValue = new Equalizer();
-        _equalizer = equalizer;
+        //_equalizer = equalizer;
+        _audioSettings = audioSettings;
         
-        PresetNames = new ObservableCollection<string>(_equalizer.Presets.Keys);
+        PresetNames = new ObservableCollection<string>(_audioSettings.Equalizer.Presets.Keys);
         
         SelectedPreset = PresetNames.FirstOrDefault() ?? "";
         
@@ -77,7 +86,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         }
     }
     
-    public void ApplyEqualizer()
+    /*public void ApplyEqualizer()
     {
 
         var currentSettings = _equalizer.CurrentSettings;
@@ -86,7 +95,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         {
             _equalizerProvider.Gains[i] = _equalizer.CurrentSettings[i];
         }
-    }
+    }*/
 
     /*public string SelectedPreset
     {
@@ -103,7 +112,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
     }*/
     
 
-    private void ApplyPreset()
+    /*private void ApplyPreset()
     {
         //_equalizer.SetPreset(SelectedPreset);
         
@@ -121,7 +130,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
     private void ApplyEqualizerToVideo()
     {
         
-    }
+    }*/
 
     public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)

@@ -12,6 +12,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
+using Mediaplayer2.Models;
 using NAudio.Wave;
 using ReactiveUI;
 using Splat;
@@ -62,6 +63,10 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     private Mediaplayer2.Models.Equalizer _equalizer;
     
     private readonly SettingsPageViewModel _equalizers;
+    
+    private EqualizerSampleProvider _equalizerProvider;
+    
+    private AudioSettings _audioSettings;
 
     public string Main
     {
@@ -151,11 +156,11 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _equalizer, value);
     }*/
     
-    public Mediaplayer2.Models.Equalizer Equalizer
+    /*public Mediaplayer2.Models.Equalizer Equalizer
     {
         get => _equalizer;
         set => this.RaiseAndSetIfChanged(ref _equalizer, value);
-    }
+    }*/
     
     public ICommand LoadFileCommand { get; }
     
@@ -186,7 +191,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         
     }
 
-    public VideoPageViewModel(Mediaplayer2.Models.Equalizer equalizer, IScreen? screen = null)
+    public VideoPageViewModel(AudioSettings audioSettings, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -204,8 +209,13 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         
         //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         
-        _equalizer = equalizer;
+        //_equalizer = equalizer;
+        _audioSettings = audioSettings;
         
+        // Подписка на обновления эквалайзера
+        /*_equalizer.WhenAnyValue(eq => eq.CurrentSettings)
+            .Subscribe(_ => ApplyEqualizer());*/
+        ApplyEqualizer();
         
         _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>
@@ -326,7 +336,15 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     // Метод для применения эквалайзера
     public void ApplyEqualizer()
     {
-        var currentSettings = _equalizer.CurrentSettings;
+        /*if (_equalizerProvider != null)
+        {
+            var settings = _equalizer.CurrentSettings;
+            for (int i = 0; i < settings.Length; i++)
+            {
+                _equalizerProvider.Gains[i] = settings[i];
+            }
+        }*/
+        _mediaPlayer.SetEqualizer(_audioSettings.Equalizer.CurrentSettings);
     }
     
     private void LoadVideoInfo(string filePath)
