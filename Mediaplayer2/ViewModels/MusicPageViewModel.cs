@@ -51,7 +51,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     private float _volume = 1f;
     
-    private System.Timers.Timer _timer;
+    //private System.Timers.Timer _timer;
     
     private IRoutableViewModel _routableViewModelImplementation;
 
@@ -72,6 +72,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private AudioSettings _audioSettings;
     
     private string _selectedPreset = "Normal";
+
+    private DispatcherTimer _timer;
     
     //private object _currentView;
 
@@ -186,10 +188,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     public Dictionary<string, float[]> EqualizerPresets { get; } = new Dictionary<string, float[]>
     {
-        { "Normal", new float[10] { 0f,0f,0f,0f,0f,0f,0f,0f,0f,0f } },
-        { "Bass Boost", new float[10] { 5f,4f,3f,2f,1f,0f,0f,0f,0f,0f } },
-        { "Treble Boost", new float[10] { 0f,0f,0f,0f,0f,1f,2f,3f,4f,5f } },
-        { "Vocal", new float[10] { 0f,1f,2f,3f,2f,1f,0f,0f,0f,0f } },
+        { "Normal", new float[10] { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f } },
+        { "Bass Boost", new float[10] { 5f, 4f, 3f, 2f, 1f, 0f, 0f, 0f, 0f, 0f } },
+        { "Treble Boost", new float[10] { 0f, 0f, 0f, 0f, 0f, 1f, 2f, 3f, 4f, 5f } },
+        { "Vocal", new float[10] { 0f, 1f, 2f, 3f, 2f, 1f, 0f, 0f, 0f, 0f } },
+        { "Pop", new float[10] { 0.5f, 1.0f, 0.8f, 0.5f, 0.3f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f } },
+        { "Rock", new float[10] { 0.7f, 0.9f, 1.0f, 0.6f, 0.4f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f } },
+        { "Jazz", new float[10] { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f } },
+        { "Classical", new float[10] { 0.6f, 0.7f, 0.8f, 0.9f, 0.7f, 0.6f, 0.6f, 0.6f, 0.6f, 0.6f } }
         // Добавьте свои пресеты
     };
     
@@ -230,6 +236,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         //CurrentView = new MusicPageView();
         
         //_equalizer = equalizer;
+        _equalizer = new Equalizer();
         _audioSettings = audioSettings;
         
         // Подписка на обновления эквалайзера
@@ -240,8 +247,19 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             .Subscribe(_ => ApplyEqualizer());*/
         ApplyEqualizer();
         
-        _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
+        /*_timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
         _timer.Elapsed += (sender, e) =>
+        {
+            if (_audioFileReader != null && _isPlaying)
+            {
+                CurrentTime = _audioFileReader.CurrentTime;
+            }
+        };*/
+        _timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(100)
+        };
+        _timer.Tick += (sender, e) =>
         {
             if (_audioFileReader != null && _isPlaying)
             {
@@ -267,23 +285,42 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 {
                     _filePath = result[0];
                     LoadMp3Info(_filePath); 
-            
+
                     // Освобождение предыдущего ресурса, если он существует
                     _audioFileReader?.Dispose();
                     _waveOut?.Dispose();
-            
+
                     _audioFileReader = new AudioFileReader(_filePath);
-                    _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+                    
                     _waveOut = new WaveOutEvent();
-                    _waveOut.Init(_equalizerProvider); // _audioFileReader
+                    _waveOut.Init(_audioFileReader);
+        
+                    // Проверка эквалайзера перед инициализацией
+                    if (_equalizer.CurrentSettings == null || _equalizer.CurrentSettings.Length != 10)
+                    {
+                        Debug.WriteLine("Equalizer CurrentSettings: ");
+                        foreach (var setting in _equalizer.CurrentSettings)
+                        {
+                            //Debug.WriteLine($"Band: {setting.Frequency}, Gain: {setting.Gain}, Q: {setting.Q}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Equalizer CurrentSettings is null.");
+                    }
+
+                    //_equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+                    _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+                    Debug.WriteLine($"Смотри: {_equalizerProvider}");
+                    
+                    _waveOut.Init(_equalizerProvider);
+                    
                     AudioDuration = _audioFileReader.TotalTime;
                 }
             }
             catch (Exception ex)
             {
-                // Обработка исключений
                 Debug.WriteLine($"Ошибка при загрузке файла: {ex.Message}");
-                // Можно показать уведомление пользователю
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
@@ -315,10 +352,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     // Запустить воспроизведение
                     if (_audioFileReader != null)
                     {
+                        Debug.WriteLine($"Ошибка здесь (1)");
                         // Убедитесь, что WaveOut инициализирован
                         if (_waveOut == null)
                         {
                             _waveOut = new WaveOutEvent();
+                            _waveOut.Init(_audioFileReader);
                             _waveOut.Init(_equalizerProvider); // _audioFileReader
                         }
 
@@ -339,7 +378,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     //await PlayAudioAsync(_filePath);
                 }
 
-                _waveOut.PlaybackStopped += (sender, e) =>
+                /*_waveOut.PlaybackStopped += (sender, e) =>
                 {
                     //Dispatcher.UIThread.InvokeAsync(() =>
                     //{
@@ -347,9 +386,18 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                     CurrentTime = TimeSpan.Zero;
                     //});
+                };*/
+                _waveOut.PlaybackStopped += (sender, e) =>
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        _isPlaying = false;
+                        PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                        CurrentTime = TimeSpan.Zero;
+                    });
                 };
             }
-        }, outputScheduler: RxApp.MainThreadScheduler); //*
+        }, outputScheduler: RxApp.MainThreadScheduler);
 
         VolumeCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -391,8 +439,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         
         SelectPresetCommand = ReactiveCommand.Create<string>(presetName =>
         {
-            SelectedPreset = presetName;
-        });
+            SelectedPreset = presetName; // Устанавливаем выбранный пресет
+            ApplyPreset(presetName); // Применяем пресет
+        }, outputScheduler: RxApp.MainThreadScheduler);
         /*_waveOut.PlaybackStopped += (sender, e) =>
         {
             //Dispatcher.UIThread.InvokeAsync(() =>
@@ -430,6 +479,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             {
                 _equalizerProvider.Gains[i] = gains[i];
             }
+            UpdateEqualizer(gains); // Обновляем эквалайзер с новыми значениями
         }
         else
         {
@@ -437,14 +487,24 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         }
     }
     
-    public void ApplyEqualizer()
+    public void UpdateEqualizer(float[] newGains)
     {
         if (_equalizerProvider != null)
         {
-            var settings = _equalizer.CurrentSettings;
-            for (int i = 0; i < settings.Length; i++)
+            for (int i = 0; i < newGains.Length && i < _equalizerProvider.Gains.Length; i++)
             {
-                _equalizerProvider.Gains[i] = settings[i];
+                _equalizerProvider.Gains[i] = newGains[i];
+            }
+        }
+    }
+    
+    private void ApplyEqualizer()
+    {
+        if (_equalizerProvider != null && _equalizer.CurrentSettings != null)
+        {
+            for (int i = 0; i < _equalizer.CurrentSettings.Length && i < _equalizerProvider.Gains.Length; i++)
+            {
+                _equalizerProvider.Gains[i] = _equalizer.CurrentSettings[i];
             }
         }
     }
