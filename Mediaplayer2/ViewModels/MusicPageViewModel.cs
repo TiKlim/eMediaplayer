@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -69,6 +70,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private EqualizerSampleProvider _equalizerProvider;
     
     private AudioSettings _audioSettings;
+    
+    private string _selectedPreset = "Normal";
     
     //private object _currentView;
 
@@ -180,6 +183,27 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     }
 
     public string Attention { get; } = "Выберите трек";
+    
+    public Dictionary<string, float[]> EqualizerPresets { get; } = new Dictionary<string, float[]>
+    {
+        { "Normal", new float[10] { 0f,0f,0f,0f,0f,0f,0f,0f,0f,0f } },
+        { "Bass Boost", new float[10] { 5f,4f,3f,2f,1f,0f,0f,0f,0f,0f } },
+        { "Treble Boost", new float[10] { 0f,0f,0f,0f,0f,1f,2f,3f,4f,5f } },
+        { "Vocal", new float[10] { 0f,1f,2f,3f,2f,1f,0f,0f,0f,0f } },
+        // Добавьте свои пресеты
+    };
+    
+    public string SelectedPreset
+    {
+        get => _selectedPreset;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedPreset, value);
+            ApplyPreset(value);
+        }
+    }
+    
+    public ReactiveCommand<string, Unit> SelectPresetCommand { get; }
 
     public MusicPageViewModel()
     {
@@ -227,35 +251,39 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         
         LoadFileCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            var dialog = new OpenFileDialog
+            try
             {
-                AllowMultiple = false,
-                Filters = new List<FileDialogFilter>
+                var dialog = new OpenFileDialog
                 {
-                    new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
+                    AllowMultiple = false,
+                    Filters = new List<FileDialogFilter>
+                    {
+                        new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
+                    }
+                };
+                var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
+                var result = await dialog.ShowAsync(desctop.MainWindow);
+                if (result.Length > 0)
+                {
+                    _filePath = result[0];
+                    LoadMp3Info(_filePath); 
+            
+                    // Освобождение предыдущего ресурса, если он существует
+                    _audioFileReader?.Dispose();
+                    _waveOut?.Dispose();
+            
+                    _audioFileReader = new AudioFileReader(_filePath);
+                    _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+                    _waveOut = new WaveOutEvent();
+                    _waveOut.Init(_equalizerProvider); // _audioFileReader
+                    AudioDuration = _audioFileReader.TotalTime;
                 }
-            };
-            var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
-            var result = await dialog.ShowAsync(desctop.MainWindow);
-            if (result.Length > 0)
+            }
+            catch (Exception ex)
             {
-                _filePath = result[0];
-                LoadMp3Info(_filePath); 
-                
-                // Освобождение предыдущего ресурса, если он существует
-                _audioFileReader?.Dispose();
-                _waveOut?.Dispose();
-                
-                _audioFileReader = new AudioFileReader(_filePath);
-                
-                //var eqProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
-                _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
-                
-                //_audioDuration = _audioFileReader.TotalTime; 
-                //Value = _audioDuration.TotalSeconds;
-                _waveOut = new WaveOutEvent();
-                _waveOut.Init(_audioFileReader); 
-                AudioDuration = _audioFileReader.TotalTime;
+                // Обработка исключений
+                Debug.WriteLine($"Ошибка при загрузке файла: {ex.Message}");
+                // Можно показать уведомление пользователю
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
@@ -291,7 +319,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                         if (_waveOut == null)
                         {
                             _waveOut = new WaveOutEvent();
-                            _waveOut.Init(_audioFileReader);
+                            _waveOut.Init(_equalizerProvider); // _audioFileReader
                         }
 
                         _waveOut.Volume = Volume; // Установка громкости
@@ -361,6 +389,10 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         
         ToEditAudioPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditAudioViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
         
+        SelectPresetCommand = ReactiveCommand.Create<string>(presetName =>
+        {
+            SelectedPreset = presetName;
+        });
         /*_waveOut.PlaybackStopped += (sender, e) =>
         {
             //Dispatcher.UIThread.InvokeAsync(() =>
@@ -390,6 +422,21 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     }*/
     
     // Метод для применения эквалайзера
+    private void ApplyPreset(string presetName)
+    {
+        if (EqualizerPresets.TryGetValue(presetName, out var gains) && _equalizerProvider != null)
+        {
+            for (int i = 0; i < gains.Length; i++)
+            {
+                _equalizerProvider.Gains[i] = gains[i];
+            }
+        }
+        else
+        {
+            Debug.WriteLine($"Пресет '{presetName}' не найден или эквалайзер не инициализирован.");
+        }
+    }
+    
     public void ApplyEqualizer()
     {
         if (_equalizerProvider != null)
@@ -404,29 +451,34 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     
     private void LoadMp3Info(string filePath)
     {
-        var file = TagLib.File.Create(filePath);
-        
-        string title = file.Tag.Title ?? "Нет названия";
-        
-        string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-        
-        Main = title;
-        PreMain = performer;
-        
-        if (file.Tag.Pictures.Length > 0)
+        try
         {
-            var picture = file.Tag.Pictures[0];
-            using (var stream = new MemoryStream(picture.Data.Data))
+            var file = TagLib.File.Create(filePath);
+            string title = file.Tag.Title ?? "Нет названия";
+            string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
+            Main = title;
+            PreMain = performer;
+
+            if (file.Tag.Pictures.Length > 0)
             {
-                TrackImage = new Bitmap(stream);
-                OpacityImage = 1;
+                var picture = file.Tag.Pictures[0];
+                using (var stream = new MemoryStream(picture.Data.Data))
+                {
+                    TrackImage = new Bitmap(stream);
+                    OpacityImage = 1;
+                }
+            }
+
+            if (_audioFileReader != null)
+            {
+                _totalTime = _audioFileReader.TotalTime;
+                AudioDuration = _totalTime;
             }
         }
-        
-        if (_audioFileReader != null)
+        catch (Exception ex)
         {
-            _totalTime = _audioFileReader.TotalTime;
-            AudioDuration = _totalTime;
+            Debug.WriteLine($"Ошибка при загрузке MP3 информации: {ex.Message}");
+            // Можно показать уведомление пользователю
         }
     }
 

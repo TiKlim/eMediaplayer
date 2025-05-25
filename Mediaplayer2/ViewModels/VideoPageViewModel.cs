@@ -344,7 +344,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 _equalizerProvider.Gains[i] = settings[i];
             }
         }*/
-        _mediaPlayer.SetEqualizer(_audioSettings.Equalizer.CurrentSettings);
+        //_mediaPlayer.SetEqualizer(_audioSettings.Equalizer.CurrentSettings);
     }
     
     private void LoadVideoInfo(string filePath)

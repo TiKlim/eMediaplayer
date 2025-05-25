@@ -126,6 +126,23 @@
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0"
                         Spacing="10">
+                <!--Кнопка "Эквалайзер"-->
+                <Button Name="EqualizerButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel">
+                    <Image Source="../Assets/EqualizerRed.png"
+                           Width="35"
+                           MaxWidth="50"
+                           MinWidth="20"/>
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Normal" Command="{Binding SelectPresetCommand}" CommandParameter="Normal" />
+                            <MenuItem Header="Bass Boost" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
+                            <MenuItem Header="Treble Boost" Command="{Binding SelectPresetCommand}" CommandParameter="Treble Boost" />
+                            <MenuItem Header="Vocal" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
                 <!--Кнопка "Редактирование трека"-->
                 <Button Name="InformButton"
                         HorizontalAlignment="Stretch"

@@ -26,16 +26,15 @@ public class EqualizerSampleProvider : ISampleProvider
     public int Read(float[] buffer, int offset, int count)
     {
         int samplesRead = source.Read(buffer, offset, count);
-        
+    
         for (int n = 0; n < samplesRead; n += channels)
         {
             for (int ch = 0; ch < channels; ch++)
             {
                 int i = offset + n + ch;
 
-                float gain = 1f;
-                if (Gains.Length > 0)
-                    gain = Gains[0]; 
+                // Используйте gain для текущего канала, если он есть
+                float gain = (Gains.Length > ch) ? Gains[ch] : 1f;
 
                 buffer[i] *= gain;
             }
