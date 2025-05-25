@@ -67,6 +67,14 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     private EqualizerSampleProvider _equalizerProvider;
     
     private AudioSettings _audioSettings;
+    
+    private string _loadFIle;
+    
+    private string _visibleAttention;
+    
+    private string _visibleImage;
+
+    private string _attention;
 
     public string Main
     {
@@ -185,13 +193,33 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToEditVideoPageCommand { get; }
+    
+    public string LoadFile
+    {
+        get => _loadFIle;
+        set => this.RaiseAndSetIfChanged(ref _loadFIle, value);
+    }
+    
+    public string VisibleAttention
+    {
+        get => _visibleAttention;
+        set => this.RaiseAndSetIfChanged(ref _visibleAttention, value);
+    }
+
+    public string VisibleImage
+    {
+        get => _visibleImage;
+        set => this.RaiseAndSetIfChanged(ref _visibleImage, value);
+    }
+
+    public string Attention { get; } = "Выберите файл";
 
     public VideoPageViewModel()
     {
         
     }
 
-    public VideoPageViewModel(AudioSettings audioSettings, IScreen? screen = null)
+    public VideoPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
@@ -201,16 +229,18 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
+        LoadFile = "Найти видео";
         TrackImage = new Bitmap("Assets/VideoPagePictureRed2.png");
         OpacityImage = 0.2;
         Visible = false;
+        VisibleImage = "true";
+        VisibleAttention = "false";
         
         //_equalizer = settingsViewModel.Equalizer;
         
         //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
         
         //_equalizer = equalizer;
-        _audioSettings = audioSettings;
         
         // Подписка на обновления эквалайзера
         /*_equalizer.WhenAnyValue(eq => eq.CurrentSettings)
@@ -257,34 +287,46 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            if (_isPlaying)
+            if (_filePath == null)
             {
-                _mediaPlayer.Pause();
-                _timer.Stop();
-                _isPlaying = false;
-                UpdateVolume();
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                VisibleImage = "false";
+                VisibleAttention = "true";
+                await Task.Delay(2000);
+                VisibleImage = "true";
+                VisibleAttention = "false";
             }
             else
             {
-                if (_filePath != null)
+                if (_isPlaying)
                 {
-                    if (_mediaPlayer.Media == null)
-                    {
-                        var media = new Media(_libVLC, _filePath, FromType.FromPath);
-                        _mediaPlayer.Media = media;
-                        await Task.Delay(100);
-                        _mediaPlayer.Playing += (sender, e) =>
-                        {
-                            AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
-                            Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
-                        };
-                    }
-                    _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
-                    _timer.Start();
-                    _isPlaying = true;
+                    _mediaPlayer.Pause();
+                    _timer.Stop();
+                    _isPlaying = false;
                     UpdateVolume();
-                    PlayImage = new Bitmap("Assets/StopRed.png");
+                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                }
+                else
+                {
+                    if (_filePath != null)
+                    {
+                        if (_mediaPlayer.Media == null)
+                        {
+                            var media = new Media(_libVLC, _filePath, FromType.FromPath);
+                            _mediaPlayer.Media = media;
+                            await Task.Delay(100);
+                            _mediaPlayer.Playing += (sender, e) =>
+                            {
+                                AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
+                                Debug.WriteLine($"Audio Duration: {AudioDuration.TotalSeconds} seconds");
+                            };
+                        }
+
+                        _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
+                        _timer.Start();
+                        _isPlaying = true;
+                        UpdateVolume();
+                        PlayImage = new Bitmap("Assets/StopRed.png");
+                    }
                 }
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
@@ -329,7 +371,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
         
-        ToEditVideoPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditVideoViewModel(_equalizers, _filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        ToEditVideoPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditVideoViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
 
     }
     

@@ -86,8 +86,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private string _classical;
 
     private string _bass;
-    
-    //private object _currentView;
+
+    private string _loadFIle;
 
     public string Main
     {
@@ -153,21 +153,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _audioDuration, value);
     }
     
-    /*public Equalizer Equalizer
-    {
-        get => _equalizer;
-        set => this.RaiseAndSetIfChanged(ref _equalizer, value);
-    }*/
-    
-    /*public object CurrentView
-    {
-        get => _currentView;
-        set => this.RaiseAndSetIfChanged(ref _currentView, value);
-    }*/
-    
     public ICommand LoadFileCommand { get; }
-    
-    //public ReactiveCommand<Unit, IRoutableViewModel> ToHome { get; }
     
     public ICommand PlayPauseCommand { get; }
     
@@ -176,8 +162,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     public ICommand BackTime { get; }
     
     public ICommand ForeTime { get; }
-    
-    //public ReactiveCommand<Unit, Unit> ToAudioEditPageCommand { get; }
 
     public string? UrlPathSegment => "/music";
     public IScreen HostScreen { get; }
@@ -196,7 +180,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _visibleImage, value);
     }
 
-    public string Attention { get; } = "Выберите трек";
+    public string Attention { get; } = "Выберите файл";
     
     public Dictionary<string, float[]> EqualizerPresets { get; } = new Dictionary<string, float[]>
     {
@@ -256,12 +240,20 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _bass, value);
     }
 
+    public string LoadFile
+    {
+        get => _loadFIle;
+        set => this.RaiseAndSetIfChanged(ref _loadFIle, value);
+    }
+    
+    public ICommand OpenEqualizerMenuCommand { get; }
+
     public MusicPageViewModel()
     {
 
     }
 
-    public MusicPageViewModel(AudioSettings audioSettings, IScreen? screen = null)
+    public MusicPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Аудиоплеер";
@@ -272,13 +264,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         Jazz = "Джаз";
         Classical = "Классический";
         Bass = "Усиление низких частот";
+        LoadFile = "Найти трек";
         TrackImage = new Bitmap("Assets/MusicPagePictureRed2.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
         
         _equalizer = new Equalizer();
-        _audioSettings = audioSettings;
+        //_audioSettings = audioSettings;
         
         ApplyEqualizer();
         
@@ -376,7 +369,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     if (_audioFileReader != null)
                     {
                         Debug.WriteLine($"Ошибка здесь (1)");
-                        // Убедитесь, что WaveOut инициализирован
                         if (_waveOut == null)
                         {
                             _waveOut = new WaveOutEvent();
@@ -445,7 +437,7 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             ApplyPreset(presetName); // Применяем пресет
         }, outputScheduler: RxApp.MainThreadScheduler);
     }
-
+    
     // Метод для применения эквалайзера
     private void ApplyPreset(string presetName)
     {
@@ -514,7 +506,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         catch (Exception ex)
         {
             Debug.WriteLine($"Ошибка при загрузке MP3 информации: {ex.Message}");
-            // Можно показать уведомление пользователю
         }
     }
 

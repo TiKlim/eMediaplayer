@@ -38,12 +38,18 @@
             <Button Grid.Column="1"
                     Grid.Row="0"
                     HorizontalAlignment="Right"
-                    VerticalContentAlignment="Center"
-                    Margin="24"
-                    Content="Загрузить аудио"
+                    Margin="24 50 10 0"
+                    Height="40"
+                    Width="140"
                     Background="#FF595E"
                     CornerRadius="10"
-                    Command="{Binding LoadFileCommand}"/>
+                    Command="{Binding LoadFileCommand}">
+                <TextBlock Text="{Binding LoadFile}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
         </Grid>
         <!--Grid для изображения (обложка трека)-->
         <Grid Grid.Row="1"
@@ -129,21 +135,23 @@
                 <!--Кнопка "Эквалайзер"-->
                 <Button Name="EqualizerButton"
                         HorizontalAlignment="Stretch"
-                        Classes="LeftPanel">
+                        Classes="LeftPanel"
+                        Command="{Binding OpenEqualizerMenuCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
                     <Image Source="../Assets/EqualizerRed.png"
                            Width="35"
                            MaxWidth="50"
                            MinWidth="20"/>
-                    <Button.ContextMenu>
-                        <ContextMenu>
+                    <Button.Flyout>
+                        <MenuFlyout>
                             <MenuItem Header="{Binding Pop}" Command="{Binding SelectPresetCommand}" CommandParameter="Pop" />
                             <MenuItem Header="{Binding Vocal}" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
                             <MenuItem Header="{Binding Rock}" Command="{Binding SelectPresetCommand}" CommandParameter="Rock" />
                             <MenuItem Header="{Binding Jazz}" Command="{Binding SelectPresetCommand}" CommandParameter="Jazz" />
                             <MenuItem Header="{Binding Classical}" Command="{Binding SelectPresetCommand}" CommandParameter="Classical" />
                             <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
-                        </ContextMenu>
-                    </Button.ContextMenu>
+                        </MenuFlyout>
+                    </Button.Flyout>
                 </Button>
                 <!--Кнопка "Редактирование трека"-->
                 <Button Name="InformButton"
