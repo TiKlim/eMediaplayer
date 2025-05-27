@@ -11,13 +11,10 @@
     <UserControl.DataContext>
         <vm:VideoPageViewModel/>
     </UserControl.DataContext>
-    <Grid Background="#f5efef">
-        
-        
-        <!--Главный Grid-->
+    <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="Transparent"
+          Background="#f5efef"
           ClipToBounds="True"
           ZIndex="1">
         <!--Grid для заголовка-->
@@ -73,6 +70,14 @@
                        HorizontalAlignment="Center"
                        Foreground="#F7D3D4"
                        FontSize="20"/>
+            <avalonia:VideoView Grid.Column="1"
+                                x:Name="VideoPlayer"
+                                MediaPlayer="{Binding MediaPlayer}"
+                                IsVisible="{Binding Visible}"
+                                Width="930"
+                                ZIndex="0"
+                                IsHitTestVisible="False">
+            </avalonia:VideoView>
         </Grid>
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
@@ -166,14 +171,5 @@
                 </Slider>
             </StackPanel>
         </Grid>
-    </Grid>
-        <avalonia:VideoView x:Name="VideoPlayer"
-                            MediaPlayer="{Binding MediaPlayer}"
-                            IsVisible="{Binding Visible}"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            ZIndex="0"
-                            IsHitTestVisible="False">
-        </avalonia:VideoView>
     </Grid>
 </UserControl>
