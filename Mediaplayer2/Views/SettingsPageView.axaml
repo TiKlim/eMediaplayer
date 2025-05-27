@@ -36,7 +36,7 @@
             </StackPanel>
         </Grid>
         <!--Grid для изображения (обложка трека)-->
-        <Grid Grid.Row="1"
+        <!--<Grid Grid.Row="1"
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <StackPanel Grid.Column="1">
@@ -48,6 +48,6 @@
                 </ComboBox>
 
             </StackPanel>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

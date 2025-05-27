@@ -102,29 +102,6 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Spacing="10">
-                    <TextBlock Text="{Binding Start}"
-                               VerticalAlignment="Center"
-                               Margin="0,0,10,0"/>
-                    <!--Полоса прокрутки-->
-                    <Slider Minimum="{Binding StartSliderValue}"
-                            Maximum="{Binding AudioDuration.TotalMilliseconds}"
-                            Value="0"
-                            Width="1000"
-                            Margin="10,0,10,0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Background="Black"
-                            Foreground="#FF595E">
-                    </Slider>
-                    <TextBlock Text="{Binding StartTimeText}"
-                               VerticalAlignment="Center"
-                               Margin="0,0,10,0"/>
-                </StackPanel>
-                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
-                <StackPanel Grid.Row="4"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Spacing="10">
                     <TextBlock Text="{Binding End}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>

@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Mediaplayer2.App"
              xmlns:local="using:Mediaplayer2"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -53,4 +54,72 @@
             </Style>
         </Style>
     </Application.Styles>
+             
+    <Application.Resources>
+        <ResourceDictionary x:Key="Rus">
+            <system:String x:Key="MainTitle">Главная</system:String>
+            <system:String x:Key="MainSubtitle">Чем займёмся сегодня?</system:String>
+            <system:String x:Key="MusicTitle">Аудиоплеер</system:String>
+            <system:String x:Key="MusicSubtitle">Что послушаем сегодня?</system:String>
+            <system:String x:Key="MusicAddButton">Найти трек</system:String>
+            <system:String x:Key="EqPop">Поп"</system:String>
+            <system:String x:Key="EqVocal">Вокал</system:String>
+            <system:String x:Key="EqRock">Рок</system:String>
+            <system:String x:Key="EqJazz">Джаз</system:String>
+            <system:String x:Key="EqClassical">Классический</system:String>
+            <system:String x:Key="EqBass">Усиление низких частот</system:String>
+            <system:String x:Key="VideoTitle">Видеоплеер</system:String>
+            <system:String x:Key="VideoSubtitle">Что посмотрим сегодня?</system:String>
+            <system:String x:Key="VideoAddButton">Найти видео</system:String>
+            <system:String x:Key="VideoWatch">Приятного просмотра!</system:String>
+            <system:String x:Key="PlaylistTitle">Плейлисты</system:String>
+            <system:String x:Key="PlaylistSubtitle">Похоже, что у Вас нет плейлистов</system:String>
+            <system:String x:Key="PlaylistAddButton">Добавить плейлист</system:String>
+            <system:String x:Key="SettingsTitle">Настройки</system:String>
+            <system:String x:Key="SettingsSubtitle">Настрой под настроение!</system:String>
+            <system:String x:Key="SettingsLanguage">Язык:</system:String>
+            <system:String x:Key="EditTitle">Редактор</system:String>
+            <system:String x:Key="TimeStart">Начало:</system:String>
+            <system:String x:Key="TimeFinish">Конец:</system:String>
+            <system:String x:Key="Attention">Выберите файл</system:String>
+            <system:String x:Key="NoTitle">Нет названия</system:String>
+            <system:String x:Key="NoName">Нет исполнителя</system:String>
+            <system:String x:Key="Save">Сохранить изменения</system:String>
+            <system:String x:Key="Cancel">Отменить изменения</system:String>
+            <system:String x:Key="AudioFromVideo">Извлечь аудиодорожку</system:String>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Eng">
+            <system:String x:Key="MainTitle">Main</system:String>
+            <system:String x:Key="MainSubtitle">What are we going to do today?</system:String>
+            <system:String x:Key="MusicTitle">AudioPlayer</system:String>
+            <system:String x:Key="MusicSubtitle">What are we listening to today?</system:String>
+            <system:String x:Key="MusicAddButton">Find a track</system:String>
+            <system:String x:Key="EqPop">Pop</system:String>
+            <system:String x:Key="EqVocal">Vocal</system:String>
+            <system:String x:Key="EqRock">Rock</system:String>
+            <system:String x:Key="EqJazz">Jazz</system:String>
+            <system:String x:Key="EqClassical">Classical</system:String>
+            <system:String x:Key="EqBass">Bass</system:String>
+            <system:String x:Key="VideoTitle">VideoPlayer</system:String>
+            <system:String x:Key="VideoSubtitle">What will we see today?</system:String>
+            <system:String x:Key="VideoAddButton">Find a video</system:String>
+            <system:String x:Key="VideoWatch">Enjoy watching!</system:String>
+            <system:String x:Key="PlaylistTitle">Playlists</system:String>
+            <system:String x:Key="PlaylistSubtitle">It looks like you don't have any playlists</system:String>
+            <system:String x:Key="PlaylistAddButton">Add a playlist</system:String>
+            <system:String x:Key="SettingsTitle">Settings</system:String>
+            <system:String x:Key="SettingsSubtitle">Get in the mood!</system:String>
+            <system:String x:Key="SettingsLanguage">Language:</system:String>
+            <system:String x:Key="EditTitle">Editor</system:String>
+            <system:String x:Key="TimeStart">Beginning:</system:String>
+            <system:String x:Key="TimeFinish">The end:</system:String>
+            <system:String x:Key="Attention">Select a file</system:String>
+            <system:String x:Key="NoTitle">No name</system:String>
+            <system:String x:Key="NoName">No performer</system:String>
+            <system:String x:Key="Save">Save changes</system:String>
+            <system:String x:Key="Cancel">Cancel changes</system:String>
+            <system:String x:Key="AudioFromVideo">Extract an audio track</system:String>
+        </ResourceDictionary>
+    </Application.Resources>
+             
 </Application>

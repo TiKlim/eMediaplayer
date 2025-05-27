@@ -67,7 +67,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
         Main = "Настройки";
-        PreMain = "Настрой под настроение";
+        PreMain = "Настрой под настроение!";
 
         //EqualizerValue = new Equalizer();
         //_equalizer = equalizer;
