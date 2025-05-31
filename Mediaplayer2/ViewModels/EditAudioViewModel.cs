@@ -4,6 +4,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using NAudio.Lame;
 using NAudio.Wave;
 using ReactiveUI;
@@ -26,6 +27,10 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     private string _endTime;
     
     private TimeSpan _currentTime;
+
+    private TimeSpan _startValue;
+
+    private TimeSpan _endValue;
     
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
     
@@ -45,7 +50,7 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     
     private float _volume = 1f;
     
-    private System.Timers.Timer _timer;
+    private DispatcherTimer _timer;
     
     private double _endSliderValue;
 
@@ -56,6 +61,10 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     private string _startTimeText;
     
     private readonly SettingsPageViewModel _equalizer;
+
+    private string _save;
+
+    private string _cancel;
     
     public string Main
     {
@@ -97,6 +106,18 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     {
         get => _currentTime;
         set => this.RaiseAndSetIfChanged(ref _currentTime, value);
+    }
+
+    public TimeSpan StartValue
+    {
+        get => _startValue;
+        set => this.RaiseAndSetIfChanged(ref _startValue, value);
+    }
+
+    public TimeSpan EndValue
+    {
+        get => _endValue;
+        set => this.RaiseAndSetIfChanged(ref _endValue, value);
     }
 
     public Bitmap? VolumeImage
@@ -142,7 +163,8 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
             {
                 _endSliderValue = value;
                 this.RaiseAndSetIfChanged(ref _endSliderValue, value);
-                UpdateEndTimeText();
+                EndValue = TimeSpan.FromSeconds(_endSliderValue);
+                //UpdateEndTimeText();
             }
         }
     }
@@ -169,7 +191,8 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
             {
                 _startSliderValue = value;
                 this.RaiseAndSetIfChanged(ref _startSliderValue, value);
-                UpdateStartTimeText();
+                StartValue = TimeSpan.FromSeconds(_startSliderValue);
+                //UpdateStartTimeText();
             }
         }
     }
@@ -185,6 +208,18 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                 this.RaiseAndSetIfChanged(ref _startTimeText, value);
             }
         }
+    }
+
+    public string SaveFile
+    {
+        get => _save;
+        set => this.RaiseAndSetIfChanged(ref _save, value);
+    }
+
+    public string Cancel
+    {
+        get => _cancel;
+        set => this.RaiseAndSetIfChanged(ref _cancel, value);
     }
     
     public ICommand PlayPauseCommand { get; }
@@ -212,18 +247,38 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = "Редактор";
-        
         Start = "Начало:";
         End = "Конец:";
+        SaveFile = "Сохранить изменения";
+        Cancel = "Отменить изменения";
         
-        _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
-        _timer.Elapsed += (sender, e) =>
+        _timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(100)
+        };
+        _timer.Tick += (sender, e) =>
         {
             if (_audioFileReader != null && _isPlaying)
             {
                 CurrentTime = _audioFileReader.CurrentTime;
             }
         };
+        /*_timer.Tick += (sender, e) =>
+        {
+            if (_audioFileReader != null && _isPlaying)
+            {
+                StartValue = _audioFileReader.CurrentTime;
+            }
+        };*/
+        _timer.Tick += (sender, e) =>
+        {
+            if (_audioFileReader != null && _isPlaying)
+            {
+                EndValue = _audioFileReader.TotalTime;
+            }
+        };
+        
+        StartValue = TimeSpan.Zero;
         
         var file = TagLib.File.Create(filePath);
         string title = file.Tag.Title ?? "Нет названия";
@@ -247,8 +302,9 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         _waveOut.Init(_audioFileReader); 
         AudioDuration = _audioFileReader.TotalTime;
         EndSliderValue = AudioDuration.TotalSeconds;
+        StartSliderValue = 0;
         
-        _audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSliderValue);
+        //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSliderValue);
         
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -338,7 +394,7 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         TrimMp3File(_filePath, (double)StartSliderValue, (double)EndSliderValue);
     }
     
-    private void UpdateStartTimeText()
+    /*private void UpdateStartTimeText()
     {
         StartTimeText = $"{FormatTime(StartSliderValue)}";
     }
@@ -352,7 +408,7 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
         return string.Format("{0:D2}:{1:D2}", (int)timeSpan.TotalMinutes, timeSpan.Seconds);
-    }
+    }*/
     
     private void UpdateVolume()
     {
@@ -395,6 +451,18 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                 }
             }
         }
+        
+        // Сохранение метаданных
+        var file = TagLib.File.Create(inputFilePath);
+        var newFile = TagLib.File.Create(tempFilePath);
+
+        // Копируем метаданные
+        newFile.Tag.Title = file.Tag.Title;
+        newFile.Tag.Performers = new string[] { file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Неизвестный исполнитель" };
+        newFile.Tag.Pictures = file.Tag.Pictures;
+
+        // Сохраняем изменения
+        newFile.Save();
 
             
         File.Delete(inputFilePath);

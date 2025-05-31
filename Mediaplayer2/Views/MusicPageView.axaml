@@ -11,10 +11,10 @@
     <UserControl.DataContext>
         <vm:MusicPageViewModel/>
     </UserControl.DataContext>
+    <!--Resource-->
     <UserControl.Resources>
         <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
     </UserControl.Resources>
-
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"

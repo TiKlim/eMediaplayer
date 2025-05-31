@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:converters="clr-namespace:Mediaplayer2.Converters"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              x:DataType="vm:EditAudioViewModel"
              x:Class="Mediaplayer2.Views.EditAudioView">
@@ -10,6 +11,10 @@
     <UserControl.DataContext>
         <vm:EditAudioViewModel/>
     </UserControl.DataContext>
+    <!--Resource-->
+    <UserControl.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
@@ -41,19 +46,24 @@
             <!--Изображение (обложка трека)-->
             <Grid Grid.Column="1"
                   RowDefinitions="*,*,*,*">
+                <DockPanel Grid.Row="0"
+                            HorizontalAlignment="Center">
                 <!--Полоса прокрутки-->
-                <Slider Grid.Row="0"
-                        Name="PlaybackSlider"
+                <Slider Name="PlaybackSlider"
                         Minimum="0"
                         Maximum="{Binding AudioDuration.TotalSeconds}"
                         Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
                         Width="1000"
                         Margin="10,0,10,0"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
                         Background="Black"
                         Foreground="#FF595E">
                 </Slider>
+                <!--Таймер-->
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                           FontSize="16"/>
+                </DockPanel>
                 <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
                 <StackPanel Grid.Row="1"
                             Orientation="Horizontal"
@@ -97,9 +107,9 @@
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                     <!--Полоса прокрутки-->
-                    <Slider Minimum="{Binding StartSliderValue}"
+                    <Slider Minimum="0"
                             Maximum="{Binding AudioDuration.TotalSeconds}"
-                            Value="0"
+                            Value="{Binding StartSliderValue, Mode=TwoWay}"
                             Width="1000"
                             Margin="10,0,10,0"
                             VerticalAlignment="Center"
@@ -107,7 +117,7 @@
                             Background="Black"
                             Foreground="#FF595E">
                     </Slider>
-                    <TextBlock Text="{Binding StartTimeText}"
+                    <TextBlock Text="{Binding StartValue, Converter={StaticResource TimeSpanToStringConverter}}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
@@ -130,7 +140,7 @@
                             Background="Black"
                             Foreground="#FF595E">
                     </Slider>
-                    <TextBlock Text="{Binding EndTimeText}"
+                    <TextBlock Text="{Binding EndValue, Converter={StaticResource TimeSpanToStringConverter}}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
@@ -139,26 +149,40 @@
         <!--Grid для нижней панели-->
         <Grid Grid.Column="0"
               Grid.Row="2"
-              RowDefinitions="*,*"
+              ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <!--Кнопка для загрузки аудио-файла-->
-            <Button Grid.Row="0"
+            <Button Grid.Column="1"
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Content="Сохранить изменения"
                     Background="#FF595E"
+                    Height="40"
+                    Width="180"
                     CornerRadius="10"
-                    Command="{Binding SaveCommand}"/>
+                    Command="{Binding SaveCommand}">
+                <TextBlock Text="{Binding SaveFile}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
             <!--Кнопка для загрузки аудио-файла-->
-            <Button Grid.Row="0"
+            <Button Grid.Column="1"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Content="Отменить изменения"
                     Background="#FF595E"
+                    Height="40"
+                    Width="180"
                     CornerRadius="10"
-                    Command="{Binding CancelCommand}"/>
+                    Command="{Binding CancelCommand}">
+                <TextBlock Text="{Binding Cancel}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
