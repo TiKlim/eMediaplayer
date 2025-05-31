@@ -4,12 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:converters="clr-namespace:Mediaplayer2.Converters"
              x:DataType="vm:MusicPageViewModel"
              x:Class="Mediaplayer2.Views.MusicPageView">
     <!--DataContext-->
     <UserControl.DataContext>
         <vm:MusicPageViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
+
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
@@ -31,8 +36,7 @@
                            VerticalAlignment="Center"/>
                 <!--Второй титл (для исполнителя)-->
                 <TextBlock Text="{Binding PreMain}"
-                           FontSize="20"
-                           FontWeight="Bold"/>
+                           FontSize="20"/>
             </StackPanel>
             <!--Кнопка для загрузки аудио-файла-->
             <Button Grid.Column="1"
@@ -125,7 +129,14 @@
                            MinWidth="20"/>
                 </Button>
             </StackPanel>
-            <!--Управление треком (Редактирование трека, уровень громкости)-->
+            <!--Таймер-->
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                       FontSize="16"/>
+            <!--Управление треком (Эквалайзер, редактирование трека, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Grid.Column="1"
                         Orientation="Horizontal"
