@@ -77,7 +77,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding DataContext.PlaylistClickedCommand, ElementName=Playlist}"
-                                CommandParameter="{Binding}">
+                                CommandParameter="{Binding}"
+                                Classes="LeftPanel">
                             <StackPanel Orientation="Horizontal" 
                                                 Margin="10">
                                 <Image Source="../Assets/ListStopRed.png"

@@ -74,7 +74,6 @@
                        IsVisible="{Binding VisibleAttention}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Foreground="#F7D3D4"
                        FontSize="20"/>
         </Grid>
         <!--Grid для нижней панели-->
@@ -106,7 +105,7 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Classes="LeftPanel"
-                        Command="{Binding BackTime}">
+                        Command="{Binding PreviousTrackCommand}">
                     <Image Source="../Assets/BackwardRed.png"
                            MaxWidth="50" 
                            MinWidth="20"/>
@@ -144,7 +143,7 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Classes="LeftPanel"
-                        Command="{Binding BackTime}">
+                        Command="{Binding NextTrackCommand}">
                     <Image Source="../Assets/ForwardRed.png"
                            MaxWidth="50" 
                            MinWidth="20"/>
@@ -157,7 +156,7 @@
                        VerticalAlignment="Center"
                        Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
                        FontSize="16"/>
-            <!--Управление треком (Эквалайзер, редактирование трека, уровень громкости)-->
+            <!--Управление треком (Эквалайзер, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Grid.Column="1"
                         Orientation="Horizontal"
@@ -184,16 +183,6 @@
                             <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
                         </MenuFlyout>
                     </Button.Flyout>
-                </Button>
-                <!--Кнопка "Редактирование трека"-->
-                <Button Name="InformButton"
-                        HorizontalAlignment="Stretch"
-                        Classes="LeftPanel"
-                        Command="{Binding ToEditAudioPageCommand}">
-                    <Image Source="../Assets/EditAudioRed.png"
-                           Width="35"
-                           MaxWidth="50"
-                           MinWidth="20"/>
                 </Button>
                 <!--Кнопка "Звук выключить/включить"-->
                 <Button Name="VolumeButton"

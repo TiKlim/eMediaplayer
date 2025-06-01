@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -93,6 +95,10 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
     private List<string> _playlist = new List<string>();
     
     private int _currentTrackIndex = -1;
+    
+    private bool _canGoBack => _currentTrackIndex > 0;
+    
+    private bool _canGoForward => _currentTrackIndex < _playlist.Count - 1;
     
     public string Main
     {
@@ -185,7 +191,7 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _visibleImage, value);
     }
 
-    public string Attention { get; } = "Выберите файл";
+    public string Attention { get; } = "1. Добавьте треки\n2. Вернитесь на страницу с плейлистами\n3. Файлы сохранились, можете выбирать плейлист";
     
     public Dictionary<string, float[]> EqualizerPresets { get; } = new Dictionary<string, float[]>
     {
@@ -252,6 +258,27 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
     }
     
     public ICommand OpenEqualizerMenuCommand { get; }
+    
+    public ICommand PreviousTrackCommand { get; }
+    public ICommand NextTrackCommand { get; }
+    
+    //public bool CanGoBack => _canGoBack;
+    
+    //public bool CanGoForward => _canGoForward;
+    
+    /*public int CurrentTrackIndex
+    {
+        get => _currentTrackIndex;
+        set
+        {
+            if (_currentTrackIndex != value)
+            {
+                _currentTrackIndex = value;
+                //OnPropertyChanged();
+                //UpdateTrackNavigation();
+            }
+        }
+    }*/
 
     public MusicFromListViewModel()
     {
@@ -265,7 +292,7 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = playlist.Name ?? "Без названия";
-        PreMain = "Что послушаем сегодня?";
+        PreMain = "Добавление треков в плейлист";
         Pop = "Поп"; 
         Vocal = "Вокал";
         Rock = "Рок";
@@ -337,7 +364,7 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             {
                 VisibleImage = "false";
                 VisibleAttention = "true";
-                await Task.Delay(2000);
+                await Task.Delay(5000);
                 VisibleImage = "true";
                 VisibleAttention = "false";
                 return;
@@ -361,6 +388,8 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
                 {
                     _waveOut?.Play();
                     _timer.Start();
+                    Debug.WriteLine($"Current Track Index: {_currentTrackIndex}");
+                    Debug.WriteLine($"Количество треков в плейлисте: {_playlist.Count}"); //*
                     _isPlaying = true;
                     PlayImage = new Bitmap("Assets/StopRed.png");
                 }
@@ -401,6 +430,26 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
         
+        PreviousTrackCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_currentTrackIndex > 0)
+            {
+                _currentTrackIndex--; // Переход к предыдущему треку
+                await PlayTrackAtIndex(_currentTrackIndex); // Воспроизводим трек
+                Debug.WriteLine($"Current Track Index: {_currentTrackIndex}");
+            }
+        }, outputScheduler: RxApp.MainThreadScheduler);
+    
+        NextTrackCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (_currentTrackIndex < _playlist.Count - 1)
+            {
+                _currentTrackIndex++; // Переход к следующему треку
+                await PlayTrackAtIndex(_currentTrackIndex); // Воспроизводим трек
+                Debug.WriteLine($"Current Track Index: {_currentTrackIndex}");
+            }
+        }, outputScheduler: RxApp.MainThreadScheduler);
+        
         ToEditAudioPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditAudioViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
         
         SelectPresetCommand = ReactiveCommand.Create<string>(presetName =>
@@ -411,6 +460,12 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         
         OpenPlaylist(playlist);
     }
+    
+    /*private void UpdateTrackNavigation()
+    {
+        OnPropertyChanged(nameof(CanGoBack));
+        OnPropertyChanged(nameof(CanGoForward));
+    }*/
     
     public async Task OpenPlaylist(Playlist playlist)
     {

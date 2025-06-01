@@ -73,7 +73,6 @@
                        IsVisible="{Binding VisibleAttention}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Foreground="#F7D3D4"
                        FontSize="20"/>
         </Grid>
         <!--Grid для нижней панели-->
