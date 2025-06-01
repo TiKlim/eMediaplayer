@@ -1,5 +1,8 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Reactive;
+using System.Reactive.Linq;
 using Mediaplayer2.Models;
 using ReactiveUI;
 using Splat;
@@ -17,6 +20,7 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     
     private string _newPlaylistName;
+    
     public string NewPlaylistName
     {
         get => _newPlaylistName;
@@ -32,6 +36,13 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
     }
 
     public RelayCommand CreatePlaylistCommand { get; }
+    
+    public ObservableCollection<Playlist> Playlists { get; } = new ObservableCollection<Playlist>();
+    
+    public ReactiveCommand<Playlist, IRoutableViewModel> PlaylistClickedCommand { get; }
+
+    public Playlist playLists;
+
 
     public PlaylistPageViewModel()
     {
@@ -46,6 +57,50 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
         PreMain = "Похоже, что у Вас нет плейлистов"; 
         
         CreatePlaylistCommand = new RelayCommand(CreatePlaylist, CanCreatePlaylist);
+        
+        // Создаем команду, которая возвращает IRoutableViewModel
+        /*PlaylistClickedCommand = ReactiveCommand.Create<Playlist, IRoutableViewModel>(playlist =>
+            new MusicFromListViewModel(playlist, HostScreen));
+
+        // Подписываемся на выполнение команды для навигации
+        PlaylistClickedCommand.Subscribe(vm =>
+            HostScreen.Router.Navigate.Execute(vm));*/
+        PlaylistClickedCommand = ReactiveCommand.Create<Playlist, IRoutableViewModel>(playlist =>
+        {
+            var viewModel = new MusicFromListViewModel(playlist, HostScreen);
+            return viewModel;
+        });
+
+// Подписка на выполнение команды для навигации
+        PlaylistClickedCommand.Subscribe(vm =>
+        {
+            HostScreen.Router.Navigate.Execute(vm);
+        });
+
+
+        LoadPlaylists();
+    }
+    
+    private void LoadPlaylists()
+    {
+        Playlists.Clear(); // Очистка текущего списка плейлистов
+    
+        string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string playlistsDirectory = Path.Combine(appDataPath, "Mediaplayer", "Playlists");
+
+        if (Directory.Exists(playlistsDirectory))
+        {
+            var directories = Directory.GetDirectories(playlistsDirectory);
+            foreach (var dir in directories)
+            {
+                var playlist = new Playlist
+                {
+                    Name = Path.GetFileName(dir),
+                    FolderPath = dir
+                };
+                Playlists.Add(playlist);
+            }
+        }
     }
     
     private bool CanCreatePlaylist()
@@ -61,29 +116,30 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
             string playlistsDirectory = Path.Combine(appDataPath, "Mediaplayer", "Playlists");
             Directory.CreateDirectory(playlistsDirectory);
 
-            string filePath = Path.Combine(playlistsDirectory, $"{NewPlaylistName}.txt");
-            if (File.Exists(filePath))
+            string playlistFolderPath = Path.Combine(playlistsDirectory, NewPlaylistName);
+            if (Directory.Exists(playlistFolderPath))
             {
-                // Можно показать сообщение, что файл уже есть
-                // В MVVM обычно через сервисы уведомлений
+                // Папка с таким именем уже существует — уведомление
                 return;
             }
+
+            Directory.CreateDirectory(playlistFolderPath);
 
             var playlist = new Playlist
             {
                 Name = NewPlaylistName,
-                FilePath = filePath
+                FolderPath = playlistFolderPath
             };
+            
             playlist.Save();
 
-            // Очистить поле после создания
             NewPlaylistName = string.Empty;
-
-            // Можно добавить логику обновления списка плейлистов, если есть
+            
+            LoadPlaylists();
         }
         catch (Exception ex)
         {
-            // !
+            // Обработка
         }
     }
 }

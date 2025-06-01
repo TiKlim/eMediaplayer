@@ -1,0 +1,218 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
+             xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:converters="clr-namespace:Mediaplayer2.Converters"
+             x:DataType="vm:MusicFromListViewModel"
+             x:Class="Mediaplayer2.Views.MusicFromListView"
+             x:Name="ListMusic">
+    <!--DataContext-->
+    <UserControl.DataContext>
+        <vm:MusicFromListViewModel/>
+    </UserControl.DataContext>
+    <!--Resource-->
+    <UserControl.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
+    <!--Главный Grid-->
+    <Grid ShowGridLines="False"
+          RowDefinitions="Auto,*,Auto"
+          Background="#f5efef">
+        <!--Grid для заголовка-->
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Заголовок-->
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Vertical"
+                        Margin="30 50 0 0"
+                        VerticalAlignment="Center">
+                <!--Главный титл (для названия)-->
+                <TextBlock Text="{Binding Main}"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                <!--Второй титл (для исполнителя)-->
+                <TextBlock Text="{Binding PreMain}"
+                           FontSize="20"/>
+            </StackPanel>
+            <!--Кнопка для загрузки аудио-файла-->
+            <Button Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    Margin="24 50 10 0"
+                    Height="40"
+                    Width="140"
+                    Background="#FF595E"
+                    CornerRadius="10"
+                    Command="{Binding LoadFileCommand}">
+                <TextBlock Text="{Binding LoadFile}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
+        </Grid>
+        <!--Grid для изображения (обложка трека)-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Изображение (обложка трека)-->
+            <Border Grid.Column="1"
+                    CornerRadius="10">
+                <Image Source="{Binding TrackImage}"
+                       Opacity="{Binding OpacityImage}"
+                       Margin="40"
+                       VerticalAlignment="Center"
+                       IsVisible="{Binding VisibleImage}"/>
+            </Border>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding Attention}"
+                       IsVisible="{Binding VisibleAttention}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="#F7D3D4"
+                       FontSize="20"/>
+        </Grid>
+        <!--Grid для нижней панели-->
+        <Grid Grid.Column="0"
+              Grid.Row="2"
+              RowDefinitions="*,*"
+              ColumnDefinitions="*,13*"
+              ShowGridLines="False">
+            <!--Полоса прокрутки-->
+            <Slider Grid.Row="0"
+                    Grid.Column="1"
+                    Name="PlaybackSlider"
+                    Minimum="0"
+                    Maximum="{Binding AudioDuration.TotalSeconds}"
+                    Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Center"
+                    Background="Black"
+                    Foreground="#FF595E">
+            </Slider>
+            <!--Управление треком (предыдущий трек, назад на 10 секунд, играть/стоп, вперёд на 10 секунд, следующий трек)-->
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Spacing="10">
+                <!--Кнопка "Предыдущий трек"-->
+                <Button Name="PreviousButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}">
+                    <Image Source="../Assets/BackwardRed.png"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Назад на 10 секунд"-->
+                <Button Name="BackwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}">
+                    <Image Source="../Assets/BackTimeRed.png"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Играть/стоп"-->
+                <Button Name="PlayButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding PlayPauseCommand}">
+                    <Image Source="{Binding PlayImage}"
+                           Width="35"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Вперёд на 10 секунд"-->
+                <Button Name="ForwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding ForeTime}">
+                    <Image Source="../Assets/ForeTimeRed.png"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Следующий трек"-->
+                <Button Name="NextButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}">
+                    <Image Source="../Assets/ForwardRed.png"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+            </StackPanel>
+            <!--Таймер-->
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                       FontSize="16"/>
+            <!--Управление треком (Эквалайзер, редактирование трека, уровень громкости)-->
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Spacing="10">
+                <!--Кнопка "Эквалайзер"-->
+                <Button Name="EqualizerButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding OpenEqualizerMenuCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                    <Image Source="../Assets/EqualizerRed.png"
+                           Width="35"
+                           MaxWidth="50"
+                           MinWidth="20"/>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuItem Header="{Binding Pop}" Command="{Binding SelectPresetCommand}" CommandParameter="Pop" />
+                            <MenuItem Header="{Binding Vocal}" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
+                            <MenuItem Header="{Binding Rock}" Command="{Binding SelectPresetCommand}" CommandParameter="Rock" />
+                            <MenuItem Header="{Binding Jazz}" Command="{Binding SelectPresetCommand}" CommandParameter="Jazz" />
+                            <MenuItem Header="{Binding Classical}" Command="{Binding SelectPresetCommand}" CommandParameter="Classical" />
+                            <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                <!--Кнопка "Редактирование трека"-->
+                <Button Name="InformButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding ToEditAudioPageCommand}">
+                    <Image Source="../Assets/EditAudioRed.png"
+                           Width="35"
+                           MaxWidth="50"
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Звук выключить/включить"-->
+                <Button Name="VolumeButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding VolumeCommand}">
+                    <Image Source="{Binding VolumeImage}"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Полоса регулирования громкости-->
+                <Slider Name="VolumeSlider"
+                        Minimum="0"
+                        Maximum="1"
+                        Value="{Binding Volume, Mode=TwoWay}"
+                        Width="200"
+                        VerticalAlignment="Center"
+                        Background="Black"
+                        Foreground="#FF595E">
+                </Slider>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

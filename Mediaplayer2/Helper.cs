@@ -33,6 +33,7 @@ public static class Helper
         Locator.CurrentMutable.Register<IViewFor<SettingsPageViewModel>>(() => new SettingsPageView());
         Locator.CurrentMutable.Register<IViewFor<EditAudioViewModel>>(() => new EditAudioView());
         Locator.CurrentMutable.Register<IViewFor<EditVideoViewModel>>(() => new EditVideoView());
+        Locator.CurrentMutable.Register<IViewFor<MusicFromListViewModel>>(() => new MusicFromListView());
         
         RxApp.MainThreadScheduler = AvaloniaScheduler.Instance;
     }

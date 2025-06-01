@@ -6,7 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
              x:DataType="vm:PlaylistPageViewModel"
-             x:Class="Mediaplayer2.Views.PlaylistPageView">
+             x:Class="Mediaplayer2.Views.PlaylistPageView"
+             x:Name="Playlist">
     <!--DataContext-->
     <UserControl.DataContext>
         <vm:PlaylistPageViewModel/>
@@ -66,7 +67,32 @@
                    Source="../Assets/PlaylistPagePictureRed2.png"
                    Opacity="0.2"
                    Margin="40"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   IsVisible="False"/>
+            <!--Отображение созданных плейлистов-->
+            <ItemsControl Grid.Column="1"
+                          ItemsSource="{Binding Playlists}"
+                          IsVisible="True"
+                          Margin="20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.PlaylistClickedCommand, ElementName=Playlist}"
+                                CommandParameter="{Binding}">
+                            <StackPanel Orientation="Horizontal" 
+                                                Margin="10">
+                                <Image Source="../Assets/ListStopRed.png"
+                                       Width="50" 
+                                       Height="50" 
+                                       VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="20"
+                                           VerticalAlignment="Center"
+                                           Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </Grid>
 </UserControl>
