@@ -89,7 +89,11 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
     private string _bass;
 
     private string _loadFIle;
-
+    
+    private List<string> _playlist = new List<string>();
+    
+    private int _currentTrackIndex = -1;
+    
     public string Main
     {
         get => _main;
@@ -261,15 +265,15 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         Main = playlist.Name ?? "Без названия";
-        //PreMain = "Что послушаем сегодня?";
-        Pop = "Поп";
+        PreMain = "Что послушаем сегодня?";
+        Pop = "Поп"; 
         Vocal = "Вокал";
         Rock = "Рок";
         Jazz = "Джаз";
         Classical = "Классический";
         Bass = "Усиление низких частот";
         LoadFile = "Добавить трек";
-        TrackImage = new Bitmap("Assets/MusicPagePictureRed2.png");
+        TrackImage = new Bitmap("Assets/ListStopRed.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
@@ -297,48 +301,28 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             {
                 var dialog = new OpenFileDialog
                 {
-                    AllowMultiple = false,
+                    AllowMultiple = true,
                     Filters = new List<FileDialogFilter>
                     {
                         new FileDialogFilter { Name = "MP3 Files", Extensions = { "mp3" } }
                     }
                 };
-                var desctop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
-                var result = await dialog.ShowAsync(desctop.MainWindow);
+                var desktop = (IClassicDesktopStyleApplicationLifetime)Application.Current!.ApplicationLifetime!;
+                var result = await dialog.ShowAsync(desktop.MainWindow);
                 if (result.Length > 0)
                 {
-                    _filePath = result[0];
-                    LoadMp3Info(_filePath); 
-
-                    // Освобождение предыдущего ресурса, если он существует
-                    _audioFileReader?.Dispose();
-                    _waveOut?.Dispose();
-
-                    _audioFileReader = new AudioFileReader(_filePath);
-                    
-                    _waveOut = new WaveOutEvent();
-                    _waveOut.Init(_audioFileReader);
-        
-                    // Проверка эквалайзера перед инициализацией
-                    if (_equalizer.CurrentSettings == null || _equalizer.CurrentSettings.Length != 10)
+                    foreach (var file in result)
                     {
-                        Debug.WriteLine("Equalizer CurrentSettings: ");
-                        foreach (var setting in _equalizer.CurrentSettings)
-                        {
-                            //Debug.WriteLine($"Band: {setting.Frequency}, Gain: {setting.Gain}, Q: {setting.Q}");
-                        }
+                        // Добавляем трек в плейлист
+                        playlist.AddTrack(file); // Используем метод для добавления трека
                     }
-                    else
+
+                    // Если сейчас ничего не играет, запустим первый трек из добавленных
+                    if (!_isPlaying && playlist.Tracks.Count > 0)
                     {
-                        Debug.WriteLine("Equalizer CurrentSettings is null.");
+                        _currentTrackIndex = 0;
+                        await PlayTrackAtIndex(_currentTrackIndex);
                     }
-                    
-                    _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
-                    Debug.WriteLine($"Смотри: {_equalizerProvider}");
-                    
-                    _waveOut.Init(_equalizerProvider);
-                    
-                    AudioDuration = _audioFileReader.TotalTime;
                 }
             }
             catch (Exception ex)
@@ -349,53 +333,37 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
 
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            if (_filePath == null)
+            if (_playlist.Count == 0)
             {
                 VisibleImage = "false";
                 VisibleAttention = "true";
                 await Task.Delay(2000);
                 VisibleImage = "true";
                 VisibleAttention = "false";
+                return;
+            }
+
+            if (_isPlaying)
+            {
+                _waveOut?.Pause();
+                _timer.Stop();
+                _isPlaying = false;
+                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
             }
             else
             {
-                if (_isPlaying)
+                if (_waveOut == null && _playlist.Count > 0)
                 {
-                    _waveOut?.Pause();
-                    _timer.Stop();
-                    _isPlaying = false;
-                    UpdateVolume();
-                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    _currentTrackIndex = _currentTrackIndex == -1 ? 0 : _currentTrackIndex;
+                    await PlayTrackAtIndex(_currentTrackIndex);
                 }
                 else
                 {
-                    // Запустить воспроизведение
-                    if (_audioFileReader != null)
-                    {
-                        Debug.WriteLine($"Ошибка здесь (1)");
-                        if (_waveOut == null)
-                        {
-                            _waveOut = new WaveOutEvent();
-                            _waveOut.Init(_audioFileReader);
-                            _waveOut.Init(_equalizerProvider); // _audioFileReader
-                        }
-
-                        _waveOut.Volume = Volume; // Установка громкости
-                        _waveOut.Play(); // Запуск воспроизведения
-                        _timer.Start();
-                        _isPlaying = true;
-                        PlayImage = new Bitmap("Assets/StopRed.png");
-                    }
+                    _waveOut?.Play();
+                    _timer.Start();
+                    _isPlaying = true;
+                    PlayImage = new Bitmap("Assets/StopRed.png");
                 }
-                _waveOut.PlaybackStopped += (sender, e) =>
-                {
-                    Dispatcher.UIThread.InvokeAsync(() =>
-                    {
-                        _isPlaying = false;
-                        PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
-                        CurrentTime = TimeSpan.Zero;
-                    });
-                };
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
@@ -440,6 +408,87 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             SelectedPreset = presetName; // Устанавливаем выбранный пресет
             ApplyPreset(presetName); // Применяем пресет
         }, outputScheduler: RxApp.MainThreadScheduler);
+        
+        OpenPlaylist(playlist);
+    }
+    
+    public async Task OpenPlaylist(Playlist playlist)
+    {
+        if (Directory.Exists(playlist.FolderPath))
+        {
+            _playlist.Clear(); // Очищаем текущий плейлист
+            _playlist.AddRange(Directory.GetFiles(playlist.FolderPath, "*.mp3")); // Получаем все mp3 файлы в папке
+
+            // Если плейлист не пуст, начинаем воспроизведение
+            if (_playlist.Count > 0)
+            {
+                _currentTrackIndex = 0; // Начинаем с первого трека
+                await PlayTrackAtIndex(_currentTrackIndex);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Папка плейлиста не найдена.");
+        }
+    }
+    
+    private async Task PlayTrackAtIndex(int index)
+    {
+        if (index < 0 || index >= _playlist.Count)
+            return;
+
+        var filePath = _playlist[index];
+
+        // Освободить предыдущие ресурсы
+        _audioFileReader?.Dispose();
+        _waveOut?.Dispose();
+
+        _audioFileReader = new AudioFileReader(filePath);
+
+        // Подготовка эквалайзера, если нужно
+        _equalizerProvider = new EqualizerSampleProvider(_audioFileReader, _equalizer.CurrentSettings);
+
+        _waveOut = new WaveOutEvent();
+        _waveOut.Init(_equalizerProvider);
+
+        _waveOut.Volume = Volume;
+
+        LoadMp3Info(filePath);
+
+        _waveOut.PlaybackStopped += OnPlaybackStopped;
+
+        _waveOut.Play();
+        _isPlaying = true;
+        PlayImage = new Bitmap("Assets/StopRed.png");
+
+        AudioDuration = _audioFileReader.TotalTime;
+
+        _timer.Start();
+    }
+    
+    private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
+    {
+        _waveOut.PlaybackStopped -= OnPlaybackStopped;
+
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            _isPlaying = false;
+            PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            CurrentTime = TimeSpan.Zero;
+
+            _currentTrackIndex++;
+
+            if (_currentTrackIndex < _playlist.Count)
+            {
+                await PlayTrackAtIndex(_currentTrackIndex);
+            }
+            else
+            {
+                // Дошли до конца плейлиста
+                _currentTrackIndex = -1;
+                _timer.Stop();
+            }
+        });
     }
     
     // Метод для применения эквалайзера
@@ -488,9 +537,10 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             var file = TagLib.File.Create(filePath);
             string title = file.Tag.Title ?? "Нет названия";
             string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-            Main = title;
-            PreMain = performer;
-
+    
+            //Main = performer;    // Исполнитель
+            PreMain = performer + " | " + title;     // Название трека
+    
             if (file.Tag.Pictures.Length > 0)
             {
                 var picture = file.Tag.Pictures[0];
@@ -500,7 +550,7 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
                     OpacityImage = 1;
                 }
             }
-
+    
             if (_audioFileReader != null)
             {
                 _totalTime = _audioFileReader.TotalTime;
@@ -512,6 +562,7 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             Debug.WriteLine($"Ошибка при загрузке MP3 информации: {ex.Message}");
         }
     }
+
 
     private void UpdateVolume()
     {

@@ -39,7 +39,7 @@
                 <TextBlock Text="{Binding PreMain}"
                            FontSize="20"/>
             </StackPanel>
-            <!--Кнопка для загрузки аудио-файла-->
+            <!--Кнопка для добавления аудио-файла-->
             <Button Grid.Column="1"
                     Grid.Row="0"
                     HorizontalAlignment="Right"
@@ -104,6 +104,7 @@
                 <!--Кнопка "Предыдущий трек"-->
                 <Button Name="PreviousButton"
                         HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
                         Classes="LeftPanel"
                         Command="{Binding BackTime}">
                     <Image Source="../Assets/BackwardRed.png"
@@ -141,6 +142,7 @@
                 <!--Кнопка "Следующий трек"-->
                 <Button Name="NextButton"
                         HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
                         Classes="LeftPanel"
                         Command="{Binding BackTime}">
                     <Image Source="../Assets/ForwardRed.png"

@@ -30,8 +30,8 @@ public class Playlist
         // Копируем файл (перезаписываем, если уже есть)
         File.Copy(sourceFilePath, destFilePath, true);
 
-        // Добавляем путь к треку (можно хранить только имя файла)
-        Tracks.Add(fileName);
+        // Добавляем путь к треку
+        Tracks.Add(destFilePath); // Сохраняем полный путь к файлу
 
         // Сохраняем обновленный список треков
         Save();
