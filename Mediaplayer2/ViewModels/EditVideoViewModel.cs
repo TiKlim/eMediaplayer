@@ -11,6 +11,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using MediaToolkit;
@@ -39,6 +40,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     private TimeSpan _currentTime;
     
+    private TimeSpan _endValue;
+    
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
     
     private Bitmap? playImage = new Bitmap("Assets/ButtonPlayRed.png");
@@ -57,7 +60,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     private float _volume = 1f;
     
-    private System.Timers.Timer _timer;
+    private DispatcherTimer _timer;
     
     private double _endSliderValue;
 
@@ -76,6 +79,12 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     private Mediaplayer2.Models.Equalizer _equalizer;
     
     private readonly SettingsPageViewModel _equalizers;
+
+    private string _save;
+
+    private string _cancel;
+
+    private string _audioFromVideo;
     
     public string Main
     {
@@ -117,6 +126,12 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     {
         get => _currentTime;
         set => this.RaiseAndSetIfChanged(ref _currentTime, value);
+    }
+    
+    public TimeSpan EndValue
+    {
+        get => _endValue;
+        set => this.RaiseAndSetIfChanged(ref _endValue, value);
     }
 
     public Bitmap? VolumeImage
@@ -242,6 +257,24 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     public IScreen HostScreen { get; }
     
     public ReactiveCommand<Unit, Unit> ExtractAudio { get; }
+
+    public string SaveBtn
+    {
+        get => _save;
+        set => this.RaiseAndSetIfChanged(ref _save, value);
+    }
+
+    public string Cancel
+    {
+        get => _cancel;
+        set => this.RaiseAndSetIfChanged(ref _cancel, value);
+    }
+
+    public string AudioFromVideoBtn
+    {
+        get => _audioFromVideo;
+        set => this.RaiseAndSetIfChanged(ref _audioFromVideo, value);
+    }
     
     public EditVideoViewModel()
     {
@@ -257,19 +290,30 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         _mediaPlayer = new MediaPlayer(_libVLC);
         
         Main = "Редактор";
-        
         Start = "Начало:";
         End = "Конец:";
+        SaveBtn = "Сохранить изменения";
+        Cancel = "Отменить изменения";
+        AudioFromVideoBtn = "Извлечь аудиодорожку";
         
         //_equalizer = settingsViewModel.Equalizer;
         
-        _timer = new System.Timers.Timer(100);
-        _timer.Elapsed += (sender, e) =>
+        _timer = new DispatcherTimer
         {
-            if (filePath != null && _isPlaying)
+            Interval = TimeSpan.FromMilliseconds(100)
+        };
+        _timer.Tick += (sender, e) =>
+        {
+            if (_filePath != null && _isPlaying)
             {
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time);
-                //Debug.WriteLine($"Current Time: {CurrentTime.TotalMilliseconds} seconds");
+            }
+        };
+        _timer.Tick += (sender, e) =>
+        {
+            if (_filePath != null && _isPlaying)
+            {
+                EndValue = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
             }
         };
         

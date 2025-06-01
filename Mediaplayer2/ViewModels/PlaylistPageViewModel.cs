@@ -54,7 +54,7 @@ public class PlaylistPageViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
 
         Main = "Плейлисты";
-        PreMain = "Похоже, что у Вас нет плейлистов"; 
+        PreMain = "Собери на своё усмотрение"; 
         
         CreatePlaylistCommand = new RelayCommand(CreatePlaylist, CanCreatePlaylist);
         

@@ -10,6 +10,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using Mediaplayer2.Models;
@@ -57,7 +58,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 
     private bool _visible;
     
-    private System.Timers.Timer _timer;
+    private DispatcherTimer _timer;
     
     //private Equalizer _equalizer;
     private Mediaplayer2.Models.Equalizer _equalizer;
@@ -247,13 +248,15 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             .Subscribe(_ => ApplyEqualizer());*/
         ApplyEqualizer();
         
-        _timer = new System.Timers.Timer(100); // Обновление каждые 100 мс
-        _timer.Elapsed += (sender, e) =>
+        _timer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(100)
+        };
+        _timer.Tick += (sender, e) =>
         {
             if (_filePath != null && _isPlaying)
             {
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time);
-                //Debug.WriteLine($"Current Time: {CurrentTime.TotalMilliseconds} seconds");
             }
         };
         
@@ -328,6 +331,15 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                         PlayImage = new Bitmap("Assets/StopRed.png");
                     }
                 }
+                /*_waveOut.PlaybackStopped += (sender, e) =>
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        _isPlaying = false;
+                        PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                        CurrentTime = TimeSpan.Zero;
+                    });
+                };*/
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 

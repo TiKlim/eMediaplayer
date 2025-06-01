@@ -5,12 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
              xmlns:avalonia="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+             xmlns:converters="clr-namespace:Mediaplayer2.Converters"
              x:DataType="vm:VideoPageViewModel"
              x:Class="Mediaplayer2.Views.VideoPageView">
     <!--DataContext-->
     <UserControl.DataContext>
         <vm:VideoPageViewModel/>
     </UserControl.DataContext>
+    <!--Resource-->
+    <UserControl.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
@@ -67,7 +72,6 @@
                        IsVisible="{Binding VisibleAttention}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       Foreground="#F7D3D4"
                        FontSize="20"/>
             <avalonia:VideoView Grid.Column="1"
                                 x:Name="VideoPlayer"
@@ -132,6 +136,13 @@
                            MinWidth="20"/>
                 </Button>
             </StackPanel>
+            <!--Таймер-->
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                       FontSize="16"/>
             <!--Управление треком (информация о треке, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Grid.Column="1"

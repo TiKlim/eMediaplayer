@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
              xmlns:avalonia="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+             xmlns:converters="clr-namespace:Mediaplayer2.Converters"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              x:DataType="vm:EditVideoViewModel"
              x:Class="Mediaplayer2.Views.EditVideoView">
@@ -11,6 +12,10 @@
     <UserControl.DataContext>
         <vm:EditVideoViewModel/>
     </UserControl.DataContext>
+    <!--Resource-->
+    <UserControl.Resources>
+        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
@@ -49,9 +54,10 @@
                                     Width="700">
            
                 </avalonia:VideoView>
+                <DockPanel Grid.Row="1"
+                           HorizontalAlignment="Center">
                 <!--Полоса прокрутки-->
-                <Slider Grid.Row="1"
-                        Name="PlaybackSlider"
+                <Slider Name="PlaybackSlider"
                         Minimum="0"
                         Maximum="{Binding AudioDuration.TotalMilliseconds}"
                         Value="{Binding CurrentTime.TotalMilliseconds, Mode=TwoWay}"
@@ -62,6 +68,11 @@
                         Background="Black"
                         Foreground="#FF595E">
                 </Slider>
+                <!--Таймер-->
+                <TextBlock VerticalAlignment="Center"
+                           Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                           FontSize="16"/>
+                </DockPanel>
                 <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
                 <StackPanel Grid.Row="2"
                             Orientation="Horizontal"
@@ -115,7 +126,7 @@
                             Background="Black"
                             Foreground="#FF595E">
                     </Slider>
-                    <TextBlock Text="{Binding EndTimeText}"
+                    <TextBlock Text="{Binding EndValue, Converter={StaticResource TimeSpanToStringConverter}}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
@@ -131,28 +142,49 @@
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Content="Сохранить изменения"
                     Background="#FF595E"
+                    Height="40"
+                    Width="180"
                     CornerRadius="10"
-                    Command="{Binding SaveCommand}"/>
+                    Command="{Binding SaveCommand}">
+                <TextBlock Text="{Binding SaveBtn}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
             <!--Кнопка для извлечения и сохранения аудиодорожки из видеофайла-->
             <Button Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Content="Извлечь аудиодорожку"
                     Background="#FF595E"
+                    Height="40"
+                    Width="180"
                     CornerRadius="10"
-                    Command="{Binding ExtractAudio}"/>
+                    Command="{Binding ExtractAudio}">
+                <TextBlock Text="{Binding AudioFromVideoBtn}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
             <!--Кнопка для сохранения изменений-->
             <Button Grid.Column="1"
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Content="Отменить изменения"
                     Background="#FF595E"
+                    Height="40"
+                    Width="180"
                     CornerRadius="10"
-                    Command="{Binding CancelCommand}"/>
+                    Command="{Binding CancelCommand}">
+                <TextBlock Text="{Binding Cancel}"
+                           Foreground="White"
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
