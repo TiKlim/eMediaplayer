@@ -415,6 +415,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         //if (file.Tag.Title == null)
         //{
             Main = Path.GetFileNameWithoutExtension(filePath);
+            PreMain = "Приятного просмотра!";
         //}
         
         Visible = true;
