@@ -18,7 +18,7 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="#f5efef">
+          Background="{DynamicResource SecondaryColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"
@@ -74,7 +74,7 @@
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
                             Command="{Binding BackTime}">
-                        <Image Source="../Assets/BackTimeRed.png"
+                        <Image Source="{DynamicResource BackTenButton}"
                                MaxWidth="50" 
                                MinWidth="20"/>
                     </Button>
@@ -83,22 +83,30 @@
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
                             Command="{Binding PlayPauseCommand}">
-                        <Image Source="{Binding PlayImage}"
-                               Width="35"
-                               MaxWidth="50" 
-                               MinWidth="20"/>
+                        <StackPanel>
+                            <Image Source="{DynamicResource PlayButton}"
+                                   IsVisible="{Binding Play}"
+                                   Width="35"
+                                   MaxWidth="50" 
+                                   MinWidth="20"/>
+                            <Image Source="{DynamicResource StopButton}"
+                                   IsVisible="{Binding Stop}"
+                                   Width="35"
+                                   MaxWidth="50" 
+                                   MinWidth="20"/>
+                        </StackPanel>
                     </Button>
                     <!--Кнопка "Вперёд на 10 секунд"-->
                     <Button Name="ForwardButton"
                             HorizontalAlignment="Stretch"
                             Classes="LeftPanel"
                             Command="{Binding ForeTime}">
-                        <Image Source="../Assets/ForeTimeRed.png"
+                        <Image Source="{DynamicResource ForeTenButton}"
                                MaxWidth="50" 
                                MinWidth="20"/>
                     </Button>
                 </StackPanel>
-                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
+                <!--Регулировка начала проигрывания-->
                 <StackPanel Grid.Row="2"
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
@@ -121,7 +129,7 @@
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
-                <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
+                <!--Регулировка конца проигрывания-->
                 <StackPanel Grid.Row="3"
                             Orientation="Horizontal"
                             HorizontalAlignment="Center"
@@ -156,7 +164,7 @@
                     HorizontalAlignment="Right"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Background="#FF595E"
+                    Background="{DynamicResource PrimaryColor}"
                     Height="40"
                     Width="180"
                     CornerRadius="10"
@@ -172,7 +180,7 @@
                     HorizontalAlignment="Left"
                     VerticalContentAlignment="Center"
                     Margin="24"
-                    Background="#FF595E"
+                    Background="{DynamicResource PrimaryColor}"
                     Height="40"
                     Width="180"
                     CornerRadius="10"

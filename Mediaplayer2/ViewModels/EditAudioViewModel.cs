@@ -65,6 +65,10 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     private string _save;
 
     private string _cancel;
+
+    private string _play;
+    
+    private string _stop;
     
     public string Main
     {
@@ -237,6 +241,18 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     public string? UrlPathSegment => "/editAudio";
     
     public IScreen HostScreen { get; }
+
+    public string Play
+    {
+        get => _play;
+        set => this.RaiseAndSetIfChanged(ref _play, value);
+    }
+
+    public string Stop
+    {
+        get => _stop;
+        set => this.RaiseAndSetIfChanged(ref _stop, value);
+    }
     
     public EditAudioViewModel()
     {
@@ -251,6 +267,9 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         End = "Конец:";
         SaveFile = "Сохранить изменения";
         Cancel = "Отменить изменения";
+
+        Play = "True";
+        Stop = "False";
         
         _timer = new DispatcherTimer
         {
@@ -314,7 +333,9 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                 _timer.Stop();
                 _isPlaying = false;
                 UpdateVolume();
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                Play = "True";
+                Stop = "False";
             }
             else
             {
@@ -332,14 +353,18 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                     _waveOut.Play(); // Запуск воспроизведения
                     _timer.Start();
                     _isPlaying = true;
-                    PlayImage = new Bitmap("Assets/StopRed.png");
+                    //PlayImage = new Bitmap("Assets/StopRed.png");
+                    Play = "False";
+                    Stop = "True";
                 }
             }
             
             _waveOut.PlaybackStopped += (sender, e) =>
             {
                 _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                Play = "True";
+                Stop = "False";
                 CurrentTime = TimeSpan.Zero;
             };
         }, outputScheduler: RxApp.MainThreadScheduler); //*

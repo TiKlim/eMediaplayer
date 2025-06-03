@@ -13,7 +13,7 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="#f5efef">
+          Background="{DynamicResource SecondaryColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"
@@ -35,18 +35,23 @@
             </StackPanel>
         </Grid>
         <!--Grid для изображения (обложка трека)-->
-        <!--<Grid Grid.Row="1"
+        <Grid Grid.Row="1"
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <StackPanel Grid.Column="1">
                 <TextBlock Text="Bass" />
-                <ComboBox ItemsSource="{Binding PresetNames}" 
-                          SelectedItem="{Binding SelectedPreset, Mode=TwoWay}" 
+                <ComboBox ItemsSource="{Binding Presets}" 
+                          SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
                           Width="200" 
                           Margin="10">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
             </StackPanel>
-        </Grid>-->
+        </Grid>
     </Grid>
 </UserControl>

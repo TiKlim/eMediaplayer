@@ -78,7 +78,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToVideoPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new VideoPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
-        ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(AudioSettings, this)).ObserveOn(RxApp.MainThreadScheduler));
+        ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
 
         if (_isSelected) 
         {

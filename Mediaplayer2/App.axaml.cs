@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Mediaplayer2.ViewModels;
@@ -26,6 +27,7 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
+                Icon = new WindowIcon("Assets/appIcon.ico")
             };
             //var vm = new MainWindowViewModel(desktop.MainWindow);
             //desktop.MainWindow.DataContext = vm;

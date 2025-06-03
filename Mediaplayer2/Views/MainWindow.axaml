@@ -51,7 +51,7 @@
                                             Name="HomeBtn"
                                             Background="{Binding Background}"
                                             Command="{Binding ToHomePageCommand}">
-                                            <Image Source="../Assets/HomeRed.png" 
+                                            <Image Source="{DynamicResource HomeButton}" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
                                                    MinWidth="40"/>
@@ -62,7 +62,7 @@
                                             Name="MusicBtn"
                                             Background="{Binding Background}"
                                             Command="{Binding ToMusicPageCommand}">
-                                            <Image Source="../Assets/MusicCollectionRed.png" 
+                                            <Image Source="{DynamicResource MusicButton}" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
                                                    MinWidth="40"/>
@@ -72,7 +72,7 @@
                                             Classes="LeftPanel" 
                                             Name="VideoBtn"
                                             Command="{Binding ToVideoPageCommand}">
-                                            <Image Source="../Assets/VideoCollectionRed.png" 
+                                            <Image Source="{DynamicResource VideoButton}" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
                                                    MinWidth="40"/>
@@ -82,7 +82,7 @@
                                             Classes="LeftPanel" 
                                             Name="PlaylistBtn"
                                             Command="{Binding ToPlaylistPageCommand}">
-                                            <Image Source="../Assets/PlaylistRed.png" 
+                                            <Image Source="{DynamicResource PlaylistButton}" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
                                                    MinWidth="40"/>
@@ -92,7 +92,7 @@
                                             Classes="LeftPanel" 
                                             Name="SettingsBtn"
                                             Command="{Binding ToSettingsPageCommand}">
-                                            <Image Source="../Assets/SettingsRed.png" 
+                                            <Image Source="{DynamicResource SettingsButton}" 
                                                    Margin="30 0 0 0" 
                                                    MaxWidth="70" 
                                                    MinWidth="40"/>
@@ -126,7 +126,7 @@
                        Grid.Row="0"
                        Grid.ColumnSpan="3">
                     <Grid Name="WindowBar"
-                          Background="#FF595E"
+                          Background="{DynamicResource PrimaryColor}"
                           DockPanel.Dock="Top"
                           ColumnDefinitions="Auto,*,Auto"
                           PointerPressed="InputElement_OnPointerPressed">

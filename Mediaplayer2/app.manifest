@@ -7,6 +7,11 @@
 
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
     <application>
+      <windowsSettings>
+        <icon>
+          <file>Assets/appIcon.ico</file>
+        </icon>
+      </windowsSettings>
       <!-- A list of the Windows versions that this application has been tested on
            and is designed to work with. Uncomment the appropriate elements
            and Windows will automatically select the most compatible environment. -->
