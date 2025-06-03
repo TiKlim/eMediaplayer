@@ -86,6 +86,10 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
 
     private string _audioFromVideo;
     
+    private string _play;
+    
+    private string _stop;
+    
     public string Main
     {
         get => _main;
@@ -276,6 +280,18 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _audioFromVideo, value);
     }
     
+    public string Play
+    {
+        get => _play;
+        set => this.RaiseAndSetIfChanged(ref _play, value);
+    }
+
+    public string Stop
+    {
+        get => _stop;
+        set => this.RaiseAndSetIfChanged(ref _stop, value);
+    }
+    
     public EditVideoViewModel()
     {
 
@@ -295,6 +311,9 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         SaveBtn = "Сохранить изменения";
         Cancel = "Отменить изменения";
         AudioFromVideoBtn = "Извлечь аудиодорожку";
+        
+        Play = "True";
+        Stop = "False";
         
         //_equalizer = settingsViewModel.Equalizer;
         
@@ -340,7 +359,9 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                 _timer.Stop();
                 _isPlaying = false;
                 UpdateVolume();
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                Play = "True";
+                Stop = "False";
             }
             else
             {
@@ -367,7 +388,9 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                     _timer.Start();
                     _isPlaying = true;
                     UpdateVolume();
-                    PlayImage = new Bitmap("Assets/StopRed.png");
+                    //PlayImage = new Bitmap("Assets/StopRed.png");
+                    Play = "False";
+                    Stop = "True";
                 }
             }
             

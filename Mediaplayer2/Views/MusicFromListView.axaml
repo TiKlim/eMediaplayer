@@ -19,7 +19,7 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="#f5efef">
+          Background="{DynamicResource SecondaryColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"
@@ -46,7 +46,7 @@
                     Margin="24 50 10 0"
                     Height="40"
                     Width="140"
-                    Background="#FF595E"
+                    Background="{DynamicResource PrimaryColor}"
                     CornerRadius="10"
                     Command="{Binding LoadFileCommand}">
                 <TextBlock Text="{Binding LoadFile}"
@@ -60,15 +60,23 @@
         <Grid Grid.Row="1"
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
+            <Panel Grid.Column="1">
             <!--Изображение (обложка трека)-->
-            <Border Grid.Column="1"
-                    CornerRadius="10">
-                <Image Source="{Binding TrackImage}"
+            <Border CornerRadius="10">
+                <Image Source="{DynamicResource ListStopBack}"
                        Opacity="{Binding OpacityImage}"
                        Margin="40"
                        VerticalAlignment="Center"
                        IsVisible="{Binding VisibleImage}"/>
             </Border>
+            <Border CornerRadius="10">
+            <Image Source="{Binding TrackImage}"
+                   Opacity="{Binding OpacityImage}"
+                   Margin="40"
+                   VerticalAlignment="Center"
+                   IsVisible="{Binding TrackImg}"/>
+            </Border>
+            </Panel>
             <TextBlock Grid.Column="1"
                        Text="{Binding Attention}"
                        IsVisible="{Binding VisibleAttention}"
@@ -92,7 +100,7 @@
                     Margin="10,0,10,0"
                     VerticalAlignment="Center"
                     Background="Black"
-                    Foreground="#FF595E">
+                    Foreground="{DynamicResource PrimaryColor}">
             </Slider>
             <!--Управление треком (предыдущий трек, назад на 10 секунд, играть/стоп, вперёд на 10 секунд, следующий трек)-->
             <StackPanel Grid.Row="1"
@@ -106,7 +114,7 @@
                         VerticalAlignment="Center"
                         Classes="LeftPanel"
                         Command="{Binding PreviousTrackCommand}">
-                    <Image Source="../Assets/BackwardRed.png"
+                    <Image Source="{DynamicResource BackwardButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -115,7 +123,7 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding BackTime}">
-                    <Image Source="../Assets/BackTimeRed.png"
+                    <Image Source="{DynamicResource BackTenButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -124,17 +132,25 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding PlayPauseCommand}">
-                    <Image Source="{Binding PlayImage}"
-                           Width="35"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
+                    <StackPanel>
+                        <Image Source="{DynamicResource PlayButton}"
+                               IsVisible="{Binding Play}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                        <Image Source="{DynamicResource StopButton}"
+                               IsVisible="{Binding Stop}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </StackPanel>
                 </Button>
                 <!--Кнопка "Вперёд на 10 секунд"-->
                 <Button Name="ForwardButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding ForeTime}">
-                    <Image Source="../Assets/ForeTimeRed.png"
+                    <Image Source="{DynamicResource ForeTenButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -144,7 +160,7 @@
                         VerticalAlignment="Center"
                         Classes="LeftPanel"
                         Command="{Binding NextTrackCommand}">
-                    <Image Source="../Assets/ForwardRed.png"
+                    <Image Source="{DynamicResource ForewardButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -169,7 +185,7 @@
                         Classes="LeftPanel"
                         Command="{Binding OpenEqualizerMenuCommand}"
                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
-                    <Image Source="../Assets/EqualizerRed.png"
+                    <Image Source="{DynamicResource EqualizerButton}"
                            Width="35"
                            MaxWidth="50"
                            MinWidth="20"/>
@@ -189,9 +205,16 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding VolumeCommand}">
-                    <Image Source="{Binding VolumeImage}"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
+                    <StackPanel>
+                        <Image Source="{DynamicResource VolumeOnButton}"
+                               IsVisible="{Binding VolumeOn}"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                        <Image Source="{DynamicResource VolumeOffButton}"
+                               IsVisible="{Binding VolumeOff}"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </StackPanel>
                 </Button>
                 <!--Полоса регулирования громкости-->
                 <Slider Name="VolumeSlider"
@@ -201,7 +224,7 @@
                         Width="200"
                         VerticalAlignment="Center"
                         Background="Black"
-                        Foreground="#FF595E">
+                        Foreground="{DynamicResource PrimaryColor}">
                 </Slider>
             </StackPanel>
         </Grid>

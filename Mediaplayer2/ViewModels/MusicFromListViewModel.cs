@@ -99,6 +99,16 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
     private bool _canGoBack => _currentTrackIndex > 0;
     
     private bool _canGoForward => _currentTrackIndex < _playlist.Count - 1;
+
+    private string _volumeOn;
+    
+    private string _volumeOff;
+    
+    private string _play;
+    
+    private string _stop;
+
+    private string _trackImg;
     
     public string Main
     {
@@ -261,24 +271,36 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
     
     public ICommand PreviousTrackCommand { get; }
     public ICommand NextTrackCommand { get; }
-    
-    //public bool CanGoBack => _canGoBack;
-    
-    //public bool CanGoForward => _canGoForward;
-    
-    /*public int CurrentTrackIndex
+
+    public string VolumeOn
     {
-        get => _currentTrackIndex;
-        set
-        {
-            if (_currentTrackIndex != value)
-            {
-                _currentTrackIndex = value;
-                //OnPropertyChanged();
-                //UpdateTrackNavigation();
-            }
-        }
-    }*/
+        get => _volumeOn;
+        set => this.RaiseAndSetIfChanged(ref _volumeOn, value);
+    }
+
+    public string VolumeOff
+    {
+        get => _volumeOff;
+        set => this.RaiseAndSetIfChanged(ref _volumeOff, value);
+    }
+    
+    public string Play
+    {
+        get => _play;
+        set => this.RaiseAndSetIfChanged(ref _play, value);
+    }
+
+    public string Stop
+    {
+        get => _stop;
+        set => this.RaiseAndSetIfChanged(ref _stop, value);
+    }
+
+    public string TrackImg
+    {
+        get => _trackImg;
+        set => this.RaiseAndSetIfChanged(ref _trackImg, value);
+    }
 
     public MusicFromListViewModel()
     {
@@ -300,10 +322,18 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         Classical = "Классический";
         Bass = "Усиление низких частот";
         LoadFile = "Добавить трек";
-        TrackImage = new Bitmap("Assets/ListStopRed.png");
+        //TrackImage = new Bitmap("Assets/ListStopRed.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
+
+        VolumeOn = "True";
+        VolumeOff = "False";
+        
+        Play = "True";
+        Stop = "False";
+
+        TrackImg = "False";
         
         _equalizer = new Equalizer();
         //_audioSettings = audioSettings;
@@ -375,7 +405,9 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
                 _waveOut?.Pause();
                 _timer.Stop();
                 _isPlaying = false;
-                PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                Play = "True";
+                Stop = "False";
             }
             else
             {
@@ -391,7 +423,9 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
                     Debug.WriteLine($"Current Track Index: {_currentTrackIndex}");
                     Debug.WriteLine($"Количество треков в плейлисте: {_playlist.Count}"); //*
                     _isPlaying = true;
-                    PlayImage = new Bitmap("Assets/StopRed.png");
+                    //PlayImage = new Bitmap("Assets/StopRed.png");
+                    Play = "False";
+                    Stop = "True";
                 }
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
@@ -514,7 +548,9 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
 
         _waveOut.Play();
         _isPlaying = true;
-        PlayImage = new Bitmap("Assets/StopRed.png");
+        //PlayImage = new Bitmap("Assets/StopRed.png");
+        Play = "False";
+        Stop = "True";
 
         AudioDuration = _audioFileReader.TotalTime;
 
@@ -528,7 +564,9 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
             _isPlaying = false;
-            PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+            Play = "True";
+            Stop = "False";
             CurrentTime = TimeSpan.Zero;
 
             _currentTrackIndex++;
@@ -602,6 +640,8 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
                 using (var stream = new MemoryStream(picture.Data.Data))
                 {
                     TrackImage = new Bitmap(stream);
+                    VisibleImage = "false";
+                    TrackImg = "True";
                     OpacityImage = 1;
                 }
             }
@@ -628,11 +668,13 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
 
         if (Volume == 0f)
         {
-            VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            VolumeOn = "False";
+            VolumeOff = "True";
         }
         else
         {
-            VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
+            VolumeOn = "True";
+            VolumeOff = "False";
         }
     }
 }

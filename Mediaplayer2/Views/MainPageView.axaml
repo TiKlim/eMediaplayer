@@ -15,7 +15,7 @@
     <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
-          Background="#f5efef">
+          Background="{DynamicResource SecondaryColor}">
         <!--Меню навигации было здесь-->
         
         <StackPanel Grid.Column="1"
@@ -33,7 +33,7 @@
         
         <Image Grid.Row="1"
                Grid.Column="1"
-               Source="../Assets/MainPagePictureRed2.png"
+               Source="{DynamicResource MainBack}"
                Opacity="0.2"
                VerticalAlignment="Center"/>
     </Grid>
