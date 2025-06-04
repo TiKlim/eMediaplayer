@@ -76,6 +76,14 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     private string _visibleImage;
 
     private string _attention;
+    
+    private string _volumeOn;
+    
+    private string _volumeOff;
+    
+    private string _play;
+    
+    private string _stop;
 
     public string Main
     {
@@ -214,6 +222,30 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     }
 
     public string Attention { get; } = "Выберите файл";
+    
+    public string VolumeOn
+    {
+        get => _volumeOn;
+        set => this.RaiseAndSetIfChanged(ref _volumeOn, value);
+    }
+
+    public string VolumeOff
+    {
+        get => _volumeOff;
+        set => this.RaiseAndSetIfChanged(ref _volumeOff, value);
+    }
+    
+    public string Play
+    {
+        get => _play;
+        set => this.RaiseAndSetIfChanged(ref _play, value);
+    }
+
+    public string Stop
+    {
+        get => _stop;
+        set => this.RaiseAndSetIfChanged(ref _stop, value);
+    }
 
     public VideoPageViewModel()
     {
@@ -231,11 +263,17 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         Main = "Видеоплеер";
         PreMain = "Что посмотрим сегодня?";
         LoadFile = "Найти видео";
-        TrackImage = new Bitmap("Assets/VideoPagePictureRed2.png");
+        //TrackImage = new Bitmap("Assets/VideoPagePictureRed2.png");
         OpacityImage = 0.2;
         Visible = false;
         VisibleImage = "true";
         VisibleAttention = "false";
+        
+        VolumeOn = "True";
+        VolumeOff = "False";
+        
+        Play = "True";
+        Stop = "False";
         
         //_equalizer = settingsViewModel.Equalizer;
         
@@ -306,7 +344,9 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                     _timer.Stop();
                     _isPlaying = false;
                     UpdateVolume();
-                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    Play = "True";
+                    Stop = "False";
                 }
                 else
                 {
@@ -328,7 +368,9 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                         _timer.Start();
                         _isPlaying = true;
                         UpdateVolume();
-                        PlayImage = new Bitmap("Assets/StopRed.png");
+                        //PlayImage = new Bitmap("Assets/StopRed.png");
+                        Play = "False";
+                        Stop = "True";
                     }
                 }
                 /*_waveOut.PlaybackStopped += (sender, e) =>
@@ -430,11 +472,13 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
 
         if (Volume == 0f)
         {
-            VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            VolumeOn = "False";
+            VolumeOff = "True";
         }
         else
         {
-            VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
+            VolumeOn = "True";
+            VolumeOff = "False";
         }
     }
     

@@ -19,7 +19,7 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="#f5efef"
+          Background="{DynamicResource SecondaryColor}"
           ClipToBounds="True"
           ZIndex="1">
         <!--Grid для заголовка-->
@@ -48,7 +48,7 @@
                     Margin="24 50 10 0"
                     Height="40"
                     Width="140"
-                    Background="#FF595E"
+                    Background="{DynamicResource PrimaryColor}"
                     CornerRadius="10"
                     Command="{Binding LoadFileCommand}">
                 <TextBlock Text="{Binding LoadFile}"
@@ -62,11 +62,12 @@
         <Grid Grid.Row="1"
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
-            <!--Изображение (обложка трека)-->
+            <!--Изображение (видео)-->
             <Image Grid.Column="1"
-                   Source="{Binding TrackImage}"
+                   Source="{DynamicResource VideoBack}"
                    Opacity="{Binding OpacityImage}"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   IsVisible="{Binding VisibleImage}"/>
             <TextBlock Grid.Column="1"
                        Text="{Binding Attention}"
                        IsVisible="{Binding VisibleAttention}"
@@ -99,7 +100,7 @@
                     Margin="10,0,10,0"
                     VerticalAlignment="Center"
                     Background="Black"
-                    Foreground="#FF595E">
+                    Foreground="{DynamicResource PrimaryColor}">
             </Slider>
             <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
             <StackPanel Grid.Row="1"
@@ -112,7 +113,7 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding BackTime}">
-                    <Image Source="../Assets/BackTimeRed.png"
+                    <Image Source="{DynamicResource BackTenButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -121,17 +122,25 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding PlayPauseCommand}">
-                    <Image Source="{Binding PlayImage}"
-                           Width="35"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
+                    <StackPanel>
+                        <Image Source="{DynamicResource PlayButton}"
+                               IsVisible="{Binding Play}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                        <Image Source="{DynamicResource StopButton}"
+                               IsVisible="{Binding Stop}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </StackPanel>
                 </Button>
                 <!--Кнопка "Вперёд на 10 секунд"-->
                 <Button Name="ForwardButton"
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding ForeTime}">
-                    <Image Source="../Assets/ForeTimeRed.png"
+                    <Image Source="{DynamicResource ForeTenButton}"
                            MaxWidth="50" 
                            MinWidth="20"/>
                 </Button>
@@ -155,7 +164,7 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding ToEditVideoPageCommand}">
-                    <Image Source="../Assets/EditVideoRed.png"
+                    <Image Source="{DynamicResource EditVideoButton}"
                            Width="35"
                            MaxWidth="50"
                            MinWidth="20"/>
@@ -165,9 +174,16 @@
                         HorizontalAlignment="Stretch"
                         Classes="LeftPanel"
                         Command="{Binding VolumeCommand}">
-                    <Image Source="{Binding VolumeImage}"
-                           MaxWidth="50" 
-                           MinWidth="20"/>
+                    <StackPanel>
+                        <Image Source="{DynamicResource VolumeOnButton}"
+                               IsVisible="{Binding VolumeOn}"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                        <Image Source="{DynamicResource VolumeOffButton}"
+                               IsVisible="{Binding VolumeOff}"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </StackPanel>
                 </Button>
                 <!--Полоса регулирования громкости-->
                 <Slider Name="VolumeSlider"
@@ -177,7 +193,7 @@
                         Width="200"
                         VerticalAlignment="Center"
                         Background="Black"
-                        Foreground="#FF595E">
+                        Foreground="{DynamicResource PrimaryColor}">
                 </Slider>
             </StackPanel>
         </Grid>

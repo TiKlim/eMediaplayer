@@ -89,6 +89,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     private string _bass;
 
     private string _loadFIle;
+    
+    private string _volumeOn;
+    
+    private string _volumeOff;
+    
+    private string _play;
+    
+    private string _stop;
+
+    private string _trackImg;
 
     public string Main
     {
@@ -248,6 +258,36 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
     }
     
     public ICommand OpenEqualizerMenuCommand { get; }
+    
+    public string VolumeOn
+    {
+        get => _volumeOn;
+        set => this.RaiseAndSetIfChanged(ref _volumeOn, value);
+    }
+
+    public string VolumeOff
+    {
+        get => _volumeOff;
+        set => this.RaiseAndSetIfChanged(ref _volumeOff, value);
+    }
+    
+    public string Play
+    {
+        get => _play;
+        set => this.RaiseAndSetIfChanged(ref _play, value);
+    }
+
+    public string Stop
+    {
+        get => _stop;
+        set => this.RaiseAndSetIfChanged(ref _stop, value);
+    }
+
+    public string TrackImg
+    {
+        get => _trackImg;
+        set => this.RaiseAndSetIfChanged(ref _trackImg, value);
+    }
 
     public MusicPageViewModel()
     {
@@ -270,6 +310,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         OpacityImage = 0.2;
         VisibleImage = "true";
         VisibleAttention = "false";
+        
+        VolumeOn = "True";
+        VolumeOff = "False";
+        
+        Play = "True";
+        Stop = "False";
+
+        TrackImg = "False";
         
         _equalizer = new Equalizer();
         //_audioSettings = audioSettings;
@@ -362,7 +410,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     _timer.Stop();
                     _isPlaying = false;
                     UpdateVolume();
-                    PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                    Play = "True";
+                    Stop = "False";
                 }
                 else
                 {
@@ -381,7 +431,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                         _waveOut.Play(); // Запуск воспроизведения
                         _timer.Start();
                         _isPlaying = true;
-                        PlayImage = new Bitmap("Assets/StopRed.png");
+                        //PlayImage = new Bitmap("Assets/StopRed.png");
+                        Play = "False";
+                        Stop = "True";
                     }
                 }
                 _waveOut.PlaybackStopped += (sender, e) =>
@@ -389,7 +441,9 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                     Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         _isPlaying = false;
-                        PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                        //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
+                        Play = "True";
+                        Stop = "False";
                         CurrentTime = TimeSpan.Zero;
                     });
                 };
@@ -494,6 +548,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
                 using (var stream = new MemoryStream(picture.Data.Data))
                 {
                     TrackImage = new Bitmap(stream);
+                    VisibleImage = "false";
+                    TrackImg = "True";
                     OpacityImage = 1;
                 }
             }
@@ -519,11 +575,15 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
 
         if (Volume == 0f)
         {
-            VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
+            VolumeOn = "False";
+            VolumeOff = "True";
         }
         else
         {
-            VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
+            //VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
+            VolumeOn = "True";
+            VolumeOff = "False";
         }
     }
 }
