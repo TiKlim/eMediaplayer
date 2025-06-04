@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -16,6 +17,14 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
         
         SettingsViewModel = new SettingsPageViewModel();
+        //var settingsViewModel = new SettingsPageViewModel();
+        var savedThemeName = SettingsViewModel.LoadSelectedThemeName();
+        var savedTheme = SettingsViewModel.Presets.FirstOrDefault(t => t.Name == savedThemeName);
+        
+        if (savedTheme != null)
+        {
+            SettingsViewModel.ApplyTheme(savedTheme);
+        }
     }
 
     public override void OnFrameworkInitializationCompleted()
