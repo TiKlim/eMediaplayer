@@ -22,7 +22,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
+public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
 {
     private string _main;
 
@@ -288,6 +288,14 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
         get => _trackImg;
         set => this.RaiseAndSetIfChanged(ref _trackImg, value);
     }
+    
+    public void Dispose()
+    {
+        _waveOut?.Stop();
+        _audioFileReader?.Dispose();
+        _waveOut?.Dispose();
+        _isPlaying = false;
+    }
 
     public MusicPageViewModel()
     {
@@ -491,6 +499,18 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel
             SelectedPreset = presetName; // Устанавливаем выбранный пресет
             ApplyPreset(presetName); // Применяем пресет
         }, outputScheduler: RxApp.MainThreadScheduler);
+    }
+    
+    public void StopPlayback()
+    {
+        if (_isPlaying)
+        {
+            _waveOut?.Stop();
+            _audioFileReader?.Dispose();
+            _waveOut?.Dispose();
+            _isPlaying = false;
+            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
+        }
     }
     
     // Метод для применения эквалайзера

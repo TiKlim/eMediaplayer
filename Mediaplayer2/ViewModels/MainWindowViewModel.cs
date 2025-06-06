@@ -8,6 +8,7 @@ using System.Threading;
 using Avalonia.Controls;
 using Mediaplayer2.Models;
 using Mediaplayer2.Views;
+using NAudio.Wave;
 using ReactiveUI;
 using Splat;
 
@@ -26,6 +27,10 @@ public class MainWindowViewModel : ViewModelBase, IScreen
     private string _background;
     
     private readonly Equalizer _equalizer;
+    
+    private IWavePlayer _waveOut;
+    
+    private AudioFileReader _audioFileReader;
     
     public AudioSettings AudioSettings { get; }
  

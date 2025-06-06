@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Mediaplayer2.Models;
+using NAudio.Wave;
 using ReactiveUI;
 using Splat;
 
@@ -23,6 +24,10 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         return Path.Combine(appFolder, SettingsFileName);
     }
     
+    private IWavePlayer _waveOut;
+    
+    private AudioFileReader _audioFileReader;
+    
     public ObservableCollection<Theme> Presets { get; }
     
     private Theme _selectedTheme;
@@ -35,7 +40,9 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
     public string Main { get; }
     
     public string PreMain { get; }
-    
+
+    public string Appearance { get; }
+
     public string? UrlPathSegment => "/settings";
     
     public IScreen HostScreen { get; }
@@ -216,6 +223,12 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         
         Main = "Настройки";
         PreMain = "Настрой под настроение!";
+        Appearance = "Внешний вид:";
+        
+        // Освобождение предыдущего ресурса, если он существует
+        _audioFileReader?.Dispose();
+        _waveOut?.Dispose();
+        _waveOut?.Stop();
         
         Presets = new ObservableCollection<Theme>
         {
@@ -329,7 +342,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Черничный пломбир", 
+                Name = "Виноград", 
                 PrimaryColor = "#6A4C93", 
                 SecondaryColor = "#EFEEF1", 
                 HomeButton = "Assets/HomeViolet.png", 

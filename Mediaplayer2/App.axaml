@@ -41,13 +41,13 @@
         </Style>
         <Style Selector="Slider">
             <Setter Property="Background" Value="Black"></Setter>
-            <Setter Property="Foreground" Value="#FF595E"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
             <Style Selector="^:pointerover /template/ContentPresenter">
                 <Setter Property="Background" Value="Black"></Setter>
-                <Setter Property="Foreground" Value="#FF595E"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
             </Style>
             <Style Selector="^:horizontal /template/Thumb">
-                <Setter Property="Background" Value="#FF595E"></Setter>
+                <Setter Property="Background" Value="{DynamicResource PrimaryColor}"></Setter>
             </Style>
             <Style Selector="^:pressed /template/Thumb">
                 <Setter Property="Background" Value="Black"></Setter>
