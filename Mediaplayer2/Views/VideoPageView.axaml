@@ -14,7 +14,7 @@
     </UserControl.DataContext>
     <!--Resource-->
     <UserControl.Resources>
-        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <converters:SecondTimeSpanToStringConverter x:Key="SecondTimeSpanToStringConverter"/>
     </UserControl.Resources>
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
@@ -150,7 +150,7 @@
                        Grid.Column="1"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                       Text="{Binding CurrentTime, Converter={StaticResource SecondTimeSpanToStringConverter}}"
                        FontSize="16"/>
             <!--Управление треком (информация о треке, уровень громкости)-->
             <StackPanel Grid.Row="1"

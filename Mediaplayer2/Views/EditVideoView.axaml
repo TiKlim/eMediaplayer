@@ -14,7 +14,7 @@
     </UserControl.DataContext>
     <!--Resource-->
     <UserControl.Resources>
-        <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <converters:SecondTimeSpanToStringConverter x:Key="SecondTimeSpanToStringConverter"/>
     </UserControl.Resources>
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
@@ -70,7 +70,7 @@
                 </Slider>
                 <!--Таймер-->
                 <TextBlock VerticalAlignment="Center"
-                           Text="{Binding CurrentTime, Converter={StaticResource TimeSpanToStringConverter}}"
+                           Text="{Binding CurrentTime, Converter={StaticResource SecondTimeSpanToStringConverter}}"
                            FontSize="16"/>
                 </DockPanel>
                 <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
@@ -134,7 +134,7 @@
                             Background="Black"
                             Foreground="{DynamicResource PrimaryColor}">
                     </Slider>
-                    <TextBlock Text="{Binding EndValue, Converter={StaticResource TimeSpanToStringConverter}}"
+                    <TextBlock Text="{Binding EndValue, Converter={StaticResource SecondTimeSpanToStringConverter}}"
                                VerticalAlignment="Center"
                                Margin="0,0,10,0"/>
                 </StackPanel>
