@@ -181,6 +181,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             {
                 _endSliderValue = value;
                 this.RaiseAndSetIfChanged(ref _endSliderValue, value);
+                EndValue = TimeSpan.FromMilliseconds(_endSliderValue);
                 UpdateEndTimeText();
             }
         }
@@ -323,14 +324,14 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         };
         _timer.Tick += (sender, e) =>
         {
-            if (_filePath != null && _isPlaying)
+            if (filePath != null && _isPlaying)
             {
                 CurrentTime = TimeSpan.FromMilliseconds(_mediaPlayer.Time);
             }
         };
         _timer.Tick += (sender, e) =>
         {
-            if (_filePath != null && _isPlaying)
+            if (filePath != null && _isPlaying)
             {
                 EndValue = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
             }
@@ -342,8 +343,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         //EndSliderValue = AudioDuration.TotalMilliseconds;
         
-        var newTime = TimeSpan.FromMilliseconds(StartSliderValue);
-        _mediaPlayer.Time = (int)newTime.TotalMilliseconds;
+        /*var newTime = TimeSpan.FromMilliseconds(StartSliderValue);
+        _mediaPlayer.Time = (int)newTime.TotalMilliseconds;*/
         
         //UpdateStartTimeText();
         //UpdateEndTimeText();
