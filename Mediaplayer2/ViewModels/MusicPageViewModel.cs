@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -492,7 +493,27 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
         
-        ToEditAudioPageCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new EditAudioViewModel(_filePath, HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
+        ToEditAudioPageCommand = ReactiveCommand.CreateFromTask<Unit, IRoutableViewModel>(async _ =>
+        {
+            if (_filePath == null)
+            {
+                VisibleImage = "false";
+                VisibleAttention = "true";
+                await Task.Delay(2000);
+                VisibleImage = "true";
+                VisibleAttention = "false";
+                return null;
+            }
+            else
+            {
+                var viewModel = new EditAudioViewModel(_filePath, HostScreen);
+                await HostScreen.Router.Navigate.Execute(viewModel)
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .ToTask();
+
+                return viewModel;
+            }
+        }, outputScheduler: RxApp.MainThreadScheduler);
         
         SelectPresetCommand = ReactiveCommand.Create<string>(presetName =>
         {

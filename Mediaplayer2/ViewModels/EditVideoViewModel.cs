@@ -473,7 +473,11 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         
         CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
 
-        ExtractAudio = ReactiveCommand.CreateFromTask(() => AudioFromVideo(filePath));
+        ExtractAudio = ReactiveCommand.CreateFromTask(async() =>
+        {
+            await AudioFromVideo(filePath);
+            await HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
+        });
     }
     
     public void ApplyEqualizer()
