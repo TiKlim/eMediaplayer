@@ -40,6 +40,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     
     private TimeSpan _currentTime;
     
+    private TimeSpan _startValue;
+    
     private TimeSpan _endValue;
     
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
@@ -132,6 +134,12 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _currentTime, value);
     }
     
+    public TimeSpan StartValue
+    {
+        get => _startValue;
+        set => this.RaiseAndSetIfChanged(ref _startValue, value);
+    }
+    
     public TimeSpan EndValue
     {
         get => _endValue;
@@ -209,6 +217,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             {
                 _startSliderValue = value;
                 this.RaiseAndSetIfChanged(ref _startSliderValue, value);
+                StartValue = TimeSpan.FromMilliseconds(_startSliderValue);
                 UpdateStartTimeText();
             }
         }
@@ -336,8 +345,10 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                 EndValue = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
             }
         };
+        StartValue = TimeSpan.Zero;
         
         PreMain = Path.GetFileNameWithoutExtension(filePath);
+        StartSliderValue = 0;
         
         //AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length); //*
         
@@ -385,6 +396,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
                             UpdateEndTimeText();
                         };
                     }
+                    _mediaPlayer.Time = (int)StartSliderValue; // ???????????
                     _mediaPlayer.Play(); // При частом нажатии на стоп видео может ломаться
                     _timer.Start();
                     _isPlaying = true;
@@ -441,12 +453,22 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
-        SaveCommand = ReactiveCommand.CreateFromObservable(() =>
+        SaveCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            _mediaPlayer.Stop();
-            _mediaPlayer.Dispose();
-            TrimVideoFile(filePath, (double)StartSliderValue, (double)EndSliderValue);
-            return HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
+            if (_mediaPlayer != null)
+            {
+                _mediaPlayer.Stop();
+                //_mediaPlayer.Dispose();
+                //_mediaPlayer = null;
+            }
+            // Проверка параметров
+            if (StartSliderValue < 0 || EndSliderValue <= StartSliderValue)
+            {
+                throw new ArgumentException("Неверные параметры начала и конца обрезки.");
+            }
+            //
+            await TrimVideoFile(filePath, (double)StartSliderValue, (double)EndSliderValue);
+            return await HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
         });
         
         CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
@@ -510,45 +532,58 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         }
     }
     
-    private void TrimVideoFile(string inputFilePath, double startSeconds, double endSeconds)
+    private async Task TrimVideoFile(string inputFilePath, double startSeconds, double endSeconds)
     {
+        if (startSeconds < 0 || endSeconds <= startSeconds)
+            throw new ArgumentException("Неверные параметры обрезки.");
+
         string tempFilePath = Path.Combine(Path.GetDirectoryName(inputFilePath)!, $"{Path.GetFileNameWithoutExtension(inputFilePath)}_temp{Path.GetExtension(inputFilePath)}");
 
         var inputFile = new MediaFile { Filename = inputFilePath };
         var outputFile = new MediaFile { Filename = tempFilePath };
-        
-        
 
         using (var engine = new Engine())
         {
             var options = new ConversionOptions
             {
                 Seek = TimeSpan.FromSeconds(startSeconds),
-                //MaxDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
+                MaxVideoDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
+                
+                //Duration = TimeSpan.FromSeconds(endSeconds - startSeconds)
             };
-            
-            engine.Convert(inputFile, outputFile, options);
-        }
-        
-        //File.Delete(inputFilePath);
-        //File.Move(tempFilePath, inputFilePath);
-        try
-        {
-            if (File.Exists(inputFilePath))
-            {
-                File.Delete(inputFilePath);
-            }
 
-            File.Move(tempFilePath, inputFilePath);
+            await Task.Run(() => engine.Convert(inputFile, outputFile, options));
         }
-        catch (IOException ex) // Повторная попытка
+
+        const int maxRetries = 5;
+        int retries = 0;
+        while (true)
         {
-            Debug.WriteLine($"Error deleting file: {ex.Message}");
-            
-            Thread.Sleep(1000);
-            TrimVideoFile(inputFilePath, startSeconds, endSeconds);
+            try
+            {
+                if (File.Exists(inputFilePath))
+                {
+                    File.Delete(inputFilePath);
+                }
+
+                File.Move(tempFilePath, inputFilePath);
+                break;
+            }
+            catch (IOException ex)
+            {
+                retries++;
+                if (retries >= maxRetries)
+                {
+                    Debug.WriteLine($"Не удалось удалить/переместить файл после {maxRetries} попыток: {ex.Message}");
+                    throw;
+                }
+                Debug.WriteLine($"Ошибка при удалении файла, попытка {retries}: {ex.Message}");
+                await Task.Delay(1000);
+            }
         }
     }
+
+
 
     private async Task AudioFromVideo(string videoFilePath)
     {
