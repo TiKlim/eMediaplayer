@@ -46,7 +46,7 @@
               ShowGridLines="False">
             <!--Изображение (обложка трека)-->
             <Grid Grid.Column="1"
-                  RowDefinitions="*,*,*,*,*">
+                  RowDefinitions="Auto,*,*,*,*">
                 <avalonia:VideoView x:Name="VideoPlayer"
                                     Grid.Row="0"
                                     MediaPlayer="{Binding MediaPlayer}"
