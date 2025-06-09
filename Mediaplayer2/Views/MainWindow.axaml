@@ -8,7 +8,6 @@
         mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
         x:Class="Mediaplayer2.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
         Title="Mediaplayer2"
         WindowStartupLocation="CenterScreen"
         ExtendClientAreaToDecorationsHint="True"

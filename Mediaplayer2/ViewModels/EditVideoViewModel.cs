@@ -311,6 +311,8 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         
+        FilePath = filePath;
+        
         Core.Initialize();
         _libVLC = new LibVLC();
         _mediaPlayer = new MediaPlayer(_libVLC);
@@ -458,17 +460,19 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             if (_mediaPlayer != null)
             {
                 _mediaPlayer.Stop();
-                //_mediaPlayer.Dispose();
-                //_mediaPlayer = null;
             }
-            // Проверка параметров
             if (StartSliderValue < 0 || EndSliderValue <= StartSliderValue)
             {
                 throw new ArgumentException("Неверные параметры начала и конца обрезки.");
             }
-            //
-            await TrimVideoFile(filePath, (double)StartSliderValue, (double)EndSliderValue);
+            await TrimVideoFile(FilePath, StartSliderValue / 1000.0, EndSliderValue / 1000.0);
             return await HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler);
+        });
+        
+        SaveCommand.ThrownExceptions.Subscribe(ex =>
+        {
+            Debug.WriteLine($"Ошибка в ReactiveCommand: {ex}");
+            // Логика обработки ошибки
         });
         
         CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new VideoPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
@@ -546,19 +550,27 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
         var inputFile = new MediaFile { Filename = inputFilePath };
         var outputFile = new MediaFile { Filename = tempFilePath };
 
-        using (var engine = new Engine())
+        try
         {
-            var options = new ConversionOptions
+            using (var engine = new Engine())
             {
-                Seek = TimeSpan.FromSeconds(startSeconds),
-                MaxVideoDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
-                
-                //Duration = TimeSpan.FromSeconds(endSeconds - startSeconds)
-            };
+                var options = new ConversionOptions
+                {
+                    Seek = TimeSpan.FromSeconds(startSeconds),
+                    MaxVideoDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
+                    //MaxAudioDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
+                };
 
-            await Task.Run(() => engine.Convert(inputFile, outputFile, options));
+                await Task.Run(() => engine.Convert(inputFile, outputFile, options));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Ошибка при обрезке видео: {ex.Message}");
+            throw;
         }
 
+        // Попытка заменить оригинальный файл
         const int maxRetries = 5;
         int retries = 0;
         while (true)
@@ -566,9 +578,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             try
             {
                 if (File.Exists(inputFilePath))
-                {
                     File.Delete(inputFilePath);
-                }
 
                 File.Move(tempFilePath, inputFilePath);
                 break;
@@ -586,8 +596,6 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             }
         }
     }
-
-
 
     private async Task AudioFromVideo(string videoFilePath)
     {

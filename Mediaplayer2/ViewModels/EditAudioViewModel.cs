@@ -451,22 +451,24 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
             VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
         }
     }
-    
+    // Метод редактирования аудио
     private void TrimMp3File(string inputFilePath, double startSeconds, double endSeconds)
     {
-            
+        // Создание временного пути для отредактированного файла
         string tempFilePath = Path.Combine(Path.GetDirectoryName(inputFilePath)!, $"{Path.GetFileNameWithoutExtension(inputFilePath)}_temp.mp3");
-
+        // Открывается исходный файл
         using (var reader = new AudioFileReader(inputFilePath))
         {
-                
+            // Установление позиции чтения в файле
             reader.CurrentTime = TimeSpan.FromSeconds(startSeconds);
+            // Создание нового файла
             using (var writer = new LameMP3FileWriter(tempFilePath, reader.WaveFormat, LAMEPreset.STANDARD))
             {
+                // Передаём данные в буфер,
                 var buffer = new byte[4096];
                 int bytesRead;
+                // и записываем их в новый файл до указанной позиции.
                 TimeSpan endTime = TimeSpan.FromSeconds(endSeconds);
-
                 while ((bytesRead = reader.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     if (reader.CurrentTime >= endTime)
@@ -481,17 +483,17 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         var file = TagLib.File.Create(inputFilePath);
         var newFile = TagLib.File.Create(tempFilePath);
 
-        // Копируем метаданные
+        // Копирование метаданные
         newFile.Tag.Title = file.Tag.Title;
         newFile.Tag.Performers = new string[] { file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Неизвестный исполнитель" };
         newFile.Tag.Pictures = file.Tag.Pictures;
 
-        // Сохраняем изменения
+        // Сохранение изменений
         newFile.Save();
 
-            
+        // Удаление исходного файла
         File.Delete(inputFilePath);
-            
+        // Замена на новый файл
         File.Move(tempFilePath, inputFilePath);
     }
 }
