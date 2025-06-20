@@ -539,26 +539,27 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
         }
     }
-    
+    // Метод редактирования видео
     private async Task TrimVideoFile(string inputFilePath, double startSeconds, double endSeconds)
     {
+        // Проверка параметров 
         if (startSeconds < 0 || endSeconds <= startSeconds)
             throw new ArgumentException("Неверные параметры обрезки.");
-
+        // Формирование временного пути для файла
         string tempFilePath = Path.Combine(Path.GetDirectoryName(inputFilePath)!, $"{Path.GetFileNameWithoutExtension(inputFilePath)}_temp{Path.GetExtension(inputFilePath)}");
-
+        // Создание объектов для исходного и нового файлов
         var inputFile = new MediaFile { Filename = inputFilePath };
         var outputFile = new MediaFile { Filename = tempFilePath };
 
         try
         {
+            // Обрезка видео
             using (var engine = new Engine())
             {
                 var options = new ConversionOptions
                 {
                     Seek = TimeSpan.FromSeconds(startSeconds),
                     MaxVideoDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
-                    //MaxAudioDuration = TimeSpan.FromSeconds(endSeconds - startSeconds)
                 };
 
                 await Task.Run(() => engine.Convert(inputFile, outputFile, options));
@@ -570,7 +571,7 @@ public class EditVideoViewModel : ViewModelBase, IRoutableViewModel
             throw;
         }
 
-        // Попытка заменить оригинальный файл
+        // Замена исходного файла новым
         const int maxRetries = 5;
         int retries = 0;
         while (true)

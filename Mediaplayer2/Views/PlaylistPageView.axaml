@@ -78,7 +78,7 @@
                         <Button Command="{Binding DataContext.PlaylistClickedCommand, ElementName=Playlist}"
                                 CommandParameter="{Binding}"
                                 Classes="LeftPanel">
-                            <StackPanel Orientation="Horizontal" 
+                            <StackPanel Orientation="Vertical" 
                                                 Margin="10">
                                 <Image Source="{DynamicResource ListStopBack}"
                                        Width="50" 

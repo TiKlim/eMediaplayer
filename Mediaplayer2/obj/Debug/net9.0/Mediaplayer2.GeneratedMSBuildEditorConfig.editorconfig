@@ -27,6 +27,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [K:/RiderProj/Mediaplayer/Mediaplayer2/Views/EditAudioView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[K:/RiderProj/Mediaplayer/Mediaplayer2/Views/EditPlaylistView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [K:/RiderProj/Mediaplayer/Mediaplayer2/Views/EditVideoView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
