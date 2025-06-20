@@ -441,6 +441,8 @@
         <AvaloniaResource Include="Assets\wNew3.png" />
         <None Remove="Assets\wNew4.png" />
         <AvaloniaResource Include="Assets\wNew4.png" />
+        <None Remove="Assets\appIcon.ico" />
+        <AvaloniaResource Include="Assets\appIcon.ico" />
     </ItemGroup>
 
     <ItemGroup>
