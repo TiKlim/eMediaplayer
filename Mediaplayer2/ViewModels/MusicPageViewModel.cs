@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
@@ -23,7 +24,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
+public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable, IActivatableViewModel
 {
     private string _main;
 
@@ -297,6 +298,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         _waveOut?.Dispose();
         _isPlaying = false;
     }
+    
+    public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
     public MusicPageViewModel()
     {
@@ -306,6 +309,16 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
     public MusicPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        // Останавливаем плеер при переключении на другую страницу
+        this.WhenActivated(disposables =>
+        {
+            Disposable.Create(() =>
+            {
+                StopPlayback();
+                Dispose();
+            }).DisposeWith(disposables);
+        });
+        
         Main = "Аудиоплеер";
         PreMain = "Что послушаем сегодня?";
         Pop = "Поп";
