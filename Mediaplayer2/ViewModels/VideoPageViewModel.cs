@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
+public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable, IActivatableViewModel
 {
     private string _main;
 
@@ -247,6 +248,33 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         get => _stop;
         set => this.RaiseAndSetIfChanged(ref _stop, value);
     }
+    
+    public void StopPlayback()
+    {
+        if (_isPlaying)
+        {
+            _mediaPlayer?.Stop();
+            _timer.Stop();
+            _isPlaying = false;
+            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
+        }
+    }
+    
+    public void Dispose()
+    {
+        //_mediaPlayer?.Dispose();
+        if (_mediaPlayer != null)
+        {
+            if (_mediaPlayer.IsPlaying)
+                _mediaPlayer.Stop();
+
+            _mediaPlayer.Dispose();
+            _mediaPlayer = null;
+        }
+        _isPlaying = false;
+    }
+    
+    public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
     public VideoPageViewModel()
     {
@@ -256,6 +284,18 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
     public VideoPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        // Останавливаем плеер при переключении на другую страницу
+        this.WhenActivated(disposables =>
+        {
+            Disposable.Create(async () =>
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    StopPlayback();
+                    Dispose();
+                });
+            }).DisposeWith(disposables);
+        });
         
         Core.Initialize();
         _libVLC = new LibVLC();
@@ -276,15 +316,6 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
         Play = "True";
         Stop = "False";
         
-        //_equalizer = settingsViewModel.Equalizer;
-        
-        //settingsViewModel.EqualizerUpdated += ApplyEqualizer; // Подписка на событие
-        
-        //_equalizer = equalizer;
-        
-        // Подписка на обновления эквалайзера
-        /*_equalizer.WhenAnyValue(eq => eq.CurrentSettings)
-            .Subscribe(_ => ApplyEqualizer());*/
         ApplyEqualizer();
         
         _timer = new DispatcherTimer
@@ -315,15 +346,6 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             {
                 _filePath = result[0];
                 LoadVideoInfo(_filePath);
-                
-                
-                
-                //_audioFileReader?.Dispose();
-                //_mediaPlayer?.Dispose();
-                
-                //_audioFileReader = new AudioFileReader(_filePath);
-                //AudioDuration = TimeSpan.FromMilliseconds(_mediaPlayer.Length);
-                //AudioDuration = _audioFileReader.TotalTime;
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
 
@@ -345,7 +367,6 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                     _timer.Stop();
                     _isPlaying = false;
                     UpdateVolume();
-                    //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                     Play = "True";
                     Stop = "False";
                 }
@@ -369,7 +390,6 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                         _timer.Start();
                         _isPlaying = true;
                         UpdateVolume();
-                        //PlayImage = new Bitmap("Assets/StopRed.png");
                         Play = "False";
                         Stop = "True";
                     }
@@ -392,13 +412,11 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
             {
                 Volume = 0.5f;
                 UpdateVolume();
-                //VolumeImage = new Bitmap("Assets/VolumeOnRed.png");
             }
             else
             {
                 Volume = 0f;
                 UpdateVolume();
-                //VolumeImage = new Bitmap("Assets/VolumeOffRed.png");
             }
         });
         
@@ -446,8 +464,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel
                 return viewModel;
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
-
-    }
+    }   
     
     // Метод для применения эквалайзера
     public void ApplyEqualizer()

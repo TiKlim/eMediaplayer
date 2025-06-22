@@ -291,6 +291,18 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         set => this.RaiseAndSetIfChanged(ref _trackImg, value);
     }
     
+    public void StopPlayback()
+    {
+        if (_isPlaying)
+        {
+            _waveOut?.Stop();
+            _audioFileReader?.Dispose();
+            _waveOut?.Dispose();
+            _isPlaying = false;
+            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
+        }
+    }
+    
     public void Dispose()
     {
         _waveOut?.Stop();
@@ -533,18 +545,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
             SelectedPreset = presetName; // Устанавливаем выбранный пресет
             ApplyPreset(presetName); // Применяем пресет
         }, outputScheduler: RxApp.MainThreadScheduler);
-    }
-    
-    public void StopPlayback()
-    {
-        if (_isPlaying)
-        {
-            _waveOut?.Stop();
-            _audioFileReader?.Dispose();
-            _waveOut?.Dispose();
-            _isPlaying = false;
-            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
-        }
     }
     
     // Метод для применения эквалайзера

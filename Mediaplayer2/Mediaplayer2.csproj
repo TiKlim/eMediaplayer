@@ -14,7 +14,7 @@
     </ItemGroup>-->
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\appIcon.ico" />
+        <!--<AvaloniaResource Include="Assets\appIcon.ico" />-->
         <None Remove="Assets\AddBlack.png" />
         <AvaloniaResource Include="Assets\AddBlack.png" />
         <None Remove="Assets\AddBlue.png" />

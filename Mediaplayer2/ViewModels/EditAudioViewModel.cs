@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using Avalonia.Media.Imaging;
@@ -12,7 +13,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
+public class EditAudioViewModel : ViewModelBase, IRoutableViewModel, IDisposable, IActivatableViewModel
 {
     private string _main;
 
@@ -254,6 +255,28 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _stop, value);
     }
     
+    public void StopPlayback()
+    {
+        if (_isPlaying)
+        {
+            _waveOut?.Stop();
+            _audioFileReader?.Dispose();
+            _waveOut?.Dispose();
+            _isPlaying = false;
+            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
+        }
+    }
+    
+    public void Dispose()
+    {
+        _waveOut?.Stop();
+        _audioFileReader?.Dispose();
+        _waveOut?.Dispose();
+        _isPlaying = false;
+    }
+    
+    public ViewModelActivator Activator { get; } = new ViewModelActivator();
+    
     public EditAudioViewModel()
     {
 
@@ -262,6 +285,16 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
     public EditAudioViewModel(string filePath, IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        // Останавливаем плеер при переключении на другую страницу
+        this.WhenActivated(disposables =>
+        {
+            Disposable.Create(() =>
+            {
+                StopPlayback();
+                Dispose();
+            }).DisposeWith(disposables);
+        });
+        
         Main = "Редактор";
         Start = "Начало:";
         End = "Конец:";
@@ -282,13 +315,6 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                 CurrentTime = _audioFileReader.CurrentTime;
             }
         };
-        /*_timer.Tick += (sender, e) =>
-        {
-            if (_audioFileReader != null && _isPlaying)
-            {
-                StartValue = _audioFileReader.CurrentTime;
-            }
-        };*/
         _timer.Tick += (sender, e) =>
         {
             if (_audioFileReader != null && _isPlaying)
@@ -323,8 +349,6 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         EndSliderValue = AudioDuration.TotalSeconds;
         StartSliderValue = 0;
         
-        //_audioFileReader.CurrentTime = TimeSpan.FromSeconds(StartSliderValue);
-        
         PlayPauseCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             if (_isPlaying)
@@ -333,7 +357,6 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
                 _timer.Stop();
                 _isPlaying = false;
                 UpdateVolume();
-                //PlayImage = new Bitmap("Assets/ButtonPlayRed.png");
                 Play = "True";
                 Stop = "False";
             }
@@ -412,28 +435,10 @@ public class EditAudioViewModel : ViewModelBase, IRoutableViewModel
         CancelCommand = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.Navigate.Execute(new MusicPageViewModel(HostScreen)).ObserveOn(RxApp.MainThreadScheduler));
     }
     
-    
-
     private void Save()
     {
         TrimMp3File(_filePath, (double)StartSliderValue, (double)EndSliderValue);
     }
-    
-    /*private void UpdateStartTimeText()
-    {
-        StartTimeText = $"{FormatTime(StartSliderValue)}";
-    }
-
-    private void UpdateEndTimeText()
-    {
-        EndTimeText = $"{FormatTime(EndSliderValue)}";
-    }
-    
-    private string FormatTime(double seconds)
-    {
-        TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
-        return string.Format("{0:D2}:{1:D2}", (int)timeSpan.TotalMinutes, timeSpan.Seconds);
-    }*/
     
     private void UpdateVolume()
     {

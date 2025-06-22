@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -24,7 +25,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
+public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel, IDisposable, IActivatableViewModel
 {
     private string _main;
 
@@ -301,6 +302,28 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
         get => _trackImg;
         set => this.RaiseAndSetIfChanged(ref _trackImg, value);
     }
+    
+    public void StopPlayback()
+    {
+        if (_isPlaying)
+        {
+            _waveOut?.Stop();
+            _audioFileReader?.Dispose();
+            _waveOut?.Dispose();
+            _isPlaying = false;
+            CurrentTime = TimeSpan.Zero; // Сброс текущего времени
+        }
+    }
+    
+    public void Dispose()
+    {
+        _waveOut?.Stop();
+        _audioFileReader?.Dispose();
+        _waveOut?.Dispose();
+        _isPlaying = false;
+    }
+    
+    public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
     public MusicFromListViewModel()
     {
@@ -313,6 +336,16 @@ public class MusicFromListViewModel : ViewModelBase, IRoutableViewModel
             throw new ArgumentNullException(nameof(playlist));
         
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
+        // Останавливаем плеер при переключении на другую страницу
+        this.WhenActivated(disposables =>
+        {
+            Disposable.Create(() =>
+            {
+                StopPlayback();
+                Dispose();
+            }).DisposeWith(disposables);
+        });
+        
         Main = playlist.Name ?? "Без названия";
         PreMain = "Добавление треков в плейлист";
         Pop = "Поп"; 
