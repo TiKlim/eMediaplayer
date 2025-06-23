@@ -95,6 +95,12 @@ public class MainWindowViewModel : ViewModelBase, IScreen
             Background = "Transparent";
             SelectedClasses = "LeftPanel";
         }
+        
+        /*for (VideoPageViewModel videoVM = this; videoVM != null; videoVM = videoVM.VideoPageViewModel)
+        {
+            videoVM.WhenDeactivated();
+        }*/
+
     }
     
     private void HomePage()

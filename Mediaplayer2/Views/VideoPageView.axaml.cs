@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using LibVLCSharp.Avalonia;
@@ -10,20 +11,19 @@ namespace Mediaplayer2.Views;
 
 public partial class VideoPageView : ReactiveUserControl<VideoPageViewModel>
 {
-    //private VideoPageViewModel _viewModel;
+    //private VideoView _videoViewl;
     
     public VideoPageView()
     {
         InitializeComponent();
-        /*_viewModel = new VideoPageViewModel();
-        _viewModel.OnPlay += ViewModelOnOnPlay;
-        DataContext = _viewModel;*/
-        
-        //videoView 
+        //Unloaded += OnUnloaded;
     }
 
-    /*private void ViewModelOnOnPlay(MediaPlayer mediaPlayer)
+    /*private void OnUnloaded(object? sender, RoutedEventArgs e)
     {
-        VideoView.MediaPlayer = mediaPlayer;
+        if (VideoPlayer.MediaPlayer != null)
+        {
+            VideoPlayer.MediaPlayer = null; // Отвязать VideoView от MediaPlayer
+        }
     }*/
 }

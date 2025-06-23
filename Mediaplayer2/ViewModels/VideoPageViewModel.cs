@@ -22,7 +22,7 @@ using Splat;
 
 namespace Mediaplayer2.ViewModels;
 
-public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable, IActivatableViewModel
+public class VideoPageViewModel : ViewModelBase, IRoutableViewModel//, IDisposable, IActivatableViewModel
 {
     private string _main;
 
@@ -249,7 +249,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         set => this.RaiseAndSetIfChanged(ref _stop, value);
     }
     
-    public void StopPlayback()
+    /*public void StopPlayback()
     {
         if (_isPlaying)
         {
@@ -272,7 +272,7 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
             _mediaPlayer = null;
         }
         _isPlaying = false;
-    }
+    }*/
     
     public ViewModelActivator Activator { get; } = new ViewModelActivator();
 
@@ -285,17 +285,28 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
         // Останавливаем плеер при переключении на другую страницу
-        this.WhenActivated(disposables =>
+        /*this.WhenActivated(disposables =>
         {
-            Disposable.Create(async () =>
+            Core.Initialize();
+            _libVLC = new LibVLC();
+            MediaPlayer = new MediaPlayer(_libVLC);
+            
+            Disposable.Create(() =>
             {
-                await Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    StopPlayback();
-                    Dispose();
-                });
+                // Остановить воспроизведение
+                if (MediaPlayer?.IsPlaying == true)
+                    MediaPlayer.Stop();
+
+                // Отвязать MediaPlayer от VideoView — это должно делать View, но заранее, не в Unloaded
+
+                // Освободить ресурсы
+                MediaPlayer?.Dispose();
+                MediaPlayer = null;
+
+                _libVLC?.Dispose();
+                _libVLC = null;
             }).DisposeWith(disposables);
-        });
+        });*/
         
         Core.Initialize();
         _libVLC = new LibVLC();
@@ -464,7 +475,23 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
                 return viewModel;
             }
         }, outputScheduler: RxApp.MainThreadScheduler);
-    }   
+    }
+    
+    public void WhenDeactivated()
+    {
+        if (_mediaPlayer?.IsPlaying == true)
+            _mediaPlayer.Stop();
+
+        _mediaPlayer?.Dispose();
+        _mediaPlayer = null;
+
+        _libVLC?.Dispose();
+        _libVLC = null;
+
+        _timer?.Stop();
+        _timer = null;
+    }
+
     
     // Метод для применения эквалайзера
     public void ApplyEqualizer()
