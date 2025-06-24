@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mediaplayer2", "Mediaplayer2\Mediaplayer2.csproj", "{8BE1EFF1-7326-429C-8495-F7E3B619329F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLCSharp.Avalonia.Unofficial", "LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj", "{7E7D0586-1D25-4876-88E3-CAD2A8387A37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{8BE1EFF1-7326-429C-8495-F7E3B619329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BE1EFF1-7326-429C-8495-F7E3B619329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BE1EFF1-7326-429C-8495-F7E3B619329F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7D0586-1D25-4876-88E3-CAD2A8387A37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7D0586-1D25-4876-88E3-CAD2A8387A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7D0586-1D25-4876-88E3-CAD2A8387A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7D0586-1D25-4876-88E3-CAD2A8387A37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

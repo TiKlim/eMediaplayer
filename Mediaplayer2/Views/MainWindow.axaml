@@ -20,7 +20,8 @@
         <!--Главный Grid-->
         <Grid RowDefinitions="Auto,*,5"
               ColumnDefinitions="5,*,5"
-              ShowGridLines="False">
+              ShowGridLines="False"
+              Background="{DynamicResource SecondaryColor}">
             <!--Панель с контентом-->
             <Panel Grid.Column="0"
                    Grid.Row="0"

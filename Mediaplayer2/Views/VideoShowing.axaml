@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
+             xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:vlcsharp="clr-namespace:LibVLCSharp.Avalonia.Unofficial;assembly=LibVLCSharp.Avalonia.Unofficial"
+             xmlns:controls="using:Mediaplayer2.Views"
+             x:DataType="vm:VideoPageViewModel"
+             x:Class="Mediaplayer2.Views.VideoShowing">
+    <!--DataContext-->
+    <UserControl.DataContext>
+        <vm:VideoPageViewModel/>
+    </UserControl.DataContext>
+    <!---->
+    <Panel Margin="10"		
+           Background="Blue"
+           HorizontalAlignment="Stretch"
+           VerticalAlignment="Stretch"
+           Name="PanelView">
+
+        <vlcsharp:VideoView
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Name="VideoViewer">
+
+            <!-- Content -->
+            
+            
+        </vlcsharp:VideoView>
+    </Panel>
+</UserControl>

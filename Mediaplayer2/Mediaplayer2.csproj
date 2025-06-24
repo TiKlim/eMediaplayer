@@ -14,6 +14,12 @@
     </ItemGroup>-->
 
     <ItemGroup>
+        <ProjectReference Include="K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj" />
+    </ItemGroup>
+
+
+    
+    <ItemGroup>
         <!--<AvaloniaResource Include="Assets\appIcon.ico" />-->
         <None Remove="Assets\AddBlack.png" />
         <AvaloniaResource Include="Assets\AddBlack.png" />

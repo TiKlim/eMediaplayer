@@ -343,6 +343,19 @@
           }
         }
       },
+      "CSharpFunctionalExtensions/3.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/CSharpFunctionalExtensions.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/CSharpFunctionalExtensions.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "DynamicData/8.4.1": {
         "type": "package",
         "dependencies": {
@@ -1372,6 +1385,23 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "System.Reactive.Linq/6.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Reactive.Linq.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reactive.Linq.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Reflection/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1862,6 +1892,15 @@
           }
         }
       },
+      "System.Threading.Tasks.Extensions/4.5.4": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      },
       "TagLibSharp/2.3.0": {
         "type": "package",
         "compile": {
@@ -1891,6 +1930,24 @@
         "type": "package",
         "build": {
           "build/VideoLAN.LibVLC.Windows.targets": {}
+        }
+      },
+      "LibVLCSharp.Avalonia.Unofficial/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Avalonia": "11.3.0",
+          "CSharpFunctionalExtensions": "3.6.0",
+          "LibVLCSharp": "3.9.3",
+          "System.Reactive": "6.0.1",
+          "System.Reactive.Linq": "6.0.1",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
+        },
+        "compile": {
+          "bin/placeholder/LibVLCSharp.Avalonia.Unofficial.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LibVLCSharp.Avalonia.Unofficial.dll": {}
         }
       }
     }
@@ -2338,6 +2395,26 @@
         "lib/net8.0/Avalonia.X11.xml",
         "lib/netstandard2.0/Avalonia.X11.dll",
         "lib/netstandard2.0/Avalonia.X11.xml"
+      ]
+    },
+    "CSharpFunctionalExtensions/3.6.0": {
+      "sha512": "c+oWbfDKKjpOLPMxn/iPn1GL24YTJMtOiGfj0AsDKZ2v6/Mr6V7BfzfWLg6KqNRx3KRy3KcQE680SwvDTI/jcg==",
+      "type": "package",
+      "path": "csharpfunctionalextensions/3.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "csharpfunctionalextensions.3.6.0.nupkg.sha512",
+        "csharpfunctionalextensions.nuspec",
+        "lib/net6.0/CSharpFunctionalExtensions.dll",
+        "lib/net6.0/CSharpFunctionalExtensions.pdb",
+        "lib/net6.0/CSharpFunctionalExtensions.xml",
+        "lib/net8.0/CSharpFunctionalExtensions.dll",
+        "lib/net8.0/CSharpFunctionalExtensions.pdb",
+        "lib/net8.0/CSharpFunctionalExtensions.xml",
+        "lib/netstandard2.0/CSharpFunctionalExtensions.dll",
+        "lib/netstandard2.0/CSharpFunctionalExtensions.pdb",
+        "lib/netstandard2.0/CSharpFunctionalExtensions.xml"
       ]
     },
     "DynamicData/8.4.1": {
@@ -4390,6 +4467,26 @@
         "system.reactive.nuspec"
       ]
     },
+    "System.Reactive.Linq/6.0.1": {
+      "sha512": "XC+ZxI74RhP10po29httLW82gjtVQYkLaGM36FIpjd0+lroTerWViadxSXjcWiFPslsdvqNTPrIT+oIA3i4Rfw==",
+      "type": "package",
+      "path": "system.reactive.linq/6.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net472/System.Reactive.Linq.dll",
+        "lib/net472/System.Reactive.Linq.xml",
+        "lib/netstandard2.0/System.Reactive.Linq.dll",
+        "lib/netstandard2.0/System.Reactive.Linq.xml",
+        "lib/uap10.0.18362/System.Reactive.Linq.dll",
+        "lib/uap10.0.18362/System.Reactive.Linq.pri",
+        "lib/uap10.0.18362/System.Reactive.Linq.xml",
+        "readme.md",
+        "system.reactive.linq.6.0.1.nupkg.sha512",
+        "system.reactive.linq.nuspec"
+      ]
+    },
     "System.Reflection/4.3.0": {
       "sha512": "KMiAFoW7MfJGa9nDFNcfu+FpEdiHpWgTcS2HdMpDvt9saK3y/G4GwprPyzqjFH9NTaGPQeWNHU+iDlDILj96aQ==",
       "type": "package",
@@ -5706,6 +5803,43 @@
         "system.threading.tasks.nuspec"
       ]
     },
+    "System.Threading.Tasks.Extensions/4.5.4": {
+      "sha512": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
+      "type": "package",
+      "path": "system.threading.tasks.extensions/4.5.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Threading.Tasks.Extensions.dll",
+        "lib/net461/System.Threading.Tasks.Extensions.xml",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll",
+        "lib/netstandard1.0/System.Threading.Tasks.Extensions.xml",
+        "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll",
+        "lib/netstandard2.0/System.Threading.Tasks.Extensions.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/netcoreapp2.1/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+        "system.threading.tasks.extensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "TagLibSharp/2.3.0": {
       "sha512": "Qo4z6ZjnIfbR3Us1Za5M2vQ97OWZPmODvVmepxZ8XW0UIVLGdO2T63/N3b23kCcyiwuIe0TQvMEQG8wUCCD1mA==",
       "type": "package",
@@ -6794,6 +6928,11 @@
         "videolan.libvlc.windows.3.0.21.nupkg.sha512",
         "videolan.libvlc.windows.nuspec"
       ]
+    },
+    "LibVLCSharp.Avalonia.Unofficial/1.0.0": {
+      "type": "project",
+      "path": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj",
+      "msbuildProject": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6806,6 +6945,7 @@
       "Avalonia.Themes.Fluent >= 11.3.0",
       "LibVLCSharp >= 3.9.3",
       "LibVLCSharp.Avalonia >= 3.9.3",
+      "LibVLCSharp.Avalonia.Unofficial >= 1.0.0",
       "MediaToolkit >= 1.1.0.1",
       "Microsoft.Extensions.DependencyInjection >= 9.0.4",
       "NAudio >= 2.2.1",
@@ -6847,7 +6987,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "K:\\RiderProj\\Mediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {
+              "projectPath": "K:\\RiderProj\\Mediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

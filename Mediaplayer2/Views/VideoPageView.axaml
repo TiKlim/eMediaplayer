@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="759"
              xmlns:vm="clr-namespace:Mediaplayer2.ViewModels"
+             xmlns:vlcsharp="clr-namespace:LibVLCSharp.Avalonia.Unofficial;assembly=LibVLCSharp.Avalonia.Unofficial"
              xmlns:avalonia="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
              xmlns:converters="clr-namespace:Mediaplayer2.Converters"
              x:DataType="vm:VideoPageViewModel"
@@ -16,12 +17,14 @@
     <UserControl.Resources>
         <converters:SecondTimeSpanToStringConverter x:Key="SecondTimeSpanToStringConverter"/>
     </UserControl.Resources>
+    <!---->
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="{DynamicResource SecondaryColor}"
           ClipToBounds="True"
+          Background="{Binding Bacground}"
           ZIndex="1">
+        <!--<ContentControl Content="{Binding CurrentView}"/>-->
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"
@@ -36,10 +39,14 @@
                 <TextBlock Text="{Binding Main}"
                            FontSize="40"
                            FontWeight="Bold"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center"
+                           Foreground="{Binding TextBackground}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="NoWrap"/>
                 <!--Второй титл (для исполнителя)-->
                 <TextBlock Text="{Binding PreMain}"
-                           FontSize="20"/>
+                           FontSize="20"
+                           Foreground="{Binding TextBackground}"/>
             </StackPanel>
             <!--Кнопка для загрузки видео-файла-->
             <Button Grid.Column="1"
@@ -78,7 +85,7 @@
                                 x:Name="VideoPlayer"
                                 MediaPlayer="{Binding MediaPlayer}"
                                 IsVisible="{Binding Visible}"
-                                Width="930"
+                                Width="1280"
                                 ZIndex="0"
                                 IsHitTestVisible="False">
             </avalonia:VideoView>
@@ -99,7 +106,7 @@
                     Value="{Binding CurrentTime.TotalMilliseconds, Mode=TwoWay}"
                     Margin="10,0,10,0"
                     VerticalAlignment="Center"
-                    Background="Black"
+                    Background="{Binding TextBackground}"
                     Foreground="{DynamicResource PrimaryColor}">
             </Slider>
             <!--Управление треком (назад на 10 секунд, играть/стоп, вперёд на 10 секунд)-->
@@ -151,7 +158,8 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Text="{Binding CurrentTime, Converter={StaticResource SecondTimeSpanToStringConverter}}"
-                       FontSize="16"/>
+                       FontSize="16"
+                       Foreground="{Binding TextBackground}"/>
             <!--Управление треком (информация о треке, уровень громкости)-->
             <StackPanel Grid.Row="1"
                         Grid.Column="1"
@@ -192,7 +200,7 @@
                         Value="{Binding Volume, Mode=TwoWay}"
                         Width="200"
                         VerticalAlignment="Center"
-                        Background="Black"
+                        Background="{Binding TextBackground}"
                         Foreground="{DynamicResource PrimaryColor}">
                 </Slider>
             </StackPanel>

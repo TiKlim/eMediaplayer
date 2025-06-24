@@ -16,6 +16,7 @@ using Avalonia.Threading;
 using LibVLCSharp.Avalonia;
 using LibVLCSharp.Shared;
 using Mediaplayer2.Models;
+using Mediaplayer2.Views;
 using NAudio.Wave;
 using ReactiveUI;
 using Splat;
@@ -86,6 +87,12 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel//, IDisposab
     private string _play;
     
     private string _stop;
+
+    private UserControl _currentView;
+    
+    private string _bacground;
+    
+    private string _textBackground;
 
     public string Main
     {
@@ -275,6 +282,29 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel//, IDisposab
     }*/
     
     public ViewModelActivator Activator { get; } = new ViewModelActivator();
+    
+    public UserControl CurrentView
+    {
+        get => _currentView;
+        set
+        {
+            if (_currentView == value) return;
+            _currentView = value;
+            this.RaisePropertyChanged();
+        }
+    }
+
+    public string Bacground
+    {
+        get => _bacground;
+        set => this.RaiseAndSetIfChanged(ref _bacground, value);
+    }
+
+    public string TextBackground
+    {
+        get => _textBackground;
+        set => this.RaiseAndSetIfChanged(ref _textBackground, value);
+    }
 
     public VideoPageViewModel()
     {
@@ -326,6 +356,18 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel//, IDisposab
         
         Play = "True";
         Stop = "False";
+        
+        Bacground = "Transparent";
+        TextBackground = "Black";
+
+        /*if (CurrentView is VideoShowing)
+        {
+            CurrentView = new VideoPageView() { DataContext = this };
+        }
+        else
+        {
+            CurrentView = new VideoPageView() { DataContext = this };
+        }*/
         
         ApplyEqualizer();
         
@@ -509,22 +551,16 @@ public class VideoPageViewModel : ViewModelBase, IRoutableViewModel//, IDisposab
     
     private void LoadVideoInfo(string filePath)
     {
-        //var file = TagLib.File.Create(filePath);
-        
-        //string title = file.Tag.Title ?? "Нет названия";
-        
-        //string performer = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Нет исполнителя";
-        
-        //Main = title;
-        //PreMain = performer;
-
-        //if (file.Tag.Title == null)
-        //{
-            Main = Path.GetFileNameWithoutExtension(filePath);
-            PreMain = "Приятного просмотра!";
-        //}
-        
+        Main = Path.GetFileNameWithoutExtension(filePath);
+        PreMain = "Приятного просмотра!";
         Visible = true;
+        Bacground = "Black";
+        TextBackground = "White";
+        VisibleImage = "False";
+        /*if (CurrentView is VideoPageView)
+        {
+            CurrentView = new VideoShowing() { DataContext = this };
+        }*/
     }
 
     private void UpdateVolume()
