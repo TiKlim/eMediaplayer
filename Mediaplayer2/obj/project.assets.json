@@ -6931,8 +6931,8 @@
     },
     "LibVLCSharp.Avalonia.Unofficial/1.0.0": {
       "type": "project",
-      "path": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj",
-      "msbuildProject": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj"
+      "path": "../../Mediaplayer/LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj",
+      "msbuildProject": "../../Mediaplayer/LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6963,11 +6963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
+      "projectUniqueName": "K:\\RiderProj\\Mediaplayer3\\Mediaplayer2\\Mediaplayer2.csproj",
       "projectName": "Mediaplayer2",
-      "projectPath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
+      "projectPath": "K:\\RiderProj\\Mediaplayer3\\Mediaplayer2\\Mediaplayer2.csproj",
       "packagesPath": "C:\\Users\\klimt\\.nuget\\packages\\",
-      "outputPath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\obj\\",
+      "outputPath": "K:\\RiderProj\\Mediaplayer3\\Mediaplayer2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
