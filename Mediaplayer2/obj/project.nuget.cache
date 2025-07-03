@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MJm9ndPH2AY=",
+  "dgSpecHash": "iFNgficlISE=",
   "success": true,
-  "projectFilePath": "K:\\RiderProj\\Mediaplayer3\\Mediaplayer2\\Mediaplayer2.csproj",
+  "projectFilePath": "K:\\RiderProj\\Mediaplayer\\Mediaplayer2\\Mediaplayer2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\klimt\\.nuget\\packages\\avalonia\\11.3.0\\avalonia.11.3.0.nupkg.sha512",
     "C:\\Users\\klimt\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.22045.20230930\\avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

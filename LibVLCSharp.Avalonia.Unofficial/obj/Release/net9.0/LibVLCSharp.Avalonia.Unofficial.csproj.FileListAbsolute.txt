@@ -1,0 +1,14 @@
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\bin\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.deps.json
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\bin\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.dll
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\bin\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.pdb
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.csproj.AssemblyReference.cache
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\Avalonia\Resources.Inputs.cache
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.GeneratedMSBuildEditorConfig.editorconfig
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.AssemblyInfoInputs.cache
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.AssemblyInfo.cs
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.csproj.CoreCompileInputs.cache
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.sourcelink.json
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.dll
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\refint\LibVLCSharp.Avalonia.Unofficial.dll
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\LibVLCSharp.Avalonia.Unofficial.pdb
+K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Release\net9.0\ref\LibVLCSharp.Avalonia.Unofficial.dll
