@@ -1,3 +1,5 @@
+![Uploading 1.png…]()
+
 # eMediaplayer
 ## О проекте
 ### Что такое "e"?
