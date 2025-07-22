@@ -12,3 +12,17 @@ K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLC
 K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\refint\LibVLCSharp.Avalonia.Unofficial.dll
 K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.pdb
 K:\RiderProj\Mediaplayer\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\ref\LibVLCSharp.Avalonia.Unofficial.dll
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\bin\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.deps.json
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\bin\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.dll
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\bin\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.pdb
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.csproj.AssemblyReference.cache
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\Avalonia\Resources.Inputs.cache
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.AssemblyInfoInputs.cache
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.AssemblyInfo.cs
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.csproj.CoreCompileInputs.cache
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.sourcelink.json
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.dll
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\refint\LibVLCSharp.Avalonia.Unofficial.dll
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\LibVLCSharp.Avalonia.Unofficial.pdb
+C:\Users\User\RiderProjects\MediaplayerE\LibVLCSharp.Avalonia.Unofficial\obj\Debug\net9.0\ref\LibVLCSharp.Avalonia.Unofficial.dll
