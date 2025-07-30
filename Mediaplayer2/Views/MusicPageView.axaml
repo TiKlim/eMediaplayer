@@ -60,7 +60,7 @@
               ColumnDefinitions="*,13*"
               ShowGridLines="False">
             <Panel Grid.Column="1">
-                <!--Изображение (обложка трека)-->
+                <!--Изображение страницы-->
                 <Border CornerRadius="10">
                     <Image Source="{DynamicResource MusicBack}"
                            Opacity="{Binding OpacityImage}"
@@ -68,6 +68,36 @@
                            VerticalAlignment="Center"
                            IsVisible="{Binding VisibleImage}"/>
                 </Border>
+                <!--Изображение (обложка трека на случай, если её нет)-->
+                <Border CornerRadius="10">
+                    <Grid RowDefinitions="*">
+                    <Image Source="{DynamicResource Cover}"
+                           Opacity="{Binding OpacityImage}"
+                           Margin="40"
+                           VerticalAlignment="Center"
+                           IsVisible="{Binding CoverImg}"
+                           Grid.Row="0"/>
+                    <StackPanel Grid.Row="0"
+                                Margin="40"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                IsVisible="{Binding CoverImg}">
+                        <TextBlock Text="{Binding Main}"
+                                   Foreground="White"
+                                   FontSize="45"
+                                   FontWeight="Bold"
+                                   MaxWidth="400"
+                                   TextWrapping="WrapWithOverflow"/>
+                        <TextBlock Text="{Binding PreMain}"
+                                   Foreground="White"
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"
+                                   MaxWidth="400"
+                                   TextWrapping="WrapWithOverflow"/>
+                    </StackPanel>
+                    </Grid>
+                </Border>
+                <!--Изображение (обложка трека)-->
                 <Border CornerRadius="10">
                     <Image Source="{Binding TrackImage}"
                            Opacity="{Binding OpacityImage}"

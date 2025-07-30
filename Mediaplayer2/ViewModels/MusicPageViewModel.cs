@@ -102,6 +102,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
 
     private string _trackImg;
 
+    private string _coverImg;
+
     public string Main
     {
         get => _main;
@@ -290,6 +292,12 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         get => _trackImg;
         set => this.RaiseAndSetIfChanged(ref _trackImg, value);
     }
+
+    public string CoverImg
+    {
+        get => _coverImg;
+        set => this.RaiseAndSetIfChanged(ref _coverImg, value);
+    }
     
     public void StopPlayback()
     {
@@ -343,6 +351,8 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         TrackImage = new Bitmap("Assets/MusicPagePictureRed2.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
+        TrackImg = "False";
+        CoverImg = "False";
         VisibleAttention = "false";
         
         VolumeOn = "True";
@@ -350,8 +360,6 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
         
         Play = "True";
         Stop = "False";
-
-        TrackImg = "False";
         
         _equalizer = new Equalizer();
         //_audioSettings = audioSettings;
@@ -606,6 +614,13 @@ public class MusicPageViewModel : ViewModelBase, IRoutableViewModel, IDisposable
                     TrackImg = "True";
                     OpacityImage = 1;
                 }
+            }
+            else
+            {
+                CoverImg = "True";
+                VisibleImage = "False";
+                TrackImg = "False";
+                OpacityImage = 1;
             }
 
             if (_audioFileReader != null)

@@ -79,6 +79,7 @@
         <Bitmap x:Key="MusicBack">Assets/MusicPagePictureRed2.png</Bitmap>
         <Bitmap x:Key="VideoBack">Assets/VideoPagePictureRed2.png</Bitmap>
         <Bitmap x:Key="PlaylistBack">Assets/PlaylistPagePictureRed2.png</Bitmap>
+        <Bitmap x:Key="Cover">Assets/strawberry.jpg</Bitmap>
     </Application.Resources>
              
     

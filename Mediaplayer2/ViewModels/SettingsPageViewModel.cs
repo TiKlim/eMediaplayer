@@ -77,7 +77,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureRed2.png",
                 MusicBack = "Assets/MusicPagePictureRed2.png",
                 VideoBack = "Assets/VideoPagePictureRed2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureRed2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureRed2.png",
+                Cover = "Assets/strawberry.jpg"
             },
             new Theme
             {
@@ -104,7 +105,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureYellow2.png",
                 MusicBack = "Assets/MusicPagePictureYellow2.png",
                 VideoBack = "Assets/VideoPagePictureYellow2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureYellow2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureYellow2.png",
+                Cover = "Assets/lemon sherbet.jpg"
             },
             new Theme
             {
@@ -131,7 +133,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureGreen2.png",
                 MusicBack = "Assets/MusicPagePictureGreen2.png",
                 VideoBack = "Assets/VideoPagePictureGreen2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureGreen2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureGreen2.png",
+                Cover = "Assets/pistachios.jpg"
             },
             new Theme
             {
@@ -158,7 +161,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureBlue2.png",
                 MusicBack = "Assets/MusicPagePictureBlue2.png",
                 VideoBack = "Assets/VideoPagePictureBlue2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureBlue2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureBlue2.png",
+                Cover = "Assets/blueberry.jpg"
             },
             new Theme
             {
@@ -185,7 +189,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureViolet2.png",
                 MusicBack = "Assets/MusicPagePictureViolet2.png",
                 VideoBack = "Assets/VideoPagePictureViolet2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureViolet2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureViolet2.png",
+                Cover = "Assets/grape.jpg"
             }
         };
         
@@ -257,7 +262,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureRed2.png",
                 MusicBack = "Assets/MusicPagePictureRed2.png",
                 VideoBack = "Assets/VideoPagePictureRed2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureRed2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureRed2.png",
+                Cover = "Assets/strawberry.jpg"
             },
             new Theme
             {
@@ -284,7 +290,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureYellow2.png",
                 MusicBack = "Assets/MusicPagePictureYellow2.png",
                 VideoBack = "Assets/VideoPagePictureYellow2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureYellow2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureYellow2.png",
+                Cover = "Assets/lemon sherbet.jpg"
             },
             new Theme
             {
@@ -311,7 +318,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureGreen2.png",
                 MusicBack = "Assets/MusicPagePictureGreen2.png",
                 VideoBack = "Assets/VideoPagePictureGreen2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureGreen2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureGreen2.png",
+                Cover = "Assets/pistachios.jpg"
             },
             new Theme
             {
@@ -338,7 +346,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureBlue2.png",
                 MusicBack = "Assets/MusicPagePictureBlue2.png",
                 VideoBack = "Assets/VideoPagePictureBlue2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureBlue2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureBlue2.png",
+                Cover = "Assets/blueberry.jpg"
             },
             new Theme
             {
@@ -365,7 +374,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MainBack = "Assets/MainPagePictureViolet2.png",
                 MusicBack = "Assets/MusicPagePictureViolet2.png",
                 VideoBack = "Assets/VideoPagePictureViolet2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureViolet2.png"
+                PlaylistBack = "Assets/PlaylistPagePictureViolet2.png",
+                Cover = "Assets/grape.jpg"
             }
         };
         
@@ -404,7 +414,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         var app = Avalonia.Application.Current;
         if (app == null) return;
 
-        // Пример обновления ресурсов
+        // Обновление ресурсов
         app.Resources["PrimaryColor"] = Avalonia.Media.Color.Parse(theme.PrimaryColor);
         app.Resources["SecondaryColor"] = Avalonia.Media.Color.Parse(theme.SecondaryColor);
         app.Resources["HomeButton"] = new Avalonia.Media.Imaging.Bitmap(theme.HomeButton);
@@ -428,6 +438,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         app.Resources["MusicBack"] = new Avalonia.Media.Imaging.Bitmap(theme.MusicBack);
         app.Resources["VideoBack"] = new Avalonia.Media.Imaging.Bitmap(theme.VideoBack);
         app.Resources["PlaylistBack"] = new Avalonia.Media.Imaging.Bitmap(theme.PlaylistBack);
+        app.Resources["Cover"] = new Avalonia.Media.Imaging.Bitmap(theme.Cover);
     }
     
     private void SaveSelectedThemeName(string themeName)

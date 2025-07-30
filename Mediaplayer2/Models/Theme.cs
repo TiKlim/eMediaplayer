@@ -26,4 +26,5 @@ public class Theme
     public string MusicBack { get; set; }
     public string VideoBack { get; set; }
     public string PlaylistBack { get; set; }
+    public string Cover { get; set; }
 }
