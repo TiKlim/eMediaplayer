@@ -20,27 +20,26 @@
         <!--Главный Grid-->
         <Grid RowDefinitions="Auto,*,5"
               ColumnDefinitions="5,*,5"
-              ShowGridLines="False"
-              Background="{DynamicResource SecondaryColor}">
+              ShowGridLines="True"
+              Background="{DynamicResource ThirdColor}">
             <!--Панель с контентом-->
             <Panel Grid.Column="0"
                    Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Grid.RowSpan="3">
-                    <!--<ContentControl Content="{Binding CurrentView}"/>-->
                     <react:RoutedViewHost Router="{Binding Router}"/>
-                    <!--<views:MusicPageView/>-->
-
             </Panel>
             <!--Grid окна действий-->
             <Grid Grid.Column="0"
-                  Grid.Row="1"
+                  Grid.Row="0"
                   Grid.ColumnSpan="3"
-                  RowDefinitions="Auto,*,Auto"
-                  ShowGridLines="False">
+                  Grid.RowSpan="3"
+                  ShowGridLines="True">
                     <!--Grid меню навигации-->
-                    <Grid Grid.Row="1"
-                          ColumnDefinitions="*,13*">
+                    <Grid Grid.Row=""
+                          Grid.RowSpan=""
+                          ColumnDefinitions="*,13*"
+                          ShowGridLines="True">
                             <!--Меню навигации-->
                             <StackPanel Grid.Column="0"
                                         Orientation="Vertical" 
@@ -128,7 +127,7 @@
                        Grid.Row="0"
                        Grid.ColumnSpan="3">
                     <Grid Name="WindowBar"
-                          Background="{DynamicResource PrimaryColor}"
+                          Background="{DynamicResource SecondaryColor}"
                           DockPanel.Dock="Top"
                           ColumnDefinitions="Auto,*,Auto"
                           PointerPressed="InputElement_OnPointerPressed">

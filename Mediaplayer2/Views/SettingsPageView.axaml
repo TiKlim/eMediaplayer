@@ -13,7 +13,7 @@
     <!--Главный Grid-->
     <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
-          Background="{DynamicResource SecondaryColor}">
+          Background="{DynamicResource ThirdColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"

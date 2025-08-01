@@ -57,7 +57,8 @@
              
     <Application.Resources>
         <Color x:Key="PrimaryColor">#FF595E</Color>
-        <Color x:Key="SecondaryColor">#f5efef</Color>
+        <Color x:Key="SecondaryColor">#ffdadc</Color>
+        <Color x:Key="ThirdColor">#ffeded</Color>
         <Bitmap x:Key="HomeButton">Assets/HomeRed.png</Bitmap>
         <Bitmap x:Key="MusicButton">Assets/MusicCollectionRed.png</Bitmap>
         <Bitmap x:Key="VideoButton">Assets/VideoCollectionRed.png</Bitmap>

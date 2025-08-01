@@ -15,7 +15,7 @@
     <Grid ShowGridLines="False" 
           ColumnDefinitions="*,13*" 
           RowDefinitions="120,*,120"
-          Background="{DynamicResource SecondaryColor}">
+          Background="{DynamicResource ThirdColor}">
         <!--Меню навигации было здесь-->
         
         <StackPanel Grid.Column="1"

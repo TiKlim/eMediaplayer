@@ -56,7 +56,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Клубника", 
                 PrimaryColor = "#FF595E", 
-                SecondaryColor = "#f5efef", 
+                SecondaryColor = "#ffdadc", 
+                ThirdColor = "#ffeded",
                 HomeButton = "Assets/HomeRed.png", 
                 MusicButton = "Assets/MusicCollectionRed.png", 
                 VideoButton = "Assets/VideoCollectionRed.png",
@@ -84,7 +85,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Лимонный щербет", 
                 PrimaryColor = "#FFCA3A", 
-                SecondaryColor = "#F5F3ED", 
+                SecondaryColor = "#fff3d4",
+                ThirdColor = "#fff9e9", 
                 HomeButton = "Assets/HomeYello.png", 
                 MusicButton = "Assets/MusicCollectionYello.png", 
                 VideoButton = "Assets/VideoCollectionYello.png",
@@ -112,7 +114,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Фисташка", 
                 PrimaryColor = "#8AC926", 
-                SecondaryColor = "#F0F3EC", 
+                SecondaryColor = "#e5f3cf", 
+                ThirdColor = "#f2f9e7", 
                 HomeButton = "Assets/HomeGreen.png", 
                 MusicButton = "Assets/MusicCollectionGreen.png", 
                 VideoButton = "Assets/VideoCollectionGreen.png",
@@ -140,7 +143,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Голубика", 
                 PrimaryColor = "#1982C4", 
-                SecondaryColor = "#ECF0F3", 
+                SecondaryColor = "#cce4f2", 
+                ThirdColor = "#e6f1f9", 
                 HomeButton = "Assets/HomeBlue.png", 
                 MusicButton = "Assets/MusicCollectionBlue.png", 
                 VideoButton = "Assets/VideoCollectionBlue.png",
@@ -166,9 +170,10 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Черничный пломбир", 
+                Name = "Виноград", 
                 PrimaryColor = "#6A4C93", 
-                SecondaryColor = "#EFEEF1", 
+                SecondaryColor = "#ded8e7", 
+                ThirdColor = "#efebf3",
                 HomeButton = "Assets/HomeViolet.png", 
                 MusicButton = "Assets/MusicCollectionViolet.png", 
                 VideoButton = "Assets/VideoCollectionViolet.png",
@@ -241,7 +246,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Клубника", 
                 PrimaryColor = "#FF595E", 
-                SecondaryColor = "#f5efef", 
+                SecondaryColor = "#ffdadc", 
+                ThirdColor = "#ffeded",
                 HomeButton = "Assets/HomeRed.png", 
                 MusicButton = "Assets/MusicCollectionRed.png", 
                 VideoButton = "Assets/VideoCollectionRed.png",
@@ -269,7 +275,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Лимонный щербет", 
                 PrimaryColor = "#FFCA3A", 
-                SecondaryColor = "#F5F3ED", 
+                SecondaryColor = "#fff3d4",
+                ThirdColor = "#fff9e9",
                 HomeButton = "Assets/HomeYello.png", 
                 MusicButton = "Assets/MusicCollectionYello.png", 
                 VideoButton = "Assets/VideoCollectionYello.png",
@@ -297,7 +304,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Фисташка", 
                 PrimaryColor = "#8AC926", 
-                SecondaryColor = "#F0F3EC", 
+                SecondaryColor = "#e5f3cf", 
+                ThirdColor = "#f2f9e7",
                 HomeButton = "Assets/HomeGreen.png", 
                 MusicButton = "Assets/MusicCollectionGreen.png", 
                 VideoButton = "Assets/VideoCollectionGreen.png",
@@ -325,7 +333,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Голубика", 
                 PrimaryColor = "#1982C4", 
-                SecondaryColor = "#ECF0F3", 
+                SecondaryColor = "#cce4f2", 
+                ThirdColor = "#e6f1f9",
                 HomeButton = "Assets/HomeBlue.png", 
                 MusicButton = "Assets/MusicCollectionBlue.png", 
                 VideoButton = "Assets/VideoCollectionBlue.png",
@@ -353,7 +362,8 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 Name = "Виноград", 
                 PrimaryColor = "#6A4C93", 
-                SecondaryColor = "#EFEEF1", 
+                SecondaryColor = "#ded8e7", 
+                ThirdColor = "#efebf3",
                 HomeButton = "Assets/HomeViolet.png", 
                 MusicButton = "Assets/MusicCollectionViolet.png", 
                 VideoButton = "Assets/VideoCollectionViolet.png",
@@ -417,6 +427,7 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         // Обновление ресурсов
         app.Resources["PrimaryColor"] = Avalonia.Media.Color.Parse(theme.PrimaryColor);
         app.Resources["SecondaryColor"] = Avalonia.Media.Color.Parse(theme.SecondaryColor);
+        app.Resources["ThirdColor"] = Avalonia.Media.Color.Parse(theme.ThirdColor);
         app.Resources["HomeButton"] = new Avalonia.Media.Imaging.Bitmap(theme.HomeButton);
         app.Resources["MusicButton"] = new Avalonia.Media.Imaging.Bitmap(theme.MusicButton);
         app.Resources["VideoButton"] = new Avalonia.Media.Imaging.Bitmap(theme.VideoButton);

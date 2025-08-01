@@ -16,9 +16,9 @@
         <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
     </UserControl.Resources>
     <!--Главный Grid-->
-    <Grid ShowGridLines="False"
+    <Grid ShowGridLines="True"
           RowDefinitions="Auto,*,Auto"
-          Background="{DynamicResource SecondaryColor}">
+          Background="{DynamicResource ThirdColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
               ColumnDefinitions="*,13*"

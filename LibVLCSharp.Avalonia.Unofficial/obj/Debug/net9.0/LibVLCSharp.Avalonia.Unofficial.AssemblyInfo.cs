@@ -22,7 +22,7 @@ This package depends on LibVLCSharp as well as Avalonia.
 LibVLC needs to be installed separately, see VideoLAN.LibVLC.* packages.
     ")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ba4bd8d30ebd2209cf25b77feaa7b74272c0406")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d2a2d988933cfaabaae14d2d3136df604b0d8c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("LibVLCSharp.Avalonia.Unofficial")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LibVLCSharp.Avalonia.Unofficial")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
