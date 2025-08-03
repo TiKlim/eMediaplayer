@@ -42,62 +42,72 @@
                           ShowGridLines="True">
                             <!--Меню навигации-->
                             <StackPanel Grid.Column="0"
+                                        Background="{DynamicResource SecondaryColor}"
                                         Orientation="Vertical" 
-                                        AreVerticalSnapPointsRegular="True" 
-                                        VerticalAlignment="Center"
+                                        AreVerticalSnapPointsRegular="True"
                                         Spacing="20">
-                                    <!--Кнопка "Домой"-->
-                                    <Button HorizontalAlignment="Stretch"
-                                            Classes="LeftPanel"    
-                                            Name="HomeBtn"
-                                            Background="{Binding Background}"
-                                            Command="{Binding ToHomePageCommand}">
-                                            <Image Source="{DynamicResource HomeButton}" 
-                                                   Margin="30 0 0 0" 
-                                                   MaxWidth="70" 
-                                                   MinWidth="40"/>
-                                    </Button>
-                                    <!--Кнопка "Аудио"-->
-                                    <Button HorizontalAlignment="Stretch" 
-                                            Classes="LeftPanel" 
-                                            Name="MusicBtn"
-                                            Background="{Binding Background}"
-                                            Command="{Binding ToMusicPageCommand}">
-                                            <Image Source="{DynamicResource MusicButton}" 
-                                                   Margin="30 0 0 0" 
-                                                   MaxWidth="70" 
-                                                   MinWidth="40"/>
-                                    </Button>
-                                    <!--Кнопка "Видео"-->
-                                    <Button HorizontalAlignment="Stretch" 
-                                            Classes="LeftPanel" 
-                                            Name="VideoBtn"
-                                            Command="{Binding ToVideoPageCommand}">
-                                            <Image Source="{DynamicResource VideoButton}" 
-                                                   Margin="30 0 0 0" 
-                                                   MaxWidth="70" 
-                                                   MinWidth="40"/>
-                                    </Button>
-                                    <!--Кнопка "Плейлисты"-->
-                                    <Button HorizontalAlignment="Stretch"
-                                            Classes="LeftPanel" 
-                                            Name="PlaylistBtn"
-                                            Command="{Binding ToPlaylistPageCommand}">
-                                            <Image Source="{DynamicResource PlaylistButton}" 
-                                                   Margin="30 0 0 0" 
-                                                   MaxWidth="70" 
-                                                   MinWidth="40"/>
-                                    </Button>
-                                    <!--Кнопка "Настройки"-->
-                                    <Button HorizontalAlignment="Stretch"
-                                            Classes="LeftPanel" 
-                                            Name="SettingsBtn"
-                                            Command="{Binding ToSettingsPageCommand}">
-                                            <Image Source="{DynamicResource SettingsButton}" 
-                                                   Margin="30 0 0 0" 
-                                                   MaxWidth="70" 
-                                                   MinWidth="40"/>
-                                    </Button>
+                                    <StackPanel Spacing="20"
+                                                Orientation="Vertical"
+                                                VerticalAlignment="Top"
+                                                Margin="0 60 0 0">
+                                            <!--Кнопка "Аудио"-->
+                                            <Button HorizontalAlignment="Stretch" 
+                                                    Classes="LeftPanel" 
+                                                    Name="MusicBtn"
+                                                    Background="{Binding Background}"
+                                                    Command="{Binding ToMusicPageCommand}">
+                                                    <Image Source="{DynamicResource MusicButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="20" 
+                                                           MinWidth="20"/>
+                                            </Button>
+                                            <!--Кнопка "Видео"-->
+                                            <Button HorizontalAlignment="Stretch" 
+                                                    Classes="LeftPanel" 
+                                                    Name="VideoBtn"
+                                                    Command="{Binding ToVideoPageCommand}">
+                                                    <Image Source="{DynamicResource VideoButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="20" 
+                                                           MinWidth="20"/>
+                                            </Button>
+                                            <!--Кнопка "Плейлисты"-->
+                                            <Button HorizontalAlignment="Stretch"
+                                                    Classes="LeftPanel" 
+                                                    Name="PlaylistBtn"
+                                                    Command="{Binding ToPlaylistPageCommand}">
+                                                    <Image Source="{DynamicResource PlaylistButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="20" 
+                                                           MinWidth="20"/>
+                                            </Button>
+                                    </StackPanel>
+                                    <StackPanel Spacing="20"
+                                                Orientation="Vertical"
+                                                VerticalAlignment="Bottom"
+                                                Margin="0 60 0 0">
+                                            <!--Кнопка "Домой"-->
+                                            <Button HorizontalAlignment="Stretch"
+                                                    Classes="LeftPanel"    
+                                                    Name="HomeBtn"
+                                                    Background="{Binding Background}"
+                                                    Command="{Binding ToHomePageCommand}">
+                                                    <Image Source="{DynamicResource HomeButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="20" 
+                                                           MinWidth="20"/>
+                                            </Button>
+                                            <!--Кнопка "Настройки"-->
+                                            <Button HorizontalAlignment="Stretch"
+                                                    Classes="LeftPanel" 
+                                                    Name="SettingsBtn"
+                                                    Command="{Binding ToSettingsPageCommand}">
+                                                    <Image Source="{DynamicResource SettingsButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="20" 
+                                                           MinWidth="20"/>
+                                            </Button>
+                                    </StackPanel>
                             </StackPanel>   
                     </Grid>
             </Grid>
