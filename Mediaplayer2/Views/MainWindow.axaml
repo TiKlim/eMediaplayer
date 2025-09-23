@@ -44,17 +44,24 @@
                             
                             <!--Попробовать Grid-->
                             
-                            <StackPanel Grid.Column="0"
-                                        Background="{DynamicResource SecondaryColor}"
-                                        Orientation="Vertical" 
-                                        AreVerticalSnapPointsRegular="True"
-                                        Width="50"
-                                        HorizontalAlignment="Left"
-                                        Spacing="20">
+                            <Grid Grid.Column="0"
+                                  Background="{DynamicResource SecondaryColor}"
+                                  Width="50"
+                                  HorizontalAlignment="Left">
                                     <StackPanel Spacing="20"
                                                 Orientation="Vertical"
                                                 VerticalAlignment="Top"
                                                 Margin="0 60 0 0">
+                                            <!--Кнопка "Плейлисты"-->
+                                            <Button HorizontalAlignment="Stretch"
+                                                    Classes="LeftPanel" 
+                                                    Name="PlaylistBtn"
+                                                    Command="{Binding ToPlaylistPageCommand}">
+                                                    <Image Source="{DynamicResource PlaylistButton}" 
+                                                           Margin="0 0 0 0" 
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
+                                            </Button>
                                             <!--Кнопка "Аудио"-->
                                             <Button HorizontalAlignment="Stretch" 
                                                     Classes="LeftPanel" 
@@ -76,21 +83,11 @@
                                                            MaxWidth="30" 
                                                            MinWidth="30"/>
                                             </Button>
-                                            <!--Кнопка "Плейлисты"-->
-                                            <Button HorizontalAlignment="Stretch"
-                                                    Classes="LeftPanel" 
-                                                    Name="PlaylistBtn"
-                                                    Command="{Binding ToPlaylistPageCommand}">
-                                                    <Image Source="{DynamicResource PlaylistButton}" 
-                                                           Margin="0 0 0 0" 
-                                                           MaxWidth="30" 
-                                                           MinWidth="30"/>
-                                            </Button>
                                     </StackPanel>
                                     <StackPanel Spacing="20"
                                                 Orientation="Vertical"
                                                 VerticalAlignment="Bottom"
-                                                Margin="0 60 0 0">
+                                                Margin="0 0 0 0">
                                             <!--Кнопка "Домой"-->
                                             <Button HorizontalAlignment="Stretch"
                                                     Classes="LeftPanel"    
@@ -113,7 +110,7 @@
                                                            MinWidth="30"/>
                                             </Button>
                                     </StackPanel>
-                            </StackPanel>   
+                            </Grid>   
                     </Grid>
             </Grid>
             <!--Изменение размеров окна. Часть первая-->
