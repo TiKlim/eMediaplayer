@@ -20,7 +20,7 @@
         <!--Главный Grid-->
         <Grid RowDefinitions="Auto,*,5"
               ColumnDefinitions="5,*,5"
-              ShowGridLines="True"
+              ShowGridLines="False"
               Background="{DynamicResource ThirdColor}">
             <!--Панель с контентом-->
             <Panel Grid.Column="0"
@@ -34,12 +34,12 @@
                   Grid.Row="0"
                   Grid.ColumnSpan="3"
                   Grid.RowSpan="3"
-                  ShowGridLines="True">
+                  ShowGridLines="False">
                     <!--Grid меню навигации-->
                     <Grid Grid.Row=""
                           Grid.RowSpan=""
-                          ColumnDefinitions="*,13*"
-                          ShowGridLines="True">
+                          ColumnDefinitions="Auto,13*"
+                          ShowGridLines="False">
                             <!--Меню навигации-->
                             
                             <!--Попробовать Grid-->
@@ -48,6 +48,8 @@
                                         Background="{DynamicResource SecondaryColor}"
                                         Orientation="Vertical" 
                                         AreVerticalSnapPointsRegular="True"
+                                        Width="50"
+                                        HorizontalAlignment="Left"
                                         Spacing="20">
                                     <StackPanel Spacing="20"
                                                 Orientation="Vertical"
@@ -61,8 +63,8 @@
                                                     Command="{Binding ToMusicPageCommand}">
                                                     <Image Source="{DynamicResource MusicButton}" 
                                                            Margin="0 0 0 0" 
-                                                           MaxWidth="20" 
-                                                           MinWidth="20"/>
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
                                             </Button>
                                             <!--Кнопка "Видео"-->
                                             <Button HorizontalAlignment="Stretch" 
@@ -71,8 +73,8 @@
                                                     Command="{Binding ToVideoPageCommand}">
                                                     <Image Source="{DynamicResource VideoButton}" 
                                                            Margin="0 0 0 0" 
-                                                           MaxWidth="20" 
-                                                           MinWidth="20"/>
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
                                             </Button>
                                             <!--Кнопка "Плейлисты"-->
                                             <Button HorizontalAlignment="Stretch"
@@ -81,8 +83,8 @@
                                                     Command="{Binding ToPlaylistPageCommand}">
                                                     <Image Source="{DynamicResource PlaylistButton}" 
                                                            Margin="0 0 0 0" 
-                                                           MaxWidth="20" 
-                                                           MinWidth="20"/>
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
                                             </Button>
                                     </StackPanel>
                                     <StackPanel Spacing="20"
@@ -97,8 +99,8 @@
                                                     Command="{Binding ToHomePageCommand}">
                                                     <Image Source="{DynamicResource HomeButton}" 
                                                            Margin="0 0 0 0" 
-                                                           MaxWidth="20" 
-                                                           MinWidth="20"/>
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
                                             </Button>
                                             <!--Кнопка "Настройки"-->
                                             <Button HorizontalAlignment="Stretch"
@@ -107,8 +109,8 @@
                                                     Command="{Binding ToSettingsPageCommand}">
                                                     <Image Source="{DynamicResource SettingsButton}" 
                                                            Margin="0 0 0 0" 
-                                                           MaxWidth="20" 
-                                                           MinWidth="20"/>
+                                                           MaxWidth="30" 
+                                                           MinWidth="30"/>
                                             </Button>
                                     </StackPanel>
                             </StackPanel>   
