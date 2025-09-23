@@ -28,4 +28,8 @@ public class Theme
     public string VideoBack { get; set; }
     public string PlaylistBack { get; set; }
     public string Cover { get; set; }
+    public string Close { get; set; }
+    public string Roll { get; set; }
+    public string Maximise { get; set; }
+    public string Minimize { get; set; }
 }

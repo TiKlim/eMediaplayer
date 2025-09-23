@@ -159,27 +159,28 @@
                                     <!--Свернуть окно-->
                                     <Button Name="MinimizeWindow"
                                             Classes="WindowBar">
-                                            <Image Source="../Assets/roll.png"
+                                            <Image Source="{DynamicResource Roll}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Вернуть окно в прежние размеры-->
                                     <Button Name="NormalWindow"
                                             Classes="WindowBar"
                                             IsVisible="False">
-                                            <Image Source="../Assets/minimize.png"
+                                            <Image Source="{DynamicResource Minimize}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Увеличить окно на весь экран-->
                                     <Button Name="MaximizeWindow"
                                             Classes="WindowBar">
-                                            <Image Source="../Assets/maximise.png"
+                                            <Image Source="{DynamicResource Maximise}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Закрыть окно-->
                                     <Button Name="CloseWindow"
                                             Classes="CloseButton">
-                                            <Image Source="../Assets/close.png"
-                                                   Height="20"/>
+                                            <Image Source="{DynamicResource Close}"
+                                                   Height="20"
+                                                   Classes="CloseImg"/>
                                     </Button>
                             </StackPanel>
                     </Grid>

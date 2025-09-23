@@ -79,7 +79,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureRed2.png",
                 VideoBack = "Assets/VideoPagePictureRed2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureRed2.png",
-                Cover = "Assets/strawberry.jpg"
+                Cover = "Assets/strawberry.jpg",
+                Close = "Assets/CloseRed.png",
+                Roll = "Assets/RollRed.png",
+                Maximise = "Assets/MaximiseRed.png",
+                Minimize = "Assets/MinimizeRed.png"
             },
             new Theme
             {
@@ -108,7 +112,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureYellow2.png",
                 VideoBack = "Assets/VideoPagePictureYellow2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureYellow2.png",
-                Cover = "Assets/lemon sherbet.jpg"
+                Cover = "Assets/lemon sherbet.jpg",
+                Close = "Assets/CloseYellow.png",
+                Roll = "Assets/RollYellow.png",
+                Maximise = "Assets/MaximiseYellow.png",
+                Minimize = "Assets/MinimizeYellow.png"
             },
             new Theme
             {
@@ -137,7 +145,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureGreen2.png",
                 VideoBack = "Assets/VideoPagePictureGreen2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureGreen2.png",
-                Cover = "Assets/pistachios.jpg"
+                Cover = "Assets/pistachios.jpg",
+                Close = "Assets/CloseGreen.png",
+                Roll = "Assets/RollGreen.png",
+                Maximise = "Assets/MaximiseGreen.png",
+                Minimize = "Assets/MinimizeGreen.png"
             },
             new Theme
             {
@@ -166,7 +178,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureBlue2.png",
                 VideoBack = "Assets/VideoPagePictureBlue2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureBlue2.png",
-                Cover = "Assets/blueberry.jpg"
+                Cover = "Assets/blueberry.jpg",
+                Close = "Assets/CloseBlue.png",
+                Roll = "Assets/RollBlue.png",
+                Maximise = "Assets/MaximiseBlue.png",
+                Minimize = "Assets/MinimizeBlue.png"
             },
             new Theme
             {
@@ -195,7 +211,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureViolet2.png",
                 VideoBack = "Assets/VideoPagePictureViolet2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureViolet2.png",
-                Cover = "Assets/grape.jpg"
+                Cover = "Assets/grape.jpg",
+                Close = "Assets/CloseViolet.png",
+                Roll = "Assets/RollViolet.png",
+                Maximise = "Assets/MaximiseViolet.png",
+                Minimize = "Assets/MinimizeViolet.png"
             }
         };
         
@@ -269,7 +289,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureRed2.png",
                 VideoBack = "Assets/VideoPagePictureRed2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureRed2.png",
-                Cover = "Assets/strawberry.jpg"
+                Cover = "Assets/strawberry.jpg",
+                Close = "Assets/CloseRed.png",
+                Roll = "Assets/RollRed.png",
+                Maximise = "Assets/MaximiseRed.png",
+                Minimize = "Assets/MinimizeRed.png"
             },
             new Theme
             {
@@ -298,7 +322,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureYellow2.png",
                 VideoBack = "Assets/VideoPagePictureYellow2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureYellow2.png",
-                Cover = "Assets/lemon sherbet.jpg"
+                Cover = "Assets/lemon sherbet.jpg",
+                Close = "Assets/CloseYellow.png",
+                Roll = "Assets/RollYellow.png",
+                Maximise = "Assets/MaximiseYellow.png",
+                Minimize = "Assets/MinimizeYellow.png"
             },
             new Theme
             {
@@ -327,7 +355,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureGreen2.png",
                 VideoBack = "Assets/VideoPagePictureGreen2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureGreen2.png",
-                Cover = "Assets/pistachios.jpg"
+                Cover = "Assets/pistachios.jpg",
+                Close = "Assets/CloseGreen.png",
+                Roll = "Assets/RollGreen.png",
+                Maximise = "Assets/MaximiseGreen.png",
+                Minimize = "Assets/MinimizeGreen.png"
             },
             new Theme
             {
@@ -356,7 +388,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureBlue2.png",
                 VideoBack = "Assets/VideoPagePictureBlue2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureBlue2.png",
-                Cover = "Assets/blueberry.jpg"
+                Cover = "Assets/blueberry.jpg",
+                Close = "Assets/CloseBlue.png",
+                Roll = "Assets/RollBlue.png",
+                Maximise = "Assets/MaximiseBlue.png",
+                Minimize = "Assets/MinimizeBlue.png"
             },
             new Theme
             {
@@ -385,7 +421,11 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
                 MusicBack = "Assets/MusicPagePictureViolet2.png",
                 VideoBack = "Assets/VideoPagePictureViolet2.png",
                 PlaylistBack = "Assets/PlaylistPagePictureViolet2.png",
-                Cover = "Assets/grape.jpg"
+                Cover = "Assets/grape.jpg",
+                Close = "Assets/CloseViolet.png",
+                Roll = "Assets/RollViolet.png",
+                Maximise = "Assets/MaximiseViolet.png",
+                Minimize = "Assets/MinimizeViolet.png"
             }
         };
         
@@ -450,6 +490,10 @@ public class SettingsPageViewModel : ReactiveObject, IRoutableViewModel
         app.Resources["VideoBack"] = new Avalonia.Media.Imaging.Bitmap(theme.VideoBack);
         app.Resources["PlaylistBack"] = new Avalonia.Media.Imaging.Bitmap(theme.PlaylistBack);
         app.Resources["Cover"] = new Avalonia.Media.Imaging.Bitmap(theme.Cover);
+        app.Resources["Close"] = new Avalonia.Media.Imaging.Bitmap(theme.Close);
+        app.Resources["Roll"] = new Avalonia.Media.Imaging.Bitmap(theme.Roll);
+        app.Resources["Minimize"] = new Avalonia.Media.Imaging.Bitmap(theme.Minimize);
+        app.Resources["Maximise"] = new Avalonia.Media.Imaging.Bitmap(theme.Maximise);
     }
     
     private void SaveSelectedThemeName(string themeName)
