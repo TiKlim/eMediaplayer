@@ -101,6 +101,11 @@ public class MainWindowViewModel : ViewModelBase, IScreen
             videoVM.WhenDeactivated();
         }*/
 
+        if (Background == "Red")
+        {
+            
+        }
+
     }
     
     private void HomePage()

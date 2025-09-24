@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
 using Avalonia.ReactiveUI;
 using Mediaplayer2.ViewModels;
 using ReactiveUI;
@@ -14,9 +15,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        //var viewModel = new VideoPageViewModel(VideoPlayer);
-        //DataContext = viewModel;
-        //DataContext = new MainWindowViewModel();
     }
     // Метод для перемещения окна по экрану с помощью верхней панели.
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)

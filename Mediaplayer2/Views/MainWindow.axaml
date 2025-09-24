@@ -180,7 +180,7 @@
                                             Classes="CloseButton">
                                             <Image Source="{DynamicResource Close}"
                                                    Height="20"
-                                                   Classes="CloseImg"/>
+                                                   Name="CloseImage"/>
                                     </Button>
                             </StackPanel>
                     </Grid>
