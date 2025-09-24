@@ -156,10 +156,19 @@
                     <Grid Name="WindowBar"
                           Background="{DynamicResource SecondaryColor}"
                           DockPanel.Dock="Top"
-                          ColumnDefinitions="Auto,*,Auto"
+                          ColumnDefinitions="50,*,Auto"
+                          ShowGridLines="False"
                           PointerPressed="InputElement_OnPointerPressed">
+                            <!--Значок-->
+                            <Image Source="../Assets/appIcon.ico"
+                                   Height="20"
+                                   Margin="15 0 0 0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"/>
                             <!--Заголовок-->
-                            <TextBlock VerticalAlignment="Center"
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
                                        Margin="10 0 0 0"
                                        Text="eMediaplayer"
                                        Foreground="{DynamicResource ThirdColor}"/>
