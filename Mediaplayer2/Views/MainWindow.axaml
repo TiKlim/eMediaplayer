@@ -56,6 +56,9 @@
                                             <Button HorizontalAlignment="Stretch"
                                                     Classes="LeftPanel" 
                                                     Name="PlaylistBtn"
+                                                    CornerRadius="4"
+                                                    Height="45"
+                                                    Width="45"
                                                     Command="{Binding ToPlaylistPageCommand}">
                                                     <Image Source="{DynamicResource PlaylistButton}" 
                                                            Margin="0 0 0 0" 
@@ -66,6 +69,9 @@
                                             <Button HorizontalAlignment="Stretch" 
                                                     Classes="LeftPanel" 
                                                     Name="MusicBtn"
+                                                    CornerRadius="4"
+                                                    Height="45"
+                                                    Width="45"
                                                     Background="{Binding Background}"
                                                     Command="{Binding ToMusicPageCommand}">
                                                     <Image Source="{DynamicResource MusicButton}" 
@@ -77,6 +83,9 @@
                                             <Button HorizontalAlignment="Stretch" 
                                                     Classes="LeftPanel" 
                                                     Name="VideoBtn"
+                                                    CornerRadius="4"
+                                                    Height="45"
+                                                    Width="45"
                                                     Command="{Binding ToVideoPageCommand}">
                                                     <Image Source="{DynamicResource VideoButton}" 
                                                            Margin="0 0 0 0" 
@@ -92,6 +101,9 @@
                                             <Button HorizontalAlignment="Stretch"
                                                     Classes="LeftPanel"    
                                                     Name="HomeBtn"
+                                                    CornerRadius="4"
+                                                    Height="45"
+                                                    Width="45"
                                                     Background="{Binding Background}"
                                                     Command="{Binding ToHomePageCommand}">
                                                     <Image Source="{DynamicResource HomeButton}" 
@@ -103,6 +115,9 @@
                                             <Button HorizontalAlignment="Stretch"
                                                     Classes="LeftPanel" 
                                                     Name="SettingsBtn"
+                                                    CornerRadius="4"
+                                                    Height="45"
+                                                    Width="45"
                                                     Command="{Binding ToSettingsPageCommand}">
                                                     <Image Source="{DynamicResource SettingsButton}" 
                                                            Margin="0 0 0 0" 
@@ -158,26 +173,30 @@
                                     </StackPanel.Styles>
                                     <!--Свернуть окно-->
                                     <Button Name="MinimizeWindow"
-                                            Classes="WindowBar">
+                                            Classes="WindowBar"
+                                            CornerRadius="4">
                                             <Image Source="{DynamicResource Roll}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Вернуть окно в прежние размеры-->
                                     <Button Name="NormalWindow"
                                             Classes="WindowBar"
-                                            IsVisible="False">
+                                            IsVisible="False"
+                                            CornerRadius="4">
                                             <Image Source="{DynamicResource Minimize}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Увеличить окно на весь экран-->
                                     <Button Name="MaximizeWindow"
-                                            Classes="WindowBar">
+                                            Classes="WindowBar"
+                                            CornerRadius="4">
                                             <Image Source="{DynamicResource Maximise}"
                                                    Height="20"/>
                                     </Button>
                                     <!--Закрыть окно-->
                                     <Button Name="CloseWindow"
-                                            Classes="CloseButton">
+                                            Classes="CloseButton"
+                                            CornerRadius="4">
                                             <Image Source="{DynamicResource Close}"
                                                    Height="20"
                                                    Name="CloseImage"/>
