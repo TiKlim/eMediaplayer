@@ -12,6 +12,7 @@ public partial class MainWindow : Window
 {
     // Переменная для кнопок развернуть/вернуть прежний размер.
     private bool _boobool;
+    //
     public MainWindow()
     {
         InitializeComponent();

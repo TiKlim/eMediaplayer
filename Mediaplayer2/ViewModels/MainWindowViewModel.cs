@@ -54,6 +54,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         set => this.RaiseAndSetIfChanged(ref _currentView, value);
     }*/
     
+    public string IsVisibleImage;
+    
     public ReactiveCommand<Unit, IRoutableViewModel> ToHomePageCommand { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> ToMusicPageCommand { get; }
@@ -85,6 +87,8 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
 
+        SelectedButtons();
+        
         if (_isSelected) 
         {
             Background = "#f7d2d3";
@@ -107,40 +111,9 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         }
 
     }
-    
-    private void HomePage()
-    {
-        //CurrentView = new MainPageView();
-        _isSelected = true; //???
-    }
 
-    /*private void MusicPage()
+    public void SelectedButtons()
     {
-        CurrentView = new MusicPageView();
-    }*/
-
-    /*private IObservable<IRoutableViewModel> ToMusic()
-    {
-        return Router.Navigate.Execute(new MusicPageViewModel(equalizer, this));
-    }*/
-    
-    private void VideoPage()
-    {
-        //CurrentView = new VideoPageView();
-    }
-    
-    private void PlaylistPage()
-    {
-        //CurrentView = new PlaylistPageView();
-    }
-    
-    private void SettingsPage()
-    {
-        //CurrentView = new SettingsPageView();
-    }
-
-    private void AudioEditPage()
-    {
-        //CurrentView = new EditAudioView();
+        
     }
 }
