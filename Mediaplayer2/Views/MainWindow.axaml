@@ -122,7 +122,8 @@
                                                     <Image Source="{DynamicResource SettingsButton}" 
                                                            Margin="0 0 0 0" 
                                                            MaxWidth="30" 
-                                                           MinWidth="30"/>
+                                                           MinWidth="30"
+                                                           Name="SettingsImage"/>
                                             </Button>
                                     </StackPanel>
                             </Grid>   

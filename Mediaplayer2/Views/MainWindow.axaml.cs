@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.ReactiveUI;
 using Mediaplayer2.ViewModels;
@@ -13,6 +14,7 @@ public partial class MainWindow : Window
     // Переменная для кнопок развернуть/вернуть прежний размер.
     private bool _boobool;
     //
+    public Bitmap WhiteImage = new Bitmap("Assets/CloseWhite.png");
     public MainWindow()
     {
         InitializeComponent();
@@ -41,6 +43,8 @@ public partial class MainWindow : Window
         this.Get<Button>("MinimizeWindow").Click += delegate { this.WindowState = WindowState.Minimized; };
         this.Get<Button>("MaximizeWindow").Click += delegate { this.WindowState = WindowState.Maximized; _boobool = true; MaxMinButton(); };
         this.Get<Button>("CloseWindow").Click += delegate { this.Close(); };
+        this.Get<Button>("CloseWindow").PointerWheelChanged += delegate { CloseImage.Source = WhiteImage; };
+        this.Get<Button>("SettingsBtn").PointerPressed += delegate { SettingsImage.Source = WhiteImage; }; //!!!
         this.Get<Button>("NormalWindow").Click += delegate { this.WindowState = WindowState.Normal; _boobool = false; MaxMinButton(); };
         // Добавление возможности изменять размеры окна.
         SetupSide("Left", StandardCursorType.LeftSide, WindowEdge.West);
