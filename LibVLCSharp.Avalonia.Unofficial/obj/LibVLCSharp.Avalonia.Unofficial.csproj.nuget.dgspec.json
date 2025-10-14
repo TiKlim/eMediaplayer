@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {}
+    "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {
+    "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
+        "projectUniqueName": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
         "projectName": "LibVLCSharp.Avalonia.Unofficial",
-        "projectPath": "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
+        "projectPath": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\obj\\",
+        "outputPath": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
