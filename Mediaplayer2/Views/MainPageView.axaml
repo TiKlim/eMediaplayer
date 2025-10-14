@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     <!--DataContext-->
     <Grid ShowGridLines="False" 
-          ColumnDefinitions="*,13*" 
+          ColumnDefinitions="*,33*" 
           RowDefinitions="120,*,120"
           Background="{DynamicResource ThirdColor}">
         <!--Меню навигации было здесь-->

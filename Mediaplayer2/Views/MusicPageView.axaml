@@ -16,12 +16,12 @@
         <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
     </UserControl.Resources>
     <!--Главный Grid-->
-    <Grid ShowGridLines="True"
+    <Grid ShowGridLines="False"
           RowDefinitions="Auto,*,Auto"
           Background="{DynamicResource ThirdColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,33*"
               ShowGridLines="False">
             <!--Заголовок-->
             <StackPanel Grid.Column="1"
@@ -57,7 +57,7 @@
         </Grid>
         <!--Grid для изображения (обложка трека)-->
         <Grid Grid.Row="1"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,23*"
               ShowGridLines="False">
             <Panel Grid.Column="1">
                 <!--Изображение страницы-->
@@ -117,7 +117,7 @@
         <Grid Grid.Column="0"
               Grid.Row="2"
               RowDefinitions="*,*"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,23*"
               ShowGridLines="False">
             <!--Полоса прокрутки-->
             <Slider Grid.Row="0"
