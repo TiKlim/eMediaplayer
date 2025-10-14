@@ -6931,8 +6931,8 @@
     },
     "LibVLCSharp.Avalonia.Unofficial/1.0.0": {
       "type": "project",
-      "path": "../../MediaplayerE/LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj",
-      "msbuildProject": "../../MediaplayerE/LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj"
+      "path": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj",
+      "msbuildProject": "../LibVLCSharp.Avalonia.Unofficial/LibVLCSharp.Avalonia.Unofficial.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6988,8 +6988,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {
-              "projectPath": "C:\\Users\\User\\RiderProjects\\MediaplayerE\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj"
+            "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj": {
+              "projectPath": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj"
             }
           }
         }
