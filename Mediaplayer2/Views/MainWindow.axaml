@@ -96,7 +96,7 @@
                                     <StackPanel Spacing="20"
                                                 Orientation="Vertical"
                                                 VerticalAlignment="Bottom"
-                                                Margin="0 0 0 0">
+                                                Margin="0 0 0 20">
                                             <!--Кнопка "Домой"-->
                                             <Button HorizontalAlignment="Stretch"
                                                     Classes="LeftPanel"    
