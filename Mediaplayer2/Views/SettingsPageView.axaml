@@ -16,7 +16,7 @@
           Background="{DynamicResource ThirdColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,33*"
               ShowGridLines="False">
             <!--Заголовок-->
             <StackPanel Grid.Column="1"
@@ -36,7 +36,7 @@
         </Grid>
         <!--Grid для изображения (обложка трека)-->
         <Grid Grid.Row="1"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,23*"
               ShowGridLines="False">
             <StackPanel Grid.Column="1"
                         Margin="30 40 0 0"

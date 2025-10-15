@@ -21,7 +21,7 @@
           Background="{DynamicResource ThirdColor}">
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,33*"
               ShowGridLines="False">
             <!--Заголовок-->
             <StackPanel Grid.Column="1"

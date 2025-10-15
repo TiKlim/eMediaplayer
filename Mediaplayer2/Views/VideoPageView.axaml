@@ -27,7 +27,7 @@
         <!--<ContentControl Content="{Binding CurrentView}"/>-->
         <!--Grid для заголовка-->
         <Grid Grid.Row="0"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,33*"
               ShowGridLines="False">
             <!--Заголовок-->
             <StackPanel Grid.Column="1"
@@ -67,7 +67,7 @@
         </Grid>
         <!--Grid для изображения (обложка трека)-->
         <Grid Grid.Row="1"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,23*"
               ShowGridLines="False">
             <!--Изображение (видео)-->
             <Image Grid.Column="1"
@@ -94,7 +94,7 @@
         <Grid Grid.Column="0"
               Grid.Row="2"
               RowDefinitions="*,*"
-              ColumnDefinitions="*,13*"
+              ColumnDefinitions="*,23*"
               ShowGridLines="False"
               ZIndex="11">
             <!--Полоса прокрутки-->

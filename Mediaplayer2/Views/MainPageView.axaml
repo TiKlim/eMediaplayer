@@ -23,7 +23,7 @@
                     Orientation="Vertical"
                     Margin="30 50 0 0">
             <TextBlock Text="{Binding Main}"
-                       FontSize="38"
+                       FontSize="40"
                        FontWeight="Bold"
                        VerticalAlignment="Center"/>
          
