@@ -14,7 +14,7 @@
     </ItemGroup>-->
 
     <ItemGroup>
-        <ProjectReference Include="C:\Users\User\RiderProjects\eMediaplayer\LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj" />
+        <ProjectReference Include="K:\RiderProj\eMediaplayer\LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj" />
     </ItemGroup>
 
 

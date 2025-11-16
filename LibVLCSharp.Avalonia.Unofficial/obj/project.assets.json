@@ -3696,19 +3696,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\klimt\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
+      "projectUniqueName": "K:\\RiderProj\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
       "projectName": "LibVLCSharp.Avalonia.Unofficial",
-      "projectPath": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\RiderProjects\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\obj\\",
+      "projectPath": "K:\\RiderProj\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\LibVLCSharp.Avalonia.Unofficial.csproj",
+      "packagesPath": "C:\\Users\\klimt\\.nuget\\packages\\",
+      "outputPath": "K:\\RiderProj\\eMediaplayer\\LibVLCSharp.Avalonia.Unofficial\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\klimt\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -3732,7 +3732,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -3779,7 +3779,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\User\\.dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
