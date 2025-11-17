@@ -16,7 +16,7 @@ eMediaplayer дополняет функционал обычного медиа
 
 Также eMediaplayer отличается простотой интерфейса, что делает работу с ним ещё приятнее.
 ## Информация скачивающим
-В файле .csproj проекта поменяйте путь к библиотеке "LibVLCSharp.Avalonia.Unofficial".
+В файле .csproj проекта (Mediaplayer2.csproj) поменяйте путь к библиотеке "LibVLCSharp.Avalonia.Unofficial".
 ## Контакты
 klim.timofeev.04@mail.ru
 
