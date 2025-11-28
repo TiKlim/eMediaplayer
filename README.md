@@ -1,4 +1,5 @@
-<img width="1920" height="427" alt="1" src="https://github.com/user-attachments/assets/1f1df374-d6a1-4f94-8776-b8ec14b1bb93" />
+<img width="1920" height="431" alt="2" src="https://github.com/user-attachments/assets/e6dc5b4f-3385-4a81-8060-5b9ee6b8f910" />
+
 
 # eMediaplayer
 ## О проекте
