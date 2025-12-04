@@ -4,6 +4,7 @@
 **/[Oo]ut/
 **/[Pp]ublish/
 # Файлы Rider
+*.DotSettings.user
 .idea/
 **/*.sln.iml
 # NuGet пакеты
