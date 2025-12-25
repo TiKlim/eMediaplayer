@@ -37,6 +37,7 @@
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="NAudio.Lame" Version="2.1.0" />
         <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="18.1.1" />
+        <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.6.2" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
         <PackageReference Include="TagLibSharp" Version="2.3.0" />
         <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.21" />
