@@ -10,7 +10,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <ProjectReference Include="K:\RiderProj\eMediaplayer\LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj" />
+        <ProjectReference Include="..\LibVLCSharp.Avalonia.Unofficial\LibVLCSharp.Avalonia.Unofficial.csproj" />
     </ItemGroup>
 
     <ItemGroup>
