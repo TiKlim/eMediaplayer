@@ -79,7 +79,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         
         AudioSettings = new AudioSettings();
         
-        Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
+        /*Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler);
         
         ToHomePageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MainPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToMusicPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new MusicPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
@@ -87,7 +87,7 @@ public class MainWindowViewModel : ViewModelBase, IScreen
         ToPlaylistPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new PlaylistPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
         ToSettingsPageCommand = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(new SettingsPageViewModel(this)).ObserveOn(RxApp.MainThreadScheduler));
 
-        SelectedButtons();
+        SelectedButtons();*/
         
         if (_isSelected) 
         {

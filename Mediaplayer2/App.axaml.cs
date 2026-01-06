@@ -10,21 +10,20 @@ namespace Mediaplayer2;
 
 public partial class App : Application
 {
-    public static SettingsPageViewModel SettingsViewModel { get; private set; }
+    //public static SettingsPageViewModel SettingsViewModel { get; private set; }
     
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
         
-        SettingsViewModel = new SettingsPageViewModel();
-        //var settingsViewModel = new SettingsPageViewModel();
+        /*SettingsViewModel = new SettingsPageViewModel();
         var savedThemeName = SettingsViewModel.LoadSelectedThemeName();
         var savedTheme = SettingsViewModel.Presets.FirstOrDefault(t => t.Name == savedThemeName);
         
         if (savedTheme != null)
         {
             SettingsViewModel.ApplyTheme(savedTheme);
-        }
+        }*/
     }
 
     public override void OnFrameworkInitializationCompleted()

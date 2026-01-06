@@ -40,12 +40,12 @@ public partial class MainWindow : Window
         // 
         AvaloniaXamlLoader.Load(this);
         // Кнопки управления окном (свернуть/развернуть/вернуть прежний размер/закрыть).
-        this.Get<Button>("MinimizeWindow").Click += delegate { this.WindowState = WindowState.Minimized; };
+        /*this.Get<Button>("MinimizeWindow").Click += delegate { this.WindowState = WindowState.Minimized; };
         this.Get<Button>("MaximizeWindow").Click += delegate { this.WindowState = WindowState.Maximized; _boobool = true; MaxMinButton(); };
         this.Get<Button>("CloseWindow").Click += delegate { this.Close(); };
         this.Get<Button>("CloseWindow").PointerWheelChanged += delegate { CloseImage.Source = WhiteImage; };
         this.Get<Button>("SettingsBtn").PointerPressed += delegate { SettingsImage.Source = WhiteImage; }; //!!!
-        this.Get<Button>("NormalWindow").Click += delegate { this.WindowState = WindowState.Normal; _boobool = false; MaxMinButton(); };
+        this.Get<Button>("NormalWindow").Click += delegate { this.WindowState = WindowState.Normal; _boobool = false; MaxMinButton(); };*/
         // Добавление возможности изменять размеры окна.
         SetupSide("Left", StandardCursorType.LeftSide, WindowEdge.West);
         SetupSide("Right", StandardCursorType.RightSide, WindowEdge.East);

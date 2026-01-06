@@ -26,7 +26,7 @@ public static class Helper
         Locator.CurrentMutable.InitializeReactiveUI();
         
         Locator.CurrentMutable.RegisterConstant(services);
-        Locator.CurrentMutable.Register<IViewFor<MainPageViewModel>>(() => new MainPageView());
+        /*Locator.CurrentMutable.Register<IViewFor<MainPageViewModel>>(() => new MainPageView());
         Locator.CurrentMutable.Register<IViewFor<MusicPageViewModel>>(() => new MusicPageView());
         Locator.CurrentMutable.Register<IViewFor<VideoPageViewModel>>(() => new VideoPageView()); //*
         Locator.CurrentMutable.Register<IViewFor<PlaylistPageViewModel>>(() => new PlaylistPageView());
@@ -35,7 +35,7 @@ public static class Helper
         Locator.CurrentMutable.Register<IViewFor<EditVideoViewModel>>(() => new EditVideoView());
         Locator.CurrentMutable.Register<IViewFor<MusicFromListViewModel>>(() => new MusicFromListView());
         Locator.CurrentMutable.Register<IViewFor<EditPlaylistViewModel>>(() => new EditPlaylistView());
-        
+        */
         RxApp.MainThreadScheduler = AvaloniaScheduler.Instance;
     }
 }
