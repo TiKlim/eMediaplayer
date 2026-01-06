@@ -18,6 +18,15 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
+    
+    <ItemGroup>
+        
+        <Compile Remove="Archive\**\*.cs"/>
+        <None Include="Archive\**\*.cs"/>
+        
+        <AvaloniaResource Remove="Archive\**\*.axaml"/>
+        <None Include="Archive\**\*.axaml"/>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.3.10" />
