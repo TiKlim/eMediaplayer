@@ -12,4 +12,51 @@
         <vm:MainPageViewModel/>
     </UserControl.DataContext>
     <!-- DataContext -->
+    <!-- Основной Grid -->
+    <Grid ShowGridLines="True"
+          RowDefinitions="Auto, Auto,*,Auto,Auto"
+          Background="{DynamicResource ThirdColor}">
+        <!-- Полоса прокрутки -->
+        <DockPanel Grid.Row="3"
+                   Height="40"
+                   Background="{DynamicResource SecondaryColor}">
+            
+        </DockPanel>
+        <!-- Полоса прокрутки -->
+        <!-- Нижняя панель -->
+        <!-- Нижняя панель -->
+        <!-- Средняя панель -->
+        <!-- Средняя панель -->
+        <!-- Верхняя панель -->
+        <Grid Grid.Row="1"
+              Height="70"
+              ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
+              ShowGridLines="True">
+            <StackPanel Grid.Column="0"
+                        Width="220"
+                        Margin="10"
+                        Background="{DynamicResource SecondaryColor}">
+                <ComboBox ItemsSource="{Binding Presets}" 
+                          SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
+                          Width="200"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="10"
+                          Background="{DynamicResource PrimaryColor}"
+                          BorderBrush="{DynamicResource SecondaryColor}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+        <!-- Верхняя панель -->
+        <!-- Панель управления окном -->
+        <StackPanel Grid.Row="0"
+                    Height="40"></StackPanel>
+        <!-- Панель управления окном -->
+    </Grid>
+    <!-- Основной Grid -->
 </UserControl>
