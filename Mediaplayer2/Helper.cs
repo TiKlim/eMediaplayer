@@ -26,8 +26,8 @@ public static class Helper
         Locator.CurrentMutable.InitializeReactiveUI();
         
         Locator.CurrentMutable.RegisterConstant(services);
-        /*Locator.CurrentMutable.Register<IViewFor<MainPageViewModel>>(() => new MainPageView());
-        Locator.CurrentMutable.Register<IViewFor<MusicPageViewModel>>(() => new MusicPageView());
+        Locator.CurrentMutable.Register<IViewFor<MainPageViewModel>>(() => new MainPageView());
+        /*Locator.CurrentMutable.Register<IViewFor<MusicPageViewModel>>(() => new MusicPageView());
         Locator.CurrentMutable.Register<IViewFor<VideoPageViewModel>>(() => new VideoPageView()); //*
         Locator.CurrentMutable.Register<IViewFor<PlaylistPageViewModel>>(() => new PlaylistPageView());
         Locator.CurrentMutable.Register<IViewFor<SettingsPageViewModel>>(() => new SettingsPageView());
