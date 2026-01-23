@@ -1,4 +1,7 @@
+using Avalonia.Media;
+
 namespace Mediaplayer2.Models;
+
 
 public class Theme
 {

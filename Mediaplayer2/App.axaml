@@ -65,6 +65,7 @@
     </Application.Styles>
              
     <Application.Resources>
+        <!-- Темы -->
         <Color x:Key="PrimaryColor">#FF595E</Color>
         <Color x:Key="SecondaryColor">#ffdadc</Color>
         <Color x:Key="ThirdColor">#ffeded</Color>
@@ -94,5 +95,21 @@
         <Bitmap x:Key="Roll">Assets/RollRed.png</Bitmap>
         <Bitmap x:Key="Maximise">Assets/MaximiseRed.png</Bitmap>
         <Bitmap x:Key="Minimize">Assets/MinimizeRed.png</Bitmap>
+        <!-- Язык -->
+        <system:String x:Key="LanguageName">Русский</system:String>
+        <system:String x:Key="RedThemeName">Клубника</system:String>
+        <system:String x:Key="YellowThemeName">Лимонный шербет</system:String>
+        <system:String x:Key="GreenThemeName">Фисташка</system:String>
+        <system:String x:Key="BlueThemeName">Голубика</system:String>
+        <system:String x:Key="VioletThemeName">Ежевика</system:String>
+        <system:String x:Key="FindFileButton">Найти файл</system:String>
+        <system:String x:Key="EditFileButton">Редактировать</system:String>
+        <system:String x:Key="FirstEqualizerThemeName">Поп</system:String>
+        <system:String x:Key="SecondEqualizerThemeName">Вокал</system:String>
+        <system:String x:Key="ThirdEqualizerThemeName">Рок</system:String>
+        <system:String x:Key="FourthEqualizerThemeName">Джаз</system:String>
+        <system:String x:Key="FifthEqualizerThemeName">Классический</system:String>
+        <system:String x:Key="SixthEqualizerThemeName">Усиление низких частот</system:String>
     </Application.Resources>
+
 </Application>

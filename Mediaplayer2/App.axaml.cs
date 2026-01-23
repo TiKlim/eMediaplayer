@@ -24,6 +24,14 @@ public partial class App : Application
         {
             MainViewModel.ApplyTheme(savedTheme);
         }
+        
+        var savedLanguage = MainViewModel.LoadSelectedLanguage();
+        var savedLang = MainViewModel.Languages.FirstOrDefault(t => t.LanguageName == savedLanguage);
+
+        if (savedLang != null)
+        {
+            MainViewModel.ApplyLanguage(savedLang);
+        }
     }
 
     public override void OnFrameworkInitializationCompleted()

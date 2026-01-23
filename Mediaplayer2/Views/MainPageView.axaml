@@ -32,6 +32,7 @@
               Height="70"
               ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
               ShowGridLines="True">
+            <!-- Смена темы -->
             <StackPanel Grid.Column="0"
                         Width="220"
                         Margin="10"
@@ -43,7 +44,9 @@
                           VerticalAlignment="Center"
                           Margin="10"
                           Background="{DynamicResource PrimaryColor}"
-                          BorderBrush="{DynamicResource SecondaryColor}">
+                          BorderBrush="{DynamicResource SecondaryColor}"
+                          Classes="ComboBox"
+                          Foreground="White">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -51,6 +54,49 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+            <!-- Смена темы -->
+            <!-- Смена языка -->
+            <StackPanel Grid.Column="1"
+                        Width="220"
+                        Margin="10"
+                        Background="{DynamicResource SecondaryColor}">
+                <ComboBox ItemsSource="{Binding Languages}" 
+                          SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" 
+                          Width="200"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="10"
+                          Background="{DynamicResource PrimaryColor}"
+                          BorderBrush="{DynamicResource SecondaryColor}"
+                          Classes="ComboBox"
+                          Foreground="White">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LanguageName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <!-- Смена языка -->
+            <!-- Смена языка -->
+            <StackPanel Grid.Column="3"
+                        Width="220"
+                        Margin="10"
+                        Background="{DynamicResource SecondaryColor}">
+                <Button Width="200"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Background="{DynamicResource PrimaryColor}"
+                        BorderBrush="{DynamicResource SecondaryColor}">
+                    <TextBlock Text="{DynamicResource FindFileButton}"
+                               FontSize="15"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"></TextBlock>
+                </Button>
+            </StackPanel>
+            <!-- Смена языка -->
         </Grid>
         <!-- Верхняя панель -->
         <!-- Панель управления окном -->

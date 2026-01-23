@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Avalonia.Media;
 using Mediaplayer2.Models;
 using NAudio.Wave;
 using ReactiveUI;
@@ -27,26 +28,30 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
     
     private AudioFileReader _audioFileReader;
     
+    private Theme _selectedTheme;
+    
+    private Language _selectedLanguage;
+    
     public ObservableCollection<Theme> Presets { get; }
     
-    private Theme _selectedTheme;
+    public ObservableCollection<Language> Languages { get; }
+    
     public Theme SelectedTheme
     {
         get => _selectedTheme;
         set => this.RaiseAndSetIfChanged(ref _selectedTheme, value);
     }
-    
-    public string Main { get; }
-    
-    public string PreMain { get; }
 
-    public string Appearance { get; }
+    public Language SelectedLanguage
+    {
+        get => _selectedLanguage;
+        set => this.RaiseAndSetIfChanged(ref _selectedLanguage, value);
+    }
 
-    public string? UrlPathSegment => "/settings";
+    public string? UrlPathSegment => "/main";
     
     public IScreen HostScreen { get; }
     
-
     public MainPageViewModel()
     {
         Presets = new ObservableCollection<Theme>
@@ -86,7 +91,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Лимонный щербет", 
+                Name = "Лимонный шербет", 
                 PrimaryColor = "#FFCA3A", 
                 SecondaryColor = "#fff3d4",
                 ThirdColor = "#fff9e9", 
@@ -185,7 +190,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Виноград", 
+                Name = "Ежевика", 
                 PrimaryColor = "#6A4C93", 
                 SecondaryColor = "#ded8e7", 
                 ThirdColor = "#efebf3",
@@ -242,17 +247,78 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             .Subscribe(theme =>
             {
                 ApplyTheme(theme);
-                SaveSelectedThemeName(theme?.Name);
+                SaveBothSettings(theme?.Name, SelectedLanguage?.LanguageName);
+            });
+
+        Languages = new ObservableCollection<Language>
+        {
+            new Language
+            {
+                LanguageName = "Русский",
+                RedThemeName = "Клубника",
+                YellowThemeName = "Лимонный шербет",
+                GreenThemeName = "Фисташка",
+                BlueThemeName = "Голубика",
+                VioletThemeName = "Ежевика",
+                FindFileButton = "Найти файл",
+                EditFileButton = "Редактировать",
+                FirstEqualizerThemeName = "Поп",
+                SecondEqualizerThemeName = "Вокал",
+                ThirdEqualizerThemeName = "Рок",
+                FourthEqualizerThemeName = "Джаз",
+                FifthEqualizerThemeName = "Классический",
+                SixthEqualizerThemeName = "Усиление низких частот"
+            },
+            new Language
+            {
+                LanguageName = "English",
+                RedThemeName = "Strawberry",
+                YellowThemeName = "Lemon sherbet",
+                GreenThemeName = "Pistachio",
+                BlueThemeName = "Blueberry",
+                VioletThemeName = "Blackberry",
+                FindFileButton = "Find the file",
+                EditFileButton = "Edit",
+                FirstEqualizerThemeName = "Pop",
+                SecondEqualizerThemeName = "Vocal",
+                ThirdEqualizerThemeName = "Rock",
+                FourthEqualizerThemeName = "Jazz",
+                FifthEqualizerThemeName = "Classical",
+                SixthEqualizerThemeName = "Bass"
+            }
+        };
+        
+        SelectedLanguage = Languages.First();
+        
+        // Подписка на смену языка
+        this.WhenAnyValue(x => x.SelectedLanguage)
+            .Subscribe(language => ApplyLanguage(language));
+        
+        var savedLanguage = LoadSelectedLanguage();
+        if (!string.IsNullOrEmpty(savedLanguage))
+        {
+            var savedLang = Languages.FirstOrDefault(t => t.LanguageName == savedLanguage);
+            if (savedLang != null)
+                SelectedLanguage = savedLang;
+            else
+                SelectedLanguage = Languages.First();
+        }
+        else
+        {
+            SelectedLanguage = Languages.First();
+        }
+        
+        this.WhenAnyValue(x => x.SelectedLanguage)
+            .Subscribe(language =>
+            {
+                ApplyLanguage(language);
+                SaveBothSettings(SelectedTheme?.Name, language?.LanguageName);
             });
     }
 
     public MainPageViewModel(IScreen? screen = null)
     {
         HostScreen = screen ?? Locator.Current.GetService<IScreen>()!;
-        
-        Main = "Настройки";
-        PreMain = "Настрой под настроение!";
-        Appearance = "Внешний вид:";
         
         // Освобождение предыдущего ресурса, если он существует
         _audioFileReader?.Dispose();
@@ -296,7 +362,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Лимонный щербет", 
+                Name = "Лимонный шербет", 
                 PrimaryColor = "#FFCA3A", 
                 SecondaryColor = "#fff3d4",
                 ThirdColor = "#fff9e9",
@@ -395,7 +461,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Виноград", 
+                Name = "Ежевика", 
                 PrimaryColor = "#6A4C93", 
                 SecondaryColor = "#ded8e7", 
                 ThirdColor = "#efebf3",
@@ -452,14 +518,79 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             .Subscribe(theme =>
             {
                 ApplyTheme(theme);
-                SaveSelectedThemeName(theme?.Name);
+                SaveBothSettings(theme?.Name, SelectedLanguage?.LanguageName);
             });
+       
 
+        Languages = new ObservableCollection<Language>
+        {
+            new Language
+            {
+                LanguageName = "Русский",
+                RedThemeName = "Клубника",
+                YellowThemeName = "Лимонный шербет",
+                GreenThemeName = "Фисташка",
+                BlueThemeName = "Голубика",
+                VioletThemeName = "Ежевика",
+                FindFileButton = "Найти файл",
+                EditFileButton = "Редактировать",
+                FirstEqualizerThemeName = "Поп",
+                SecondEqualizerThemeName = "Вокал",
+                ThirdEqualizerThemeName = "Рок",
+                FourthEqualizerThemeName = "Джаз",
+                FifthEqualizerThemeName = "Классический",
+                SixthEqualizerThemeName = "Усиление низких частот"
+            },
+            new Language
+            {
+                LanguageName = "English",
+                RedThemeName = "Strawberry",
+                YellowThemeName = "Lemon sherbet",
+                GreenThemeName = "Pistachio",
+                BlueThemeName = "Blueberry",
+                VioletThemeName = "Blackberry",
+                FindFileButton = "Find the file",
+                EditFileButton = "Edit",
+                FirstEqualizerThemeName = "Pop",
+                SecondEqualizerThemeName = "Vocal",
+                ThirdEqualizerThemeName = "Rock",
+                FourthEqualizerThemeName = "Jazz",
+                FifthEqualizerThemeName = "Classical",
+                SixthEqualizerThemeName = "Bass"
+            }
+        };
+        
+        SelectedLanguage = Languages.First();
+        
+        // Подписка на смену языка
+        this.WhenAnyValue(x => x.SelectedLanguage)
+            .Subscribe(language => ApplyLanguage(language));
+        
+        var savedLanguage = LoadSelectedLanguage();
+        if (!string.IsNullOrEmpty(savedLanguage))
+        {
+            var savedLang = Languages.FirstOrDefault(t => t.LanguageName == savedLanguage);
+            if (savedLang != null)
+                SelectedLanguage = savedLang;
+            else
+                SelectedLanguage = Languages.First();
+        }
+        else
+        {
+            SelectedLanguage = Languages.First();
+        }
+        
+        this.WhenAnyValue(x => x.SelectedLanguage)
+            .Subscribe(language =>
+            {
+                ApplyLanguage(language);
+                SaveBothSettings(SelectedTheme?.Name, language?.LanguageName);
+            });
     }
     
     public void ApplyTheme(Theme theme)
     {
-        // Здесь обновите ресурсы приложения
+        // Здесь обновятся ресурсы приложения
         var app = Avalonia.Application.Current;
         if (app == null) return;
 
@@ -495,21 +626,6 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
         app.Resources["Maximise"] = new Avalonia.Media.Imaging.Bitmap(theme.Maximise);
     }
     
-    private void SaveSelectedThemeName(string themeName)
-    {
-        try
-        {
-            var settings = new UserSettings { SelectedThemeName = themeName };
-            var json = JsonSerializer.Serialize(settings);
-            var path = GetSettingsFilePath();
-            File.WriteAllText(path, json);
-        }
-        catch
-        {
-            // Логируйте ошибки при необходимости
-        }
-    }
-    
     public string? LoadSelectedThemeName()
     {
         try
@@ -524,6 +640,66 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
         catch
         {
             return null;
+        }
+    }
+    
+    public void ApplyLanguage(Language language)
+    {
+        // Здесь обновятся ресурсы приложения
+        var app = Avalonia.Application.Current;
+        if (app == null) return;
+
+        // Обновление ресурсов
+        app.Resources["LanguageName"] = language.LanguageName;
+        app.Resources["RedThemeName"] = language.RedThemeName;
+        app.Resources["YellowThemeName"] = language.YellowThemeName;
+        app.Resources["GreenThemeName"] = language.GreenThemeName;
+        app.Resources["BlueThemeName"] = language.BlueThemeName;
+        app.Resources["VioletThemeName"] = language.VioletThemeName;
+        app.Resources["FindFileButton"] = language.FindFileButton;
+        app.Resources["EditFileButton"] = language.EditFileButton;
+        app.Resources["FirstEqualizerThemeName"] = language.FirstEqualizerThemeName;
+        app.Resources["SecondEqualizerThemeName"] = language.SecondEqualizerThemeName;
+        app.Resources["ThirdEqualizerThemeName"] = language.ThirdEqualizerThemeName;
+        app.Resources["FourthEqualizerThemeName"] = language.FourthEqualizerThemeName;
+        app.Resources["FifthEqualizerThemeName"] = language.FifthEqualizerThemeName;
+        app.Resources["SixthEqualizerThemeName"] = language.SixthEqualizerThemeName;
+    }
+    
+    public string? LoadSelectedLanguage()
+    {
+        try
+        {
+            var path = GetSettingsFilePath();
+            if (!File.Exists(path))
+                return null;
+            var json = File.ReadAllText(path);
+            var settings = JsonSerializer.Deserialize<UserSettings>(json);
+            return settings?.SelectedLanguageName;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+    
+    public void SaveBothSettings(string themeName, string languageName)
+    {
+        try
+        {
+            var settings = new UserSettings
+            {
+                SelectedThemeName = themeName,
+                SelectedLanguageName = languageName
+            };
+        
+            var json = JsonSerializer.Serialize(settings);
+            var path = GetSettingsFilePath();
+            File.WriteAllText(path, json);
+        }
+        catch
+        {
+            // *
         }
     }
 }
