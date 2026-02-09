@@ -61,7 +61,7 @@
             <DockPanel Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="3"
-                       Height="40">
+                       Height="50">
                     <Grid Name="WindowBar"
                           Background="{DynamicResource SecondaryColor}"
                           DockPanel.Dock="Top"
@@ -83,7 +83,8 @@
                                        Foreground="{DynamicResource PrimaryColor}"/>
                             <!-- Управление окном -->
                             <StackPanel Grid.Column="2"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal"
+                                        Margin="0 0 10 0">
                                     <StackPanel.Styles>
                                             <Style Selector="Button">
                                                     <Setter Property="Margin" Value="2"/>
