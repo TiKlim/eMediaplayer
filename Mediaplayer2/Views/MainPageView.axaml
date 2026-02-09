@@ -17,36 +17,79 @@
           RowDefinitions="Auto, Auto, *, Auto, Auto"
           Background="{DynamicResource ThirdColor}">
         <!-- Полоса прокрутки -->
-        <DockPanel Grid.Row="4"
-                   Height="40"
+        <StackPanel Grid.Row="4"
+                   Height="50"
                    Background="{DynamicResource SecondaryColor}">
-            
-        </DockPanel>
+            <Slider Name="PlaybackSlider"
+                    Minimum="0"
+                    
+                    Margin="10,0,10,0"
+                    Background="Black"
+                    Foreground="{DynamicResource PrimaryColor}">
+            </Slider>
+            <!--Maximum="{Binding AudioDuration.TotalSeconds}"
+                    Value="{Binding CurrentTime.TotalSeconds, Mode=TwoWay}"-->
+        </StackPanel>
         <!-- Полоса прокрутки -->
         <!-- Нижняя панель -->
         <Grid Grid.Row="3"
-              Height="70"
+              Height="80"
               ColumnDefinitions="Auto, Auto, *, Auto, Auto"
               ShowGridLines="False">
             <!-- Панель управления воспроизведением -->
             <StackPanel Grid.Column="0"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
-                
+                <!--Кнопка "Назад на 10 секунд"-->
+                <Button Name="BackwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}">
+                    <Image Source="{DynamicResource BackTenButton}"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
+                <!--Кнопка "Играть/стоп"-->
+                <Button Name="PlayButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding PlayPauseCommand}">
+                    <StackPanel>
+                        <Image Source="{DynamicResource PlayButton}"
+                               IsVisible="{Binding Play}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                        <Image Source="{DynamicResource StopButton}"
+                               IsVisible="{Binding Stop}"
+                               Width="35"
+                               MaxWidth="50" 
+                               MinWidth="20"/>
+                    </StackPanel>
+                </Button>
+                <!--Кнопка "Вперёд на 10 секунд"-->
+                <Button Name="ForwardButton"
+                        HorizontalAlignment="Stretch"
+                        Classes="LeftPanel"
+                        Command="{Binding ForeTime}">
+                    <Image Source="{DynamicResource ForeTenButton}"
+                           MaxWidth="50" 
+                           MinWidth="20"/>
+                </Button>
             </StackPanel>
             <!-- Панель управления воспроизведением -->
             <!-- Панель регулирования скорости -->
             <StackPanel Grid.Column="1"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 
             </StackPanel>
             <!-- Панель регулирования скорости -->
             <!-- Панель таймера -->
             <StackPanel Grid.Column="2"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 
             </StackPanel>
@@ -54,7 +97,7 @@
             <!-- Панель эквалайзера -->
             <StackPanel Grid.Column="3"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 
             </StackPanel>
@@ -62,7 +105,7 @@
             <!-- Панель регулирования громкости -->
             <StackPanel Grid.Column="4"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 10 10"
                         Background="{DynamicResource SecondaryColor}">
                 
             </StackPanel>
@@ -73,17 +116,18 @@
         <!-- Средняя панель -->
         <!-- Верхняя панель -->
         <Grid Grid.Row="1"
-              Height="70"
+              Height="80"
               ColumnDefinitions="Auto, Auto, *, Auto, Auto"
               ShowGridLines="False">
             <!-- Смена темы -->
             <StackPanel Grid.Column="0"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 <ComboBox ItemsSource="{Binding Presets}" 
                           SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
                           Width="200"
+                          Height="40"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           Margin="10"
@@ -102,11 +146,12 @@
             <!-- Смена языка -->
             <StackPanel Grid.Column="1"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 <ComboBox ItemsSource="{Binding Languages}" 
                           SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" 
                           Width="200"
+                          Height="40"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           Margin="10"
@@ -124,7 +169,7 @@
             <!-- Смена языка -->
             <!-- Панель информации о файле -->
             <StackPanel Grid.Column="2"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 
             </StackPanel>
@@ -132,9 +177,10 @@
             <!-- Кнопка поиска файла -->
             <StackPanel Grid.Column="3"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 0 10"
                         Background="{DynamicResource SecondaryColor}">
                 <Button Width="200"
+                        Height="40"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="10"
@@ -151,9 +197,10 @@
             <!-- Кнопка перехода к редактированию -->
             <StackPanel Grid.Column="4"
                         Width="220"
-                        Margin="10"
+                        Margin="10 10 10 10"
                         Background="{DynamicResource SecondaryColor}">
                 <Button Width="200"
+                        Height="40"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Margin="10"
@@ -171,7 +218,7 @@
         <!-- Верхняя панель -->
         <!-- Панель управления окном -->
         <StackPanel Grid.Row="0"
-                    Height="40"></StackPanel>
+                    Height="50"></StackPanel>
         <!-- Панель управления окном -->
     </Grid>
     <!-- Основной Grid -->
