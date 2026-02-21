@@ -66,9 +66,10 @@
              
     <Application.Resources>
         <!-- Темы -->
-        <Color x:Key="PrimaryColor">#FF595E</Color>
+        <Color x:Key="PrimaryColor">#ff595e</Color>
         <Color x:Key="SecondaryColor">#ffdadc</Color>
         <Color x:Key="ThirdColor">#ffeded</Color>
+        <Color x:Key="FourthColor">#ffacae</Color>
         <Bitmap x:Key="HomeButton">Assets/HomeRed.png</Bitmap>
         <Bitmap x:Key="MusicButton">Assets/MusicCollectionRed.png</Bitmap>
         <Bitmap x:Key="VideoButton">Assets/VideoCollectionRed.png</Bitmap>

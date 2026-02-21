@@ -131,10 +131,8 @@
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           Margin="10"
-                          Background="{DynamicResource PrimaryColor}"
-                          BorderBrush="{DynamicResource SecondaryColor}"
-                          Classes="ComboBox"
-                          Foreground="White">
+                          Background="{DynamicResource FourthColor}"
+                          BorderBrush="{DynamicResource SecondaryColor}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>
@@ -155,10 +153,8 @@
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
                           Margin="10"
-                          Background="{DynamicResource PrimaryColor}"
-                          BorderBrush="{DynamicResource SecondaryColor}"
-                          Classes="ComboBox"
-                          Foreground="White">
+                          Background="{DynamicResource FourthColor}"
+                          BorderBrush="{DynamicResource SecondaryColor}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding LanguageName}"/>

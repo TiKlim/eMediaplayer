@@ -317,9 +317,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Клубника", 
-                PrimaryColor = "#FF595E", 
+                PrimaryColor = "#ff595e", 
                 SecondaryColor = "#ffdadc", 
                 ThirdColor = "#ffeded",
+                FourthColor = "#ffacae",
                 HomeButton = "Assets/HomeRed.png", 
                 MusicButton = "Assets/MusicCollectionRed.png", 
                 VideoButton = "Assets/VideoCollectionRed.png",
@@ -350,9 +351,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Лимонный шербет", 
-                PrimaryColor = "#FFCA3A", 
+                PrimaryColor = "#ffca3a", 
                 SecondaryColor = "#fff3d4",
-                ThirdColor = "#fff9e9", 
+                ThirdColor = "#fff9e9",
+                FourthColor = "#ffe49c",
                 HomeButton = "Assets/HomeYello.png", 
                 MusicButton = "Assets/MusicCollectionYello.png", 
                 VideoButton = "Assets/VideoCollectionYello.png",
@@ -383,9 +385,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Фисташка", 
-                PrimaryColor = "#8AC926", 
+                PrimaryColor = "#8ac926", 
                 SecondaryColor = "#e5f3cf", 
-                ThirdColor = "#f2f9e7", 
+                ThirdColor = "#f2f9e7",
+                FourthColor = "#c4e492",
                 HomeButton = "Assets/HomeGreen.png", 
                 MusicButton = "Assets/MusicCollectionGreen.png", 
                 VideoButton = "Assets/VideoCollectionGreen.png",
@@ -416,9 +419,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Голубика", 
-                PrimaryColor = "#1982C4", 
+                PrimaryColor = "#1982c4", 
                 SecondaryColor = "#cce4f2", 
-                ThirdColor = "#e6f1f9", 
+                ThirdColor = "#e6f1f9",
+                FourthColor = "#8cc0e1", 
                 HomeButton = "Assets/HomeBlue.png", 
                 MusicButton = "Assets/MusicCollectionBlue.png", 
                 VideoButton = "Assets/VideoCollectionBlue.png",
@@ -449,9 +453,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Ежевика", 
-                PrimaryColor = "#6A4C93", 
+                PrimaryColor = "#6a4c93", 
                 SecondaryColor = "#ded8e7", 
                 ThirdColor = "#efebf3",
+                FourthColor = "#b4a5c9", 
                 HomeButton = "Assets/HomeViolet.png", 
                 MusicButton = "Assets/MusicCollectionViolet.png", 
                 VideoButton = "Assets/VideoCollectionViolet.png",
@@ -727,9 +732,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Клубника", 
-                PrimaryColor = "#FF595E", 
+                PrimaryColor = "#ff595e", 
                 SecondaryColor = "#ffdadc", 
                 ThirdColor = "#ffeded",
+                FourthColor = "#ffacae",
                 HomeButton = "Assets/HomeRed.png", 
                 MusicButton = "Assets/MusicCollectionRed.png", 
                 VideoButton = "Assets/VideoCollectionRed.png",
@@ -760,9 +766,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Лимонный шербет", 
-                PrimaryColor = "#FFCA3A", 
+                PrimaryColor = "#ffca3a", 
                 SecondaryColor = "#fff3d4",
                 ThirdColor = "#fff9e9",
+                FourthColor = "#ffe49c",
                 HomeButton = "Assets/HomeYello.png", 
                 MusicButton = "Assets/MusicCollectionYello.png", 
                 VideoButton = "Assets/VideoCollectionYello.png",
@@ -793,9 +800,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Фисташка", 
-                PrimaryColor = "#8AC926", 
+                PrimaryColor = "#8ac926", 
                 SecondaryColor = "#e5f3cf", 
                 ThirdColor = "#f2f9e7",
+                FourthColor = "#c4e492",
                 HomeButton = "Assets/HomeGreen.png", 
                 MusicButton = "Assets/MusicCollectionGreen.png", 
                 VideoButton = "Assets/VideoCollectionGreen.png",
@@ -826,9 +834,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Голубика", 
-                PrimaryColor = "#1982C4", 
+                PrimaryColor = "#1982c4", 
                 SecondaryColor = "#cce4f2", 
                 ThirdColor = "#e6f1f9",
+                FourthColor = "#8cc0e1",
                 HomeButton = "Assets/HomeBlue.png", 
                 MusicButton = "Assets/MusicCollectionBlue.png", 
                 VideoButton = "Assets/VideoCollectionBlue.png",
@@ -859,9 +868,10 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             new Theme
             {
                 Name = "Ежевика", 
-                PrimaryColor = "#6A4C93", 
+                PrimaryColor = "#6a4c93", 
                 SecondaryColor = "#ded8e7", 
                 ThirdColor = "#efebf3",
+                FourthColor = "#b4a5c9", 
                 HomeButton = "Assets/HomeViolet.png", 
                 MusicButton = "Assets/MusicCollectionViolet.png", 
                 VideoButton = "Assets/VideoCollectionViolet.png",
@@ -995,6 +1005,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
         app.Resources["PrimaryColor"] = Avalonia.Media.Color.Parse(theme.PrimaryColor);
         app.Resources["SecondaryColor"] = Avalonia.Media.Color.Parse(theme.SecondaryColor);
         app.Resources["ThirdColor"] = Avalonia.Media.Color.Parse(theme.ThirdColor);
+        app.Resources["FourthColor"] = Avalonia.Media.Color.Parse(theme.FourthColor);
         app.Resources["HomeButton"] = new Avalonia.Media.Imaging.Bitmap(theme.HomeButton);
         app.Resources["MusicButton"] = new Avalonia.Media.Imaging.Bitmap(theme.MusicButton);
         app.Resources["VideoButton"] = new Avalonia.Media.Imaging.Bitmap(theme.VideoButton);

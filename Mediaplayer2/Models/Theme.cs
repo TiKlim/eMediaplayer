@@ -9,6 +9,7 @@ public class Theme
     public string PrimaryColor { get; set; }
     public string SecondaryColor { get; set; }
     public string ThirdColor { get; set; }
+    public string FourthColor { get; set; }
     public string HomeButton { get; set; }
     public string MusicButton { get; set; }
     public string VideoButton { get; set; }
