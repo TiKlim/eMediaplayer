@@ -22,3 +22,6 @@ eMediaplayer дополняет функционал обычного медиа
 klim.timofeev.04@mail.ru
 
 Тимофеев Клим, 2025-2026.
+
+<img width="1920" height="430" alt="image" src="https://github.com/user-attachments/assets/098d3222-a42e-4f0a-9bc6-87445e8040ba" />
+
