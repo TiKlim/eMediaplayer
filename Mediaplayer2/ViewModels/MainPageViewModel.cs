@@ -66,7 +66,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
     
     private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
     
-    private Bitmap? playImage = new Bitmap("Assets/ButtonPlayRed.png");
+    private Bitmap? playImage = new Bitmap("Assets/FocusRed.png");
     
     private string _filePath;
     
@@ -305,6 +305,8 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
     public ICommand BackTime { get; }
     
     public ICommand ForeTime { get; }
+    
+    public ICommand OpenEqualizerMenuCommand { get; }
 
     public string? UrlPathSegment => "/main";
     
@@ -326,7 +328,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionRed.png",
                 PlaylistButton = "Assets/PlaylistRed.png",
                 SettingsButton = "Assets/SettingsRed.png",
-                PlayButton = "Assets/ButtonPlayRed.png",
+                PlayButton = "Assets/FocusRed.png",
                 StopButton = "Assets/StopRed.png",
                 BackTenButton = "Assets/BackTimeRed.png",
                 ForeTenButton = "Assets/ForeTimeRed.png",
@@ -360,7 +362,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionYello.png",
                 PlaylistButton = "Assets/PlaylistYello.png",
                 SettingsButton = "Assets/SettingsYello.png",
-                PlayButton = "Assets/ButtonPlayYellow.png",
+                PlayButton = "Assets/FocusYellow.png",
                 StopButton = "Assets/StopYellow.png",
                 BackTenButton = "Assets/BackTimeYellow.png",
                 ForeTenButton = "Assets/ForeTimeYellow.png",
@@ -394,7 +396,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionGreen.png",
                 PlaylistButton = "Assets/PlaylistGreen.png",
                 SettingsButton = "Assets/SettingsGreen.png",
-                PlayButton = "Assets/ButtonPlayGreen.png",
+                PlayButton = "Assets/FocusGreen.png",
                 StopButton = "Assets/StopGreen.png",
                 BackTenButton = "Assets/BackTimeGreen.png",
                 ForeTenButton = "Assets/ForeTimeGreen.png",
@@ -428,7 +430,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionBlue.png",
                 PlaylistButton = "Assets/PlaylistBlue.png",
                 SettingsButton = "Assets/SettingsBlue.png",
-                PlayButton = "Assets/ButtonPlayBlue.png",
+                PlayButton = "Assets/FocusBlue.png",
                 StopButton = "Assets/StopBlue.png",
                 BackTenButton = "Assets/BackTimeBlue.png",
                 ForeTenButton = "Assets/ForeTimeBlue.png",
@@ -462,7 +464,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionViolet.png",
                 PlaylistButton = "Assets/PlaylistViolet.png",
                 SettingsButton = "Assets/SettingsViolet.png",
-                PlayButton = "Assets/ButtonPlayViolet.png",
+                PlayButton = "Assets/FocusViolet.png",
                 StopButton = "Assets/StopViolet.png",
                 BackTenButton = "Assets/BackTimeViolet.png",
                 ForeTenButton = "Assets/ForeTimeViolet.png",
@@ -741,7 +743,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionRed.png",
                 PlaylistButton = "Assets/PlaylistRed.png",
                 SettingsButton = "Assets/SettingsRed.png",
-                PlayButton = "Assets/ButtonPlayRed.png",
+                PlayButton = "Assets/FocusRed.png",
                 StopButton = "Assets/StopRed.png",
                 BackTenButton = "Assets/BackTimeRed.png",
                 ForeTenButton = "Assets/ForeTimeRed.png",
@@ -775,7 +777,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionYello.png",
                 PlaylistButton = "Assets/PlaylistYello.png",
                 SettingsButton = "Assets/SettingsYello.png",
-                PlayButton = "Assets/ButtonPlayYellow.png",
+                PlayButton = "Assets/FocusYellow.png",
                 StopButton = "Assets/StopYellow.png",
                 BackTenButton = "Assets/BackTimeYellow.png",
                 ForeTenButton = "Assets/ForeTimeYellow.png",
@@ -809,7 +811,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionGreen.png",
                 PlaylistButton = "Assets/PlaylistGreen.png",
                 SettingsButton = "Assets/SettingsGreen.png",
-                PlayButton = "Assets/ButtonPlayGreen.png",
+                PlayButton = "Assets/FocusGreen.png",
                 StopButton = "Assets/StopGreen.png",
                 BackTenButton = "Assets/BackTimeGreen.png",
                 ForeTenButton = "Assets/ForeTimeGreen.png",
@@ -843,7 +845,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionBlue.png",
                 PlaylistButton = "Assets/PlaylistBlue.png",
                 SettingsButton = "Assets/SettingsBlue.png",
-                PlayButton = "Assets/ButtonPlayBlue.png",
+                PlayButton = "Assets/FocusBlue.png",
                 StopButton = "Assets/StopBlue.png",
                 BackTenButton = "Assets/BackTimeBlue.png",
                 ForeTenButton = "Assets/ForeTimeBlue.png",
@@ -877,7 +879,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
                 VideoButton = "Assets/VideoCollectionViolet.png",
                 PlaylistButton = "Assets/PlaylistViolet.png",
                 SettingsButton = "Assets/SettingsViolet.png",
-                PlayButton = "Assets/ButtonPlayViolet.png",
+                PlayButton = "Assets/FocusViolet.png",
                 StopButton = "Assets/StopViolet.png",
                 BackTenButton = "Assets/BackTimeViolet.png",
                 ForeTenButton = "Assets/ForeTimeViolet.png",

@@ -75,7 +75,7 @@
         <Bitmap x:Key="VideoButton">Assets/VideoCollectionRed.png</Bitmap>
         <Bitmap x:Key="PlaylistButton">Assets/PlaylistRed.png</Bitmap>
         <Bitmap x:Key="SettingsButton">Assets/SettingsRed.png</Bitmap>
-        <Bitmap x:Key="PlayButton">Assets/ButtonPlayRed.png</Bitmap>
+        <Bitmap x:Key="PlayButton">Assets/FocusRed.png</Bitmap>
         <Bitmap x:Key="StopButton">Assets/StopRed.png</Bitmap>
         <Bitmap x:Key="BackTenButton">Assets/BackTimeRed.png</Bitmap>
         <Bitmap x:Key="ForeTenButton">Assets/ForeTimeRed.png</Bitmap>
