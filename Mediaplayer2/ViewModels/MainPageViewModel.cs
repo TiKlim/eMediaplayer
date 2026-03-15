@@ -352,7 +352,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Лимонный шербет", 
+                Name = "Банан", 
                 PrimaryColor = "#ffca3a", 
                 SecondaryColor = "#fff3d4",
                 ThirdColor = "#fff9e9",
@@ -521,7 +521,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 LanguageName = "Русский",
                 RedThemeName = "Клубника",
-                YellowThemeName = "Лимонный шербет",
+                YellowThemeName = "Банан",
                 GreenThemeName = "Фисташка",
                 BlueThemeName = "Голубика",
                 VioletThemeName = "Ежевика",
@@ -538,7 +538,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             {
                 LanguageName = "English",
                 RedThemeName = "Strawberry",
-                YellowThemeName = "Lemon sherbet",
+                YellowThemeName = "Banana",
                 GreenThemeName = "Pistachio",
                 BlueThemeName = "Blueberry",
                 VioletThemeName = "Blackberry",
@@ -767,7 +767,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
             },
             new Theme
             {
-                Name = "Лимонный шербет", 
+                Name = "Банан", 
                 PrimaryColor = "#ffca3a", 
                 SecondaryColor = "#fff3d4",
                 ThirdColor = "#fff9e9",
