@@ -36,12 +36,83 @@
               Height="80"
               ColumnDefinitions="Auto, Auto, *, Auto, Auto"
               ShowGridLines="False">
-            <!-- Панель управления воспроизведением -->
+            <!-- Панель эквалайзера -->
             <Border Grid.Column="0"
-                        Width="220"
-                        Margin="10 10 0 10"
-                        Background="{DynamicResource SecondaryColor}"
+                    Width="220"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                <Button Name="EqualizerButton"
+                        Width="200"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Classes="LeftPanel"
+                        Command="{Binding OpenEqualizerMenuCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Background="{DynamicResource FourthColor}"
                         CornerRadius="4">
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuItem Header="{Binding Pop}" Command="{Binding SelectPresetCommand}" CommandParameter="Pop" />
+                            <MenuItem Header="{Binding Vocal}" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
+                            <MenuItem Header="{Binding Rock}" Command="{Binding SelectPresetCommand}" CommandParameter="Rock" />
+                            <MenuItem Header="{Binding Jazz}" Command="{Binding SelectPresetCommand}" CommandParameter="Jazz" />
+                            <MenuItem Header="{Binding Classical}" Command="{Binding SelectPresetCommand}" CommandParameter="Classical" />
+                            <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </Border>
+            <!-- Панель эквалайзера -->
+            <!-- Панель регулирования скорости -->
+            <Border Grid.Column="1"
+                    Width="220"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                <ComboBox ItemsSource="{Binding Presets}" 
+                          SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
+                          Width="200"
+                          Height="40"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Margin="10"
+                          Background="{DynamicResource FourthColor}"
+                          BorderBrush="{DynamicResource SecondaryColor}"
+                          CornerRadius="4">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text=""/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Border>
+            <!-- Панель регулирования скорости -->
+            <!-- Панель таймера -->
+            <Border Grid.Column="2"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                
+            </Border>
+            <!-- Панель таймера -->
+            <!-- Панель регулирования громкости -->
+            <Border Grid.Column="3"
+                    Width="220"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                
+            </Border>
+            <!-- Панель регулирования громкости -->
+            <!-- Панель управления воспроизведением -->
+            <Border Grid.Column="4"
+                    Width="220"
+                    Margin="10 10 10 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
                 <Grid ColumnDefinitions="*, *, *"
                       HorizontalAlignment="Center"
                       Width="200"
@@ -82,77 +153,6 @@
                 </Grid>
             </Border>
             <!-- Панель управления воспроизведением -->
-            <!-- Панель регулирования скорости -->
-            <Border Grid.Column="1"
-                    Width="220"
-                    Margin="10 10 0 10"
-                    Background="{DynamicResource SecondaryColor}"
-                    CornerRadius="4">
-                <ComboBox ItemsSource="{Binding Presets}" 
-                          SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" 
-                          Width="200"
-                          Height="40"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Margin="10"
-                          Background="{DynamicResource FourthColor}"
-                          BorderBrush="{DynamicResource SecondaryColor}"
-                          CornerRadius="4">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text=""/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Border>
-            <!-- Панель регулирования скорости -->
-            <!-- Панель таймера -->
-            <Border Grid.Column="2"
-                    Margin="10 10 0 10"
-                    Background="{DynamicResource SecondaryColor}"
-                    CornerRadius="4">
-                
-            </Border>
-            <!-- Панель таймера -->
-            <!-- Панель эквалайзера -->
-            <Border Grid.Column="3"
-                    Width="220"
-                    Margin="10 10 0 10"
-                    Background="{DynamicResource SecondaryColor}"
-                    CornerRadius="4">
-                <Button Name="EqualizerButton"
-                        Width="200"
-                        Height="40"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Margin="10"
-                        Classes="LeftPanel"
-                        Command="{Binding OpenEqualizerMenuCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                        Background="{DynamicResource FourthColor}"
-                        CornerRadius="4">
-                    <Button.Flyout>
-                        <MenuFlyout>
-                            <MenuItem Header="{Binding Pop}" Command="{Binding SelectPresetCommand}" CommandParameter="Pop" />
-                            <MenuItem Header="{Binding Vocal}" Command="{Binding SelectPresetCommand}" CommandParameter="Vocal" />
-                            <MenuItem Header="{Binding Rock}" Command="{Binding SelectPresetCommand}" CommandParameter="Rock" />
-                            <MenuItem Header="{Binding Jazz}" Command="{Binding SelectPresetCommand}" CommandParameter="Jazz" />
-                            <MenuItem Header="{Binding Classical}" Command="{Binding SelectPresetCommand}" CommandParameter="Classical" />
-                            <MenuItem Header="{Binding Bass}" Command="{Binding SelectPresetCommand}" CommandParameter="Bass Boost" />
-                        </MenuFlyout>
-                    </Button.Flyout>
-                </Button>
-            </Border>
-            <!-- Панель эквалайзера -->
-            <!-- Панель регулирования громкости -->
-            <Border Grid.Column="4"
-                    Width="220"
-                    Margin="10 10 10 10"
-                    Background="{DynamicResource SecondaryColor}"
-                    CornerRadius="4">
-                
-            </Border>
-            <!-- Панель регулирования громкости -->
         </Grid>
         <!-- Нижняя панель -->
         <!-- Средняя панель -->
