@@ -3,8 +3,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Mediaplayer2.Services;
 using Mediaplayer2.ViewModels;
 using Mediaplayer2.Views;
+using Splat;
 
 namespace Mediaplayer2;
 
@@ -17,21 +19,9 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
         
         MainViewModel = new MainPageViewModel();
-        var savedThemeName = MainViewModel.LoadSelectedThemeName();
-        var savedTheme = MainViewModel.Presets.FirstOrDefault(t => t.Name == savedThemeName);
         
-        if (savedTheme != null)
-        {
-            MainViewModel.ApplyTheme(savedTheme);
-        }
-        
-        var savedLanguage = MainViewModel.LoadSelectedLanguage();
-        var savedLang = MainViewModel.Languages.FirstOrDefault(t => t.LanguageName == savedLanguage);
-
-        if (savedLang != null)
-        {
-            MainViewModel.ApplyLanguage(savedLang);
-        }
+        Locator.CurrentMutable.RegisterConstant(new ThemeService(), typeof(IThemeService));
+        Locator.CurrentMutable.RegisterConstant(new LanguageService(), typeof(ILanguageService));
     }
 
     public override void OnFrameworkInitializationCompleted()
