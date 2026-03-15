@@ -12,4 +12,6 @@ public partial class MainPageView : ReactiveUserControl<MainPageViewModel>
     {
         InitializeComponent();
     }
+    
+
 }

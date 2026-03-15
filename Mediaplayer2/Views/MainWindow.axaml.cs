@@ -43,7 +43,7 @@ public partial class MainWindow : Window
         this.Get<Button>("MinimizeWindow").Click += delegate { this.WindowState = WindowState.Minimized; };
         this.Get<Button>("MaximizeWindow").Click += delegate { this.WindowState = WindowState.Maximized; _boobool = true; MaxMinButton(); };
         this.Get<Button>("CloseWindow").Click += delegate { this.Close(); };
-        this.Get<Button>("CloseWindow").PointerWheelChanged += delegate { CloseImage.Source = WhiteImage; };
+        //this.Get<Button>("CloseWindow").PointerWheelChanged += delegate { CloseImage.Source = WhiteImage; };
         //this.Get<Button>("SettingsBtn").PointerPressed += delegate { SettingsImage.Source = WhiteImage; }; //!!!
         this.Get<Button>("NormalWindow").Click += delegate { this.WindowState = WindowState.Normal; _boobool = false; MaxMinButton(); };
         // Добавление возможности изменять размеры окна.
