@@ -34,12 +34,69 @@
         <!-- Нижняя панель -->
         <Grid Grid.Row="3"
               Height="80"
-              ColumnDefinitions="Auto, Auto, *, Auto, Auto"
+              ColumnDefinitions="Auto, Auto, Auto, Auto, *, Auto, Auto, Auto"
               ShowGridLines="False">
-            <!-- Панель эквалайзера -->
+            <!-- Кнопка "Назад на 10 секунд" -->
             <Border Grid.Column="0"
-                    Width="220"
+                    Width="66"
                     Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                <Button Name="BackwardButton"
+                        Classes="LeftPanel"
+                        Command="{Binding BackTime}"
+                        CornerRadius="4"
+                        Background="{DynamicResource PrimaryColor}"
+                        HorizontalAlignment="Center">
+                    <Image Source="{DynamicResource BackTenButton}"
+                           Height="40"/>
+                </Button>
+            </Border>
+            <!-- Кнопка "Назад на 10 секунд" -->
+            <!-- Кнопка "Играть/стоп" -->
+            <Border Grid.Column="1"
+                    Width="66"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                <Button Name="PlayButton"
+                        Classes="LeftPanel"
+                        Command="{Binding PlayPauseCommand}"
+                        CornerRadius="4"
+                        Background="{DynamicResource PrimaryColor}"
+                        HorizontalAlignment="Center">
+                    <StackPanel>
+                        <Image Source="{DynamicResource PlayButton}"
+                               IsVisible="{Binding Play}"
+                               Height="40"/>
+                        <Image Source="{DynamicResource StopButton}"
+                               IsVisible="{Binding Stop}"
+                               Height="40"/>
+                    </StackPanel>
+                </Button>
+            </Border>
+            <!-- Кнопка "Играть/стоп" -->
+            <!-- Кнопка "Вперёд на 10 секунд" -->
+            <Border Grid.Column="2"
+                    Width="66"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                <Button Name="ForwardButton"
+                        Classes="LeftPanel"
+                        Command="{Binding ForeTime}"
+                        CornerRadius="4"
+                        Background="{DynamicResource PrimaryColor}"
+                        HorizontalAlignment="Center">
+                    <Image Source="{DynamicResource ForeTenButton}"
+                           Height="40"/>
+                </Button>
+            </Border>
+            <!-- Кнопка "Вперёд на 10 секунд" -->
+            <!-- Панель эквалайзера -->
+            <Border Grid.Column="3"
+                    Width="220"
+                    Margin="12 10 0 10"
                     Background="{DynamicResource SecondaryColor}"
                     CornerRadius="4">
                 <Button Name="EqualizerButton"
@@ -66,8 +123,16 @@
                 </Button>
             </Border>
             <!-- Панель эквалайзера -->
+            <!-- Панель таймера -->
+            <Border Grid.Column="4"
+                    Margin="10 10 0 10"
+                    Background="{DynamicResource SecondaryColor}"
+                    CornerRadius="4">
+                
+            </Border>
+            <!-- Панель таймера -->
             <!-- Панель регулирования скорости -->
-            <Border Grid.Column="1"
+            <Border Grid.Column="5"
                     Width="220"
                     Margin="10 10 0 10"
                     Background="{DynamicResource SecondaryColor}"
@@ -90,69 +155,24 @@
                 </ComboBox>
             </Border>
             <!-- Панель регулирования скорости -->
-            <!-- Панель таймера -->
-            <Border Grid.Column="2"
+            <!-- Панель регулирования громкости (Кнопка) -->
+            <Border Grid.Column="6"
+                    Width="66"
                     Margin="10 10 0 10"
                     Background="{DynamicResource SecondaryColor}"
                     CornerRadius="4">
                 
             </Border>
-            <!-- Панель таймера -->
-            <!-- Панель регулирования громкости -->
-            <Border Grid.Column="3"
-                    Width="220"
-                    Margin="10 10 0 10"
-                    Background="{DynamicResource SecondaryColor}"
-                    CornerRadius="4">
-                
-            </Border>
-            <!-- Панель регулирования громкости -->
-            <!-- Панель управления воспроизведением -->
-            <Border Grid.Column="4"
-                    Width="220"
+            <!-- Панель регулирования громкости (Кнопка) -->
+            <!-- Панель регулирования громкости (Ползунок) -->
+            <Border Grid.Column="7"
+                    Width="144"
                     Margin="10 10 10 10"
                     Background="{DynamicResource SecondaryColor}"
                     CornerRadius="4">
-                <Grid ColumnDefinitions="*, *, *"
-                      HorizontalAlignment="Center"
-                      Width="200"
-                      Margin="10 10 10 10">
-                <!--Кнопка "Назад на 10 секунд"-->
-                <Button Grid.Column="0"
-                        Name="BackwardButton"
-                        Classes="LeftPanel"
-                        Command="{Binding BackTime}"
-                        CornerRadius="4">
-                    <Image Source="{DynamicResource BackTenButton}"
-                           Height="40"/>
-                </Button>
-                <!--Кнопка "Играть/стоп"-->
-                <Button Grid.Column="1"
-                        Name="PlayButton"
-                        Classes="LeftPanel"
-                        Command="{Binding PlayPauseCommand}"
-                        CornerRadius="4">
-                    <StackPanel>
-                        <Image Source="{DynamicResource PlayButton}"
-                               IsVisible="{Binding Play}"
-                               Height="40"/>
-                        <Image Source="{DynamicResource StopButton}"
-                               IsVisible="{Binding Stop}"
-                               Height="40"/>
-                    </StackPanel>
-                </Button>
-                <!--Кнопка "Вперёд на 10 секунд"-->
-                <Button Grid.Column="2"
-                        Name="ForwardButton"
-                        Classes="LeftPanel"
-                        Command="{Binding ForeTime}"
-                        CornerRadius="4">
-                    <Image Source="{DynamicResource ForeTenButton}"
-                           Height="40"/>
-                </Button>
-                </Grid>
+                
             </Border>
-            <!-- Панель управления воспроизведением -->
+            <!-- Панель регулирования громкости (Ползунок) -->
         </Grid>
         <!-- Нижняя панель -->
         <!-- Средняя панель -->
