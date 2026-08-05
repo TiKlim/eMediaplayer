@@ -16,11 +16,7 @@ public class Theme
     public string ForeTenButton { get; set; }
     public string VolumeOnButton { get; set; }
     public string VolumeOffButton { get; set; }
-    public string ListStopBack { get; set; }
     public string MainBack { get; set; }
-    public string MusicBack { get; set; }
-    public string VideoBack { get; set; }
-    public string PlaylistBack { get; set; }
     public string Cover { get; set; }
     public string Close { get; set; }
     public string Roll { get; set; }

@@ -59,9 +59,9 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
 
     private TimeSpan _currentTime;
     
-    private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnRed.png");
+    private Bitmap? volumeImage = new Bitmap("Assets/VolumeOnWhite.png");
     
-    private Bitmap? playImage = new Bitmap("Assets/FocusRed.png");
+    private Bitmap? playImage = new Bitmap("Assets/FocusWhite.png");
     
     private string _filePath;
     
@@ -322,7 +322,7 @@ public class MainPageViewModel : ReactiveObject, IRoutableViewModel
         _waveOut?.Dispose();
         _waveOut?.Stop();
         
-        TrackImage = new Bitmap("Assets/MusicPagePictureRed2.png");
+        TrackImage = new Bitmap("Assets/MainPagePictureRed2.png");
         OpacityImage = 0.2;
         VisibleImage = "true";
         TrackImg = "False";
