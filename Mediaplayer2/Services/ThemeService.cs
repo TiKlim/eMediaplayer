@@ -38,94 +38,18 @@ public class ThemeService : IThemeService
         {
             new Theme
             {
-                Name = "Клубника", 
-                PrimaryColor = "#ff595e", 
-                SecondaryColor = "#ffdadc", 
-                ThirdColor = "#ffeded",
-                FourthColor = "#ffacae",
-                PlayButton = "Assets/FocusWhite.png",
-                StopButton = "Assets/StopRed.png",
-                BackTenButton = "Assets/BackTimeWhite.png",
-                ForeTenButton = "Assets/ForeTimeWhite.png",
-                VolumeOnButton = "Assets/VolumeOnWhite.png",
-                VolumeOffButton = "Assets/VolumeOffWhite.png",
-                ListStopBack = "Assets/ListStopRed.png",
-                MainBack = "Assets/MainPagePictureRed2.png",
-                MusicBack = "Assets/MusicPagePictureRed2.png",
-                VideoBack = "Assets/VideoPagePictureRed2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureRed2.png",
-                Cover = "Assets/strawberry.jpg",
-                Close = "Assets/CloseRed.png",
-                Roll = "Assets/RollRed.png",
-                Maximise = "Assets/MaximiseRed.png",
-                Minimize = "Assets/MinimizeRed.png"
-            },
-            new Theme
-            {
-                Name = "Банан", 
-                PrimaryColor = "#ffca3a", 
-                SecondaryColor = "#fff3d4",
-                ThirdColor = "#fff9e9",
-                FourthColor = "#ffe49c",
-                PlayButton = "Assets/FocusWhite.png",
-                StopButton = "Assets/StopYellow.png",
-                BackTenButton = "Assets/BackTimeWhite.png",
-                ForeTenButton = "Assets/ForeTimeWhite.png",
-                VolumeOnButton = "Assets/VolumeOnWhite.png",
-                VolumeOffButton = "Assets/VolumeOffWhite.png",
-                ListStopBack = "Assets/ListStopYellow.png",
-                MainBack = "Assets/MainPagePictureYellow2.png",
-                MusicBack = "Assets/MusicPagePictureYellow2.png",
-                VideoBack = "Assets/VideoPagePictureYellow2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureYellow2.png",
-                Cover = "Assets/lemon sherbet.jpg",
-                Close = "Assets/CloseYellow.png",
-                Roll = "Assets/RollYellow.png",
-                Maximise = "Assets/MaximiseYellow.png",
-                Minimize = "Assets/MinimizeYellow.png"
-            },
-            new Theme
-            {
-                Name = "Фисташка", 
-                PrimaryColor = "#8ac926", 
-                SecondaryColor = "#e5f3cf", 
-                ThirdColor = "#f2f9e7",
-                FourthColor = "#c4e492",
-                PlayButton = "Assets/FocusWhite.png",
-                StopButton = "Assets/StopGreen.png",
-                BackTenButton = "Assets/BackTimeWhite.png",
-                ForeTenButton = "Assets/ForeTimeWhite.png",
-                VolumeOnButton = "Assets/VolumeOnWhite.png",
-                VolumeOffButton = "Assets/VolumeOffWhite.png",
-                ListStopBack = "Assets/ListStopGreen.png",
-                MainBack = "Assets/MainPagePictureGreen2.png",
-                MusicBack = "Assets/MusicPagePictureGreen2.png",
-                VideoBack = "Assets/VideoPagePictureGreen2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureGreen2.png",
-                Cover = "Assets/pistachios.jpg",
-                Close = "Assets/CloseGreen.png",
-                Roll = "Assets/RollGreen.png",
-                Maximise = "Assets/MaximiseGreen.png",
-                Minimize = "Assets/MinimizeGreen.png"
-            },
-            new Theme
-            {
                 Name = "Голубика", 
                 PrimaryColor = "#1982c4", 
                 SecondaryColor = "#cce4f2", 
                 ThirdColor = "#e6f1f9",
                 FourthColor = "#8cc0e1",
                 PlayButton = "Assets/FocusWhite.png",
-                StopButton = "Assets/StopBlue.png",
+                StopButton = "Assets/StopWhite.png",
                 BackTenButton = "Assets/BackTimeWhite.png",
                 ForeTenButton = "Assets/ForeTimeWhite.png",
                 VolumeOnButton = "Assets/VolumeOnWhite.png",
                 VolumeOffButton = "Assets/VolumeOffWhite.png",
-                ListStopBack = "Assets/ListStopBlue.png",
                 MainBack = "Assets/MainPagePictureBlue2.png",
-                MusicBack = "Assets/MusicPagePictureBlue2.png",
-                VideoBack = "Assets/VideoPagePictureBlue2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureBlue2.png",
                 Cover = "Assets/blueberry.jpg",
                 Close = "Assets/CloseBlue.png",
                 Roll = "Assets/RollBlue.png",
@@ -140,21 +64,77 @@ public class ThemeService : IThemeService
                 ThirdColor = "#efebf3",
                 FourthColor = "#b4a5c9",
                 PlayButton = "Assets/FocusWhite.png",
-                StopButton = "Assets/StopViolet.png",
+                StopButton = "Assets/StopWhite.png",
                 BackTenButton = "Assets/BackTimeWhite.png",
                 ForeTenButton = "Assets/ForeTimeWhite.png",
                 VolumeOnButton = "Assets/VolumeOnWhite.png",
                 VolumeOffButton = "Assets/VolumeOffWhite.png",
-                ListStopBack = "Assets/ListStopViolet.png",
                 MainBack = "Assets/MainPagePictureViolet2.png",
-                MusicBack = "Assets/MusicPagePictureViolet2.png",
-                VideoBack = "Assets/VideoPagePictureViolet2.png",
-                PlaylistBack = "Assets/PlaylistPagePictureViolet2.png",
                 Cover = "Assets/grape.jpg",
                 Close = "Assets/CloseViolet.png",
                 Roll = "Assets/RollViolet.png",
                 Maximise = "Assets/MaximiseViolet.png",
                 Minimize = "Assets/MinimizeViolet.png"
+            },
+            new Theme
+            {
+                Name = "Клубника", 
+                PrimaryColor = "#ff595e", 
+                SecondaryColor = "#ffdadc", 
+                ThirdColor = "#ffeded",
+                FourthColor = "#ffacae",
+                PlayButton = "Assets/FocusWhite.png",
+                StopButton = "Assets/StopWhite.png",
+                BackTenButton = "Assets/BackTimeWhite.png",
+                ForeTenButton = "Assets/ForeTimeWhite.png",
+                VolumeOnButton = "Assets/VolumeOnWhite.png",
+                VolumeOffButton = "Assets/VolumeOffWhite.png",
+                MainBack = "Assets/MainPagePictureRed2.png",
+                Cover = "Assets/strawberry.jpg",
+                Close = "Assets/CloseRed.png",
+                Roll = "Assets/RollRed.png",
+                Maximise = "Assets/MaximiseRed.png",
+                Minimize = "Assets/MinimizeRed.png"
+            },
+            new Theme
+            {
+                Name = "Манго", 
+                PrimaryColor = "#ffae43", 
+                SecondaryColor = "#ffedd6",
+                ThirdColor = "#fff6ea",
+                FourthColor = "#ffd6a1",
+                PlayButton = "Assets/FocusWhite.png",
+                StopButton = "Assets/StopWhite.png",
+                BackTenButton = "Assets/BackTimeWhite.png",
+                ForeTenButton = "Assets/ForeTimeWhite.png",
+                VolumeOnButton = "Assets/VolumeOnWhite.png",
+                VolumeOffButton = "Assets/VolumeOffWhite.png",
+                MainBack = "Assets/MainPagePictureOrange.png",
+                Cover = "Assets/lemon sherbet.jpg",
+                Close = "Assets/CloseOrange.png",
+                Roll = "Assets/RollOrange.png",
+                Maximise = "Assets/MaximiseOrange.png",
+                Minimize = "Assets/MinimizeOrange.png"
+            },
+            new Theme
+            {
+                Name = "Фисташка", 
+                PrimaryColor = "#8ac926", 
+                SecondaryColor = "#e5f3cf", 
+                ThirdColor = "#f2f9e7",
+                FourthColor = "#c4e492",
+                PlayButton = "Assets/FocusWhite.png",
+                StopButton = "Assets/StopWhite.png",
+                BackTenButton = "Assets/BackTimeWhite.png",
+                ForeTenButton = "Assets/ForeTimeWhite.png",
+                VolumeOnButton = "Assets/VolumeOnWhite.png",
+                VolumeOffButton = "Assets/VolumeOffWhite.png",
+                MainBack = "Assets/MainPagePictureGreen2.png",
+                Cover = "Assets/pistachios.jpg",
+                Close = "Assets/CloseGreen.png",
+                Roll = "Assets/RollGreen.png",
+                Maximise = "Assets/MaximiseGreen.png",
+                Minimize = "Assets/MinimizeGreen.png"
             }
         };
         
@@ -179,11 +159,7 @@ public class ThemeService : IThemeService
         app.Resources["ForeTenButton"] = new Avalonia.Media.Imaging.Bitmap(theme.ForeTenButton);
         app.Resources["VolumeOnButton"] = new Avalonia.Media.Imaging.Bitmap(theme.VolumeOnButton);
         app.Resources["VolumeOffButton"] = new Avalonia.Media.Imaging.Bitmap(theme.VolumeOffButton);
-        app.Resources["ListStopBack"] = new Avalonia.Media.Imaging.Bitmap(theme.ListStopBack);
         app.Resources["MainBack"] = new Avalonia.Media.Imaging.Bitmap(theme.MainBack);
-        app.Resources["MusicBack"] = new Avalonia.Media.Imaging.Bitmap(theme.MusicBack);
-        app.Resources["VideoBack"] = new Avalonia.Media.Imaging.Bitmap(theme.VideoBack);
-        app.Resources["PlaylistBack"] = new Avalonia.Media.Imaging.Bitmap(theme.PlaylistBack);
         app.Resources["Cover"] = new Avalonia.Media.Imaging.Bitmap(theme.Cover);
         app.Resources["Close"] = new Avalonia.Media.Imaging.Bitmap(theme.Close);
         app.Resources["Roll"] = new Avalonia.Media.Imaging.Bitmap(theme.Roll);

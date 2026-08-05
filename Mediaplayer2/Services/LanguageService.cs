@@ -41,7 +41,7 @@ public class LanguageService : ILanguageService
             {
                 LanguageName = "Русский",
                 RedThemeName = "Клубника",
-                YellowThemeName = "Банан",
+                OrangeThemeName = "Манго",
                 GreenThemeName = "Фисташка",
                 BlueThemeName = "Голубика",
                 VioletThemeName = "Ежевика",
@@ -58,7 +58,7 @@ public class LanguageService : ILanguageService
             {
                 LanguageName = "English",
                 RedThemeName = "Strawberry",
-                YellowThemeName = "Banana",
+                OrangeThemeName = "Mango",
                 GreenThemeName = "Pistachio",
                 BlueThemeName = "Blueberry",
                 VioletThemeName = "Blackberry",
@@ -82,7 +82,7 @@ public class LanguageService : ILanguageService
 
         app.Resources["LanguageName"] = language.LanguageName;
         app.Resources["RedThemeName"] = language.RedThemeName;
-        app.Resources["YellowThemeName"] = language.YellowThemeName;
+        app.Resources["OrangeThemeName"] = language.OrangeThemeName;
         app.Resources["GreenThemeName"] = language.GreenThemeName;
         app.Resources["BlueThemeName"] = language.BlueThemeName;
         app.Resources["VioletThemeName"] = language.VioletThemeName;

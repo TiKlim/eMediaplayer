@@ -66,29 +66,27 @@
              
     <Application.Resources>
         <!-- Темы -->
-        <Color x:Key="PrimaryColor">#ff595e</Color>
-        <Color x:Key="SecondaryColor">#ffdadc</Color>
-        <Color x:Key="ThirdColor">#ffeded</Color>
-        <Color x:Key="FourthColor">#ffacae</Color>
-        <Bitmap x:Key="PlayButton">Assets/FocusRed.png</Bitmap>
-        <Bitmap x:Key="StopButton">Assets/StopRed.png</Bitmap>
-        <Bitmap x:Key="BackTenButton">Assets/BackTimeRed.png</Bitmap>
-        <Bitmap x:Key="ForeTenButton">Assets/ForeTimeRed.png</Bitmap>
-        <Bitmap x:Key="VolumeOnButton">Assets/VolumeOnRed.png</Bitmap>
-        <Bitmap x:Key="VolumeOffButton">Assets/VolumeOffRed.png</Bitmap>
-        <Bitmap x:Key="ListStopBack">Assets/ListStopRed.png</Bitmap>
-        <Bitmap x:Key="MainBack">Assets/MainPagePictureRed2.png</Bitmap>
-        <Bitmap x:Key="MusicBack">Assets/MusicPagePictureRed2.png</Bitmap>
-        <Bitmap x:Key="VideoBack">Assets/VideoPagePictureRed2.png</Bitmap>
-        <Bitmap x:Key="Cover">Assets/strawberry.jpg</Bitmap>
-        <Bitmap x:Key="Close">Assets/CloseRed.png</Bitmap>
-        <Bitmap x:Key="Roll">Assets/RollRed.png</Bitmap>
-        <Bitmap x:Key="Maximise">Assets/MaximiseRed.png</Bitmap>
-        <Bitmap x:Key="Minimize">Assets/MinimizeRed.png</Bitmap>
+        <Color x:Key="PrimaryColor">#1982c4</Color>
+        <Color x:Key="SecondaryColor">#cce4f2</Color>
+        <Color x:Key="ThirdColor">#e6f1f9</Color>
+        <Color x:Key="FourthColor">#8cc0e1</Color>
+        <Bitmap x:Key="PlayButton">Assets/FocusWhite.png</Bitmap>
+        <Bitmap x:Key="StopButton">Assets/StopWhite.png</Bitmap>
+        <Bitmap x:Key="BackTenButton">Assets/BackTimeWhite.png</Bitmap>
+        <Bitmap x:Key="ForeTenButton">Assets/ForeTimeWhite.png</Bitmap>
+        <Bitmap x:Key="VolumeOnButton">Assets/VolumeOnWhite.png</Bitmap>
+        <Bitmap x:Key="VolumeOffButton">Assets/VolumeOffWhite.png</Bitmap>
+        <Bitmap x:Key="ListStopBack">Assets/ListStopWhite.png</Bitmap>
+        <Bitmap x:Key="MainBack">Assets/MainPagePictureBlue2.png</Bitmap>
+        <Bitmap x:Key="Cover">Assets/blueberry.jpg</Bitmap>
+        <Bitmap x:Key="Close">Assets/CloseBlue.png</Bitmap>
+        <Bitmap x:Key="Roll">Assets/RollBlue.png</Bitmap>
+        <Bitmap x:Key="Maximise">Assets/MaximiseBlue.png</Bitmap>
+        <Bitmap x:Key="Minimize">Assets/MinimizeBlue.png</Bitmap>
         <!-- Язык -->
         <system:String x:Key="LanguageName">Русский</system:String>
         <system:String x:Key="RedThemeName">Клубника</system:String>
-        <system:String x:Key="YellowThemeName">Лимонный шербет</system:String>
+        <system:String x:Key="OrangeThemeName">Манго</system:String>
         <system:String x:Key="GreenThemeName">Фисташка</system:String>
         <system:String x:Key="BlueThemeName">Голубика</system:String>
         <system:String x:Key="VioletThemeName">Ежевика</system:String>

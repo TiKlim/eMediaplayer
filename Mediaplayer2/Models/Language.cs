@@ -4,7 +4,7 @@ public class Language
 {
     public string LanguageName { get; set; }
     public string RedThemeName { get; set; }
-    public string YellowThemeName { get; set; }
+    public string OrangeThemeName { get; set; }
     public string GreenThemeName { get; set; }
     public string BlueThemeName { get; set; }
     public string VioletThemeName { get; set; }
