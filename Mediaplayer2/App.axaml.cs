@@ -33,7 +33,7 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
-                Icon = new WindowIcon("Assets/appIcon2.ico")
+                Icon = new WindowIcon("Assets/appIcon3.ico")
             };
             //var vm = new MainWindowViewModel(desktop.MainWindow);
             //desktop.MainWindow.DataContext = vm;
