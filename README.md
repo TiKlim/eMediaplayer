@@ -1,4 +1,4 @@
-<img width="1920" height="431" alt="2" src="https://github.com/user-attachments/assets/e6dc5b4f-3385-4a81-8060-5b9ee6b8f910" />
+<img width="1920" height="428" alt="5" src="https://github.com/user-attachments/assets/812ebe32-1c66-4032-9cf5-6844056770c8" />
 
 
 # eMediaplayer
@@ -25,5 +25,6 @@ klim.timofeev.04@mail.ru
 
 Тимофеев Клим, 2025-2026.
 
-<img width="1920" height="430" alt="image" src="https://github.com/user-attachments/assets/098d3222-a42e-4f0a-9bc6-87445e8040ba" />
+<img width="1920" height="429" alt="6" src="https://github.com/user-attachments/assets/19f8caa1-1d8d-4d22-8022-2e9667cdfd0e" />
+
 
