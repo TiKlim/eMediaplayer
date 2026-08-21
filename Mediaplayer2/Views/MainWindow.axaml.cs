@@ -11,6 +11,12 @@ namespace Mediaplayer2.Views;
 
 public partial class MainWindow : Window
 {
+    // Copyright (c) 2026 Timofeev Klim (eMediaplayer)
+    // This program is free software: you can redistribute it and/or modify
+    // it under the terms of the GNU General Public License as published by
+    // the Free Software Foundation, either version 3 of the License, or
+    // (at your option) any later version.
+    
     // Переменная для кнопок развернуть/вернуть прежний размер.
     private bool _boobool;
     //

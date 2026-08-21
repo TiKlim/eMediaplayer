@@ -6,6 +6,12 @@ namespace Mediaplayer2.Converters;
 
 public class SecondTimeSpanToStringConverter : IValueConverter
 {
+    // Copyright (c) 2026 Timofeev Klim (eMediaplayer)
+    // This program is free software: you can redistribute it and/or modify
+    // it under the terms of the GNU General Public License as published by
+    // the Free Software Foundation, either version 3 of the License, or
+    // (at your option) any later version.
+    
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is TimeSpan timeSpan)
